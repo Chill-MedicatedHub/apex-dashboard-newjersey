@@ -469,6 +469,7 @@ def fetch_product_lookup(session: requests.Session, product_ids: set) -> dict:
     # LeafLink's products endpoint accepts comma-separated ids via the `id` filter
     ids_list = sorted(p for p in product_ids if p)
     BATCH = 50
+    first_logged = False
     for i in range(0, len(ids_list), BATCH):
         batch = ids_list[i:i + BATCH]
         params = {"id": ",".join(str(x) for x in batch), "limit": BATCH}
@@ -482,6 +483,11 @@ def fetch_product_lookup(session: requests.Session, product_ids: set) -> dict:
             pid = prod.get("id")
             if pid is None:
                 continue
+            if not first_logged:
+                print(f"  DEBUG product response keys: {sorted(prod.keys())}", file=sys.stderr)
+                # Print specifically the category-related fields so we can see what type they are
+                print(f"  DEBUG product[{pid}] category={prod.get('category')!r}, sub_category={prod.get('sub_category')!r}, brand={prod.get('brand')!r}", file=sys.stderr)
+                first_logged = True
             lookup[pid] = {
                 "name": prod.get("display_name") or prod.get("name") or f"Product #{pid}",
                 "brand_id": prod.get("brand"),
@@ -491,6 +497,9 @@ def fetch_product_lookup(session: requests.Session, product_ids: set) -> dict:
                 "wholesale_price_cents": _money_to_cents(prod.get("wholesale_price")),
             }
         time.sleep(SLEEP_BETWEEN_PAGES_SEC)
+    # Count how many products have a category set — useful diagnostic
+    with_cat = sum(1 for v in lookup.values() if v["category_id"])
+    print(f"  Product lookup: {len(lookup)} products, {with_cat} have a category assigned")
     return lookup
 
 

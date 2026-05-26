@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chill Medicated · New Jersey · Sales Intelligence</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/prop-types@15.8.1/prop-types.min.js"></script>
+<script crossorigin src="https://cdn.jsdelivr.net/npm/recharts@2.12.7/umd/Recharts.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<style>
+  :root {
+    /* Chill Medicated · Purple Gradient palette (New Jersey market)
+       Deep aubergine base → bright magenta accent. Matches brand logo. */
+    --bg: #110a1a;            /* very deep purple-black */
+    --bg-elev: #1d1428;        /* panel — same hue, raised */
+    --bg-elev-2: #281a38;      /* second-level surface */
+    --border: #3a2954;
+    --border-soft: #261a36;
+    --text: #f0e8f5;           /* warm off-white */
+    --text-dim: #b5a3c8;       /* muted lavender */
+    --text-faint: #6e587d;     /* faint plum */
+    --accent: #d24a92;         /* Chill magenta — bright, brand-correct */
+    --accent-dim: #a03d75;     /* darker magenta for borders/lines */
+    --accent-deep: #7a3fa0;    /* deep purple, gradient endpoint */
+    --warm: #f0a868;           /* soft amber (warnings) — unchanged */
+    --cool: #b48fd4;           /* secondary lavender */
+    --rose: #e07594;           /* soft rose (errors / negative) — already on-palette */
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-image:
+      radial-gradient(ellipse 1200px 600px at 80% -10%, rgba(210,74,146,0.06), transparent 60%),
+      radial-gradient(ellipse 800px 400px at 0% 100%, rgba(122,63,160,0.06), transparent 60%);
+  }
+
+  /* Typography */
+  .font-display { font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144; letter-spacing: -0.02em; }
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
+  .tabular { font-variant-numeric: tabular-nums; }
+
+  /* Layout */
+  .app { max-width: 1600px; margin: 0 auto; padding: 32px 40px 80px; }
+
+  /* Top bar */
+  .topbar {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 36px;
+  }
+  .brand-mark {
+    display: flex; align-items: baseline; gap: 14px;
+  }
+  .brand-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--text-faint);
+    padding: 4px 8px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+  }
+  .brand-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 28px;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  .brand-name em { color: var(--accent); font-style: italic; font-weight: 400; }
+  .topbar-meta {
+    display: flex; gap: 24px; align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+  .topbar-meta strong { color: var(--text); font-weight: 500; }
+  .pulse {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* Filter bar */
+  .filters {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    padding: 16px 20px;
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin-bottom: 32px;
+  }
+  .filter-group {
+    display: flex; flex-direction: column; gap: 6px;
+    min-width: 140px;
+  }
+  .filter-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-faint);
+  }
+  .filter-input, .filter-select {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 8px 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .filter-input:focus, .filter-select:focus { border-color: var(--accent-dim); }
+  .filter-input::placeholder { color: var(--text-faint); }
+  .filter-reset {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 8px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: 2px;
+    cursor: pointer;
+    align-self: flex-end;
+    transition: all 0.15s;
+  }
+  .filter-reset:hover { color: var(--text); border-color: var(--text-dim); }
+
+  /* KPI Grid */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 36px;
+  }
+  .kpi {
+    background: var(--bg-elev);
+    padding: 24px 22px;
+    display: flex; flex-direction: column; gap: 6px;
+    position: relative;
+    transition: background 0.2s;
+  }
+  .kpi:hover { background: var(--bg-elev-2); }
+  .kpi-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-faint);
+  }
+  .kpi-value {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 34px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+  }
+  .kpi-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+  .kpi-accent .kpi-value { color: var(--accent); }
+  .kpi::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 24px; height: 1px;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .kpi:hover::before { opacity: 1; }
+
+  /* Section */
+  .section {
+    margin-bottom: 36px;
+  }
+  .section-header {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: -0.01em;
+  }
+  .section-title em { color: var(--text-dim); font-style: italic; font-weight: 400; }
+  .section-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 24px;
+  }
+
+  /* Grid layouts */
+  .grid-2 { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .grid-half { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  /* Rank list */
+  .rank-list { display: flex; flex-direction: column; }
+  .rank-row {
+    display: grid;
+    grid-template-columns: 24px 1fr auto;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-soft);
+    position: relative;
+  }
+  .rank-row:last-child { border-bottom: none; }
+  .rank-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-faint);
+    font-variant-numeric: tabular-nums;
+  }
+  .rank-name {
+    font-size: 13px;
+    color: var(--text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .rank-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+  }
+  .rank-bar {
+    position: absolute;
+    bottom: 0; left: 38px; right: 0;
+    height: 1px;
+    background: var(--accent-dim);
+    opacity: 0.4;
+  }
+
+  /* Table */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  .data-table th {
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-faint);
+    font-weight: 500;
+    background: var(--bg-elev-2);
+  }
+  .data-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-soft);
+    color: var(--text);
+  }
+  .data-table tr:hover td { background: rgba(196,255,61,0.02); }
+  .data-table .num { font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; text-align: right; }
+  .data-table .dim { color: var(--text-dim); }
+
+  /* Empty state */
+  .empty {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--text-dim);
+  }
+  .empty h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 28px;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+  .empty code {
+    display: inline-block;
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    border-radius: 2px;
+    color: var(--accent);
+    margin: 0 2px;
+  }
+
+  /* Status pill */
+  .pill {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 3px 8px;
+    border-radius: 2px;
+    border: 1px solid;
+  }
+  .pill-completed { color: var(--accent); border-color: var(--accent-dim); background: rgba(196,255,61,0.06); }
+  .pill-pending { color: var(--warm); border-color: var(--warm); background: rgba(232,138,60,0.06); }
+  .pill-overdue { color: var(--rose); border-color: var(--rose); background: rgba(217,112,112,0.06); }
+
+  @media (max-width: 1100px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .grid-2, .grid-3, .grid-half { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect, useMemo } = React;
+
+// Guard against CDN failure — show a clear message instead of going blank
+if (typeof Recharts === 'undefined') {
+  document.getElementById('root').innerHTML = `
+    <div style="max-width:600px;margin:80px auto;padding:32px;background:#161a17;border:1px solid #262c28;border-radius:4px;color:#e8ebe7;font-family:sans-serif">
+      <h2 style="font-family:Fraunces,serif;font-weight:400;font-style:italic;margin-bottom:12px">Charts library didn't load</h2>
+      <p style="color:#9aa39c;line-height:1.6">The Recharts library failed to load from the CDN. This usually means:</p>
+      <ul style="color:#9aa39c;line-height:1.8;margin-top:8px;padding-left:20px">
+        <li>You're offline or behind a firewall blocking CDNs</li>
+        <li>An ad blocker / privacy extension is blocking jsdelivr.net or unpkg.com</li>
+        <li>Slow network — try refreshing</li>
+      </ul>
+      <p style="color:#d24a92;margin-top:16px;font-family:monospace;font-size:13px">Try: disable extensions for localhost, or refresh the page.</p>
+    </div>
+  `;
+  throw new Error('Recharts failed to load');
+}
+
+const {
+  ResponsiveContainer, LineChart, Line, BarChart, Bar, AreaChart, Area,
+  XAxis, YAxis, CartesianGrid, Tooltip, Legend, PieChart, Pie, Cell
+} = Recharts;
+
+// --- Helpers ----------------------------------------------------------------
+const parseMoney = (str) => {
+  if (str == null) return 0;
+  if (typeof str === 'number') return str;
+  // Strip currency, commas, whitespace. Handle accounting-style negatives:
+  // "($50.00)" → -50.00, which is how credits/refunds often appear in reports.
+  let s = String(str).replace(/[$,\s]/g, '');
+  if (/^\(.*\)$/.test(s)) s = '-' + s.slice(1, -1);
+  const n = parseFloat(s);
+  return isNaN(n) ? 0 : n;
+};
+
+// Sum line-level discounts across a set of rows. Apex's `discounts` field is per-line,
+// so it can be summed freely without deduplication. (Apex also has an `additional_discounts`
+// field, but it's not consistently reflected in the Apex UI, so we don't include it.)
+const sumLineDiscounts = (rowSet) =>
+  rowSet.reduce((s, r) => s + (r._lineDiscount || 0), 0);
+
+
+// `payment_dates` — yes, weirdly named, but it actually holds entries like
+// "Credit of $1,045.22 on 03/17/2026"). Field may be a string OR an array of strings.
+// Returns { total, entries } where total is the summed dollar amount of all credits
+// found and entries is an array of { amount, date } for display.
+const parsePaymentsForCredits = (paymentsField) => {
+  const empty = { total: 0, entries: [] };
+  if (!paymentsField) return empty;
+  // Normalize: accept either an array of strings or a single string
+  const text = Array.isArray(paymentsField)
+    ? paymentsField.filter(Boolean).join(', ')
+    : String(paymentsField);
+  if (!text) return empty;
+  // Match "Credit of $<amount> on <date>". The amount may include commas (e.g. 1,045.22).
+  const re = /Credit\s+of\s+\$([\d,]+(?:\.\d+)?)\s+on\s+(\d{1,2}\/\d{1,2}\/\d{2,4})/gi;
+  const entries = [];
+  let total = 0;
+  let m;
+  while ((m = re.exec(text)) !== null) {
+    const amount = parseFloat(m[1].replace(/,/g, ''));
+    if (!isNaN(amount)) {
+      total += amount;
+      entries.push({ amount, date: m[2] });
+    }
+  }
+  return { total, entries };
+};
+
+const fmtMoney = (n) => {
+  if (!n && n !== 0) return '—';
+  if (Math.abs(n) >= 1e6) return '$' + (n / 1e6).toFixed(2) + 'M';
+  if (Math.abs(n) >= 1e3) return '$' + (n / 1e3).toFixed(1) + 'K';
+  return '$' + n.toLocaleString(undefined, { maximumFractionDigits: 0 });
+};
+
+const fmtMoneyFull = (n) =>
+  '$' + (n || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+const fmtNum = (n) => (n || 0).toLocaleString();
+
+const parseDate = (str) => {
+  if (!str) return null;
+  const s = String(str).trim();
+  // YYYY-MM-DD — construct in local timezone to avoid UTC shift
+  const ymdMatch = s.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (ymdMatch) {
+    return new Date(+ymdMatch[1], +ymdMatch[2] - 1, +ymdMatch[3]);
+  }
+  // MM/DD/YYYY
+  const mdyMatch = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+  if (mdyMatch) {
+    return new Date(+mdyMatch[3], +mdyMatch[1] - 1, +mdyMatch[2]);
+  }
+  const d = new Date(s);
+  return isNaN(d) ? null : d;
+};
+
+const ymd = (d) => {
+  if (!(d instanceof Date) || isNaN(d)) return '';
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+};
+
+// US state normalization — handles "MA" / "Massachusetts" / "Mass." / "massachusetts" → "MA"
+const STATE_TO_ABBR = {
+  'alabama': 'AL', 'alaska': 'AK', 'arizona': 'AZ', 'arkansas': 'AR',
+  'california': 'CA', 'colorado': 'CO', 'connecticut': 'CT', 'delaware': 'DE',
+  'florida': 'FL', 'georgia': 'GA', 'hawaii': 'HI', 'idaho': 'ID',
+  'illinois': 'IL', 'indiana': 'IN', 'iowa': 'IA', 'kansas': 'KS',
+  'kentucky': 'KY', 'louisiana': 'LA', 'maine': 'ME', 'maryland': 'MD',
+  'massachusetts': 'MA', 'mass': 'MA',
+  'michigan': 'MI', 'minnesota': 'MN', 'mississippi': 'MS', 'missouri': 'MO',
+  'montana': 'MT', 'nebraska': 'NE', 'nevada': 'NV', 'new hampshire': 'NH',
+  'new jersey': 'NJ', 'new mexico': 'NM', 'new york': 'NY',
+  'north carolina': 'NC', 'north dakota': 'ND', 'ohio': 'OH', 'oklahoma': 'OK',
+  'oregon': 'OR', 'pennsylvania': 'PA', 'rhode island': 'RI',
+  'south carolina': 'SC', 'south dakota': 'SD', 'tennessee': 'TN',
+  'texas': 'TX', 'utah': 'UT', 'vermont': 'VT', 'virginia': 'VA',
+  'washington': 'WA', 'west virginia': 'WV', 'wisconsin': 'WI', 'wyoming': 'WY',
+  'district of columbia': 'DC', 'washington dc': 'DC', 'washington d.c.': 'DC',
+};
+
+const normalizeState = (raw) => {
+  if (!raw) return '';
+  const clean = String(raw).trim().replace(/\./g, '').toLowerCase();
+  if (!clean) return '';
+  // Already a 2-letter abbreviation
+  if (clean.length === 2) return clean.toUpperCase();
+  // Full name → abbreviation
+  if (STATE_TO_ABBR[clean]) return STATE_TO_ABBR[clean];
+  // Unknown — return original with first letter capitalized
+  return raw.toString().trim();
+};
+
+// --- Main App ---------------------------------------------------------------
+function App() {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [filters, setFilters] = useState({
+    from: '', to: '', brand: '', buyer: '', rep: '', state: '', status: '', invoice: '',
+    productLine: '', excludeSamples: false, cogsRatio: 0.45
+  });
+
+  useEffect(() => {
+    const load = () => {
+      fetch('sales_data.json?t=' + Date.now())
+        .then(r => {
+          if (!r.ok) throw new Error('Could not load sales_data.json');
+          return r.json();
+        })
+        .then(setData)
+        .catch(e => setError(e.message));
+    };
+    load();
+    const id = setInterval(load, 60000); // refresh every minute
+    return () => clearInterval(id);
+  }, []);
+
+  if (error) {
+    return (
+      <div className="app">
+        <div className="empty">
+          <h2>No data yet</h2>
+          <p>Run <code>python scraper.py</code> in this folder to pull your sales data, then refresh.</p>
+          <p style={{ marginTop: 12, fontSize: 12, color: 'var(--text-faint)' }}>{error}</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!data) {
+    return (
+      <div className="app">
+        <div className="empty"><h2>Loading…</h2></div>
+      </div>
+    );
+  }
+
+  return <Dashboard data={data} filters={filters} setFilters={setFilters} />;
+}
+
+// --- Dashboard --------------------------------------------------------------
+function Dashboard({ data, filters, setFilters }) {
+  const rows = data.rows || [];
+
+  // Helper: detect sample/promo rows
+  // Apex has an explicit "is_sample" field, but we also catch SAMP/SAMPLE in names as a safety net
+  const isSampleRow = (r) => {
+    if (String(r.is_sample || '').toLowerCase() === 'yes') return true;
+    const name = String(r.product_name || '').toUpperCase();
+    if (name.includes('SAMP') || name.includes('SAMPLE')) return true;
+    const unit = parseMoney(r.product_listing_price);
+    if (unit > 0 && unit < 0.5) return true;
+    return false;
+  };
+
+  // Helper: pull sales rep — Apex returns sales_reps_display as an array, or sales_reps as a string
+  const extractRep = (r) => {
+    if (Array.isArray(r.sales_reps_display) && r.sales_reps_display.length) {
+      return r.sales_reps_display.filter(Boolean).join(', ');
+    }
+    if (r.sales_reps) return String(r.sales_reps);
+    if (r.sales_rep) return String(r.sales_rep); // fallback
+    return '';
+  };
+
+  // Normalize once — maps Apex's real field names into the dashboard's working fields
+  const normalized = useMemo(() => rows.map(r => ({
+    ...r,
+    // Canonical aliases the dashboard uses everywhere
+    brand: r.product_brand || r.brand || '',
+    sales_rep: extractRep(r),
+    order_date: r.order_date_utc || r.order_date_localized || r.order_date || '',
+    order_date_raw: r.order_date_utc_raw || r.order_date_localized_raw || r.order_date_raw || '',
+    delivery_date: r.delivery_date || '',
+    delivery_date_raw: r.delivery_date_raw || '',
+    buyer_state: normalizeState(r.buyer_state),
+    // Use order_number as the invoice/order identifier — Apex's real data doesn't have order_id at the line level
+    order_id: r.order_id || r.order_number || null,
+    // Computed fields
+    _date: parseDate(r.order_date_utc_raw || r.order_date_localized_raw || r.order_date_raw || r.order_date_utc || r.order_date),
+    _delivery: parseDate(r.delivery_date_raw || r.delivery_date),
+    _revenue: (typeof r.line_total_raw === 'number')
+      ? r.line_total_raw / 100
+      : parseMoney(r.line_total || r.computed_sale_price || r.total),
+    _cost: parseMoney(r.batch_cost_of_goods),
+    _quantity: parseFloat(r.quantity_raw != null ? r.quantity_raw : r.quantity) || 0,
+    // DISCOUNT FIELD — using `discounts` (per-line) only. Apex also has
+    // `additional_discounts` (invoice-level), but it's not consistently reflected
+    // in the Apex UI, so we don't trust it as real discount activity. Line-level
+    // discounts here match what the CSV export and Apex invoice screens show.
+    // Comes from Apex as integer cents (e.g. 18000 = $180.00). Fallback handles
+    // edge cases where the field might be a string like "$30.00".
+    _lineDiscount: (typeof r.discounts === 'number' ? r.discounts / 100 : parseMoney(r.discounts)),
+    _discount: (typeof r.discounts === 'number' ? r.discounts / 100 : parseMoney(r.discounts)),
+    _unitPrice: parseMoney(r.product_listing_price || r.unit_price),
+    _isSample: isSampleRow(r),
+    // Credit detection — Apex records "credits applied to payment" inside the
+    // `payment_dates` array, with entries like "Credit of $1,045.22 on 03/17/2026".
+    // We parse those out and also keep the original negative-revenue fallback
+    // (in case Apex ever sends a credit as a negative line item).
+    _creditFromPayments: parsePaymentsForCredits(r.payment_dates || r.payments || r.payment_text || r.payment_history || '').total,
+    _creditEntries: parsePaymentsForCredits(r.payment_dates || r.payments || r.payment_text || r.payment_history || '').entries,
+    _isNegativeLine: (
+      (typeof r.line_total_raw === 'number' && r.line_total_raw < 0) ||
+      parseMoney(r.line_total || r.computed_sale_price || r.total) < 0
+    ),
+  })), [rows]);
+
+  // Distinct values for filters
+  const distinct = useMemo(() => ({
+    brands: [...new Set(normalized.map(r => r.brand).filter(Boolean))].sort(),
+    buyers: [...new Set(normalized.map(r => r.buyer_name).filter(Boolean))].sort(),
+    reps: [...new Set(normalized.map(r => r.sales_rep).filter(Boolean))].sort(),
+    states: [...new Set(normalized.map(r => r.buyer_state).filter(Boolean))].sort(),
+    statuses: [...new Set(normalized.map(r => r.payment_status).filter(Boolean))].sort(),
+    productLines: [...new Set(normalized.map(r => r.product_type).filter(Boolean))].sort(),
+  }), [normalized]);
+
+  // Apply filters
+  const filtered = useMemo(() => normalized.filter(r => {
+    // Use string comparison on YYYY-MM-DD to avoid timezone issues
+    if (filters.from || filters.to) {
+      if (!r._date) return false;
+      const rowYmd = ymd(r._date);
+      if (filters.from && rowYmd < filters.from) return false;
+      if (filters.to && rowYmd > filters.to) return false;
+    }
+    if (filters.brand && r.brand !== filters.brand) return false;
+    if (filters.buyer && r.buyer_name !== filters.buyer) return false;
+    if (filters.rep && r.sales_rep !== filters.rep) return false;
+    if (filters.state && r.buyer_state !== filters.state) return false;
+    if (filters.status && r.payment_status !== filters.status) return false;
+    if (filters.productLine && r.product_type !== filters.productLine) return false;
+    if (filters.excludeSamples && r._isSample) return false;
+    if (filters.invoice) {
+      const q = filters.invoice.toLowerCase();
+      const inv = String(r.order_number || r.order_id || '').toLowerCase();
+      if (!inv.includes(q)) return false;
+    }
+    return true;
+  }), [normalized, filters]);
+
+  // KPIs
+  const kpis = useMemo(() => {
+    const revenue = filtered.reduce((s, r) => s + r._revenue, 0);
+    const actualCost = filtered.reduce((s, r) => s + r._cost * r._quantity, 0);
+    const units = filtered.reduce((s, r) => s + r._quantity, 0);
+    const orderIds = new Set(filtered.map(r => r.order_id).filter(Boolean));
+    const buyers = new Set(filtered.map(r => r.buyer_name).filter(Boolean));
+    const discounts = sumLineDiscounts(filtered);
+
+    // Credits — pulled from Apex's "Payments" text field where credits are recorded
+    // as text like "Credit of $1,045.22 on 03/17/2026". The same payments string repeats
+    // on every line item of an invoice, so we dedupe by invoice/order_id before summing.
+    // Also catch any rows where revenue itself went negative (rare, but covers refund lines).
+    const creditByInvoice = new Map();   // order_id -> credit dollars
+    const negativeLineTotal = filtered
+      .filter(r => r._isNegativeLine)
+      .reduce((s, r) => s + r._revenue, 0); // negative number
+    filtered.forEach(r => {
+      const id = r.order_id;
+      if (id && r._creditFromPayments > 0 && !creditByInvoice.has(id)) {
+        creditByInvoice.set(id, r._creditFromPayments);
+      }
+    });
+    const creditsFromPayments = [...creditByInvoice.values()].reduce((s, n) => s + n, 0);
+    const credits = creditsFromPayments + (-negativeLineTotal); // both as positive dollars
+    const creditCount = creditByInvoice.size + filtered.filter(r => r._isNegativeLine).length;
+    const creditOrders = creditByInvoice.size +
+      new Set(filtered.filter(r => r._isNegativeLine).map(r => r.order_id).filter(Boolean)).size;
+    // Note: "Net Revenue" stays equal to invoice totals (what was sold).
+    // Credits are payments-side, not revenue-side, so grossRevenue == revenue here.
+    const grossRevenue = revenue;
+
+    // If Apex isn't returning real COGS, fall back to the modeled ratio
+    const isModeled = actualCost === 0 && revenue > 0;
+    const cost = isModeled ? revenue * filters.cogsRatio : actualCost;
+    const margin = revenue ? ((revenue - cost) / revenue) * 100 : 0;
+    const netProfit = revenue - cost;
+    const avgUnitPrice = units ? revenue / units : 0;
+
+    // Month-over-Month change: compare current month's revenue to previous month's
+    // (based on the latest month present in the filtered data)
+    const byMonth = {};
+    filtered.forEach(r => {
+      if (!r._date) return;
+      const ym = `${r._date.getFullYear()}-${String(r._date.getMonth() + 1).padStart(2, '0')}`;
+      byMonth[ym] = (byMonth[ym] || 0) + r._revenue;
+    });
+    const monthKeys = Object.keys(byMonth).sort();
+    let momChange = null;
+    let momLabel = '—';
+    if (monthKeys.length >= 2) {
+      const latest = byMonth[monthKeys[monthKeys.length - 1]];
+      const prev = byMonth[monthKeys[monthKeys.length - 2]];
+      if (prev) {
+        momChange = ((latest - prev) / prev) * 100;
+        momLabel = monthKeys[monthKeys.length - 1] + ' vs ' + monthKeys[monthKeys.length - 2];
+      }
+    }
+
+    return {
+      revenue,
+      grossRevenue,
+      cost,
+      grossProfit: revenue - cost,
+      netProfit,
+      margin,
+      isModeled,
+      units,
+      orders: orderIds.size,
+      buyers: buyers.size,
+      avgOrder: orderIds.size ? revenue / orderIds.size : 0,
+      avgUnitsPerInvoice: orderIds.size ? units / orderIds.size : 0,
+      avgUnitPrice,
+      momChange,
+      momLabel,
+      discounts,
+      credits,
+      creditCount,
+      creditOrders,
+      lineItems: filtered.length,
+    };
+  }, [filtered, filters.cogsRatio]);
+
+  // Monthly breakdown matching the Apex monthly sales spreadsheet format
+  const monthlyBreakdown = useMemo(() => {
+    // First pass: bucket rows by month and sum the parts that aggregate freely
+    const map = {};
+    filtered.forEach(r => {
+      if (!r._date) return;
+      const y = r._date.getFullYear();
+      const m = r._date.getMonth();
+      const key = `${y}-${String(m + 1).padStart(2, '0')}`;
+      if (!map[key]) {
+        map[key] = {
+          key,
+          monthName: r._date.toLocaleString('en-US', { month: 'long', year: 'numeric' }),
+          rows: [],
+          units: 0, netSales: 0, cogs: 0,
+        };
+      }
+      map[key].rows.push(r);
+      map[key].units += r._quantity;
+      map[key].netSales += r._revenue;
+      map[key].cogs += r._cost * r._quantity;
+    });
+    // Second pass: per-month line-level discount totals.
+    Object.values(map).forEach(m => {
+      m.discounts = sumLineDiscounts(m.rows);
+      m.gross = m.netSales + m.discounts;
+      delete m.rows; // no longer needed; saves memory in the React render
+    });
+    const sorted = Object.values(map).sort((a, b) => a.key.localeCompare(b.key));
+    // Add MOM and Margin columns. Use modeled COGS when actual is zero.
+    return sorted.map((m, i) => {
+      const prev = i > 0 ? sorted[i - 1].netSales : 0;
+      const mom = prev ? ((m.netSales - prev) / prev) * 100 : null;
+      const effectiveCogs = m.cogs > 0 ? m.cogs : m.netSales * filters.cogsRatio;
+      const netProfit = m.netSales - effectiveCogs;
+      const margin = m.netSales ? (netProfit / m.netSales) * 100 : 0;
+      const cases = m.units / 30;
+      return { ...m, cogs: effectiveCogs, cases, mom, netProfit, margin };
+    });
+  }, [filtered, filters.cogsRatio]);
+
+  // Revenue over time
+  const timeSeries = useMemo(() => {
+    const map = {};
+    filtered.forEach(r => {
+      if (!r._date) return;
+      const key = ymd(r._date);
+      if (!map[key]) map[key] = { date: key, revenue: 0, units: 0, orders: new Set() };
+      map[key].revenue += r._revenue;
+      map[key].units += r._quantity;
+      if (r.order_id) map[key].orders.add(r.order_id);
+    });
+    return Object.values(map)
+      .map(d => ({ ...d, orders: d.orders.size }))
+      .sort((a, b) => a.date.localeCompare(b.date));
+  }, [filtered]);
+
+  // Group helpers
+  const groupSum = (key, n = 10) => {
+    const map = {};
+    filtered.forEach(r => {
+      const k = r[key];
+      if (!k) return;
+      if (!map[k]) map[k] = { name: k, revenue: 0, units: 0 };
+      map[k].revenue += r._revenue;
+      map[k].units += r._quantity;
+    });
+    return Object.values(map).sort((a, b) => b.revenue - a.revenue).slice(0, n);
+  };
+
+  const topProducts = useMemo(() => groupSum('product_name'), [filtered]);
+  const topBuyers = useMemo(() => groupSum('buyer_name'), [filtered]);
+  const byRep = useMemo(() => groupSum('sales_rep', 20), [filtered]);
+  const byCategory = useMemo(() => groupSum('product_category'), [filtered]);
+  const byState = useMemo(() => groupSum('buyer_state', 15), [filtered]);
+
+  // Per-product breakdown (matches the Apex product-line spreadsheet)
+  const productBreakdown = useMemo(() => {
+    const map = {};
+    filtered.forEach(r => {
+      const k = r.product_name;
+      if (!k) return;
+      if (!map[k]) {
+        map[k] = {
+          name: k,
+          line: r.product_type || '—',
+          rows: [],
+          units: 0,
+          netSales: 0,
+          totalCost: 0,
+          unitPriceSum: 0, // for weighted avg
+          listedPrice: r._unitPrice || 0,
+          costUnit: r._cost || 0,
+        };
+      }
+      map[k].rows.push(r);
+      map[k].units += r._quantity;
+      map[k].netSales += r._revenue;
+      map[k].totalCost += r._cost * r._quantity;
+      // Take the highest unit price seen as "listed" (since promos can drop it)
+      if (r._unitPrice > map[k].listedPrice) map[k].listedPrice = r._unitPrice;
+    });
+    // Per-product line-level discount totals.
+    Object.values(map).forEach(p => {
+      p.discounts = sumLineDiscounts(p.rows);
+      p.gross = p.netSales + p.discounts;
+      delete p.rows;
+    });
+    return Object.values(map)
+      .map(p => {
+        const effectiveCost = p.totalCost > 0 ? p.totalCost : p.netSales * filters.cogsRatio;
+        const effectiveCostUnit = p.costUnit > 0
+          ? p.costUnit
+          : (p.units ? effectiveCost / p.units : 0);
+        return {
+          ...p,
+          totalCost: effectiveCost,
+          costUnit: effectiveCostUnit,
+          avgUnitPrice: p.units ? p.netSales / p.units : 0,
+          grossProfit: p.netSales - effectiveCost,
+        };
+      })
+      .sort((a, b) => b.netSales - a.netSales);
+  }, [filtered, filters.cogsRatio]);
+
+  // Group line items into invoices (one row per order/invoice)
+  const invoices = useMemo(() => {
+    const map = {};
+    filtered.forEach(r => {
+      const id = r.order_id || r.order_number;
+      if (!id) return;
+      if (!map[id]) {
+        map[id] = {
+          id,
+          invoice: r.order_number || ('#' + r.order_id),
+          date: r.order_date || '—',
+          _date: r._date,
+          buyer: r.buyer_name || '—',
+          rep: r.sales_rep || '—',
+          state: r.buyer_state || '—',
+          status: r.payment_status || 'Unknown',
+          delivery: r.delivery_date || '—',
+          lineItems: 0,
+          units: 0,
+          revenue: 0,
+          discount: 0,
+          // Credit applied to this invoice. The payments-text field repeats on every
+          // line item, so we only capture it once per order (first line wins).
+          credit: r._creditFromPayments || 0,
+          creditEntries: r._creditEntries || [],
+        };
+      }
+      map[id].lineItems += 1;
+      map[id].units += r._quantity;
+      map[id].revenue += r._revenue;
+      map[id].discount += r._lineDiscount;
+    });
+    return Object.values(map).sort((a, b) =>
+      (b._date?.getTime() || 0) - (a._date?.getTime() || 0)
+    );
+  }, [filtered]);
+
+  // Payment status
+  const paymentMix = useMemo(() => {
+    const map = {};
+    filtered.forEach(r => {
+      const k = r.payment_status || 'Unknown';
+      map[k] = (map[k] || 0) + r._revenue;
+    });
+    return Object.entries(map).map(([name, value]) => ({ name, value }));
+  }, [filtered]);
+
+  const resetFilters = () => setFilters({
+    from: '', to: '', brand: '', buyer: '', rep: '', state: '', status: '', invoice: '',
+    productLine: '', excludeSamples: false, cogsRatio: 0.45
+  });
+
+  const fetchedAt = new Date(data.fetched_at);
+
+  // Diagnostics — helps us see what the dashboard actually sees
+  const diag = useMemo(() => {
+    const datesValid = normalized.filter(r => r._date instanceof Date && !isNaN(r._date)).length;
+    const datesNull = normalized.length - datesValid;
+    const repsPresent = normalized.filter(r => r.sales_rep && String(r.sales_rep).trim()).length;
+    const repsEmpty = normalized.length - repsPresent;
+    const firstRow = normalized[0] || {};
+    const rawFirst = rows[0] || {};
+    const sampleDate = firstRow.order_date_raw || firstRow.order_date || '(no date field)';
+    const sampleRep = firstRow.sales_rep || '(empty)';
+    const orderIdsPresent = normalized.filter(r => r.order_id).length;
+    const distinctOrderIds = new Set(normalized.map(r => r.order_id).filter(Boolean)).size;
+    const rawOrderIdField = rawFirst.order_id != null ? `order_id=${JSON.stringify(rawFirst.order_id)}` : '(no order_id field)';
+    const rawOrderNumber = rawFirst.order_number != null ? `order_number=${JSON.stringify(rawFirst.order_number)}` : '(no order_number field)';
+    const sampleDiscount = firstRow._discount;
+    const rawDiscountFields = `discounts=${JSON.stringify(rawFirst.discounts)}`;
+    const totalDiscount = sumLineDiscounts(normalized);
+    const filteredDiscount = sumLineDiscounts(filtered);
+    // Per-invoice audit trail — respects the current filter state so you can answer
+    // "where exactly are these discounts coming from?" for any slice (a month, a state,
+    // a buyer, etc), making spot-checking against Apex straightforward.
+    const discountByInvoice = new Map();
+    filtered.forEach(r => {
+      const id = r.order_id;
+      if (!id) return;
+      if (!discountByInvoice.has(id)) {
+        discountByInvoice.set(id, {
+          invoice: r.order_number || id,
+          buyer: r.buyer_name || '—',
+          date: r.order_date || '—',
+          line: 0,
+        });
+      }
+      discountByInvoice.get(id).line += r._lineDiscount || 0;
+    });
+    const discountAudit = [...discountByInvoice.values()]
+      .map(d => ({ ...d, total: d.line }))
+      .filter(d => d.total > 0)
+      .sort((a, b) => b.total - a.total);
+    const discountAuditTotal = discountAudit.reduce((s, d) => s + d.total, 0);
+    // Credits: parsed from the "Payments" text field on each row.
+    // Dedupe by invoice since the same payments string appears on every line item.
+    const creditByInvoice = new Map();
+    normalized.forEach(r => {
+      const id = r.order_id;
+      if (id && r._creditFromPayments > 0 && !creditByInvoice.has(id)) {
+        creditByInvoice.set(id, { amount: r._creditFromPayments, entries: r._creditEntries });
+      }
+    });
+    const creditTotal = [...creditByInvoice.values()].reduce((s, v) => s + v.amount, 0);
+    const creditInvoices = [...creditByInvoice.keys()];
+    const rawPaymentsSample = rawFirst.payment_dates || rawFirst.payments || rawFirst.payment_text || rawFirst.payment_history || '(no payment_dates field on first row)';
+    return {
+      datesValid, datesNull, repsPresent, repsEmpty,
+      sampleDate, sampleRep,
+      orderIdsPresent, distinctOrderIds,
+      rawOrderIdField, rawOrderNumber,
+      sampleDiscount, rawDiscountFields, totalDiscount, filteredDiscount,
+      discountAudit, discountAuditTotal,
+      creditLineCount: creditByInvoice.size,
+      creditTotal,
+      creditInvoices,
+      rawPaymentsSample,
+    };
+  }, [normalized, rows, filtered]);
+
+  return (
+    <div className="app">
+      <Topbar fetchedAt={fetchedAt} rowCount={filtered.length} totalCount={rows.length} />
+
+      {/* Diagnostic panel — remove this section once everything works */}
+      <details style={{
+        background: 'var(--bg-elev)',
+        border: '1px solid var(--border)',
+        borderRadius: 4,
+        padding: '10px 14px',
+        marginBottom: 20,
+        fontFamily: 'JetBrains Mono, monospace',
+        fontSize: 11,
+        color: 'var(--text-dim)',
+      }}>
+        <summary style={{ cursor: 'pointer', color: 'var(--accent)' }}>
+          DIAGNOSTICS — click to expand
+        </summary>
+        <div style={{ marginTop: 10, lineHeight: 1.8 }}>
+          <div>Total rows: {normalized.length} · After filters: {filtered.length}</div>
+          <div>Valid dates: {diag.datesValid} · Null/invalid dates: {diag.datesNull}</div>
+          <div>Sample date value (raw): "{diag.sampleDate}"</div>
+          <div>Rows with sales_rep: {diag.repsPresent} · Without: {diag.repsEmpty}</div>
+          <div>Sample sales_rep value: "{diag.sampleRep}"</div>
+          <div>Distinct sales reps in data: {distinct.reps.length} ({distinct.reps.slice(0, 5).join(', ')}{distinct.reps.length > 5 ? '…' : ''})</div>
+          <div style={{ marginTop: 8, color: 'var(--accent)' }}>--- ORDER ID DEBUG ---</div>
+          <div>Rows with order_id: {diag.orderIdsPresent} · Distinct order_ids: {diag.distinctOrderIds}</div>
+          <div>Raw first row: {diag.rawOrderIdField}, {diag.rawOrderNumber}</div>
+          <div style={{ marginTop: 8, color: 'var(--accent)' }}>--- DISCOUNT DEBUG ---</div>
+          <div>Raw first row: {diag.rawDiscountFields}</div>
+          <div>First row computed _discount: ${diag.sampleDiscount?.toFixed(2)}</div>
+          <div>Total discounts (all rows): ${diag.totalDiscount?.toLocaleString(undefined, {maximumFractionDigits:2})}</div>
+          <div>Total discounts (current filter): ${diag.filteredDiscount?.toLocaleString(undefined, {maximumFractionDigits:2})}</div>
+          {diag.discountAudit && diag.discountAudit.length > 0 && (
+            <details style={{ marginTop: 6 }}>
+              <summary style={{ cursor: 'pointer', color: 'var(--accent)' }}>
+                Per-invoice audit ({diag.discountAudit.length} invoice{diag.discountAudit.length === 1 ? '' : 's'}, ${diag.discountAuditTotal.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2})} total · click to expand)
+              </summary>
+              <div style={{ marginTop: 6, marginLeft: 12, fontFamily: 'monospace', fontSize: '0.85em' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '120px 100px 1fr 110px', gap: '4px 12px', color: 'var(--text-dim)' }}>
+                  <div style={{ fontWeight: 600 }}>Invoice</div>
+                  <div style={{ fontWeight: 600 }}>Date</div>
+                  <div style={{ fontWeight: 600 }}>Buyer</div>
+                  <div style={{ fontWeight: 600, textAlign: 'right' }}>Discount</div>
+                  {diag.discountAudit.slice(0, 50).map((d, i) => (
+                    <React.Fragment key={i}>
+                      <div style={{ color: 'var(--accent)' }}>{d.invoice}</div>
+                      <div>{d.date}</div>
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={d.buyer}>{d.buyer}</div>
+                      <div style={{ textAlign: 'right', fontWeight: 600 }}>${d.total.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
+                    </React.Fragment>
+                  ))}
+                </div>
+                {diag.discountAudit.length > 50 && (
+                  <div style={{ marginTop: 6, color: 'var(--text-faint)' }}>
+                    Showing top 50 of {diag.discountAudit.length} · narrow with filters to see specific invoices
+                  </div>
+                )}
+              </div>
+            </details>
+          )}
+          <div style={{ marginTop: 8, color: 'var(--accent)' }}>--- CREDIT DEBUG ---</div>
+          <div>Sample "payments" field (first row): {typeof diag.rawPaymentsSample === 'string' ? `"${diag.rawPaymentsSample}"` : JSON.stringify(diag.rawPaymentsSample)}</div>
+          <div>Invoices with credits parsed: {diag.creditLineCount}</div>
+          <div>Total credits applied: ${diag.creditTotal?.toLocaleString(undefined, {maximumFractionDigits:2})}</div>
+          <div>Invoices: {diag.creditInvoices.length === 0 ? '(none)' : diag.creditInvoices.slice(0, 10).join(', ') + (diag.creditInvoices.length > 10 ? ` … +${diag.creditInvoices.length - 10} more` : '')}</div>
+        </div>
+      </details>
+
+      <FilterBar filters={filters} setFilters={setFilters} distinct={distinct} onReset={resetFilters} />
+
+      {/* KPI Row 1 — top-line money */}
+      <div className="kpi-grid">
+        <Kpi
+          label="Net Revenue"
+          value={fmtMoney(kpis.revenue)}
+          sub={`${fmtNum(kpis.lineItems)} line items`}
+          accent
+        />
+        <Kpi
+          label={'Net Profit' + (kpis.isModeled ? ' *' : '')}
+          value={fmtMoney(kpis.netProfit)}
+          sub={kpis.isModeled ? `modeled · ${(filters.cogsRatio * 100).toFixed(0)}% COGS` : 'revenue − COGS'}
+        />
+        <Kpi
+          label={'Gross Margin' + (kpis.isModeled ? ' *' : '')}
+          value={kpis.margin.toFixed(1) + '%'}
+          sub={kpis.isModeled ? `modeled · ${fmtMoney(kpis.cost)} COGS` : `${fmtMoney(kpis.cost)} COGS`}
+        />
+        <Kpi
+          label="MOM Change"
+          value={kpis.momChange == null ? '—' : (kpis.momChange >= 0 ? '+' : '') + kpis.momChange.toFixed(1) + '%'}
+          sub={kpis.momLabel}
+        />
+      </div>
+
+      {/* KPI Row 2 — volume */}
+      <div className="kpi-grid">
+        <Kpi label="Orders" value={fmtNum(kpis.orders)} sub={`${fmtMoney(kpis.avgOrder)} avg order`} />
+        <Kpi label="Units Sold" value={fmtNum(Math.round(kpis.units))} sub={`${fmtNum(kpis.lineItems)} line items`} />
+        <Kpi label="Avg Unit Price" value={fmtMoneyFull(kpis.avgUnitPrice)} sub="revenue ÷ units" />
+        <Kpi label="Avg Units / Invoice" value={kpis.avgUnitsPerInvoice.toFixed(1)} sub={`across ${fmtNum(kpis.orders)} invoices`} />
+      </div>
+
+      {/* KPI Row 3 — reach & deductions */}
+      <div className="kpi-grid">
+        <Kpi label="Active Buyers" value={fmtNum(kpis.buyers)} sub="unique accounts" />
+        <Kpi label="Markets" value={fmtNum(distinct.states.filter(s => filtered.some(r => r.buyer_state === s)).length)} sub="states with sales" />
+        <Kpi
+          label="Discounts Given"
+          value={fmtMoney(kpis.discounts)}
+          sub={kpis.grossRevenue
+            ? ((kpis.discounts / (kpis.grossRevenue + kpis.discounts)) * 100).toFixed(1) + '% of gross'
+            : '—'}
+        />
+        <Kpi
+          label="Credits Applied"
+          value={fmtMoney(kpis.credits)}
+          sub={kpis.creditCount
+            ? `${fmtNum(kpis.creditOrders)} invoice${kpis.creditOrders === 1 ? '' : 's'} · applied as payment`
+            : 'none in current view'}
+        />
+      </div>
+
+      {/* Revenue trend */}
+      <section className="section">
+        <div className="section-header">
+          <h2 className="section-title">Revenue <em>over time</em></h2>
+          <span className="section-meta">{timeSeries.length} days</span>
+        </div>
+        <div className="card" style={{ height: 320 }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart data={timeSeries} margin={{ top: 12, right: 12, left: 0, bottom: 0 }}>
+              <defs>
+                <linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#d24a92" stopOpacity={0.4} />
+                  <stop offset="100%" stopColor="#d24a92" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid stroke="#262c28" strokeDasharray="2 2" vertical={false} />
+              <XAxis dataKey="date" stroke="#5d6660" tick={{ fontSize: 11, fontFamily: 'JetBrains Mono' }} tickLine={false} axisLine={{ stroke: '#262c28' }} />
+              <YAxis stroke="#5d6660" tick={{ fontSize: 11, fontFamily: 'JetBrains Mono' }} tickLine={false} axisLine={false} tickFormatter={fmtMoney} />
+              <Tooltip
+                contentStyle={{ background: '#161a17', border: '1px solid #262c28', borderRadius: 4, fontSize: 12 }}
+                labelStyle={{ color: '#9aa39c', fontFamily: 'JetBrains Mono', fontSize: 11 }}
+                itemStyle={{ color: '#e8ebe7' }}
+                formatter={(v, n) => n === 'revenue' ? [fmtMoneyFull(v), 'Revenue'] : [fmtNum(v), n]}
+              />
+              <Area type="monotone" dataKey="revenue" stroke="#d24a92" strokeWidth={2} fill="url(#revGrad)" />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+      </section>
+
+      {/* Top products + buyers */}
+      <section className="section">
+        <div className="grid-half">
+          <RankCard title="Top products" data={topProducts} />
+          <RankCard title="Top buyers" data={topBuyers} />
+        </div>
+      </section>
+
+      {/* By rep + by category */}
+      <section className="section">
+        <div className="grid-2">
+          <div>
+            <div className="section-header">
+              <h2 className="section-title">Sales <em>by rep</em></h2>
+              <span className="section-meta">{byRep.length} reps</span>
+            </div>
+            <div className="card" style={{ height: 360 }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={byRep} layout="vertical" margin={{ top: 8, right: 16, left: 8, bottom: 8 }}>
+                  <CartesianGrid stroke="#262c28" strokeDasharray="2 2" horizontal={false} />
+                  <XAxis type="number" stroke="#5d6660" tick={{ fontSize: 11, fontFamily: 'JetBrains Mono' }} tickFormatter={fmtMoney} axisLine={false} tickLine={false} />
+                  <YAxis type="category" dataKey="name" stroke="#5d6660" tick={{ fontSize: 11 }} width={130} axisLine={false} tickLine={false} />
+                  <Tooltip
+                    contentStyle={{ background: '#161a17', border: '1px solid #262c28', borderRadius: 4, fontSize: 12 }}
+                    formatter={(v) => [fmtMoneyFull(v), 'Revenue']}
+                  />
+                  <Bar dataKey="revenue" fill="#d24a92" radius={[0, 2, 2, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+          <div>
+            <div className="section-header">
+              <h2 className="section-title">By <em>category</em></h2>
+              <span className="section-meta">mix</span>
+            </div>
+            <div className="card" style={{ height: 360, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={byCategory}
+                    dataKey="revenue"
+                    nameKey="name"
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={60}
+                    outerRadius={110}
+                    paddingAngle={2}
+                    stroke="#0f1210"
+                    strokeWidth={2}
+                  >
+                    {byCategory.map((_, i) => {
+                      const colors = ['#d24a92', '#a03d75', '#b48fd4', '#7a3fa0', '#f0a868', '#e07594', '#6e587d'];
+                      return <Cell key={i} fill={colors[i % colors.length]} />;
+                    })}
+                  </Pie>
+                  <Tooltip
+                    contentStyle={{ background: '#161a17', border: '1px solid #262c28', borderRadius: 4, fontSize: 12 }}
+                    formatter={(v) => fmtMoneyFull(v)}
+                  />
+                  <Legend
+                    verticalAlign="bottom"
+                    iconType="square"
+                    wrapperStyle={{ fontSize: 11, fontFamily: 'JetBrains Mono', color: '#9aa39c' }}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Geography + payment */}
+      <section className="section">
+        <div className="grid-half">
+          <div>
+            <div className="section-header">
+              <h2 className="section-title">By <em>state</em></h2>
+              <span className="section-meta">geography</span>
+            </div>
+            <div className="card">
+              <RankList data={byState} />
+            </div>
+          </div>
+          <div>
+            <div className="section-header">
+              <h2 className="section-title">Payment <em>status</em></h2>
+              <span className="section-meta">AR mix</span>
+            </div>
+            <div className="card">
+              <RankList data={paymentMix.map(p => ({ name: p.name, revenue: p.value }))} />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Monthly breakdown — matches Apex's monthly sales spreadsheet */}
+      <section className="section">
+        <div className="section-header">
+          <h2 className="section-title">Monthly <em>breakdown</em></h2>
+          <span className="section-meta">{monthlyBreakdown.length} months</span>
+        </div>
+        <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
+          <div style={{ overflowX: 'auto' }}>
+            <table className="data-table">
+              <thead>
+                <tr>
+                  <th>Month</th>
+                  <th className="num">Units</th>
+                  <th className="num">Cases</th>
+                  <th className="num">Gross Sales</th>
+                  <th className="num">Discounts</th>
+                  <th className="num">Net Sales</th>
+                  <th className="num">MOM ±</th>
+                  <th className="num">COGS</th>
+                  <th className="num">Net Profit</th>
+                  <th className="num">Margin</th>
+                </tr>
+              </thead>
+              <tbody>
+                {monthlyBreakdown.map((m, i) => (
+                  <tr key={i}>
+                    <td>{m.monthName}</td>
+                    <td className="num">{fmtNum(Math.round(m.units))}</td>
+                    <td className="num dim">{m.cases.toFixed(1)}</td>
+                    <td className="num">{fmtMoneyFull(m.gross)}</td>
+                    <td className="num dim">{fmtMoneyFull(m.discounts)}</td>
+                    <td className="num"><strong>{fmtMoneyFull(m.netSales)}</strong></td>
+                    <td className="num" style={{ color: m.mom == null ? 'var(--text-faint)' : m.mom >= 0 ? 'var(--accent)' : 'var(--rose)' }}>
+                      {m.mom == null ? '—' : (m.mom >= 0 ? '+' : '') + m.mom.toFixed(1) + '%'}
+                    </td>
+                    <td className="num dim">{fmtMoneyFull(m.cogs)}</td>
+                    <td className="num"><strong style={{ color: m.netProfit >= 0 ? 'var(--text)' : 'var(--rose)' }}>{fmtMoneyFull(m.netProfit)}</strong></td>
+                    <td className="num">{m.margin.toFixed(1)}%</td>
+                  </tr>
+                ))}
+                {monthlyBreakdown.length > 0 && (
+                  <tr style={{ background: 'var(--bg-elev-2)', fontWeight: 600 }}>
+                    <td>TOTAL</td>
+                    <td className="num">{fmtNum(Math.round(monthlyBreakdown.reduce((s, m) => s + m.units, 0)))}</td>
+                    <td className="num dim">{monthlyBreakdown.reduce((s, m) => s + m.cases, 0).toFixed(1)}</td>
+                    <td className="num">{fmtMoneyFull(monthlyBreakdown.reduce((s, m) => s + m.gross, 0))}</td>
+                    <td className="num dim">{fmtMoneyFull(monthlyBreakdown.reduce((s, m) => s + m.discounts, 0))}</td>
+                    <td className="num"><strong>{fmtMoneyFull(monthlyBreakdown.reduce((s, m) => s + m.netSales, 0))}</strong></td>
+                    <td className="num dim">—</td>
+                    <td className="num dim">{fmtMoneyFull(monthlyBreakdown.reduce((s, m) => s + m.cogs, 0))}</td>
+                    <td className="num"><strong style={{ color: 'var(--accent)' }}>{fmtMoneyFull(monthlyBreakdown.reduce((s, m) => s + m.netProfit, 0))}</strong></td>
+                    <td className="num"><strong>{kpis.margin.toFixed(1)}%</strong></td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      {/* Product breakdown — matches Apex's product-line spreadsheet */}
+      <section className="section">
+        <div className="section-header">
+          <h2 className="section-title">Product <em>breakdown</em></h2>
+          <span className="section-meta">{fmtNum(productBreakdown.length)} products</span>
+        </div>
+        <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
+          <div style={{ overflowX: 'auto', maxHeight: 520 }}>
+            <table className="data-table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Line</th>
+                  <th className="num">Units Sold</th>
+                  <th className="num">Gross Sales</th>
+                  <th className="num">Discounts</th>
+                  <th className="num">Net Sales</th>
+                  <th className="num">Avg Unit $</th>
+                  <th className="num">Listed $</th>
+                  <th className="num">Cost / Unit</th>
+                  <th className="num">Total Cost</th>
+                  <th className="num">Gross Profit</th>
+                </tr>
+              </thead>
+              <tbody>
+                {productBreakdown.slice(0, 100).map((p, i) => (
+                  <tr key={i}>
+                    <td>{p.name}</td>
+                    <td className="dim">{p.line}</td>
+                    <td className="num">{fmtNum(Math.round(p.units))}</td>
+                    <td className="num">{fmtMoneyFull(p.gross)}</td>
+                    <td className="num dim">{fmtMoneyFull(p.discounts)}</td>
+                    <td className="num"><strong>{fmtMoneyFull(p.netSales)}</strong></td>
+                    <td className="num dim">{fmtMoneyFull(p.avgUnitPrice)}</td>
+                    <td className="num dim">{fmtMoneyFull(p.listedPrice)}</td>
+                    <td className="num dim">{fmtMoneyFull(p.costUnit)}</td>
+                    <td className="num dim">{fmtMoneyFull(p.totalCost)}</td>
+                    <td className="num"><strong style={{ color: p.grossProfit >= 0 ? 'var(--text)' : 'var(--rose)' }}>{fmtMoneyFull(p.grossProfit)}</strong></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {productBreakdown.length > 100 && (
+            <div style={{ padding: '12px 16px', fontFamily: 'JetBrains Mono', fontSize: 11, color: 'var(--text-faint)', textAlign: 'center', borderTop: '1px solid var(--border)' }}>
+              Showing top 100 of {fmtNum(productBreakdown.length)} products by net sales
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Invoices — one row per order, with units per invoice */}
+      <section className="section">
+        <div className="section-header">
+          <h2 className="section-title">Invoices <em>· units &amp; revenue per order</em></h2>
+          <span className="section-meta">{fmtNum(invoices.length)} invoices</span>
+        </div>
+        <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
+          <div style={{ overflowX: 'auto', maxHeight: 480 }}>
+            <table className="data-table">
+              <thead>
+                <tr>
+                  <th>Invoice #</th>
+                  <th>Date</th>
+                  <th>Buyer</th>
+                  <th>Rep</th>
+                  <th className="num">Line Items</th>
+                  <th className="num">Total Units</th>
+                  <th className="num">Revenue</th>
+                  <th className="num">Credit Applied</th>
+                  <th>Payment</th>
+                </tr>
+              </thead>
+              <tbody>
+                {invoices.slice(0, 100).map((inv, i) => (
+                  <tr
+                    key={i}
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => setFilters(f => ({ ...f, invoice: inv.invoice }))}
+                    title="Click to filter the whole dashboard by this invoice"
+                  >
+                    <td className="font-mono" style={{ color: 'var(--accent)' }}>{inv.invoice}</td>
+                    <td className="dim font-mono">{inv.date}</td>
+                    <td>{inv.buyer}</td>
+                    <td className="dim">{inv.rep}</td>
+                    <td className="num dim">{fmtNum(inv.lineItems)}</td>
+                    <td className="num"><strong>{fmtNum(Math.round(inv.units))}</strong></td>
+                    <td className="num">{fmtMoneyFull(inv.revenue)}</td>
+                    <td
+                      className="num"
+                      style={inv.credit > 0 ? { color: 'var(--accent)' } : { color: 'var(--text-faint)' }}
+                      title={inv.credit > 0 && inv.creditEntries.length
+                        ? inv.creditEntries.map(e => `Credit of $${e.amount.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})} on ${e.date}`).join('\n')
+                        : ''}
+                    >
+                      {inv.credit > 0 ? fmtMoneyFull(inv.credit) : '—'}
+                    </td>
+                    <td><StatusPill status={inv.status} /></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {invoices.length > 100 && (
+            <div style={{ padding: '12px 16px', fontFamily: 'JetBrains Mono', fontSize: 11, color: 'var(--text-faint)', textAlign: 'center', borderTop: '1px solid var(--border)' }}>
+              Showing 100 of {fmtNum(invoices.length)} · use filters to narrow further
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Recent orders */}
+      <section className="section">
+        <div className="section-header">
+          <h2 className="section-title">Recent <em>line items</em></h2>
+          <span className="section-meta">latest 25</span>
+        </div>
+        <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
+          <div style={{ overflowX: 'auto' }}>
+            <table className="data-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Order</th>
+                  <th>Buyer</th>
+                  <th>Product</th>
+                  <th>Rep</th>
+                  <th className="num">Qty</th>
+                  <th className="num">Revenue</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filtered
+                  .slice()
+                  .sort((a, b) => (b._date?.getTime() || 0) - (a._date?.getTime() || 0))
+                  .slice(0, 25)
+                  .map((r, i) => (
+                    <tr key={i}>
+                      <td className="dim font-mono">{r.order_date || '—'}</td>
+                      <td className="font-mono">#{r.order_number || r.order_id || '—'}</td>
+                      <td>{r.buyer_name || '—'}</td>
+                      <td className="dim">{r.product_name || '—'}</td>
+                      <td>{r.sales_rep || '—'}</td>
+                      <td className="num">{fmtNum(r._quantity)}</td>
+                      <td className="num">{fmtMoneyFull(r._revenue)}</td>
+                      <td>
+                        <StatusPill status={r.payment_status} />
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      {kpis.isModeled && (
+        <div style={{ marginTop: 24, padding: '12px 16px', background: 'var(--bg-elev)', border: '1px solid var(--border)', borderRadius: 4, fontFamily: 'JetBrains Mono, monospace', fontSize: 11, color: 'var(--text-dim)', lineHeight: 1.6 }}>
+          <span style={{ color: 'var(--accent)' }}>*</span> COGS not present in LeafLink data — Net Profit and Gross Margin shown above use a modeled cost ratio of <strong style={{ color: 'var(--text)' }}>{(filters.cogsRatio * 100).toFixed(0)}%</strong> of net sales. Adjust the slider in the filter bar to model different scenarios. Once cost data is loaded into LeafLink's product records, these numbers will switch to actuals automatically.
+        </div>
+      )}
+
+      <footer style={{ marginTop: 60, padding: '20px 0', borderTop: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', fontFamily: 'JetBrains Mono', fontSize: 11, color: 'var(--text-faint)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>
+        <span>Chill Medicated · Sales Intelligence</span>
+        <span>Auto-refresh every 60s</span>
+      </footer>
+    </div>
+  );
+}
+
+// --- Components -------------------------------------------------------------
+function Topbar({ fetchedAt, rowCount, totalCount }) {
+  const ago = Math.floor((Date.now() - fetchedAt.getTime()) / 60000);
+  return (
+    <div className="topbar">
+      <div className="brand-mark" style={{ alignItems: 'center', gap: 16 }}>
+       <img src="logo.png" alt="Chill Medicated" style={{ height: 48, width: 'auto', flexShrink: 0 }} />
+        <div>
+          <h1 className="brand-name" style={{ lineHeight: 1, fontSize: 26 }}>
+            <span style={{ background: 'linear-gradient(90deg, #d24a92 0%, #7a3fa0 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Chill</span>{' '}
+            <em style={{ color: 'var(--text-dim)', fontStyle: 'italic', fontWeight: 400 }}>Medicated</em>
+          </h1>
+          <div className="brand-tag" style={{ marginTop: 4, border: 'none', padding: 0, fontSize: 9 }}>
+            New Jersey · Sales Intelligence
+          </div>
+        </div>
+      </div>
+      <div className="topbar-meta">
+        <span><strong>{fmtNum(rowCount)}</strong> / {fmtNum(totalCount)} rows</span>
+        <span>·</span>
+        <span>Updated {ago < 1 ? 'just now' : ago + 'm ago'}</span>
+        <span className="pulse"></span>
+      </div>
+    </div>
+  );
+}
+
+function FilterBar({ filters, setFilters, distinct, onReset }) {
+  const upd = (k, v) => setFilters(f => ({ ...f, [k]: v }));
+  return (
+    <div className="filters">
+      <div className="filter-group">
+        <label className="filter-label">From</label>
+        <input type="date" className="filter-input" value={filters.from} onChange={e => upd('from', e.target.value)} />
+      </div>
+      <div className="filter-group">
+        <label className="filter-label">To</label>
+        <input type="date" className="filter-input" value={filters.to} onChange={e => upd('to', e.target.value)} />
+      </div>
+      <div className="filter-group">
+        <label className="filter-label">Brand</label>
+        <select className="filter-select" value={filters.brand} onChange={e => upd('brand', e.target.value)}>
+          <option value="">All</option>
+          {distinct.brands.map(b => <option key={b}>{b}</option>)}
+        </select>
+      </div>
+      <div className="filter-group">
+        <label className="filter-label">Sales Rep</label>
+        <select className="filter-select" value={filters.rep} onChange={e => upd('rep', e.target.value)}>
+          <option value="">All</option>
+          {distinct.reps.map(b => <option key={b}>{b}</option>)}
+        </select>
+      </div>
+      <div className="filter-group">
+        <label className="filter-label">Buyer</label>
+        <select className="filter-select" value={filters.buyer} onChange={e => upd('buyer', e.target.value)}>
+          <option value="">All</option>
+          {distinct.buyers.map(b => <option key={b}>{b}</option>)}
+        </select>
+      </div>
+      <div className="filter-group">
+        <label className="filter-label">State</label>
+        <select className="filter-select" value={filters.state} onChange={e => upd('state', e.target.value)}>
+          <option value="">All</option>
+          {distinct.states.map(b => <option key={b}>{b}</option>)}
+        </select>
+      </div>
+      <div className="filter-group">
+        <label className="filter-label">Payment</label>
+        <select className="filter-select" value={filters.status} onChange={e => upd('status', e.target.value)}>
+          <option value="">All</option>
+          {distinct.statuses.map(b => <option key={b}>{b}</option>)}
+        </select>
+      </div>
+      <div className="filter-group">
+        <label className="filter-label">Invoice #</label>
+        <input
+          type="text"
+          className="filter-input"
+          placeholder="search…"
+          value={filters.invoice}
+          onChange={e => upd('invoice', e.target.value)}
+        />
+      </div>
+      <div className="filter-group">
+        <label className="filter-label">Product Line</label>
+        <select className="filter-select" value={filters.productLine} onChange={e => upd('productLine', e.target.value)}>
+          <option value="">All</option>
+          {distinct.productLines.map(b => <option key={b}>{b}</option>)}
+        </select>
+      </div>
+      <div className="filter-group" style={{ justifyContent: 'flex-end' }}>
+        <label
+          className="filter-label"
+          style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', marginTop: 'auto', paddingBottom: 9 }}
+        >
+          <input
+            type="checkbox"
+            checked={filters.excludeSamples}
+            onChange={e => upd('excludeSamples', e.target.checked)}
+            style={{ accentColor: 'var(--accent)', width: 14, height: 14 }}
+          />
+          Exclude samples
+        </label>
+      </div>
+      <div className="filter-group" style={{ minWidth: 180 }}>
+        <label className="filter-label" style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <span>Modeled COGS *</span>
+          <span style={{ color: 'var(--accent)' }}>{(filters.cogsRatio * 100).toFixed(0)}%</span>
+        </label>
+        <input
+          type="range"
+          min="0.30"
+          max="0.60"
+          step="0.01"
+          value={filters.cogsRatio}
+          onChange={e => upd('cogsRatio', parseFloat(e.target.value))}
+          style={{ accentColor: 'var(--accent)', width: '100%', marginTop: 8 }}
+        />
+      </div>
+      <button className="filter-reset" onClick={onReset}>Reset</button>
+    </div>
+  );
+}
+
+function Kpi({ label, value, sub, accent }) {
+  return (
+    <div className={'kpi' + (accent ? ' kpi-accent' : '')}>
+      <div className="kpi-label">{label}</div>
+      <div className="kpi-value tabular">{value}</div>
+      {sub && <div className="kpi-sub">{sub}</div>}
+    </div>
+  );
+}
+
+function RankCard({ title, data }) {
+  return (
+    <div>
+      <div className="section-header">
+        <h2 className="section-title">{title.split(' ')[0]} <em>{title.split(' ').slice(1).join(' ')}</em></h2>
+        <span className="section-meta">top {data.length}</span>
+      </div>
+      <div className="card">
+        <RankList data={data} />
+      </div>
+    </div>
+  );
+}
+
+function RankList({ data }) {
+  const max = Math.max(...data.map(d => d.revenue), 1);
+  return (
+    <div className="rank-list">
+      {data.length === 0 && <div style={{ padding: 20, color: 'var(--text-faint)', textAlign: 'center', fontSize: 13 }}>No data</div>}
+      {data.map((d, i) => (
+        <div key={i} className="rank-row">
+          <div className="rank-num">{String(i + 1).padStart(2, '0')}</div>
+          <div className="rank-name" title={d.name}>{d.name}</div>
+          <div className="rank-value">{fmtMoneyFull(d.revenue)}</div>
+          <div className="rank-bar" style={{ width: `calc(${(d.revenue / max * 100).toFixed(1)}% - 80px)` }}></div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function StatusPill({ status }) {
+  if (!status) return <span className="dim">—</span>;
+  const cls = status.toLowerCase().includes('complet') ? 'pill-completed'
+    : status.toLowerCase().includes('overdue') ? 'pill-overdue'
+    : 'pill-pending';
+  return <span className={'pill ' + cls}>{status}</span>;
+}
+
+// --- Mount ------------------------------------------------------------------
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

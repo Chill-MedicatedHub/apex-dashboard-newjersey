@@ -54,6 +54,13 @@ DOMAIN = os.environ.get("LEAFLINK_DOMAIN", "app.leaflink.com").strip()
 STATE_FILTER = os.environ.get("LEAFLINK_STATE", "NJ").strip().upper()
 DAYS_BACK = int(os.environ.get("LEAFLINK_DAYS_BACK", "365"))
 PAGE_SIZE = int(os.environ.get("LEAFLINK_PAGE_SIZE", "100"))
+# Optional absolute start date. If set, overrides DAYS_BACK.
+# Format: YYYY-MM-DD (e.g. "2025-05-01"). Useful for "everything since launch."
+START_DATE = os.environ.get("LEAFLINK_START_DATE", "").strip()
+# Optional brand name filter (case-insensitive substring match against the resolved
+# brand name). Useful when the seller account sells multiple brands and you only
+# want one. Set "" to disable.
+BRAND_FILTER = os.environ.get("LEAFLINK_BRAND_FILTER", "").strip()
 
 BASE_URL = f"https://{DOMAIN}/api/v2"
 OUTPUT_PATH = Path(__file__).parent / "sales_data.json"
@@ -192,12 +199,32 @@ def _safe_state(addr: dict | None) -> str:
     return raw if len(raw) == 2 else raw[:2]
 
 
-def _sales_rep_name(reps: list | None) -> str:
-    """Pick the first sales rep name from the order's sales_reps array."""
+def _sales_rep_id(reps: list | None) -> int | None:
+    """Pick the first sales rep ID from the order's sales_reps array.
+    Handles both shapes:
+      - [{id: 13, user: "John Doe"}, ...] (expanded)
+      - [13, ...] (just IDs)
+      - [{id: 13}, ...] (partial)
+    """
+    if not reps:
+        return None
+    first = reps[0]
+    if isinstance(first, dict):
+        return first.get("id")
+    if isinstance(first, int):
+        return first
+    return None
+
+
+def _sales_rep_name_from_expanded(reps: list | None) -> str:
+    """Pick the first sales rep name if it's in the expanded form.
+    Returns empty string if reps array contains only IDs."""
     if not reps:
         return ""
-    first = reps[0] if isinstance(reps[0], dict) else {}
-    return first.get("user") or first.get("name") or ""
+    first = reps[0]
+    if isinstance(first, dict):
+        return first.get("user") or first.get("name") or ""
+    return ""
 
 
 def _credits_to_payment_dates(credits_str: str, paid_date: str | None) -> list:
@@ -287,9 +314,26 @@ def normalize_order_to_rows(order: dict) -> list[dict]:
     paid_date = order.get("paid_date") or ""
     status = order.get("status") or ""
     classification = order.get("classification") or ""
-    customer = order.get("customer") or {}
-    buyer_name = customer.get("display_name") or ""
-    sales_rep = _sales_rep_name(order.get("sales_reps") or [])
+
+    # `customer` field can be either:
+    #   - a full dict {id, display_name, ...} (when include_children expands it)
+    #   - an integer ID alone (when it doesn't)
+    # We capture both the name (if available) and the ID for later /customers/{id}/ lookup.
+    customer_raw = order.get("customer")
+    if isinstance(customer_raw, dict):
+        customer_id = customer_raw.get("id")
+        buyer_name = customer_raw.get("display_name") or ""
+    elif isinstance(customer_raw, int):
+        customer_id = customer_raw
+        buyer_name = ""  # will be filled by enrichment pass
+    else:
+        customer_id = None
+        buyer_name = ""
+
+    # `sales_reps` field similarly comes in two shapes.
+    sales_rep_id = _sales_rep_id(order.get("sales_reps") or [])
+    sales_rep = _sales_rep_name_from_expanded(order.get("sales_reps") or [])
+
     payment_dates = _credits_to_payment_dates(order.get("credits") or "0", paid_date)
 
     # Order-level discount allocation context
@@ -316,20 +360,26 @@ def normalize_order_to_rows(order: dict) -> list[dict]:
         product_id = li.get("product")
         product_name = li.get("product_name") or f"Product #{product_id}" if product_id else "—"
 
+        # Normalize dates: strip fractional seconds from ISO timestamps so the
+        # dashboard's JS Date parser handles them cleanly.
+        # "2026-05-26T10:16:33.250708-04:00"  →  "2026-05-26T10:16:33-04:00"
+        clean_created = _strip_microseconds(created_on)
+        clean_ship = _strip_microseconds(ship_date)
+
         rows.append({
             # Identity
             "order_id": order_num,           # canonical key for invoice grouping
             "order_number": short_id or order_num,
             "number": order_num,
             # Dates (raw + iso variants — dashboard uses the most-specific available)
-            "order_date_utc": created_on,
-            "order_date_utc_raw": created_on,
-            "order_date_localized": created_on,
-            "order_date_localized_raw": created_on,
-            "order_date": _fmt_date(created_on),
-            "order_date_raw": created_on,
-            "delivery_date": _fmt_date(ship_date),
-            "delivery_date_raw": ship_date,
+            "order_date_utc": clean_created,
+            "order_date_utc_raw": clean_created,
+            "order_date_localized": clean_created,
+            "order_date_localized_raw": clean_created,
+            "order_date": _fmt_date(clean_created),
+            "order_date_raw": clean_created,
+            "delivery_date": _fmt_date(clean_ship),
+            "delivery_date_raw": clean_ship,
             "paid_date": paid_date,
             # Buyer
             "buyer_name": buyer_name,
@@ -367,8 +417,30 @@ def normalize_order_to_rows(order: dict) -> list[dict]:
             # Misc passthrough
             "is_sample": bool(li.get("is_sample")),
             "notes": (li.get("notes") or order.get("notes") or "")[:500],
+            # Private fields used by enrichment pass — stripped before final write
+            "_customer_id": customer_id,
+            "_sales_rep_id": sales_rep_id,
         })
     return rows
+
+
+def _strip_microseconds(iso: str) -> str:
+    """Strip microseconds from an ISO timestamp so JS Date parsers don't choke.
+    '2026-05-26T10:16:33.250708-04:00' → '2026-05-26T10:16:33-04:00'"""
+    if not iso or not isinstance(iso, str):
+        return iso
+    # Find the position of the dot in the time portion (after the 'T')
+    t_idx = iso.find("T")
+    if t_idx < 0:
+        return iso
+    dot_idx = iso.find(".", t_idx)
+    if dot_idx < 0:
+        return iso
+    # Find the next non-digit character after the dot (the timezone separator)
+    end_idx = dot_idx + 1
+    while end_idx < len(iso) and iso[end_idx].isdigit():
+        end_idx += 1
+    return iso[:dot_idx] + iso[end_idx:]
 
 
 def _fmt_date(iso: str) -> str:
@@ -422,6 +494,96 @@ def fetch_product_lookup(session: requests.Session, product_ids: set) -> dict:
     return lookup
 
 
+def fetch_brand_lookup(session: requests.Session, brand_ids: set) -> dict:
+    """Resolve brand IDs to human-readable names. id -> name."""
+    if not brand_ids:
+        return {}
+    print(f"Resolving {len(brand_ids)} brand(s)...")
+    lookup: dict = {}
+    for bid in sorted(b for b in brand_ids if b):
+        try:
+            data = _get(session, f"/brands/{bid}/", {})
+        except SystemExit:
+            print(f"  warning: brand {bid} lookup failed; will show as blank", file=sys.stderr)
+            continue
+        name = data.get("name") or data.get("display_name") or ""
+        if name:
+            lookup[bid] = name
+        time.sleep(SLEEP_BETWEEN_PAGES_SEC / 2)
+    return lookup
+
+
+def fetch_category_lookup(session: requests.Session) -> dict:
+    """Fetch the full product-categories list. id -> name.
+    Categories are a small fixed set, so we pull all of them once."""
+    print("Resolving product categories...")
+    lookup: dict = {}
+    try:
+        # No batching needed — usually < 20 categories
+        for cat in paginate(session, "/product-categories/", {"limit": PAGE_SIZE}):
+            cid = cat.get("id")
+            name = cat.get("name") or cat.get("display_name") or ""
+            if cid and name:
+                lookup[cid] = name
+    except SystemExit:
+        print("  warning: category lookup failed; category column will be blank", file=sys.stderr)
+    return lookup
+
+
+def fetch_customer_lookup(session: requests.Session, customer_ids: set) -> dict:
+    """Resolve customer IDs to display names. id -> display_name.
+    Customers are usually a small set (one row per dispensary), so individual lookups
+    work fine. The /customers/{id}/ endpoint requires a single ID per call."""
+    if not customer_ids:
+        return {}
+    ids = sorted(c for c in customer_ids if c)
+    print(f"Resolving {len(ids)} customer(s)...")
+    lookup: dict = {}
+    for cid in ids:
+        try:
+            data = _get(session, f"/customers/{cid}/", {})
+        except SystemExit:
+            # Don't kill the whole run; print and continue
+            print(f"  warning: customer {cid} lookup failed; will show as blank", file=sys.stderr)
+            continue
+        # Try a few field names that LeafLink might use
+        name = (data.get("display_name") or data.get("name") or
+                data.get("company_name") or "")
+        if name:
+            lookup[cid] = name
+        time.sleep(SLEEP_BETWEEN_PAGES_SEC / 2)
+    return lookup
+
+
+def fetch_sales_rep_lookup(session: requests.Session, rep_ids: set) -> dict:
+    """Resolve sales rep user IDs to names. id -> display name.
+    Sales reps are accessed via /company-staff/{id}/. Usually a tiny set
+    (you only have a handful of reps), so individual GETs are fine."""
+    if not rep_ids:
+        return {}
+    ids = sorted(r for r in rep_ids if r)
+    print(f"Resolving {len(ids)} sales rep(s)...")
+    lookup: dict = {}
+    for rid in ids:
+        try:
+            data = _get(session, f"/company-staff/{rid}/", {})
+        except SystemExit:
+            print(f"  warning: sales rep {rid} lookup failed; will show as blank", file=sys.stderr)
+            continue
+        # company-staff likely returns user_first_name, user_last_name, or user dict
+        name = ""
+        first = data.get("user_first_name") or ""
+        last = data.get("user_last_name") or ""
+        if first or last:
+            name = f"{first} {last}".strip()
+        if not name:
+            name = data.get("user") or data.get("name") or data.get("username") or ""
+        if name:
+            lookup[rid] = name
+        time.sleep(SLEEP_BETWEEN_PAGES_SEC / 2)
+    return lookup
+
+
 # --------------------------------------------------------------------------- #
 # Main                                                                        #
 # --------------------------------------------------------------------------- #
@@ -430,10 +592,18 @@ def main() -> None:
     started = time.time()
     session = _session()
 
-    # Date window
-    since = (datetime.now(timezone.utc) - timedelta(days=DAYS_BACK)).isoformat()
-    print(f"Pulling orders from LeafLink ({DOMAIN}) since {since[:10]} (last {DAYS_BACK} days)...")
+    # Date window. START_DATE (absolute) overrides DAYS_BACK (rolling) if set.
+    if START_DATE:
+        # Pad with time so the API gets a full ISO datetime
+        since = f"{START_DATE}T00:00:00+00:00"
+        window_desc = f"since {START_DATE} (absolute)"
+    else:
+        since = (datetime.now(timezone.utc) - timedelta(days=DAYS_BACK)).isoformat()
+        window_desc = f"since {since[:10]} (last {DAYS_BACK} days)"
+    print(f"Pulling orders from LeafLink ({DOMAIN}) {window_desc}...")
     print(f"Filtering to state: {STATE_FILTER or '(all)'}")
+    if BRAND_FILTER:
+        print(f"Filtering to brand:  {BRAND_FILTER}")
 
     # Step 1 — pull orders with embedded line items, customer, sales_reps
     order_params = {
@@ -444,6 +614,8 @@ def main() -> None:
     }
     raw_rows: list[dict] = []
     seen_product_ids: set = set()
+    seen_customer_ids: set = set()
+    seen_rep_ids: set = set()
     orders_seen = 0
     orders_kept = 0
 
@@ -456,22 +628,74 @@ def main() -> None:
             for r in rows:
                 if r["product_id"]:
                     seen_product_ids.add(r["product_id"])
+                if r.get("_customer_id"):
+                    seen_customer_ids.add(r["_customer_id"])
+                if r.get("_sales_rep_id"):
+                    seen_rep_ids.add(r["_sales_rep_id"])
 
     print(f"Fetched {orders_seen} order(s); kept {orders_kept} in state {STATE_FILTER}.")
     print(f"Produced {len(raw_rows)} line-item row(s).")
 
     # Step 2 — enrich product names
     product_lookup = fetch_product_lookup(session, seen_product_ids)
+    # Collect brand IDs from products so we can resolve brand names
+    brand_ids = {info["brand_id"] for info in product_lookup.values() if info.get("brand_id")}
+
+    # Step 3 — enrich category, brand, customer, and sales-rep names
+    category_lookup = fetch_category_lookup(session)
+    brand_lookup = fetch_brand_lookup(session, brand_ids)
+    customer_lookup = fetch_customer_lookup(session, seen_customer_ids)
+    sales_rep_lookup = fetch_sales_rep_lookup(session, seen_rep_ids)
+
+    # Step 4 — apply enrichment to every row, and filter by brand if requested
+    final_rows = []
     for r in raw_rows:
         pid = r["product_id"]
         if pid and pid in product_lookup:
             info = product_lookup[pid]
             r["product_name"] = info["name"]
-            # Until we resolve brand/category ids → names, leave passthrough
-            # The dashboard tolerates blank brand/product_type.
+            cat_name = category_lookup.get(info["category_id"], "")
+            brand_name = brand_lookup.get(info["brand_id"], "")
+            r["product_type"] = cat_name
+            r["product_brand"] = brand_name
+            r["brand"] = brand_name
             if not r["unit_price"] or r["unit_price"] == "$0.00":
                 if info["wholesale_price_cents"]:
                     r["unit_price"] = f"${info['wholesale_price_cents']/100:,.2f}"
+
+        # Resolve customer name from id if it's still blank
+        if not r.get("buyer_name"):
+            cid = r.get("_customer_id")
+            if cid and cid in customer_lookup:
+                r["buyer_name"] = customer_lookup[cid]
+
+        # Resolve sales rep name from id if it's still blank
+        if not r.get("sales_rep") or isinstance(r.get("sales_rep"), int):
+            rid = r.get("_sales_rep_id")
+            if rid and rid in sales_rep_lookup:
+                name = sales_rep_lookup[rid]
+                r["sales_rep"] = name
+                r["sales_reps"] = name
+                r["sales_reps_display"] = name
+            else:
+                # No resolution available — clear the integer ID so we don't show "83128"
+                r["sales_rep"] = ""
+                r["sales_reps"] = ""
+                r["sales_reps_display"] = ""
+
+        # Strip private bookkeeping fields before writing
+        r.pop("_customer_id", None)
+        r.pop("_sales_rep_id", None)
+
+        # Apply brand filter (case-insensitive substring match) AFTER enrichment
+        if BRAND_FILTER:
+            if BRAND_FILTER.lower() not in (r.get("brand") or "").lower():
+                continue
+        final_rows.append(r)
+
+    if BRAND_FILTER:
+        print(f"Brand filter '{BRAND_FILTER}' kept {len(final_rows)} of {len(raw_rows)} rows.")
+    raw_rows = final_rows
 
     # Step 3 — write atomically
     output = {

@@ -340,6 +340,24 @@ def normalize_order_to_rows(order: dict) -> list[dict]:
     if STATE_FILTER and state != STATE_FILTER:
         return []
 
+    # One-time diagnostic dump: print the discount-related fields from the FIRST
+    # order we encounter that has a non-zero discount. Helps verify whether
+    # LeafLink sends % as a decimal (0.1 = 10%) or whole number (10 = 10%).
+    global _ORDER_DISCOUNT_DEBUG_LOGGED
+    try:
+        _ORDER_DISCOUNT_DEBUG_LOGGED
+    except NameError:
+        _ORDER_DISCOUNT_DEBUG_LOGGED = False
+    if not _ORDER_DISCOUNT_DEBUG_LOGGED:
+        d = order.get("discount")
+        if d not in (None, "", 0, "0", "0.00"):
+            print(f"  DEBUG order with discount={d!r} type={order.get('discount_type')!r}:", file=sys.stderr)
+            for f in ("number", "short_id", "discount", "discount_type", "sub_total",
+                      "total", "tax", "shipping_charge", "shipping_total"):
+                print(f"    {f}: {order.get(f)!r}", file=sys.stderr)
+            print(f"  DEBUG order all top-level keys: {sorted(order.keys())}", file=sys.stderr)
+            _ORDER_DISCOUNT_DEBUG_LOGGED = True
+
     # Order-level fields used on every row
     order_num = order.get("number") or order.get("order_number") or ""
     short_id = order.get("short_id") or order.get("order_short_number") or ""
@@ -370,9 +388,14 @@ def normalize_order_to_rows(order: dict) -> list[dict]:
 
     payment_dates = _credits_to_payment_dates(order.get("credits") or "0", paid_date)
 
-    # Order-level discount allocation context
+    # Order-level discount allocation context.
+    # LeafLink may send a percent discount as either 10 (whole pct) or 0.10
+    # (decimal fraction). Heuristic: if discount_type is "%" and value < 1,
+    # interpret as fraction and convert to percentage points.
     discount_dollars = _to_decimal(order.get("discount"))
     discount_type = (order.get("discount_type") or "$").strip()
+    if discount_type == "%" and 0 < discount_dollars < 1:
+        discount_dollars = discount_dollars * 100
     order_subtotal = _order_subtotal_dollars(order)
 
     rows = []

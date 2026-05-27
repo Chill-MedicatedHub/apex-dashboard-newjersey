@@ -462,6 +462,17 @@ const parseDate = (str) => {
   return isNaN(d) ? null : d;
 };
 
+// Display format: MM/DD/YY (two-digit year, no time stamp).
+// Accepts any of the messy input shapes the scraper produces.
+const fmtDate = (str) => {
+  const d = parseDate(str);
+  if (!d) return '—';
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  const y = String(d.getFullYear()).slice(-2);
+  return `${m}/${day}/${y}`;
+};
+
 const ymd = (d) => {
   if (!(d instanceof Date) || isNaN(d)) return '';
   const y = d.getFullYear();
@@ -874,13 +885,13 @@ function Dashboard({ data, filters, setFilters }) {
         map[id] = {
           id,
           invoice: r.order_number || ('#' + r.order_id),
-          date: r.order_date || '—',
+          date: fmtDate(r._date || r.order_date_raw || r.order_date),
           _date: r._date,
           buyer: r.buyer_name || '—',
           rep: r.sales_rep || '—',
           state: r.buyer_state || '—',
           status: r.payment_status || 'Unknown',
-          delivery: r.delivery_date || '—',
+          delivery: fmtDate(r.delivery_date_raw || r.delivery_date),
           lineItems: 0,
           units: 0,
           revenue: 0,
@@ -947,7 +958,7 @@ function Dashboard({ data, filters, setFilters }) {
         discountByInvoice.set(id, {
           invoice: r.order_number || id,
           buyer: r.buyer_name || '—',
-          date: r.order_date || '—',
+          date: fmtDate(r._date || r.order_date_raw || r.order_date),
           line: 0,
         });
       }
@@ -1447,7 +1458,7 @@ function Dashboard({ data, filters, setFilters }) {
                   .slice(0, 25)
                   .map((r, i) => (
                     <tr key={i}>
-                      <td className="dim font-mono">{r.order_date || '—'}</td>
+                      <td className="dim font-mono">{fmtDate(r._date || r.order_date_raw || r.order_date)}</td>
                       <td className="font-mono">#{r.order_number || r.order_id || '—'}</td>
                       <td>{r.buyer_name || '—'}</td>
                       <td className="dim">{r.product_name || '—'}</td>

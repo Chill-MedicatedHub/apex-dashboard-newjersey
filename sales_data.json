@@ -1,10 +1,144 @@
 {
-  "fetched_at": "2026-06-11T23:47:26.449759+00:00",
+  "fetched_at": "2026-06-11T23:58:23.967780+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
   "orders_seen": 1324,
   "orders_kept": 1302,
+  "inventory": [
+    {
+      "id": "2675942",
+      "sku": "47329fca9cd9f1f63936",
+      "name": "Chill Medicated - 100mg Blue Razz Syrup",
+      "line": "",
+      "brand": "Chill Medicated",
+      "status": "available",
+      "inventory": 360.0,
+      "reserved": 75.0,
+      "available": 285.0
+    },
+    {
+      "id": "2675941",
+      "sku": "41c68a5bbc4f357f9ec5",
+      "name": "Chill Medicated - 100mg Chery Syrup",
+      "line": "",
+      "brand": "Chill Medicated",
+      "status": "available",
+      "inventory": 510.0,
+      "reserved": 90.0,
+      "available": 420.0
+    },
+    {
+      "id": "2675940",
+      "sku": "4e729672d1195aa95b72",
+      "name": "Chill Medicated - 100mg Watermelon Syrup",
+      "line": "",
+      "brand": "Chill Medicated",
+      "status": "available",
+      "inventory": 449.0,
+      "reserved": 60.0,
+      "available": 389.0
+    },
+    {
+      "id": "2675950",
+      "sku": "4d5c9b1162b6431d6c6c",
+      "name": "Chill Medicated - MAXX 1000mg THC: 1000mg CBD Body Rub",
+      "line": "",
+      "brand": "Chill Medicated",
+      "status": "available",
+      "inventory": 55.0,
+      "reserved": 0.0,
+      "available": 55.0
+    },
+    {
+      "id": "2675961",
+      "sku": "4e3596d2a7ab898be2a3",
+      "name": "Chill Medicated - MAXX Majestic Mint 1000mg THC: 1000mg CBD Body Rub",
+      "line": "",
+      "brand": "Chill Medicated",
+      "status": "available",
+      "inventory": 384.0,
+      "reserved": 0.0,
+      "available": 384.0
+    },
+    {
+      "id": "2675960",
+      "sku": "49f1a5e48e1b96a679e6",
+      "name": "Chill Medicated - MAXX  Vanilla Lust 1000mg THC: 1000mg CBD Body Rub",
+      "line": "",
+      "brand": "Chill Medicated",
+      "status": "available",
+      "inventory": 312.0,
+      "reserved": 15.0,
+      "available": 297.0
+    },
+    {
+      "id": "2675949",
+      "sku": "4434adc7323607418729",
+      "name": "Chill Medicated - RELAX 500mg THC: 500mg CBD Body Rub",
+      "line": "",
+      "brand": "Chill Medicated",
+      "status": "available",
+      "inventory": 135.0,
+      "reserved": 15.0,
+      "available": 120.0
+    },
+    {
+      "id": "2675943",
+      "sku": "4c7ea0182924b462594c",
+      "name": "Chill Medicated - ZERO SUGAR 100mg Grape Syrup",
+      "line": "",
+      "brand": "Chill Medicated",
+      "status": "available",
+      "inventory": 507.0,
+      "reserved": 60.0,
+      "available": 447.0
+    },
+    {
+      "id": "2675946",
+      "sku": "40fa86c05854beeda4bf",
+      "name": "Chill Medicated - ZERO SUGAR 100mg Lemon-Lime Syrup",
+      "line": "",
+      "brand": "Chill Medicated",
+      "status": "available",
+      "inventory": 579.0,
+      "reserved": 75.0,
+      "available": 504.0
+    },
+    {
+      "id": "2675945",
+      "sku": "4d55a249eae9d0c8ee86",
+      "name": "Chill Medicated - ZERO SUGAR 100mg Strawberry Syrup",
+      "line": "",
+      "brand": "Chill Medicated",
+      "status": "available",
+      "inventory": 495.0,
+      "reserved": 60.0,
+      "available": 435.0
+    },
+    {
+      "id": "2675947",
+      "sku": "445aa8c673b0915bc207",
+      "name": "Chill Medicated - ZERO SUGAR SNOOZE Dreamberry Syrup",
+      "line": "",
+      "brand": "Chill Medicated",
+      "status": "available",
+      "inventory": 420.0,
+      "reserved": 90.0,
+      "available": 330.0
+    },
+    {
+      "id": "2675948",
+      "sku": "4b8abf85c88da4826f00",
+      "name": "Chill Medicated - ZERO SUGAR SUNRISE Orange Creme Syrup",
+      "line": "",
+      "brand": "Chill Medicated",
+      "status": "available",
+      "inventory": 398.0,
+      "reserved": 75.0,
+      "available": 323.0
+    }
+  ],
   "rows": [
     {
       "order_id": "d108d350-3579-4a26-81a5-499f3f76080b",
@@ -48,7 +182,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "d108d350-3579-4a26-81a5-499f3f76080b",
@@ -92,7 +228,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "d108d350-3579-4a26-81a5-499f3f76080b",
@@ -136,7 +274,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "d108d350-3579-4a26-81a5-499f3f76080b",
@@ -180,7 +320,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d55a249eae9d0c8ee86",
+      "current_inventory": 435.0
     },
     {
       "order_id": "d108d350-3579-4a26-81a5-499f3f76080b",
@@ -224,7 +366,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4c7ea0182924b462594c",
+      "current_inventory": 447.0
     },
     {
       "order_id": "d108d350-3579-4a26-81a5-499f3f76080b",
@@ -268,7 +412,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "40fa86c05854beeda4bf",
+      "current_inventory": 504.0
     },
     {
       "order_id": "d108d350-3579-4a26-81a5-499f3f76080b",
@@ -312,7 +458,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4b8abf85c88da4826f00",
+      "current_inventory": 323.0
     },
     {
       "order_id": "d108d350-3579-4a26-81a5-499f3f76080b",
@@ -356,7 +504,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "d108d350-3579-4a26-81a5-499f3f76080b",
@@ -400,7 +550,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "e2765766-fefa-4c8d-890d-e4798a85f0ae",
@@ -444,7 +596,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "e2765766-fefa-4c8d-890d-e4798a85f0ae",
@@ -488,7 +642,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "49f1a5e48e1b96a679e6",
+      "current_inventory": 297.0
     },
     {
       "order_id": "e2765766-fefa-4c8d-890d-e4798a85f0ae",
@@ -532,7 +688,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "e2765766-fefa-4c8d-890d-e4798a85f0ae",
@@ -576,7 +734,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "e2765766-fefa-4c8d-890d-e4798a85f0ae",
@@ -620,7 +780,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "963209af-18e9-46dc-8020-789668c4c6eb",
@@ -664,7 +826,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "963209af-18e9-46dc-8020-789668c4c6eb",
@@ -708,7 +872,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "963209af-18e9-46dc-8020-789668c4c6eb",
@@ -752,7 +918,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d55a249eae9d0c8ee86",
+      "current_inventory": 435.0
     },
     {
       "order_id": "963209af-18e9-46dc-8020-789668c4c6eb",
@@ -796,7 +964,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "802b5b27-9b5d-44df-ad8f-4a8cfba3a402",
@@ -840,7 +1010,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "802b5b27-9b5d-44df-ad8f-4a8cfba3a402",
@@ -884,7 +1056,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "802b5b27-9b5d-44df-ad8f-4a8cfba3a402",
@@ -928,7 +1102,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "802b5b27-9b5d-44df-ad8f-4a8cfba3a402",
@@ -972,7 +1148,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "802b5b27-9b5d-44df-ad8f-4a8cfba3a402",
@@ -1016,7 +1194,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4c7ea0182924b462594c",
+      "current_inventory": 447.0
     },
     {
       "order_id": "802b5b27-9b5d-44df-ad8f-4a8cfba3a402",
@@ -1060,7 +1240,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "40fa86c05854beeda4bf",
+      "current_inventory": 504.0
     },
     {
       "order_id": "802b5b27-9b5d-44df-ad8f-4a8cfba3a402",
@@ -1104,7 +1286,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d55a249eae9d0c8ee86",
+      "current_inventory": 435.0
     },
     {
       "order_id": "802b5b27-9b5d-44df-ad8f-4a8cfba3a402",
@@ -1148,7 +1332,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "802b5b27-9b5d-44df-ad8f-4a8cfba3a402",
@@ -1192,7 +1378,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4b8abf85c88da4826f00",
+      "current_inventory": 323.0
     },
     {
       "order_id": "802b5b27-9b5d-44df-ad8f-4a8cfba3a402",
@@ -1236,7 +1424,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "49f1a5e48e1b96a679e6",
+      "current_inventory": 297.0
     },
     {
       "order_id": "802b5b27-9b5d-44df-ad8f-4a8cfba3a402",
@@ -1280,7 +1470,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "current_inventory": 55.0
     },
     {
       "order_id": "802b5b27-9b5d-44df-ad8f-4a8cfba3a402",
@@ -1324,7 +1516,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "802b5b27-9b5d-44df-ad8f-4a8cfba3a402",
@@ -1368,7 +1562,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e3596d2a7ab898be2a3",
+      "current_inventory": 384.0
     },
     {
       "order_id": "802b5b27-9b5d-44df-ad8f-4a8cfba3a402",
@@ -1412,7 +1608,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "802b5b27-9b5d-44df-ad8f-4a8cfba3a402",
@@ -1456,7 +1654,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "40fa86c05854beeda4bf",
+      "current_inventory": 504.0
     },
     {
       "order_id": "802b5b27-9b5d-44df-ad8f-4a8cfba3a402",
@@ -1500,7 +1700,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "802b5b27-9b5d-44df-ad8f-4a8cfba3a402",
@@ -1544,7 +1746,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "802b5b27-9b5d-44df-ad8f-4a8cfba3a402",
@@ -1588,7 +1792,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "26c87984-cb65-4440-8d28-5ee9c0e55bb1",
@@ -1632,7 +1838,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "26c87984-cb65-4440-8d28-5ee9c0e55bb1",
@@ -1676,7 +1884,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "current_inventory": 55.0
     },
     {
       "order_id": "26c87984-cb65-4440-8d28-5ee9c0e55bb1",
@@ -1720,7 +1930,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e3596d2a7ab898be2a3",
+      "current_inventory": 384.0
     },
     {
       "order_id": "26c87984-cb65-4440-8d28-5ee9c0e55bb1",
@@ -1764,7 +1976,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "26c87984-cb65-4440-8d28-5ee9c0e55bb1",
@@ -1808,7 +2022,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "9c6f7418-5c4c-48c9-b8a4-4824796c0968",
@@ -1852,7 +2068,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "9c6f7418-5c4c-48c9-b8a4-4824796c0968",
@@ -1896,7 +2114,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "9c6f7418-5c4c-48c9-b8a4-4824796c0968",
@@ -1940,7 +2160,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "9c6f7418-5c4c-48c9-b8a4-4824796c0968",
@@ -1984,7 +2206,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4c7ea0182924b462594c",
+      "current_inventory": 447.0
     },
     {
       "order_id": "9c6f7418-5c4c-48c9-b8a4-4824796c0968",
@@ -2028,7 +2252,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "40fa86c05854beeda4bf",
+      "current_inventory": 504.0
     },
     {
       "order_id": "9c6f7418-5c4c-48c9-b8a4-4824796c0968",
@@ -2072,7 +2298,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d55a249eae9d0c8ee86",
+      "current_inventory": 435.0
     },
     {
       "order_id": "9c6f7418-5c4c-48c9-b8a4-4824796c0968",
@@ -2116,7 +2344,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "9c6f7418-5c4c-48c9-b8a4-4824796c0968",
@@ -2160,7 +2390,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4b8abf85c88da4826f00",
+      "current_inventory": 323.0
     },
     {
       "order_id": "9c6f7418-5c4c-48c9-b8a4-4824796c0968",
@@ -2204,7 +2436,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "9c6f7418-5c4c-48c9-b8a4-4824796c0968",
@@ -2248,7 +2482,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "9c6f7418-5c4c-48c9-b8a4-4824796c0968",
@@ -2292,7 +2528,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "869cb034-b572-4bed-8538-4916727667d5",
@@ -2336,7 +2574,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "869cb034-b572-4bed-8538-4916727667d5",
@@ -2380,7 +2620,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "869cb034-b572-4bed-8538-4916727667d5",
@@ -2424,7 +2666,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "869cb034-b572-4bed-8538-4916727667d5",
@@ -2468,7 +2712,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4c7ea0182924b462594c",
+      "current_inventory": 447.0
     },
     {
       "order_id": "869cb034-b572-4bed-8538-4916727667d5",
@@ -2512,7 +2758,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "40fa86c05854beeda4bf",
+      "current_inventory": 504.0
     },
     {
       "order_id": "869cb034-b572-4bed-8538-4916727667d5",
@@ -2556,7 +2804,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d55a249eae9d0c8ee86",
+      "current_inventory": 435.0
     },
     {
       "order_id": "869cb034-b572-4bed-8538-4916727667d5",
@@ -2600,7 +2850,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "869cb034-b572-4bed-8538-4916727667d5",
@@ -2644,7 +2896,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4b8abf85c88da4826f00",
+      "current_inventory": 323.0
     },
     {
       "order_id": "869cb034-b572-4bed-8538-4916727667d5",
@@ -2688,7 +2942,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "869cb034-b572-4bed-8538-4916727667d5",
@@ -2732,7 +2988,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "40fa86c05854beeda4bf",
+      "current_inventory": 504.0
     },
     {
       "order_id": "869cb034-b572-4bed-8538-4916727667d5",
@@ -2776,7 +3034,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "869cb034-b572-4bed-8538-4916727667d5",
@@ -2820,7 +3080,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "d491a36c-86c5-4666-9622-103d11e57bff",
@@ -2864,7 +3126,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "d491a36c-86c5-4666-9622-103d11e57bff",
@@ -2908,7 +3172,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "d491a36c-86c5-4666-9622-103d11e57bff",
@@ -2952,7 +3218,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "d491a36c-86c5-4666-9622-103d11e57bff",
@@ -2996,7 +3264,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4c7ea0182924b462594c",
+      "current_inventory": 447.0
     },
     {
       "order_id": "d491a36c-86c5-4666-9622-103d11e57bff",
@@ -3040,7 +3310,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "40fa86c05854beeda4bf",
+      "current_inventory": 504.0
     },
     {
       "order_id": "d491a36c-86c5-4666-9622-103d11e57bff",
@@ -3084,7 +3356,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d55a249eae9d0c8ee86",
+      "current_inventory": 435.0
     },
     {
       "order_id": "d491a36c-86c5-4666-9622-103d11e57bff",
@@ -3128,7 +3402,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "d491a36c-86c5-4666-9622-103d11e57bff",
@@ -3172,7 +3448,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4b8abf85c88da4826f00",
+      "current_inventory": 323.0
     },
     {
       "order_id": "d491a36c-86c5-4666-9622-103d11e57bff",
@@ -3216,7 +3494,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "d491a36c-86c5-4666-9622-103d11e57bff",
@@ -3260,7 +3540,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "d491a36c-86c5-4666-9622-103d11e57bff",
@@ -3304,7 +3586,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "a5275730-d98f-44c4-ba4a-d82459449b70",
@@ -3348,7 +3632,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "a5275730-d98f-44c4-ba4a-d82459449b70",
@@ -3392,7 +3678,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "a5275730-d98f-44c4-ba4a-d82459449b70",
@@ -3436,7 +3724,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d55a249eae9d0c8ee86",
+      "current_inventory": 435.0
     },
     {
       "order_id": "a5275730-d98f-44c4-ba4a-d82459449b70",
@@ -3480,7 +3770,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "a5275730-d98f-44c4-ba4a-d82459449b70",
@@ -3524,7 +3816,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "a5275730-d98f-44c4-ba4a-d82459449b70",
@@ -3568,7 +3862,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "a5275730-d98f-44c4-ba4a-d82459449b70",
@@ -3612,7 +3908,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "49f1a5e48e1b96a679e6",
+      "current_inventory": 297.0
     },
     {
       "order_id": "a5275730-d98f-44c4-ba4a-d82459449b70",
@@ -3656,7 +3954,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "a5275730-d98f-44c4-ba4a-d82459449b70",
@@ -3700,7 +4000,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "a5275730-d98f-44c4-ba4a-d82459449b70",
@@ -3744,7 +4046,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "49f1a5e48e1b96a679e6",
+      "current_inventory": 297.0
     },
     {
       "order_id": "a5275730-d98f-44c4-ba4a-d82459449b70",
@@ -3788,7 +4092,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4b8abf85c88da4826f00",
+      "current_inventory": 323.0
     },
     {
       "order_id": "a5275730-d98f-44c4-ba4a-d82459449b70",
@@ -3832,7 +4138,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": true,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4b8abf85c88da4826f00",
+      "current_inventory": 323.0
     },
     {
       "order_id": "a5275730-d98f-44c4-ba4a-d82459449b70",
@@ -3876,7 +4184,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "4c6b3a8e-803f-4f36-9502-4cffd893b3db",
@@ -3920,7 +4230,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "4c6b3a8e-803f-4f36-9502-4cffd893b3db",
@@ -3964,7 +4276,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "4c6b3a8e-803f-4f36-9502-4cffd893b3db",
@@ -4008,7 +4322,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d55a249eae9d0c8ee86",
+      "current_inventory": 435.0
     },
     {
       "order_id": "4c6b3a8e-803f-4f36-9502-4cffd893b3db",
@@ -4052,7 +4368,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "4c6b3a8e-803f-4f36-9502-4cffd893b3db",
@@ -4096,7 +4414,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "4c6b3a8e-803f-4f36-9502-4cffd893b3db",
@@ -4140,7 +4460,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "4c6b3a8e-803f-4f36-9502-4cffd893b3db",
@@ -4184,7 +4506,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "49f1a5e48e1b96a679e6",
+      "current_inventory": 297.0
     },
     {
       "order_id": "4c6b3a8e-803f-4f36-9502-4cffd893b3db",
@@ -4228,7 +4552,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "4c6b3a8e-803f-4f36-9502-4cffd893b3db",
@@ -4272,7 +4598,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "4c6b3a8e-803f-4f36-9502-4cffd893b3db",
@@ -4316,7 +4644,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4c7ea0182924b462594c",
+      "current_inventory": 447.0
     },
     {
       "order_id": "4c6b3a8e-803f-4f36-9502-4cffd893b3db",
@@ -4360,7 +4690,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "49f1a5e48e1b96a679e6",
+      "current_inventory": 297.0
     },
     {
       "order_id": "4c6b3a8e-803f-4f36-9502-4cffd893b3db",
@@ -4404,7 +4736,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "2207008f-c065-47c7-86d2-7ecdde466d73",
@@ -4448,7 +4782,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "2207008f-c065-47c7-86d2-7ecdde466d73",
@@ -4492,7 +4828,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "2207008f-c065-47c7-86d2-7ecdde466d73",
@@ -4536,7 +4874,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d55a249eae9d0c8ee86",
+      "current_inventory": 435.0
     },
     {
       "order_id": "2207008f-c065-47c7-86d2-7ecdde466d73",
@@ -4580,7 +4920,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "2207008f-c065-47c7-86d2-7ecdde466d73",
@@ -4624,7 +4966,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "2207008f-c065-47c7-86d2-7ecdde466d73",
@@ -4668,7 +5012,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "2207008f-c065-47c7-86d2-7ecdde466d73",
@@ -4712,7 +5058,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "49f1a5e48e1b96a679e6",
+      "current_inventory": 297.0
     },
     {
       "order_id": "2207008f-c065-47c7-86d2-7ecdde466d73",
@@ -4756,7 +5104,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "2207008f-c065-47c7-86d2-7ecdde466d73",
@@ -4800,7 +5150,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": true,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "2207008f-c065-47c7-86d2-7ecdde466d73",
@@ -4844,7 +5196,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": true,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4c7ea0182924b462594c",
+      "current_inventory": 447.0
     },
     {
       "order_id": "2207008f-c065-47c7-86d2-7ecdde466d73",
@@ -4888,7 +5242,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": true,
-      "notes": ""
+      "notes": "",
+      "product_sku": "49f1a5e48e1b96a679e6",
+      "current_inventory": 297.0
     },
     {
       "order_id": "2207008f-c065-47c7-86d2-7ecdde466d73",
@@ -4932,7 +5288,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "1e6a72f5-e13c-437a-bb62-c2499240a872",
@@ -4976,7 +5334,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "1e6a72f5-e13c-437a-bb62-c2499240a872",
@@ -5020,7 +5380,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "1e6a72f5-e13c-437a-bb62-c2499240a872",
@@ -5064,7 +5426,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d55a249eae9d0c8ee86",
+      "current_inventory": 435.0
     },
     {
       "order_id": "1e6a72f5-e13c-437a-bb62-c2499240a872",
@@ -5108,7 +5472,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "1e6a72f5-e13c-437a-bb62-c2499240a872",
@@ -5152,7 +5518,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": true,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4c7ea0182924b462594c",
+      "current_inventory": 447.0
     },
     {
       "order_id": "1e6a72f5-e13c-437a-bb62-c2499240a872",
@@ -5196,7 +5564,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": true,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "1e6a72f5-e13c-437a-bb62-c2499240a872",
@@ -5240,7 +5610,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e3596d2a7ab898be2a3",
+      "current_inventory": 384.0
     },
     {
       "order_id": "1e6a72f5-e13c-437a-bb62-c2499240a872",
@@ -5284,7 +5656,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "94fcdb44-2a98-445f-90f3-69462ccca78a",
@@ -5328,7 +5702,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "94fcdb44-2a98-445f-90f3-69462ccca78a",
@@ -5372,7 +5748,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "94fcdb44-2a98-445f-90f3-69462ccca78a",
@@ -5416,7 +5794,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "94fcdb44-2a98-445f-90f3-69462ccca78a",
@@ -5460,7 +5840,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "94fcdb44-2a98-445f-90f3-69462ccca78a",
@@ -5504,7 +5886,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "94fcdb44-2a98-445f-90f3-69462ccca78a",
@@ -5548,7 +5932,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "a043ec62-c7fc-441a-b656-a6cc236ee31f",
@@ -5592,7 +5978,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "current_inventory": 55.0
     },
     {
       "order_id": "a043ec62-c7fc-441a-b656-a6cc236ee31f",
@@ -5636,7 +6024,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "a043ec62-c7fc-441a-b656-a6cc236ee31f",
@@ -5680,7 +6070,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "a043ec62-c7fc-441a-b656-a6cc236ee31f",
@@ -5724,7 +6116,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "a043ec62-c7fc-441a-b656-a6cc236ee31f",
@@ -5768,7 +6162,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "a043ec62-c7fc-441a-b656-a6cc236ee31f",
@@ -5812,7 +6208,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "a043ec62-c7fc-441a-b656-a6cc236ee31f",
@@ -5856,7 +6254,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "9c567f11-69ab-40b4-96fd-959a5136e04e",
@@ -5900,7 +6300,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "9c567f11-69ab-40b4-96fd-959a5136e04e",
@@ -5944,7 +6346,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "49f1a5e48e1b96a679e6",
+      "current_inventory": 297.0
     },
     {
       "order_id": "9c567f11-69ab-40b4-96fd-959a5136e04e",
@@ -5988,7 +6392,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "current_inventory": 55.0
     },
     {
       "order_id": "9c567f11-69ab-40b4-96fd-959a5136e04e",
@@ -6032,7 +6438,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "9c567f11-69ab-40b4-96fd-959a5136e04e",
@@ -6076,7 +6484,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e3596d2a7ab898be2a3",
+      "current_inventory": 384.0
     },
     {
       "order_id": "9c567f11-69ab-40b4-96fd-959a5136e04e",
@@ -6120,7 +6530,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "a0341fda-449d-4c43-aea4-1d5031d5ffb2",
@@ -6164,7 +6576,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "current_inventory": 55.0
     },
     {
       "order_id": "a0341fda-449d-4c43-aea4-1d5031d5ffb2",
@@ -6208,7 +6622,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e3596d2a7ab898be2a3",
+      "current_inventory": 384.0
     },
     {
       "order_id": "a0341fda-449d-4c43-aea4-1d5031d5ffb2",
@@ -6252,7 +6668,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "49f1a5e48e1b96a679e6",
+      "current_inventory": 297.0
     },
     {
       "order_id": "a0341fda-449d-4c43-aea4-1d5031d5ffb2",
@@ -6296,7 +6714,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "a0341fda-449d-4c43-aea4-1d5031d5ffb2",
@@ -6340,7 +6760,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "a0341fda-449d-4c43-aea4-1d5031d5ffb2",
@@ -6384,7 +6806,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": true,
-      "notes": ""
+      "notes": "",
+      "product_sku": "40fa86c05854beeda4bf",
+      "current_inventory": 504.0
     },
     {
       "order_id": "a0341fda-449d-4c43-aea4-1d5031d5ffb2",
@@ -6428,7 +6852,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": true,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "a0341fda-449d-4c43-aea4-1d5031d5ffb2",
@@ -6472,7 +6898,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "6dca10ee-28d4-41b1-9390-b73682ae97a6",
@@ -6516,7 +6944,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "40fa86c05854beeda4bf",
+      "current_inventory": 504.0
     },
     {
       "order_id": "6dca10ee-28d4-41b1-9390-b73682ae97a6",
@@ -6560,7 +6990,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "d64363fd-1bed-47c5-a6e3-394f18c84285",
@@ -6604,7 +7036,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "d64363fd-1bed-47c5-a6e3-394f18c84285",
@@ -6648,7 +7082,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "d64363fd-1bed-47c5-a6e3-394f18c84285",
@@ -6692,7 +7128,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "current_inventory": 55.0
     },
     {
       "order_id": "d64363fd-1bed-47c5-a6e3-394f18c84285",
@@ -6736,7 +7174,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "d64363fd-1bed-47c5-a6e3-394f18c84285",
@@ -6780,7 +7220,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "ea5f9a39-5b45-4950-bbf8-04e26d10beb3",
@@ -6824,7 +7266,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "current_inventory": 55.0
     },
     {
       "order_id": "ea5f9a39-5b45-4950-bbf8-04e26d10beb3",
@@ -6868,7 +7312,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e3596d2a7ab898be2a3",
+      "current_inventory": 384.0
     },
     {
       "order_id": "ea5f9a39-5b45-4950-bbf8-04e26d10beb3",
@@ -6912,7 +7358,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "49f1a5e48e1b96a679e6",
+      "current_inventory": 297.0
     },
     {
       "order_id": "ea5f9a39-5b45-4950-bbf8-04e26d10beb3",
@@ -6956,7 +7404,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "ea5f9a39-5b45-4950-bbf8-04e26d10beb3",
@@ -7000,7 +7450,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "ea5f9a39-5b45-4950-bbf8-04e26d10beb3",
@@ -7044,7 +7496,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "7d1bc9d6-ff57-466c-bf81-9ecbd0ed9b0b",
@@ -7088,7 +7542,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": true,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "3817e56e-d341-49dc-95e9-3a4d802c74fd",
@@ -7132,7 +7588,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": true,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "4abb1745-eecb-4461-a3a2-508439783323",
@@ -7176,7 +7634,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": true,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "4abb1745-eecb-4461-a3a2-508439783323",
@@ -7220,7 +7680,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": true,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "current_inventory": 55.0
     },
     {
       "order_id": "55b285ac-0c83-4969-8919-bf7063c6755a",
@@ -7264,7 +7726,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "55b285ac-0c83-4969-8919-bf7063c6755a",
@@ -7308,7 +7772,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "49f1a5e48e1b96a679e6",
+      "current_inventory": 297.0
     },
     {
       "order_id": "55b285ac-0c83-4969-8919-bf7063c6755a",
@@ -7352,7 +7818,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "55b285ac-0c83-4969-8919-bf7063c6755a",
@@ -7396,7 +7864,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "55b285ac-0c83-4969-8919-bf7063c6755a",
@@ -7440,7 +7910,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "55b285ac-0c83-4969-8919-bf7063c6755a",
@@ -7484,7 +7956,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4c7ea0182924b462594c",
+      "current_inventory": 447.0
     },
     {
       "order_id": "55b285ac-0c83-4969-8919-bf7063c6755a",
@@ -7528,7 +8002,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "40fa86c05854beeda4bf",
+      "current_inventory": 504.0
     },
     {
       "order_id": "55b285ac-0c83-4969-8919-bf7063c6755a",
@@ -7572,7 +8048,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d55a249eae9d0c8ee86",
+      "current_inventory": 435.0
     },
     {
       "order_id": "55b285ac-0c83-4969-8919-bf7063c6755a",
@@ -7616,7 +8094,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "55b285ac-0c83-4969-8919-bf7063c6755a",
@@ -7660,7 +8140,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": true,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "55b285ac-0c83-4969-8919-bf7063c6755a",
@@ -7704,7 +8186,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": true,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "55b285ac-0c83-4969-8919-bf7063c6755a",
@@ -7748,7 +8232,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": true,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "55b285ac-0c83-4969-8919-bf7063c6755a",
@@ -7792,7 +8278,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "7b79529e-eaa1-4ff6-99cd-838f1828b09c",
@@ -7836,7 +8324,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": true,
-      "notes": ""
+      "notes": "",
+      "product_sku": "40fa86c05854beeda4bf",
+      "current_inventory": 504.0
     },
     {
       "order_id": "7b79529e-eaa1-4ff6-99cd-838f1828b09c",
@@ -7880,7 +8370,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": true,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "7b79529e-eaa1-4ff6-99cd-838f1828b09c",
@@ -7924,7 +8416,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": true,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "f5e5dabc-14ef-44da-a225-9d269a84931c",
@@ -7968,7 +8462,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "f5e5dabc-14ef-44da-a225-9d269a84931c",
@@ -8012,7 +8508,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "49f1a5e48e1b96a679e6",
+      "current_inventory": 297.0
     },
     {
       "order_id": "f5e5dabc-14ef-44da-a225-9d269a84931c",
@@ -8056,7 +8554,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "f5e5dabc-14ef-44da-a225-9d269a84931c",
@@ -8100,7 +8600,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "5dbf30a9-c1c5-4d94-8c6b-2886e1c66c4c",
@@ -8144,7 +8646,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "5dbf30a9-c1c5-4d94-8c6b-2886e1c66c4c",
@@ -8188,7 +8692,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "5dbf30a9-c1c5-4d94-8c6b-2886e1c66c4c",
@@ -8232,7 +8738,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4c7ea0182924b462594c",
+      "current_inventory": 447.0
     },
     {
       "order_id": "5dbf30a9-c1c5-4d94-8c6b-2886e1c66c4c",
@@ -8276,7 +8784,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "40fa86c05854beeda4bf",
+      "current_inventory": 504.0
     },
     {
       "order_id": "5dbf30a9-c1c5-4d94-8c6b-2886e1c66c4c",
@@ -8320,7 +8830,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d55a249eae9d0c8ee86",
+      "current_inventory": 435.0
     },
     {
       "order_id": "5dbf30a9-c1c5-4d94-8c6b-2886e1c66c4c",
@@ -8364,7 +8876,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "5dbf30a9-c1c5-4d94-8c6b-2886e1c66c4c",
@@ -8408,7 +8922,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "bff53cd5-8af3-49f0-9199-aca01c338e78",
@@ -8452,7 +8968,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "bff53cd5-8af3-49f0-9199-aca01c338e78",
@@ -8496,7 +9014,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "bff53cd5-8af3-49f0-9199-aca01c338e78",
@@ -8540,7 +9060,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "bff53cd5-8af3-49f0-9199-aca01c338e78",
@@ -8584,7 +9106,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "current_inventory": 55.0
     },
     {
       "order_id": "bff53cd5-8af3-49f0-9199-aca01c338e78",
@@ -8628,7 +9152,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e3596d2a7ab898be2a3",
+      "current_inventory": 384.0
     },
     {
       "order_id": "bff53cd5-8af3-49f0-9199-aca01c338e78",
@@ -8672,7 +9198,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "49f1a5e48e1b96a679e6",
+      "current_inventory": 297.0
     },
     {
       "order_id": "bff53cd5-8af3-49f0-9199-aca01c338e78",
@@ -8716,7 +9244,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "bff53cd5-8af3-49f0-9199-aca01c338e78",
@@ -8760,7 +9290,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "bff53cd5-8af3-49f0-9199-aca01c338e78",
@@ -8804,7 +9336,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4c7ea0182924b462594c",
+      "current_inventory": 447.0
     },
     {
       "order_id": "bff53cd5-8af3-49f0-9199-aca01c338e78",
@@ -8848,7 +9382,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d55a249eae9d0c8ee86",
+      "current_inventory": 435.0
     },
     {
       "order_id": "bff53cd5-8af3-49f0-9199-aca01c338e78",
@@ -8892,7 +9428,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "bff53cd5-8af3-49f0-9199-aca01c338e78",
@@ -8936,7 +9474,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "79a75ee2-230b-4b96-97fd-c90cfa9570a8",
@@ -8980,7 +9520,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "79a75ee2-230b-4b96-97fd-c90cfa9570a8",
@@ -9024,7 +9566,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "49f1a5e48e1b96a679e6",
+      "current_inventory": 297.0
     },
     {
       "order_id": "79a75ee2-230b-4b96-97fd-c90cfa9570a8",
@@ -9068,7 +9612,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "current_inventory": 55.0
     },
     {
       "order_id": "79a75ee2-230b-4b96-97fd-c90cfa9570a8",
@@ -9112,7 +9658,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "79a75ee2-230b-4b96-97fd-c90cfa9570a8",
@@ -9156,7 +9704,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "0392b56a-bd05-4a94-8a5c-c4ff0c0e6f07",
@@ -9200,7 +9750,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "0392b56a-bd05-4a94-8a5c-c4ff0c0e6f07",
@@ -9244,7 +9796,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "0392b56a-bd05-4a94-8a5c-c4ff0c0e6f07",
@@ -9288,7 +9842,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "0392b56a-bd05-4a94-8a5c-c4ff0c0e6f07",
@@ -9332,7 +9888,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4c7ea0182924b462594c",
+      "current_inventory": 447.0
     },
     {
       "order_id": "0392b56a-bd05-4a94-8a5c-c4ff0c0e6f07",
@@ -9376,7 +9934,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "40fa86c05854beeda4bf",
+      "current_inventory": 504.0
     },
     {
       "order_id": "0392b56a-bd05-4a94-8a5c-c4ff0c0e6f07",
@@ -9420,7 +9980,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d55a249eae9d0c8ee86",
+      "current_inventory": 435.0
     },
     {
       "order_id": "0392b56a-bd05-4a94-8a5c-c4ff0c0e6f07",
@@ -9464,7 +10026,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "0392b56a-bd05-4a94-8a5c-c4ff0c0e6f07",
@@ -9508,7 +10072,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "0392b56a-bd05-4a94-8a5c-c4ff0c0e6f07",
@@ -9552,7 +10118,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "current_inventory": 55.0
     },
     {
       "order_id": "0392b56a-bd05-4a94-8a5c-c4ff0c0e6f07",
@@ -9596,7 +10164,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "0392b56a-bd05-4a94-8a5c-c4ff0c0e6f07",
@@ -9640,7 +10210,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": true,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "0392b56a-bd05-4a94-8a5c-c4ff0c0e6f07",
@@ -9684,7 +10256,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4c7ea0182924b462594c",
+      "current_inventory": 447.0
     },
     {
       "order_id": "0392b56a-bd05-4a94-8a5c-c4ff0c0e6f07",
@@ -9728,7 +10302,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "3a23b357-5a30-47ff-b89c-e3f624d32dce",
@@ -9772,7 +10348,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "3a23b357-5a30-47ff-b89c-e3f624d32dce",
@@ -9816,7 +10394,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4c7ea0182924b462594c",
+      "current_inventory": 447.0
     },
     {
       "order_id": "3a23b357-5a30-47ff-b89c-e3f624d32dce",
@@ -9860,7 +10440,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "40fa86c05854beeda4bf",
+      "current_inventory": 504.0
     },
     {
       "order_id": "3a23b357-5a30-47ff-b89c-e3f624d32dce",
@@ -9904,7 +10486,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d55a249eae9d0c8ee86",
+      "current_inventory": 435.0
     },
     {
       "order_id": "3a23b357-5a30-47ff-b89c-e3f624d32dce",
@@ -9948,7 +10532,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "3a23b357-5a30-47ff-b89c-e3f624d32dce",
@@ -9992,7 +10578,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "3a23b357-5a30-47ff-b89c-e3f624d32dce",
@@ -10036,7 +10624,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "current_inventory": 55.0
     },
     {
       "order_id": "3a23b357-5a30-47ff-b89c-e3f624d32dce",
@@ -10080,7 +10670,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "26333a89-0d10-4610-a5bc-ed3681528a12",
@@ -10124,7 +10716,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": true,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "386a5612-c6ba-40dc-80e9-0b94913f8b8a",
@@ -10168,7 +10762,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "386a5612-c6ba-40dc-80e9-0b94913f8b8a",
@@ -10212,7 +10808,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "386a5612-c6ba-40dc-80e9-0b94913f8b8a",
@@ -10256,7 +10854,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "386a5612-c6ba-40dc-80e9-0b94913f8b8a",
@@ -10300,7 +10900,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4c7ea0182924b462594c",
+      "current_inventory": 447.0
     },
     {
       "order_id": "386a5612-c6ba-40dc-80e9-0b94913f8b8a",
@@ -10344,7 +10946,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "40fa86c05854beeda4bf",
+      "current_inventory": 504.0
     },
     {
       "order_id": "386a5612-c6ba-40dc-80e9-0b94913f8b8a",
@@ -10388,7 +10992,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d55a249eae9d0c8ee86",
+      "current_inventory": 435.0
     },
     {
       "order_id": "386a5612-c6ba-40dc-80e9-0b94913f8b8a",
@@ -10432,7 +11038,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "386a5612-c6ba-40dc-80e9-0b94913f8b8a",
@@ -10476,7 +11084,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "386a5612-c6ba-40dc-80e9-0b94913f8b8a",
@@ -10520,7 +11130,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "49f1a5e48e1b96a679e6",
+      "current_inventory": 297.0
     },
     {
       "order_id": "386a5612-c6ba-40dc-80e9-0b94913f8b8a",
@@ -10564,7 +11176,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "current_inventory": 55.0
     },
     {
       "order_id": "386a5612-c6ba-40dc-80e9-0b94913f8b8a",
@@ -10608,7 +11222,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "386a5612-c6ba-40dc-80e9-0b94913f8b8a",
@@ -10652,7 +11268,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4c7ea0182924b462594c",
+      "current_inventory": 447.0
     },
     {
       "order_id": "386a5612-c6ba-40dc-80e9-0b94913f8b8a",
@@ -10696,7 +11314,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "31f82f16-3501-438d-b81f-462be82a4751",
@@ -10740,7 +11360,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "31f82f16-3501-438d-b81f-462be82a4751",
@@ -10784,7 +11406,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "current_inventory": 55.0
     },
     {
       "order_id": "31f82f16-3501-438d-b81f-462be82a4751",
@@ -10828,7 +11452,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "31f82f16-3501-438d-b81f-462be82a4751",
@@ -10872,7 +11498,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "31f82f16-3501-438d-b81f-462be82a4751",
@@ -10916,7 +11544,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "09bbee2f-9279-4b0e-a395-17bbfd8e8918",
@@ -10960,7 +11590,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "09bbee2f-9279-4b0e-a395-17bbfd8e8918",
@@ -11004,7 +11636,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "09bbee2f-9279-4b0e-a395-17bbfd8e8918",
@@ -11048,7 +11682,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "09bbee2f-9279-4b0e-a395-17bbfd8e8918",
@@ -11092,7 +11728,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "current_inventory": 55.0
     },
     {
       "order_id": "09bbee2f-9279-4b0e-a395-17bbfd8e8918",
@@ -11136,7 +11774,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e3596d2a7ab898be2a3",
+      "current_inventory": 384.0
     },
     {
       "order_id": "09bbee2f-9279-4b0e-a395-17bbfd8e8918",
@@ -11180,7 +11820,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "09bbee2f-9279-4b0e-a395-17bbfd8e8918",
@@ -11224,7 +11866,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "b23c1f62-b44e-4b08-9535-436eb15b5995",
@@ -11268,7 +11912,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "b23c1f62-b44e-4b08-9535-436eb15b5995",
@@ -11312,7 +11958,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "b23c1f62-b44e-4b08-9535-436eb15b5995",
@@ -11356,7 +12004,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "b23c1f62-b44e-4b08-9535-436eb15b5995",
@@ -11400,7 +12050,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "b23c1f62-b44e-4b08-9535-436eb15b5995",
@@ -11444,7 +12096,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4c7ea0182924b462594c",
+      "current_inventory": 447.0
     },
     {
       "order_id": "b23c1f62-b44e-4b08-9535-436eb15b5995",
@@ -11488,7 +12142,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "40fa86c05854beeda4bf",
+      "current_inventory": 504.0
     },
     {
       "order_id": "b23c1f62-b44e-4b08-9535-436eb15b5995",
@@ -11532,7 +12188,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d55a249eae9d0c8ee86",
+      "current_inventory": 435.0
     },
     {
       "order_id": "b23c1f62-b44e-4b08-9535-436eb15b5995",
@@ -11576,7 +12234,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "b23c1f62-b44e-4b08-9535-436eb15b5995",
@@ -11620,7 +12280,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4c7ea0182924b462594c",
+      "current_inventory": 447.0
     },
     {
       "order_id": "b23c1f62-b44e-4b08-9535-436eb15b5995",
@@ -11664,7 +12326,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "efc67ab0-9db9-4f36-8e3c-a5822e96668d",
@@ -11708,7 +12372,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "cb9193db-d0f1-41e1-b496-5cb060155c1f",
@@ -11752,7 +12418,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "cb9193db-d0f1-41e1-b496-5cb060155c1f",
@@ -11796,7 +12464,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "cb9193db-d0f1-41e1-b496-5cb060155c1f",
@@ -11840,7 +12510,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "current_inventory": 55.0
     },
     {
       "order_id": "cb9193db-d0f1-41e1-b496-5cb060155c1f",
@@ -11884,7 +12556,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "cb9193db-d0f1-41e1-b496-5cb060155c1f",
@@ -11928,7 +12602,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "cb9193db-d0f1-41e1-b496-5cb060155c1f",
@@ -11972,7 +12648,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4b8abf85c88da4826f00",
+      "current_inventory": 323.0
     },
     {
       "order_id": "cb9193db-d0f1-41e1-b496-5cb060155c1f",
@@ -12016,7 +12694,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "1050341e-20a7-4793-bab8-061a19fdf7dd",
@@ -12060,7 +12740,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50"
+      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "1050341e-20a7-4793-bab8-061a19fdf7dd",
@@ -12104,7 +12786,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50"
+      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "1050341e-20a7-4793-bab8-061a19fdf7dd",
@@ -12148,7 +12832,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50"
+      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "1050341e-20a7-4793-bab8-061a19fdf7dd",
@@ -12192,7 +12878,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50"
+      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "1050341e-20a7-4793-bab8-061a19fdf7dd",
@@ -12236,7 +12924,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50"
+      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50",
+      "product_sku": "49f1a5e48e1b96a679e6",
+      "current_inventory": 297.0
     },
     {
       "order_id": "1050341e-20a7-4793-bab8-061a19fdf7dd",
@@ -12280,7 +12970,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50"
+      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "current_inventory": 55.0
     },
     {
       "order_id": "1050341e-20a7-4793-bab8-061a19fdf7dd",
@@ -12324,7 +13016,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50"
+      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50",
+      "product_sku": "4e3596d2a7ab898be2a3",
+      "current_inventory": 384.0
     },
     {
       "order_id": "1050341e-20a7-4793-bab8-061a19fdf7dd",
@@ -12368,7 +13062,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50"
+      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "1050341e-20a7-4793-bab8-061a19fdf7dd",
@@ -12412,7 +13108,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50"
+      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50",
+      "product_sku": "4c7ea0182924b462594c",
+      "current_inventory": 447.0
     },
     {
       "order_id": "1050341e-20a7-4793-bab8-061a19fdf7dd",
@@ -12456,7 +13154,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50"
+      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50",
+      "product_sku": "40fa86c05854beeda4bf",
+      "current_inventory": 504.0
     },
     {
       "order_id": "1050341e-20a7-4793-bab8-061a19fdf7dd",
@@ -12500,7 +13200,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50"
+      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50",
+      "product_sku": "4d55a249eae9d0c8ee86",
+      "current_inventory": 435.0
     },
     {
       "order_id": "1050341e-20a7-4793-bab8-061a19fdf7dd",
@@ -12544,7 +13246,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50"
+      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "1050341e-20a7-4793-bab8-061a19fdf7dd",
@@ -12588,7 +13292,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50"
+      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50",
+      "product_sku": "4b8abf85c88da4826f00",
+      "current_inventory": 323.0
     },
     {
       "order_id": "1050341e-20a7-4793-bab8-061a19fdf7dd",
@@ -12632,7 +13338,9 @@
       "sales_reps_display": "Ron Morton",
       "payment_dates": [],
       "is_sample": false,
-      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50"
+      "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "3aad1262-f115-4d0c-91a9-da4d803070be",
@@ -12676,7 +13384,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4b8abf85c88da4826f00",
+      "current_inventory": 323.0
     },
     {
       "order_id": "3aad1262-f115-4d0c-91a9-da4d803070be",
@@ -12720,7 +13430,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "3aad1262-f115-4d0c-91a9-da4d803070be",
@@ -12764,7 +13476,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "3aad1262-f115-4d0c-91a9-da4d803070be",
@@ -12808,7 +13522,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "e52c7c7d-c5ad-4ef8-8820-00507555f63d",
@@ -12852,7 +13568,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "e52c7c7d-c5ad-4ef8-8820-00507555f63d",
@@ -12896,7 +13614,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "e52c7c7d-c5ad-4ef8-8820-00507555f63d",
@@ -12940,7 +13660,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "e52c7c7d-c5ad-4ef8-8820-00507555f63d",
@@ -12984,7 +13706,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "3be7956d-35fc-4172-a7f3-5d9c70adf734",
@@ -13028,7 +13752,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "3be7956d-35fc-4172-a7f3-5d9c70adf734",
@@ -13072,7 +13798,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e3596d2a7ab898be2a3",
+      "current_inventory": 384.0
     },
     {
       "order_id": "3be7956d-35fc-4172-a7f3-5d9c70adf734",
@@ -13116,7 +13844,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "3be7956d-35fc-4172-a7f3-5d9c70adf734",
@@ -13160,7 +13890,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "3be7956d-35fc-4172-a7f3-5d9c70adf734",
@@ -13204,7 +13936,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "3be7956d-35fc-4172-a7f3-5d9c70adf734",
@@ -13248,7 +13982,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d55a249eae9d0c8ee86",
+      "current_inventory": 435.0
     },
     {
       "order_id": "3be7956d-35fc-4172-a7f3-5d9c70adf734",
@@ -13292,7 +14028,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "3be7956d-35fc-4172-a7f3-5d9c70adf734",
@@ -13336,7 +14074,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4b8abf85c88da4826f00",
+      "current_inventory": 323.0
     },
     {
       "order_id": "3be7956d-35fc-4172-a7f3-5d9c70adf734",
@@ -13380,7 +14120,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "3be7956d-35fc-4172-a7f3-5d9c70adf734",
@@ -13424,7 +14166,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "3be7956d-35fc-4172-a7f3-5d9c70adf734",
@@ -13468,7 +14212,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "55a851d3-6b62-41db-8e51-f595a4d90c74",
@@ -13512,7 +14258,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "55a851d3-6b62-41db-8e51-f595a4d90c74",
@@ -13556,7 +14304,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "49f1a5e48e1b96a679e6",
+      "current_inventory": 297.0
     },
     {
       "order_id": "55a851d3-6b62-41db-8e51-f595a4d90c74",
@@ -13600,7 +14350,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "current_inventory": 55.0
     },
     {
       "order_id": "55a851d3-6b62-41db-8e51-f595a4d90c74",
@@ -13644,7 +14396,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e3596d2a7ab898be2a3",
+      "current_inventory": 384.0
     },
     {
       "order_id": "55a851d3-6b62-41db-8e51-f595a4d90c74",
@@ -13688,7 +14442,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "55a851d3-6b62-41db-8e51-f595a4d90c74",
@@ -13732,7 +14488,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "55a851d3-6b62-41db-8e51-f595a4d90c74",
@@ -13776,7 +14534,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "55a851d3-6b62-41db-8e51-f595a4d90c74",
@@ -13820,7 +14580,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "55a851d3-6b62-41db-8e51-f595a4d90c74",
@@ -13864,7 +14626,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4c7ea0182924b462594c",
+      "current_inventory": 447.0
     },
     {
       "order_id": "55a851d3-6b62-41db-8e51-f595a4d90c74",
@@ -13908,7 +14672,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "40fa86c05854beeda4bf",
+      "current_inventory": 504.0
     },
     {
       "order_id": "55a851d3-6b62-41db-8e51-f595a4d90c74",
@@ -13952,7 +14718,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d55a249eae9d0c8ee86",
+      "current_inventory": 435.0
     },
     {
       "order_id": "55a851d3-6b62-41db-8e51-f595a4d90c74",
@@ -13996,7 +14764,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "55a851d3-6b62-41db-8e51-f595a4d90c74",
@@ -14040,7 +14810,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4c7ea0182924b462594c",
+      "current_inventory": 447.0
     },
     {
       "order_id": "55a851d3-6b62-41db-8e51-f595a4d90c74",
@@ -14084,7 +14856,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "55a851d3-6b62-41db-8e51-f595a4d90c74",
@@ -14128,7 +14902,9 @@
       "sales_reps_display": "Peter Casey",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "52b1a9eb-0ed9-4c50-b3a6-cd6b5e89cd2d",
@@ -14172,7 +14948,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "52b1a9eb-0ed9-4c50-b3a6-cd6b5e89cd2d",
@@ -14216,7 +14994,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "49f1a5e48e1b96a679e6",
+      "current_inventory": 297.0
     },
     {
       "order_id": "52b1a9eb-0ed9-4c50-b3a6-cd6b5e89cd2d",
@@ -14260,7 +15040,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "current_inventory": 55.0
     },
     {
       "order_id": "52b1a9eb-0ed9-4c50-b3a6-cd6b5e89cd2d",
@@ -14304,7 +15086,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e3596d2a7ab898be2a3",
+      "current_inventory": 384.0
     },
     {
       "order_id": "52b1a9eb-0ed9-4c50-b3a6-cd6b5e89cd2d",
@@ -14348,7 +15132,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "52b1a9eb-0ed9-4c50-b3a6-cd6b5e89cd2d",
@@ -14392,7 +15178,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "52b1a9eb-0ed9-4c50-b3a6-cd6b5e89cd2d",
@@ -14436,7 +15224,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "52b1a9eb-0ed9-4c50-b3a6-cd6b5e89cd2d",
@@ -14480,7 +15270,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "52b1a9eb-0ed9-4c50-b3a6-cd6b5e89cd2d",
@@ -14524,7 +15316,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4c7ea0182924b462594c",
+      "current_inventory": 447.0
     },
     {
       "order_id": "52b1a9eb-0ed9-4c50-b3a6-cd6b5e89cd2d",
@@ -14568,7 +15362,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "40fa86c05854beeda4bf",
+      "current_inventory": 504.0
     },
     {
       "order_id": "52b1a9eb-0ed9-4c50-b3a6-cd6b5e89cd2d",
@@ -14612,7 +15408,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d55a249eae9d0c8ee86",
+      "current_inventory": 435.0
     },
     {
       "order_id": "52b1a9eb-0ed9-4c50-b3a6-cd6b5e89cd2d",
@@ -14656,7 +15454,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "52b1a9eb-0ed9-4c50-b3a6-cd6b5e89cd2d",
@@ -14700,7 +15500,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "52b1a9eb-0ed9-4c50-b3a6-cd6b5e89cd2d",
@@ -14744,7 +15546,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "52b1a9eb-0ed9-4c50-b3a6-cd6b5e89cd2d",
@@ -14788,7 +15592,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "cda52dbf-40da-4fa5-b991-b019ae4d40a7",
@@ -14832,7 +15638,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "cda52dbf-40da-4fa5-b991-b019ae4d40a7",
@@ -14876,7 +15684,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "cda52dbf-40da-4fa5-b991-b019ae4d40a7",
@@ -14920,7 +15730,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "c454e146-5231-4bcc-a2be-7ee76f5a604a",
@@ -14964,7 +15776,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "c454e146-5231-4bcc-a2be-7ee76f5a604a",
@@ -15008,7 +15822,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "c454e146-5231-4bcc-a2be-7ee76f5a604a",
@@ -15052,7 +15868,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "c454e146-5231-4bcc-a2be-7ee76f5a604a",
@@ -15096,7 +15914,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4c7ea0182924b462594c",
+      "current_inventory": 447.0
     },
     {
       "order_id": "c454e146-5231-4bcc-a2be-7ee76f5a604a",
@@ -15140,7 +15960,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "40fa86c05854beeda4bf",
+      "current_inventory": 504.0
     },
     {
       "order_id": "c454e146-5231-4bcc-a2be-7ee76f5a604a",
@@ -15184,7 +16006,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d55a249eae9d0c8ee86",
+      "current_inventory": 435.0
     },
     {
       "order_id": "c454e146-5231-4bcc-a2be-7ee76f5a604a",
@@ -15228,7 +16052,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "c454e146-5231-4bcc-a2be-7ee76f5a604a",
@@ -15272,7 +16098,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "c454e146-5231-4bcc-a2be-7ee76f5a604a",
@@ -15316,7 +16144,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "current_inventory": 55.0
     },
     {
       "order_id": "c454e146-5231-4bcc-a2be-7ee76f5a604a",
@@ -15360,7 +16190,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "c454e146-5231-4bcc-a2be-7ee76f5a604a",
@@ -15404,7 +16236,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": true,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4c7ea0182924b462594c",
+      "current_inventory": 447.0
     },
     {
       "order_id": "c454e146-5231-4bcc-a2be-7ee76f5a604a",
@@ -15448,7 +16282,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": true,
-      "notes": ""
+      "notes": "",
+      "product_sku": "49f1a5e48e1b96a679e6",
+      "current_inventory": 297.0
     },
     {
       "order_id": "c454e146-5231-4bcc-a2be-7ee76f5a604a",
@@ -15492,7 +16328,9 @@
       "sales_reps_display": "",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "a3ba2541-2c2a-42de-a9d5-d8a6c439d4d1",
@@ -15536,7 +16374,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "a3ba2541-2c2a-42de-a9d5-d8a6c439d4d1",
@@ -15580,7 +16420,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "a3ba2541-2c2a-42de-a9d5-d8a6c439d4d1",
@@ -15624,7 +16466,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "a3ba2541-2c2a-42de-a9d5-d8a6c439d4d1",
@@ -15668,7 +16512,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4c7ea0182924b462594c",
+      "current_inventory": 447.0
     },
     {
       "order_id": "a3ba2541-2c2a-42de-a9d5-d8a6c439d4d1",
@@ -15712,7 +16558,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "40fa86c05854beeda4bf",
+      "current_inventory": 504.0
     },
     {
       "order_id": "a3ba2541-2c2a-42de-a9d5-d8a6c439d4d1",
@@ -15756,7 +16604,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d55a249eae9d0c8ee86",
+      "current_inventory": 435.0
     },
     {
       "order_id": "a3ba2541-2c2a-42de-a9d5-d8a6c439d4d1",
@@ -15800,7 +16650,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "a3ba2541-2c2a-42de-a9d5-d8a6c439d4d1",
@@ -15844,7 +16696,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "a3ba2541-2c2a-42de-a9d5-d8a6c439d4d1",
@@ -15888,7 +16742,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "49f1a5e48e1b96a679e6",
+      "current_inventory": 297.0
     },
     {
       "order_id": "a3ba2541-2c2a-42de-a9d5-d8a6c439d4d1",
@@ -15932,7 +16788,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "current_inventory": 55.0
     },
     {
       "order_id": "a3ba2541-2c2a-42de-a9d5-d8a6c439d4d1",
@@ -15976,7 +16834,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e3596d2a7ab898be2a3",
+      "current_inventory": 384.0
     },
     {
       "order_id": "a3ba2541-2c2a-42de-a9d5-d8a6c439d4d1",
@@ -16020,7 +16880,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "a3ba2541-2c2a-42de-a9d5-d8a6c439d4d1",
@@ -16064,7 +16926,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     },
     {
       "order_id": "200920c2-6be9-403e-8b5b-33ade59768ed",
@@ -16108,7 +16972,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "47329fca9cd9f1f63936",
+      "current_inventory": 285.0
     },
     {
       "order_id": "200920c2-6be9-403e-8b5b-33ade59768ed",
@@ -16152,7 +17018,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "41c68a5bbc4f357f9ec5",
+      "current_inventory": 420.0
     },
     {
       "order_id": "200920c2-6be9-403e-8b5b-33ade59768ed",
@@ -16196,7 +17064,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e729672d1195aa95b72",
+      "current_inventory": 389.0
     },
     {
       "order_id": "200920c2-6be9-403e-8b5b-33ade59768ed",
@@ -16240,7 +17110,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4c7ea0182924b462594c",
+      "current_inventory": 447.0
     },
     {
       "order_id": "200920c2-6be9-403e-8b5b-33ade59768ed",
@@ -16284,7 +17156,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "40fa86c05854beeda4bf",
+      "current_inventory": 504.0
     },
     {
       "order_id": "200920c2-6be9-403e-8b5b-33ade59768ed",
@@ -16328,7 +17202,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d55a249eae9d0c8ee86",
+      "current_inventory": 435.0
     },
     {
       "order_id": "200920c2-6be9-403e-8b5b-33ade59768ed",
@@ -16372,7 +17248,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "445aa8c673b0915bc207",
+      "current_inventory": 330.0
     },
     {
       "order_id": "200920c2-6be9-403e-8b5b-33ade59768ed",
@@ -16416,7 +17294,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "current_inventory": 109.0
     },
     {
       "order_id": "200920c2-6be9-403e-8b5b-33ade59768ed",
@@ -16460,7 +17340,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "49f1a5e48e1b96a679e6",
+      "current_inventory": 297.0
     },
     {
       "order_id": "200920c2-6be9-403e-8b5b-33ade59768ed",
@@ -16504,7 +17386,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "current_inventory": 55.0
     },
     {
       "order_id": "200920c2-6be9-403e-8b5b-33ade59768ed",
@@ -16548,7 +17432,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4e3596d2a7ab898be2a3",
+      "current_inventory": 384.0
     },
     {
       "order_id": "200920c2-6be9-403e-8b5b-33ade59768ed",
@@ -16592,7 +17478,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "current_inventory": 120.0
     },
     {
       "order_id": "200920c2-6be9-403e-8b5b-33ade59768ed",
@@ -16636,7 +17524,9 @@
       "sales_reps_display": "Sales Chill Medicated",
       "payment_dates": [],
       "is_sample": false,
-      "notes": ""
+      "notes": "",
+      "product_sku": "chillb2btax",
+      "current_inventory": -4.0
     }
   ]
 }

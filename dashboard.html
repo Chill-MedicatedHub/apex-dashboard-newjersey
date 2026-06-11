@@ -155,6 +155,8 @@
     transition: all 0.15s;
   }
   .filter-reset:hover { color: var(--text); border-color: var(--text-dim); }
+  .date-preset { background: transparent; border: 1px solid var(--border); color: var(--text-dim); padding: 7px 10px; font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; border-radius: 2px; cursor: pointer; transition: all .15s; }
+  .date-preset:hover { color: var(--text); border-color: var(--accent); }
 
   /* KPI Grid */
   .kpi-grid {
@@ -843,8 +845,10 @@ function Dashboard({ data, filters, setFilters }) {
           unitPriceSum: 0, // for weighted avg
           listedPrice: r._unitPrice || 0,
           costUnit: r._cost || 0,
+          currentInventory: null,
         };
       }
+      if (r.current_inventory != null) map[k].currentInventory = r.current_inventory;
       map[k].rows.push(r);
       map[k].units += r._quantity;
       map[k].netSales += r._revenue;
@@ -1066,7 +1070,7 @@ function Dashboard({ data, filters, setFilters }) {
 
       <FilterBar filters={filters} setFilters={setFilters} distinct={distinct} onReset={resetFilters} />
 
-      {/* KPI Row 1 — top-line money */}
+      {/* KPI Row 1 */}
       <div className="kpi-grid">
         <Kpi
           label="Net Revenue"
@@ -1075,36 +1079,24 @@ function Dashboard({ data, filters, setFilters }) {
           accent
         />
         <Kpi
-          label={'Net Profit' + (kpis.isModeled ? ' *' : '')}
-          value={fmtMoney(kpis.netProfit)}
-          sub={kpis.isModeled ? `modeled · ${(filters.cogsRatio * 100).toFixed(0)}% COGS` : 'revenue − COGS'}
-        />
-        <Kpi
-          label={'Gross Margin' + (kpis.isModeled ? ' *' : '')}
-          value={kpis.margin.toFixed(1) + '%'}
-          sub={kpis.isModeled ? `modeled · ${fmtMoney(kpis.cost)} COGS` : `${fmtMoney(kpis.cost)} COGS`}
-        />
-        <Kpi
           label="MOM Change"
           value={kpis.momChange == null ? '—' : (kpis.momChange >= 0 ? '+' : '') + kpis.momChange.toFixed(1) + '%'}
-          sub={kpis.momPrevAmount != null && kpis.momLatestAmount != null
-            ? `${fmtMoney(kpis.momPrevAmount)} → ${fmtMoney(kpis.momLatestAmount)} · ${kpis.momLabel}`
-            : kpis.momLabel}
+          sub={kpis.momLabel}
         />
-      </div>
-
-      {/* KPI Row 2 — volume */}
-      <div className="kpi-grid">
         <Kpi label="Orders" value={fmtNum(kpis.orders)} sub={`${fmtMoney(kpis.avgOrder)} avg order`} />
         <Kpi label="Units Sold" value={fmtNum(Math.round(kpis.units))} sub={`${fmtNum(kpis.lineItems)} line items`} />
-        <Kpi label="Avg Unit Price" value={fmtMoneyFull(kpis.avgUnitPrice)} sub="revenue ÷ units" />
-        <Kpi label="Avg Units / Invoice" value={kpis.avgUnitsPerInvoice.toFixed(1)} sub={`across ${fmtNum(kpis.orders)} invoices`} />
       </div>
 
-      {/* KPI Row 3 — reach & deductions */}
+      {/* KPI Row 2 */}
       <div className="kpi-grid">
+        <Kpi label="Avg Unit Price" value={fmtMoneyFull(kpis.avgUnitPrice)} sub="revenue ÷ units" />
+        <Kpi label="Avg Units / Invoice" value={kpis.avgUnitsPerInvoice.toFixed(1)} sub={`across ${fmtNum(kpis.orders)} invoices`} />
         <Kpi label="Active Buyers" value={fmtNum(kpis.buyers)} sub="unique accounts" />
         <Kpi label="Markets" value={fmtNum(distinct.states.filter(s => filtered.some(r => r.buyer_state === s)).length)} sub="states with sales" />
+      </div>
+
+      {/* KPI Row 3 */}
+      <div className="kpi-grid">
         <Kpi
           label="Discounts Given"
           value={fmtMoney(kpis.discounts)}
@@ -1120,7 +1112,6 @@ function Dashboard({ data, filters, setFilters }) {
             : 'none in current view'}
         />
       </div>
-
       {/* Revenue trend */}
       <section className="section">
         <div className="section-header">
@@ -1148,6 +1139,124 @@ function Dashboard({ data, filters, setFilters }) {
               <Area type="monotone" dataKey="revenue" stroke="#d24a92" strokeWidth={2} fill="url(#revGrad)" />
             </AreaChart>
           </ResponsiveContainer>
+        </div>
+      </section>
+
+      {/* Invoices — one row per order, with units per invoice */}
+      <section className="section">
+        <div className="section-header">
+          <h2 className="section-title">Invoices <em>· units &amp; revenue per order</em></h2>
+          <span className="section-meta">{fmtNum(invoices.length)} invoices</span>
+        </div>
+        <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
+          <div style={{ overflowX: 'auto', maxHeight: 480 }}>
+            <table className="data-table">
+              <thead>
+                <tr>
+                  <th>Invoice #</th>
+                  <th>Date</th>
+                  <th>Buyer</th>
+                  <th>Rep</th>
+                  <th className="num">Line Items</th>
+                  <th className="num">Total Units</th>
+                  <th className="num">Revenue</th>
+                  <th className="num">Credit Applied</th>
+                  <th>Payment</th>
+                </tr>
+              </thead>
+              <tbody>
+                {invoices.slice(0, 100).map((inv, i) => (
+                  <tr
+                    key={i}
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => setFilters(f => ({ ...f, invoice: inv.invoice }))}
+                    title="Click to filter the whole dashboard by this invoice"
+                  >
+                    <td className="font-mono" style={{ color: 'var(--accent)' }}>{inv.invoice}</td>
+                    <td className="dim font-mono">{inv.date}</td>
+                    <td>{inv.buyer}</td>
+                    <td className="dim">{inv.rep}</td>
+                    <td className="num dim">{fmtNum(inv.lineItems)}</td>
+                    <td className="num"><strong>{fmtNum(Math.round(inv.units))}</strong></td>
+                    <td className="num">{fmtMoneyFull(inv.revenue)}</td>
+                    <td
+                      className="num"
+                      style={inv.credit > 0 ? { color: 'var(--accent)' } : { color: 'var(--text-faint)' }}
+                      title={inv.credit > 0 && inv.creditEntries.length
+                        ? inv.creditEntries.map(e => `Credit of $${e.amount.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})} on ${e.date}`).join('\n')
+                        : ''}
+                    >
+                      {inv.credit > 0 ? fmtMoneyFull(inv.credit) : '—'}
+                    </td>
+                    <td><StatusPill status={inv.status} /></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {invoices.length > 100 && (
+            <div style={{ padding: '12px 16px', fontFamily: 'JetBrains Mono', fontSize: 11, color: 'var(--text-faint)', textAlign: 'center', borderTop: '1px solid var(--border)' }}>
+              Showing 100 of {fmtNum(invoices.length)} · use filters to narrow further
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Product breakdown — matches Apex's product-line spreadsheet */}
+      <section className="section">
+        <div className="section-header">
+          <h2 className="section-title">Product <em>breakdown</em></h2>
+          <span className="section-meta">{fmtNum(productBreakdown.length)} products</span>
+        </div>
+        <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
+          <div style={{ overflowX: 'auto', maxHeight: 520 }}>
+            <table className="data-table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Line</th>
+                  <th className="num">Units Sold</th>
+                  <th className="num">Gross Sales</th>
+                  <th className="num">Discounts</th>
+                  <th className="num">Net Sales</th>
+                  <th className="num">Avg Unit $</th>
+                  <th className="num">Listed $</th>
+                  <th className="num">Current Inv.</th>
+                </tr>
+              </thead>
+              <tbody>
+                {productBreakdown.slice(0, 100).map((p, i) => (
+                  <tr key={i}>
+                    <td>{p.name}</td>
+                    <td className="dim">{p.line}</td>
+                    <td className="num">{fmtNum(Math.round(p.units))}</td>
+                    <td className="num">{fmtMoneyFull(p.gross)}</td>
+                    <td className="num dim">{fmtMoneyFull(p.discounts)}</td>
+                    <td className="num"><strong>{fmtMoneyFull(p.netSales)}</strong></td>
+                    <td className="num dim">{fmtMoneyFull(p.avgUnitPrice)}</td>
+                    <td className="num dim">{fmtMoneyFull(p.listedPrice)}</td>
+                    <td className="num">{p.currentInventory == null ? <span style={{ color: 'var(--text-faint)' }}>—</span> : fmtNum(Math.round(p.currentInventory))}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {productBreakdown.length > 100 && (
+            <div style={{ padding: '12px 16px', fontFamily: 'JetBrains Mono', fontSize: 11, color: 'var(--text-faint)', textAlign: 'center', borderTop: '1px solid var(--border)' }}>
+              Showing top 100 of {fmtNum(productBreakdown.length)} products by net sales
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Payment status */}
+      <section className="section">
+        <div className="section-header">
+          <h2 className="section-title">Payment <em>status</em></h2>
+          <span className="section-meta">AR mix</span>
+        </div>
+        <div className="card">
+          <RankList data={paymentMix.map(p => ({ name: p.name, revenue: p.value }))} />
         </div>
       </section>
 
@@ -1235,27 +1344,14 @@ function Dashboard({ data, filters, setFilters }) {
         </div>
       </section>
 
-      {/* Geography + payment */}
+      {/* By state */}
       <section className="section">
-        <div className="grid-half">
-          <div>
-            <div className="section-header">
-              <h2 className="section-title">By <em>state</em></h2>
-              <span className="section-meta">geography</span>
-            </div>
-            <div className="card">
-              <RankList data={byState} />
-            </div>
-          </div>
-          <div>
-            <div className="section-header">
-              <h2 className="section-title">Payment <em>status</em></h2>
-              <span className="section-meta">AR mix</span>
-            </div>
-            <div className="card">
-              <RankList data={paymentMix.map(p => ({ name: p.name, revenue: p.value }))} />
-            </div>
-          </div>
+        <div className="section-header">
+          <h2 className="section-title">By <em>state</em></h2>
+          <span className="section-meta">geography</span>
+        </div>
+        <div className="card">
+          <RankList data={byState} />
         </div>
       </section>
 
@@ -1277,9 +1373,6 @@ function Dashboard({ data, filters, setFilters }) {
                   <th className="num">Discounts</th>
                   <th className="num">Net Sales</th>
                   <th className="num">MOM ±</th>
-                  <th className="num">COGS</th>
-                  <th className="num">Net Profit</th>
-                  <th className="num">Margin</th>
                 </tr>
               </thead>
               <tbody>
@@ -1294,9 +1387,6 @@ function Dashboard({ data, filters, setFilters }) {
                     <td className="num" style={{ color: m.mom == null ? 'var(--text-faint)' : m.mom >= 0 ? 'var(--accent)' : 'var(--rose)' }}>
                       {m.mom == null ? '—' : (m.mom >= 0 ? '+' : '') + m.mom.toFixed(1) + '%'}
                     </td>
-                    <td className="num dim">{fmtMoneyFull(m.cogs)}</td>
-                    <td className="num"><strong style={{ color: m.netProfit >= 0 ? 'var(--text)' : 'var(--rose)' }}>{fmtMoneyFull(m.netProfit)}</strong></td>
-                    <td className="num">{m.margin.toFixed(1)}%</td>
                   </tr>
                 ))}
                 {monthlyBreakdown.length > 0 && (
@@ -1308,125 +1398,11 @@ function Dashboard({ data, filters, setFilters }) {
                     <td className="num dim">{fmtMoneyFull(monthlyBreakdown.reduce((s, m) => s + m.discounts, 0))}</td>
                     <td className="num"><strong>{fmtMoneyFull(monthlyBreakdown.reduce((s, m) => s + m.netSales, 0))}</strong></td>
                     <td className="num dim">—</td>
-                    <td className="num dim">{fmtMoneyFull(monthlyBreakdown.reduce((s, m) => s + m.cogs, 0))}</td>
-                    <td className="num"><strong style={{ color: 'var(--accent)' }}>{fmtMoneyFull(monthlyBreakdown.reduce((s, m) => s + m.netProfit, 0))}</strong></td>
-                    <td className="num"><strong>{kpis.margin.toFixed(1)}%</strong></td>
                   </tr>
                 )}
               </tbody>
             </table>
           </div>
-        </div>
-      </section>
-
-      {/* Product breakdown — matches Apex's product-line spreadsheet */}
-      <section className="section">
-        <div className="section-header">
-          <h2 className="section-title">Product <em>breakdown</em></h2>
-          <span className="section-meta">{fmtNum(productBreakdown.length)} products</span>
-        </div>
-        <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
-          <div style={{ overflowX: 'auto', maxHeight: 520 }}>
-            <table className="data-table">
-              <thead>
-                <tr>
-                  <th>Product</th>
-                  <th>Line</th>
-                  <th className="num">Units Sold</th>
-                  <th className="num">Gross Sales</th>
-                  <th className="num">Discounts</th>
-                  <th className="num">Net Sales</th>
-                  <th className="num">Avg Unit $</th>
-                  <th className="num">Listed $</th>
-                  <th className="num">Cost / Unit</th>
-                  <th className="num">Total Cost</th>
-                  <th className="num">Gross Profit</th>
-                </tr>
-              </thead>
-              <tbody>
-                {productBreakdown.slice(0, 100).map((p, i) => (
-                  <tr key={i}>
-                    <td>{p.name}</td>
-                    <td className="dim">{p.line}</td>
-                    <td className="num">{fmtNum(Math.round(p.units))}</td>
-                    <td className="num">{fmtMoneyFull(p.gross)}</td>
-                    <td className="num dim">{fmtMoneyFull(p.discounts)}</td>
-                    <td className="num"><strong>{fmtMoneyFull(p.netSales)}</strong></td>
-                    <td className="num dim">{fmtMoneyFull(p.avgUnitPrice)}</td>
-                    <td className="num dim">{fmtMoneyFull(p.listedPrice)}</td>
-                    <td className="num dim">{fmtMoneyFull(p.costUnit)}</td>
-                    <td className="num dim">{fmtMoneyFull(p.totalCost)}</td>
-                    <td className="num"><strong style={{ color: p.grossProfit >= 0 ? 'var(--text)' : 'var(--rose)' }}>{fmtMoneyFull(p.grossProfit)}</strong></td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          {productBreakdown.length > 100 && (
-            <div style={{ padding: '12px 16px', fontFamily: 'JetBrains Mono', fontSize: 11, color: 'var(--text-faint)', textAlign: 'center', borderTop: '1px solid var(--border)' }}>
-              Showing top 100 of {fmtNum(productBreakdown.length)} products by net sales
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Invoices — one row per order, with units per invoice */}
-      <section className="section">
-        <div className="section-header">
-          <h2 className="section-title">Invoices <em>· units &amp; revenue per order</em></h2>
-          <span className="section-meta">{fmtNum(invoices.length)} invoices</span>
-        </div>
-        <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
-          <div style={{ overflowX: 'auto', maxHeight: 480 }}>
-            <table className="data-table">
-              <thead>
-                <tr>
-                  <th>Invoice #</th>
-                  <th>Date</th>
-                  <th>Buyer</th>
-                  <th>Rep</th>
-                  <th className="num">Line Items</th>
-                  <th className="num">Total Units</th>
-                  <th className="num">Revenue</th>
-                  <th className="num">Credit Applied</th>
-                  <th>Payment</th>
-                </tr>
-              </thead>
-              <tbody>
-                {invoices.slice(0, 100).map((inv, i) => (
-                  <tr
-                    key={i}
-                    style={{ cursor: 'pointer' }}
-                    onClick={() => setFilters(f => ({ ...f, invoice: inv.invoice }))}
-                    title="Click to filter the whole dashboard by this invoice"
-                  >
-                    <td className="font-mono" style={{ color: 'var(--accent)' }}>{inv.invoice}</td>
-                    <td className="dim font-mono">{inv.date}</td>
-                    <td>{inv.buyer}</td>
-                    <td className="dim">{inv.rep}</td>
-                    <td className="num dim">{fmtNum(inv.lineItems)}</td>
-                    <td className="num"><strong>{fmtNum(Math.round(inv.units))}</strong></td>
-                    <td className="num">{fmtMoneyFull(inv.revenue)}</td>
-                    <td
-                      className="num"
-                      style={inv.credit > 0 ? { color: 'var(--accent)' } : { color: 'var(--text-faint)' }}
-                      title={inv.credit > 0 && inv.creditEntries.length
-                        ? inv.creditEntries.map(e => `Credit of $${e.amount.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})} on ${e.date}`).join('\n')
-                        : ''}
-                    >
-                      {inv.credit > 0 ? fmtMoneyFull(inv.credit) : '—'}
-                    </td>
-                    <td><StatusPill status={inv.status} /></td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          {invoices.length > 100 && (
-            <div style={{ padding: '12px 16px', fontFamily: 'JetBrains Mono', fontSize: 11, color: 'var(--text-faint)', textAlign: 'center', borderTop: '1px solid var(--border)' }}>
-              Showing 100 of {fmtNum(invoices.length)} · use filters to narrow further
-            </div>
-          )}
         </div>
       </section>
 
@@ -1476,12 +1452,6 @@ function Dashboard({ data, filters, setFilters }) {
         </div>
       </section>
 
-      {kpis.isModeled && (
-        <div style={{ marginTop: 24, padding: '12px 16px', background: 'var(--bg-elev)', border: '1px solid var(--border)', borderRadius: 4, fontFamily: 'JetBrains Mono, monospace', fontSize: 11, color: 'var(--text-dim)', lineHeight: 1.6 }}>
-          <span style={{ color: 'var(--accent)' }}>*</span> COGS not present in LeafLink data — Net Profit and Gross Margin shown above use a modeled cost ratio of <strong style={{ color: 'var(--text)' }}>{(filters.cogsRatio * 100).toFixed(0)}%</strong> of net sales. Adjust the slider in the filter bar to model different scenarios. Once cost data is loaded into LeafLink's product records, these numbers will switch to actuals automatically.
-        </div>
-      )}
-
       <footer style={{ marginTop: 60, padding: '20px 0', borderTop: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', fontFamily: 'JetBrains Mono', fontSize: 11, color: 'var(--text-faint)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>
         <span>Chill Medicated · Sales Intelligence</span>
         <span>Auto-refresh every 60s</span>
@@ -1528,6 +1498,18 @@ function FilterBar({ filters, setFilters, distinct, onReset }) {
       <div className="filter-group">
         <label className="filter-label">To</label>
         <input type="date" className="filter-input" value={filters.to} onChange={e => upd('to', e.target.value)} />
+      </div>
+      <div className="filter-group" style={{ minWidth: 'auto' }}>
+        <label className="filter-label">Quick range</label>
+        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+          {[['Today', 0], ['Last wk', 7], ['30 days', 30], ['90 days', 90], ['YTD', 'ytd']].map(([lbl, d]) => (
+            <button key={lbl} className="date-preset" onClick={() => {
+              const t = new Date(); const fmt = x => `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, '0')}-${String(x.getDate()).padStart(2, '0')}`;
+              let from; if (d === 'ytd') { from = new Date(t.getFullYear(), 0, 1); } else { from = new Date(t); from.setDate(from.getDate() - d); }
+              setFilters(f => ({ ...f, from: fmt(from), to: fmt(t) }));
+            }}>{lbl}</button>
+          ))}
+        </div>
       </div>
       <div className="filter-group">
         <label className="filter-label">Brand</label>
@@ -1594,21 +1576,6 @@ function FilterBar({ filters, setFilters, distinct, onReset }) {
           />
           Exclude samples
         </label>
-      </div>
-      <div className="filter-group" style={{ minWidth: 180 }}>
-        <label className="filter-label" style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <span>Modeled COGS *</span>
-          <span style={{ color: 'var(--accent)' }}>{(filters.cogsRatio * 100).toFixed(0)}%</span>
-        </label>
-        <input
-          type="range"
-          min="0.30"
-          max="0.60"
-          step="0.01"
-          value={filters.cogsRatio}
-          onChange={e => upd('cogsRatio', parseFloat(e.target.value))}
-          style={{ accentColor: 'var(--accent)', width: '100%', marginTop: 8 }}
-        />
       </div>
       <button className="filter-reset" onClick={onReset}>Reset</button>
     </div>

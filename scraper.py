@@ -65,6 +65,31 @@ BRAND_FILTER = os.environ.get("LEAFLINK_BRAND_FILTER", "").strip()
 BASE_URL = f"https://{DOMAIN}/api/v2"
 OUTPUT_PATH = Path(__file__).parent / "sales_data.json"
 
+# --- Inventory pull (current stock + full catalog) ------------------------- #
+# Pulls the seller's product catalog to get current on-hand inventory and to
+# list every Chill Medicated product (including never-sold ones). Filtered to
+# Available-listed products so it matches the LeafLink inventory export, and
+# auto-updates each run. ON by default for this dashboard; set 0 to disable.
+PULL_INVENTORY = os.environ.get("LEAFLINK_PULL_INVENTORY", "1") == "1"
+INV_MAX_PAGES = int(os.environ.get("LEAFLINK_INV_MAX_PAGES", "60"))
+# Optional company id -> use the smaller company-scoped products endpoint.
+# If unset, falls back to the account-wide /products/ list (token-scoped).
+INV_COMPANY_ID = os.environ.get("LEAFLINK_COMPANY_ID", "").strip()
+# Inventory value fields, in preference order. available_inventory = on-hand
+# minus reserved; quantity = total on hand. Prefer available (matches the export).
+INV_FIELDS = [f.strip() for f in os.environ.get(
+    "LEAFLINK_INV_FIELDS",
+    "available_inventory,quantity,quantity_available,inventory"
+).split(",") if f.strip()]
+# Keep only these listing states (matches the "Available" export, drops Archived/
+# Unlisted). The API key for this field isn't documented, so we try candidates.
+LISTED_STATES = {s.strip().lower() for s in
+                 os.environ.get("LEAFLINK_LISTED_STATES", "available").split(",") if s.strip()}
+STATUS_FIELDS = [f.strip() for f in os.environ.get(
+    "LEAFLINK_STATUS_FIELDS",
+    "listing_state,status,product_status,state,listing_status,product_state"
+).split(",") if f.strip()]
+
 # Polite request pacing. The docs don't specify limits, but a small sleep
 # between pages keeps us well under any reasonable rate cap.
 SLEEP_BETWEEN_PAGES_SEC = 0.4
@@ -711,6 +736,164 @@ def fetch_sales_rep_lookup(session: requests.Session, rep_ids: set) -> dict:
 # Main                                                                        #
 # --------------------------------------------------------------------------- #
 
+def _inv_amount(v):
+    """Coerce a possibly-stringy numeric field to float, else None."""
+    if v is None:
+        return None
+    if isinstance(v, (int, float)):
+        return float(v)
+    try:
+        s = str(v).replace(",", "").replace("$", "").strip()
+        return float(s) if s not in ("", "-") else None
+    except (TypeError, ValueError):
+        return None
+
+
+def _prod_status(p):
+    """Lowercased listing status of a product, trying candidate field names.
+    Handles string or {slug/name/value} shapes. Returns ("", None) if absent."""
+    for f in STATUS_FIELDS:
+        if f in p and p[f] is not None:
+            v = p[f]
+            if isinstance(v, dict):
+                v = v.get("slug") or v.get("name") or v.get("value") or ""
+            return str(v).strip().lower(), f
+    return "", None
+
+
+def fetch_inventory(session: requests.Session) -> dict:
+    """Best-effort current-inventory pull from the seller product catalog.
+
+    Returns {"by_id": {pid: qty}, "by_sku": {sku: qty}, "catalog": [...]}.
+    Defensive: any failure (403 / wrong field / no permission) leaves the maps
+    empty and the dashboard simply shows '—'. Mirrors the Michigan scraper:
+    follows the `next` URL (the products endpoint ignores ?page=), filters the
+    catalog to the brand + Available-listed products, and prints diagnostics so
+    the listing-status field can be confirmed on a real run.
+    """
+    inv_by_id, inv_by_sku, catalog, seen = {}, {}, [], set()
+
+    def _soft_get(url, params):
+        """GET that returns (status, json) without killing the run on 4xx."""
+        try:
+            r = session.get(url, params=params or {}, timeout=REQUEST_TIMEOUT_SEC)
+            return r.status_code, (r.json() if r.status_code == 200 else None)
+        except requests.RequestException:
+            return None, None
+
+    endpoints = []
+    if INV_COMPANY_ID:
+        endpoints.append(f"/companies/{INV_COMPANY_ID}/products/")
+    endpoints.append("/products/")
+
+    for ep in endpoints:
+        base = f"{BASE_URL}{ep}"
+        status, data = _soft_get(base, {"limit": PAGE_SIZE})
+        if status != 200 or not data:
+            print(f"  inventory: status {status} on {ep} — trying next endpoint.", file=sys.stderr)
+            continue
+
+        # Pass 1: page through, build inventory maps (all products) and buffer
+        # product dicts + brand ids so we can resolve brand names before filtering.
+        prods, brand_ids, field_hits, sample_keys, pages = [], set(), {}, None, 0
+        while data is not None and pages < INV_MAX_PAGES:
+            items = data.get("results") if isinstance(data, dict) else data
+            if not items:
+                break
+            for p in items:
+                if not isinstance(p, dict):
+                    continue
+                if sample_keys is None:
+                    sample_keys = sorted(p.keys())
+                pid = p.get("id")
+                sku = str(p.get("sku") or "").strip()
+                val, f = None, None
+                for cand in INV_FIELDS:
+                    if cand in p and p[cand] is not None:
+                        v = _inv_amount(p[cand])
+                        if v is not None:
+                            val, f = v, cand
+                            break
+                if val is not None:
+                    field_hits[f] = field_hits.get(f, 0) + 1
+                    if pid is not None:
+                        inv_by_id[str(pid)] = val
+                    if sku:
+                        inv_by_sku[sku] = val
+                if p.get("brand") is not None:
+                    brand_ids.add(p.get("brand"))
+                prods.append((p, val))
+            pages += 1
+            nxt = data.get("next") if isinstance(data, dict) else None
+            if not nxt:
+                break
+            _, data = _soft_get(nxt, None)  # follow next (endpoint ignores ?page=)
+            time.sleep(SLEEP_BETWEEN_PAGES_SEC)
+
+        if pages >= INV_MAX_PAGES:
+            print(f"  inventory: hit INV_MAX_PAGES={INV_MAX_PAGES} on {ep} — raise "
+                  f"LEAFLINK_INV_MAX_PAGES if the catalog is larger.", file=sys.stderr)
+
+        # Resolve brand names so we can brand-filter the catalog (product.brand is an id).
+        brand_lookup = fetch_brand_lookup(session, brand_ids) if brand_ids else {}
+
+        # Pass 2: build the brand + listing-state filtered catalog.
+        status_counts, status_field_seen, brand_unresolved = {}, None, 0
+        for p, val in prods:
+            pid = p.get("id")
+            sku = str(p.get("sku") or "").strip()
+            name = p.get("display_name") or p.get("name") or ""
+            bname = brand_lookup.get(p.get("brand"), "")
+            # Brand filter (by resolved name). Defensive: if the brand couldn't be
+            # resolved, keep the product rather than risk dropping everything.
+            if BRAND_FILTER and bname and BRAND_FILTER.lower() not in bname.lower():
+                continue
+            if BRAND_FILTER and not bname:
+                brand_unresolved += 1
+            # Listing-state filter (Available only). Defensive: keep when no status
+            # field is found on the product.
+            st, sf = _prod_status(p)
+            status_counts[st or "(none)"] = status_counts.get(st or "(none)", 0) + 1
+            if sf is not None:
+                status_field_seen = sf
+            if sf is not None and LISTED_STATES and st not in LISTED_STATES:
+                continue
+            key = str(pid) if pid is not None else sku
+            if key and key not in seen:
+                seen.add(key)
+                catalog.append({
+                    "id": str(pid) if pid is not None else "",
+                    "sku": sku, "name": name,
+                    "line": p.get("product_line_name") or "",
+                    "brand": bname, "status": st,
+                    "inventory": _inv_amount(p.get("quantity")),
+                    "reserved": _inv_amount(p.get("reserved_qty")),
+                    "available": val,
+                })
+
+        if inv_by_id or inv_by_sku or catalog:
+            print(f"Inventory: matched on {ep} — {len(inv_by_id)} by id / "
+                  f"{len(inv_by_sku)} by sku ({pages} pages, fields {field_hits}); "
+                  f"{len(catalog)} catalog products (brand='{BRAND_FILTER}', "
+                  f"listed={sorted(LISTED_STATES)}, status field={status_field_seen}, "
+                  f"brand status breakdown={status_counts})")
+            if status_field_seen is None:
+                print(f"  WARNING: no listing-status field found among {STATUS_FIELDS}. "
+                      f"Catalog NOT filtered by listing state (all kept). First product "
+                      f"keys: {sample_keys} — set LEAFLINK_STATUS_FIELDS to fix.", file=sys.stderr)
+            if brand_unresolved:
+                print(f"  NOTE: {brand_unresolved} product(s) kept with an unresolved brand "
+                      f"name (brand filter couldn't be applied to them).", file=sys.stderr)
+            return {"by_id": inv_by_id, "by_sku": inv_by_sku, "catalog": catalog}
+        print(f"  inventory: {ep} returned products but no recognizable inventory field. "
+              f"First product keys: {sample_keys}", file=sys.stderr)
+
+    print("  inventory: nothing matched — current stock will show '—'. Set "
+          "LEAFLINK_COMPANY_ID / LEAFLINK_INV_FIELDS once the right path+field are known.",
+          file=sys.stderr)
+    return {"by_id": {}, "by_sku": {}, "catalog": []}
+
+
 def main() -> None:
     started = time.time()
     session = _session()
@@ -777,6 +960,7 @@ def main() -> None:
         if pid and pid in product_lookup:
             info = product_lookup[pid]
             r["product_name"] = info["name"]
+            r["product_sku"] = info.get("sku") or ""
             cat_name = category_lookup.get(info["category_id"], "")
             brand_name = brand_lookup.get(info["brand_id"], "")
             r["product_type"] = cat_name
@@ -820,7 +1004,29 @@ def main() -> None:
         print(f"Brand filter '{BRAND_FILTER}' kept {len(final_rows)} of {len(raw_rows)} rows.")
     raw_rows = final_rows
 
-    # Step 3 — write atomically
+    # Step 5 — current inventory + full catalog (Available-listed products only)
+    inventory = {"by_id": {}, "by_sku": {}, "catalog": []}
+    if PULL_INVENTORY:
+        print("Pulling current inventory / product catalog...")
+        try:
+            inventory = fetch_inventory(session)
+        except Exception as e:  # never let inventory break the sales pull
+            print(f"  inventory pull errored ({e}); continuing without it.", file=sys.stderr)
+        inv_by_id, inv_by_sku = inventory["by_id"], inventory["by_sku"]
+        if inv_by_id or inv_by_sku:
+            stamped = 0
+            for r in raw_rows:
+                pid = str(r.get("product_id")) if r.get("product_id") is not None else ""
+                sku = str(r.get("product_sku") or r.get("sku") or "").strip()
+                cur = (inv_by_id.get(pid) if pid else None)
+                if cur is None and sku:
+                    cur = inv_by_sku.get(sku)
+                if cur is not None:
+                    r["current_inventory"] = cur
+                    stamped += 1
+            print(f"  Stamped current_inventory on {stamped} of {len(raw_rows)} rows.")
+
+    # Step 6 — write atomically
     output = {
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source": "leaflink-v2-api",
@@ -828,6 +1034,7 @@ def main() -> None:
         "days_back": DAYS_BACK,
         "orders_seen": orders_seen,
         "orders_kept": orders_kept,
+        "inventory": inventory["catalog"],
         "rows": raw_rows,
     }
     tmp = OUTPUT_PATH.with_suffix(".json.tmp")
@@ -839,4 +1046,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    main()v

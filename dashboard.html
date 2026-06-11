@@ -926,6 +926,37 @@ function Dashboard({ data, filters, setFilters }) {
     return Object.entries(map).map(([name, value]) => ({ name, value }));
   }, [filtered]);
 
+  // Current inventory — from the scraped LeafLink catalog (data.inventory),
+  // filtered upstream to Available-listed products so it matches the export and
+  // auto-updates each run. Built from the unfiltered snapshot (ignores date/buyer
+  // filters by design — current stock is current stock). Sold totals join by sku,
+  // then name, using physical units (_quantity).
+  const inventory = useMemo(() => {
+    const soldBySku = {}, soldByName = {};
+    normalized.forEach(r => {
+      const u = r._quantity || 0;
+      if (r.product_sku) soldBySku[r.product_sku] = (soldBySku[r.product_sku] || 0) + u;
+      if (r.product_name) soldByName[r.product_name] = (soldByName[r.product_name] || 0) + u;
+    });
+    const cat = Array.isArray(data.inventory) ? data.inventory : [];
+    const list = cat.map(p => {
+      const sold = (p.sku && soldBySku[p.sku] != null) ? soldBySku[p.sku] : (soldByName[p.name] || 0);
+      return {
+        name: p.name || '—', line: p.line || '—', sku: p.sku || '',
+        qty: (p.inventory != null ? p.inventory : null),
+        reserved: (p.reserved != null ? p.reserved : null),
+        inv: (p.available != null ? p.available : null),
+        status: p.status || '', sold, neverSold: sold <= 0,
+      };
+    }).sort((a, b) => (b.inv || 0) - (a.inv || 0));
+    const withInv = list.filter(p => p.inv != null);
+    const availableTotal = withInv.reduce((s, p) => s + p.inv, 0);
+    const reservedTotal = list.reduce((s, p) => s + (p.reserved || 0), 0);
+    const onHandTotal = list.reduce((s, p) => s + (p.qty || 0), 0);
+    const out = withInv.filter(p => p.inv <= 0).length;
+    return { list, availableTotal, reservedTotal, onHandTotal, skus: list.length, out };
+  }, [normalized, data.inventory]);
+
   const resetFilters = () => setFilters({
     from: '', to: '', brand: '', buyer: '', rep: '', state: '', status: '', invoice: '',
     productLine: '', excludeSamples: false, cogsRatio: 0.45
@@ -1259,6 +1290,69 @@ function Dashboard({ data, filters, setFilters }) {
           <RankList data={paymentMix.map(p => ({ name: p.name, revenue: p.value }))} />
         </div>
       </section>
+
+      {/* Current inventory — Available-listed products from the LeafLink catalog */}
+      <section className="section">
+        <div className="section-header">
+          <h2 className="section-title">Current <em>inventory</em></h2>
+          <span className="section-meta">
+            {inventory.skus > 0
+              ? `${fmtNum(inventory.skus)} products · live from product catalog`
+              : 'awaiting scraper inventory pull'}
+          </span>
+        </div>
+        {inventory.skus > 0 ? (
+          <React.Fragment>
+            <div className="kpi-grid" style={{ marginBottom: 24 }}>
+              <Kpi label="Available" value={fmtNum(Math.round(inventory.availableTotal))} sub="units sellable now" accent />
+              <Kpi label="Reserved" value={fmtNum(Math.round(inventory.reservedTotal))} sub="held by open orders" />
+              <Kpi label="On Hand" value={fmtNum(Math.round(inventory.onHandTotal))} sub="total inventory" />
+              <Kpi label="Out Of Stock" value={fmtNum(inventory.out)} sub={`of ${fmtNum(inventory.skus)} products`} />
+            </div>
+            <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
+              <div style={{ overflowX: 'auto', maxHeight: 520 }}>
+                <table className="data-table">
+                  <thead>
+                    <tr>
+                      <th>Product</th>
+                      <th>Line</th>
+                      <th>SKU</th>
+                      <th className="num">Units Sold</th>
+                      <th className="num">On Hand</th>
+                      <th className="num">Reserved</th>
+                      <th className="num">Available</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {inventory.list.map((p, i) => (
+                      <tr key={i}>
+                        <td>{p.name}</td>
+                        <td className="dim">{p.line}</td>
+                        <td className="dim font-mono" style={{ fontSize: 11 }}>{p.sku || '—'}</td>
+                        <td className="num dim">{fmtNum(Math.round(p.sold))}</td>
+                        <td className="num dim">{p.qty == null ? '—' : fmtNum(Math.round(p.qty))}</td>
+                        <td className="num dim">{p.reserved == null ? '—' : fmtNum(Math.round(p.reserved))}</td>
+                        <td className="num"><strong style={{ color: p.inv == null ? 'var(--text-faint)' : p.inv <= 0 ? 'var(--rose)' : 'var(--accent)' }}>{p.inv == null ? '—' : fmtNum(Math.round(p.inv))}</strong></td>
+                        <td>{p.neverSold
+                          ? <span style={{ fontFamily: 'JetBrains Mono', fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--warm)', border: '1px solid var(--warm)', borderRadius: 2, padding: '2px 6px', whiteSpace: 'nowrap' }}>Never sold</span>
+                          : <span style={{ color: 'var(--text-faint)' }}>—</span>}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </React.Fragment>
+        ) : (
+          <div className="card" style={{ padding: '24px', color: 'var(--text-dim)', fontFamily: 'JetBrains Mono', fontSize: 12, lineHeight: 1.7 }}>
+            No inventory in the data yet. Deploy the latest <code style={{ color: 'var(--accent)' }}>scraper.py</code> with
+            {' '}<code style={{ color: 'var(--accent)' }}>LEAFLINK_PULL_INVENTORY=1</code> and run it once — the product
+            catalog will populate this section automatically.
+          </div>
+        )}
+      </section>
+
 
       {/* Top products + buyers */}
       <section className="section">

@@ -9,17 +9,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script>window.React||document.write('<script crossorigin src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"><\/script>');</script>
-<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script>window.ReactDOM||document.write('<script crossorigin src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"><\/script>');</script>
-<script crossorigin src="https://unpkg.com/prop-types@15.8.1/prop-types.min.js"></script>
-<script>window.PropTypes||document.write('<script crossorigin src="https://cdn.jsdelivr.net/npm/prop-types@15.8.1/prop-types.min.js"><\/script>');</script>
-<script crossorigin src="https://cdn.jsdelivr.net/npm/recharts@2.12.7/umd/Recharts.min.js"></script>
-<script>window.Recharts||document.write('<script crossorigin src="https://unpkg.com/recharts@2.12.7/umd/Recharts.min.js"><\/script>');</script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<script>window.Babel||document.write('<script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7/babel.min.js"><\/script>');</script>
-
 <style>
   :root {
     /* Chill Medicated · Purple Gradient palette (New Jersey market)
@@ -365,12 +354,21 @@
     .grid-2, .grid-3, .grid-half { grid-template-columns: 1fr; }
   }
 </style>
+<!-- Libraries served from this repo root (no external CDN). -->
+<script src="react.production.min.js"></script>
+<script src="react-dom.production.min.js"></script>
+<script src="prop-types.min.js"></script>
+<script src="Recharts.js"></script>
 </head>
 <body>
 <div id="root"></div>
 
-<script type="text/babel">
-const { useState, useEffect, useMemo } = React;
+<script>
+const {
+  useState,
+  useEffect,
+  useMemo
+} = React;
 
 // Guard against CDN failure — show a clear message instead of going blank
 if (typeof Recharts === 'undefined') {
@@ -388,14 +386,26 @@ if (typeof Recharts === 'undefined') {
   `;
   throw new Error('Recharts failed to load');
 }
-
 const {
-  ResponsiveContainer, LineChart, Line, BarChart, Bar, AreaChart, Area,
-  XAxis, YAxis, CartesianGrid, Tooltip, Legend, PieChart, Pie, Cell
+  ResponsiveContainer,
+  LineChart,
+  Line,
+  BarChart,
+  Bar,
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  PieChart,
+  Pie,
+  Cell
 } = Recharts;
 
 // --- Helpers ----------------------------------------------------------------
-const parseMoney = (str) => {
+const parseMoney = str => {
   if (str == null) return 0;
   if (typeof str === 'number') return str;
   // Strip currency, commas, whitespace. Handle accounting-style negatives:
@@ -409,21 +419,20 @@ const parseMoney = (str) => {
 // Sum line-level discounts across a set of rows. Apex's `discounts` field is per-line,
 // so it can be summed freely without deduplication. (Apex also has an `additional_discounts`
 // field, but it's not consistently reflected in the Apex UI, so we don't include it.)
-const sumLineDiscounts = (rowSet) =>
-  rowSet.reduce((s, r) => s + (r._lineDiscount || 0), 0);
-
+const sumLineDiscounts = rowSet => rowSet.reduce((s, r) => s + (r._lineDiscount || 0), 0);
 
 // `payment_dates` — yes, weirdly named, but it actually holds entries like
 // "Credit of $1,045.22 on 03/17/2026"). Field may be a string OR an array of strings.
 // Returns { total, entries } where total is the summed dollar amount of all credits
 // found and entries is an array of { amount, date } for display.
-const parsePaymentsForCredits = (paymentsField) => {
-  const empty = { total: 0, entries: [] };
+const parsePaymentsForCredits = paymentsField => {
+  const empty = {
+    total: 0,
+    entries: []
+  };
   if (!paymentsField) return empty;
   // Normalize: accept either an array of strings or a single string
-  const text = Array.isArray(paymentsField)
-    ? paymentsField.filter(Boolean).join(', ')
-    : String(paymentsField);
+  const text = Array.isArray(paymentsField) ? paymentsField.filter(Boolean).join(', ') : String(paymentsField);
   if (!text) return empty;
   // Match "Credit of $<amount> on <date>". The amount may include commas (e.g. 1,045.22).
   const re = /Credit\s+of\s+\$([\d,]+(?:\.\d+)?)\s+on\s+(\d{1,2}\/\d{1,2}\/\d{2,4})/gi;
@@ -434,25 +443,31 @@ const parsePaymentsForCredits = (paymentsField) => {
     const amount = parseFloat(m[1].replace(/,/g, ''));
     if (!isNaN(amount)) {
       total += amount;
-      entries.push({ amount, date: m[2] });
+      entries.push({
+        amount,
+        date: m[2]
+      });
     }
   }
-  return { total, entries };
+  return {
+    total,
+    entries
+  };
 };
-
-const fmtMoney = (n) => {
+const fmtMoney = n => {
   if (!n && n !== 0) return '—';
   if (Math.abs(n) >= 1e6) return '$' + (n / 1e6).toFixed(2) + 'M';
   if (Math.abs(n) >= 1e3) return '$' + (n / 1e3).toFixed(1) + 'K';
-  return '$' + n.toLocaleString(undefined, { maximumFractionDigits: 0 });
+  return '$' + n.toLocaleString(undefined, {
+    maximumFractionDigits: 0
+  });
 };
-
-const fmtMoneyFull = (n) =>
-  '$' + (n || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-const fmtNum = (n) => (n || 0).toLocaleString();
-
-const parseDate = (str) => {
+const fmtMoneyFull = n => '$' + (n || 0).toLocaleString(undefined, {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+});
+const fmtNum = n => (n || 0).toLocaleString();
+const parseDate = str => {
   if (!str) return null;
   const s = String(str).trim();
   // YYYY-MM-DD — construct in local timezone to avoid UTC shift
@@ -471,7 +486,7 @@ const parseDate = (str) => {
 
 // Display format: MM/DD/YY (two-digit year, no time stamp).
 // Accepts any of the messy input shapes the scraper produces.
-const fmtDate = (str) => {
+const fmtDate = str => {
   const d = parseDate(str);
   if (!d) return '—';
   const m = String(d.getMonth() + 1).padStart(2, '0');
@@ -479,8 +494,7 @@ const fmtDate = (str) => {
   const y = String(d.getFullYear()).slice(-2);
   return `${m}/${day}/${y}`;
 };
-
-const ymd = (d) => {
+const ymd = d => {
   if (!(d instanceof Date) || isNaN(d)) return '';
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, '0');
@@ -490,24 +504,62 @@ const ymd = (d) => {
 
 // US state normalization — handles "MA" / "Massachusetts" / "Mass." / "massachusetts" → "MA"
 const STATE_TO_ABBR = {
-  'alabama': 'AL', 'alaska': 'AK', 'arizona': 'AZ', 'arkansas': 'AR',
-  'california': 'CA', 'colorado': 'CO', 'connecticut': 'CT', 'delaware': 'DE',
-  'florida': 'FL', 'georgia': 'GA', 'hawaii': 'HI', 'idaho': 'ID',
-  'illinois': 'IL', 'indiana': 'IN', 'iowa': 'IA', 'kansas': 'KS',
-  'kentucky': 'KY', 'louisiana': 'LA', 'maine': 'ME', 'maryland': 'MD',
-  'massachusetts': 'MA', 'mass': 'MA',
-  'michigan': 'MI', 'minnesota': 'MN', 'mississippi': 'MS', 'missouri': 'MO',
-  'montana': 'MT', 'nebraska': 'NE', 'nevada': 'NV', 'new hampshire': 'NH',
-  'new jersey': 'NJ', 'new mexico': 'NM', 'new york': 'NY',
-  'north carolina': 'NC', 'north dakota': 'ND', 'ohio': 'OH', 'oklahoma': 'OK',
-  'oregon': 'OR', 'pennsylvania': 'PA', 'rhode island': 'RI',
-  'south carolina': 'SC', 'south dakota': 'SD', 'tennessee': 'TN',
-  'texas': 'TX', 'utah': 'UT', 'vermont': 'VT', 'virginia': 'VA',
-  'washington': 'WA', 'west virginia': 'WV', 'wisconsin': 'WI', 'wyoming': 'WY',
-  'district of columbia': 'DC', 'washington dc': 'DC', 'washington d.c.': 'DC',
+  'alabama': 'AL',
+  'alaska': 'AK',
+  'arizona': 'AZ',
+  'arkansas': 'AR',
+  'california': 'CA',
+  'colorado': 'CO',
+  'connecticut': 'CT',
+  'delaware': 'DE',
+  'florida': 'FL',
+  'georgia': 'GA',
+  'hawaii': 'HI',
+  'idaho': 'ID',
+  'illinois': 'IL',
+  'indiana': 'IN',
+  'iowa': 'IA',
+  'kansas': 'KS',
+  'kentucky': 'KY',
+  'louisiana': 'LA',
+  'maine': 'ME',
+  'maryland': 'MD',
+  'massachusetts': 'MA',
+  'mass': 'MA',
+  'michigan': 'MI',
+  'minnesota': 'MN',
+  'mississippi': 'MS',
+  'missouri': 'MO',
+  'montana': 'MT',
+  'nebraska': 'NE',
+  'nevada': 'NV',
+  'new hampshire': 'NH',
+  'new jersey': 'NJ',
+  'new mexico': 'NM',
+  'new york': 'NY',
+  'north carolina': 'NC',
+  'north dakota': 'ND',
+  'ohio': 'OH',
+  'oklahoma': 'OK',
+  'oregon': 'OR',
+  'pennsylvania': 'PA',
+  'rhode island': 'RI',
+  'south carolina': 'SC',
+  'south dakota': 'SD',
+  'tennessee': 'TN',
+  'texas': 'TX',
+  'utah': 'UT',
+  'vermont': 'VT',
+  'virginia': 'VA',
+  'washington': 'WA',
+  'west virginia': 'WV',
+  'wisconsin': 'WI',
+  'wyoming': 'WY',
+  'district of columbia': 'DC',
+  'washington dc': 'DC',
+  'washington d.c.': 'DC'
 };
-
-const normalizeState = (raw) => {
+const normalizeState = raw => {
   if (!raw) return '';
   const clean = String(raw).trim().replace(/\./g, '').toLowerCase();
   if (!clean) return '';
@@ -524,55 +576,67 @@ function App() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [filters, setFilters] = useState({
-    from: '', to: '', brand: '', buyer: '', rep: '', state: '', status: '', invoice: '',
-    productLine: '', excludeSamples: false, cogsRatio: 0.45
+    from: '',
+    to: '',
+    brand: '',
+    buyer: '',
+    rep: '',
+    state: '',
+    status: '',
+    invoice: '',
+    productLine: '',
+    excludeSamples: false,
+    cogsRatio: 0.45
   });
-
   useEffect(() => {
     const load = () => {
-      fetch('sales_data.json?t=' + Date.now())
-        .then(r => {
-          if (!r.ok) throw new Error('Could not load sales_data.json');
-          return r.json();
-        })
-        .then(setData)
-        .catch(e => setError(e.message));
+      fetch('sales_data.json?t=' + Date.now()).then(r => {
+        if (!r.ok) throw new Error('Could not load sales_data.json');
+        return r.json();
+      }).then(setData).catch(e => setError(e.message));
     };
     load();
     const id = setInterval(load, 60000); // refresh every minute
     return () => clearInterval(id);
   }, []);
-
   if (error) {
-    return (
-      <div className="app">
-        <div className="empty">
-          <h2>No data yet</h2>
-          <p>Run <code>python scraper.py</code> in this folder to pull your sales data, then refresh.</p>
-          <p style={{ marginTop: 12, fontSize: 12, color: 'var(--text-faint)' }}>{error}</p>
-        </div>
-      </div>
-    );
+    return /*#__PURE__*/React.createElement("div", {
+      className: "app"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "empty"
+    }, /*#__PURE__*/React.createElement("h2", null, "No data yet"), /*#__PURE__*/React.createElement("p", null, "Run ", /*#__PURE__*/React.createElement("code", null, "python scraper.py"), " in this folder to pull your sales data, then refresh."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 12,
+        fontSize: 12,
+        color: 'var(--text-faint)'
+      }
+    }, error)));
   }
-
   if (!data) {
-    return (
-      <div className="app">
-        <div className="empty"><h2>Loading…</h2></div>
-      </div>
-    );
+    return /*#__PURE__*/React.createElement("div", {
+      className: "app"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "empty"
+    }, /*#__PURE__*/React.createElement("h2", null, "Loading\u2026")));
   }
-
-  return <Dashboard data={data} filters={filters} setFilters={setFilters} />;
+  return /*#__PURE__*/React.createElement(Dashboard, {
+    data: data,
+    filters: filters,
+    setFilters: setFilters
+  });
 }
 
 // --- Dashboard --------------------------------------------------------------
-function Dashboard({ data, filters, setFilters }) {
+function Dashboard({
+  data,
+  filters,
+  setFilters
+}) {
   const rows = data.rows || [];
 
   // Helper: detect sample/promo rows
   // Apex has an explicit "is_sample" field, but we also catch SAMP/SAMPLE in names as a safety net
-  const isSampleRow = (r) => {
+  const isSampleRow = r => {
     if (String(r.is_sample || '').toLowerCase() === 'yes') return true;
     const name = String(r.product_name || '').toUpperCase();
     if (name.includes('SAMP') || name.includes('SAMPLE')) return true;
@@ -582,7 +646,7 @@ function Dashboard({ data, filters, setFilters }) {
   };
 
   // Helper: pull sales rep — Apex returns sales_reps_display as an array, or sales_reps as a string
-  const extractRep = (r) => {
+  const extractRep = r => {
     if (Array.isArray(r.sales_reps_display) && r.sales_reps_display.length) {
       return r.sales_reps_display.filter(Boolean).join(', ');
     }
@@ -607,9 +671,7 @@ function Dashboard({ data, filters, setFilters }) {
     // Computed fields
     _date: parseDate(r.order_date_utc_raw || r.order_date_localized_raw || r.order_date_raw || r.order_date_utc || r.order_date),
     _delivery: parseDate(r.delivery_date_raw || r.delivery_date),
-    _revenue: (typeof r.line_total_raw === 'number')
-      ? r.line_total_raw / 100
-      : parseMoney(r.line_total || r.computed_sale_price || r.total),
+    _revenue: typeof r.line_total_raw === 'number' ? r.line_total_raw / 100 : parseMoney(r.line_total || r.computed_sale_price || r.total),
     _cost: parseMoney(r.batch_cost_of_goods),
     _quantity: parseFloat(r.quantity_raw != null ? r.quantity_raw : r.quantity) || 0,
     // DISCOUNT FIELD — using `discounts` (per-line) only. Apex also has
@@ -618,8 +680,8 @@ function Dashboard({ data, filters, setFilters }) {
     // discounts here match what the CSV export and Apex invoice screens show.
     // Comes from Apex as integer cents (e.g. 18000 = $180.00). Fallback handles
     // edge cases where the field might be a string like "$30.00".
-    _lineDiscount: (typeof r.discounts === 'number' ? r.discounts / 100 : parseMoney(r.discounts)),
-    _discount: (typeof r.discounts === 'number' ? r.discounts / 100 : parseMoney(r.discounts)),
+    _lineDiscount: typeof r.discounts === 'number' ? r.discounts / 100 : parseMoney(r.discounts),
+    _discount: typeof r.discounts === 'number' ? r.discounts / 100 : parseMoney(r.discounts),
     _unitPrice: parseMoney(r.product_listing_price || r.unit_price),
     _isSample: isSampleRow(r),
     // Credit detection — Apex records "credits applied to payment" inside the
@@ -628,10 +690,7 @@ function Dashboard({ data, filters, setFilters }) {
     // (in case Apex ever sends a credit as a negative line item).
     _creditFromPayments: parsePaymentsForCredits(r.payment_dates || r.payments || r.payment_text || r.payment_history || '').total,
     _creditEntries: parsePaymentsForCredits(r.payment_dates || r.payments || r.payment_text || r.payment_history || '').entries,
-    _isNegativeLine: (
-      (typeof r.line_total_raw === 'number' && r.line_total_raw < 0) ||
-      parseMoney(r.line_total || r.computed_sale_price || r.total) < 0
-    ),
+    _isNegativeLine: typeof r.line_total_raw === 'number' && r.line_total_raw < 0 || parseMoney(r.line_total || r.computed_sale_price || r.total) < 0
   })), [rows]);
 
   // Distinct values for filters
@@ -641,7 +700,7 @@ function Dashboard({ data, filters, setFilters }) {
     reps: [...new Set(normalized.map(r => r.sales_rep).filter(Boolean))].sort(),
     states: [...new Set(normalized.map(r => r.buyer_state).filter(Boolean))].sort(),
     statuses: [...new Set(normalized.map(r => r.payment_status).filter(Boolean))].sort(),
-    productLines: [...new Set(normalized.map(r => r.product_type).filter(Boolean))].sort(),
+    productLines: [...new Set(normalized.map(r => r.product_type).filter(Boolean))].sort()
   }), [normalized]);
 
   // Apply filters
@@ -681,10 +740,8 @@ function Dashboard({ data, filters, setFilters }) {
     // as text like "Credit of $1,045.22 on 03/17/2026". The same payments string repeats
     // on every line item of an invoice, so we dedupe by invoice/order_id before summing.
     // Also catch any rows where revenue itself went negative (rare, but covers refund lines).
-    const creditByInvoice = new Map();   // order_id -> credit dollars
-    const negativeLineTotal = filtered
-      .filter(r => r._isNegativeLine)
-      .reduce((s, r) => s + r._revenue, 0); // negative number
+    const creditByInvoice = new Map(); // order_id -> credit dollars
+    const negativeLineTotal = filtered.filter(r => r._isNegativeLine).reduce((s, r) => s + r._revenue, 0); // negative number
     filtered.forEach(r => {
       const id = r.order_id;
       if (id && r._creditFromPayments > 0 && !creditByInvoice.has(id)) {
@@ -692,10 +749,9 @@ function Dashboard({ data, filters, setFilters }) {
       }
     });
     const creditsFromPayments = [...creditByInvoice.values()].reduce((s, n) => s + n, 0);
-    const credits = creditsFromPayments + (-negativeLineTotal); // both as positive dollars
+    const credits = creditsFromPayments + -negativeLineTotal; // both as positive dollars
     const creditCount = creditByInvoice.size + filtered.filter(r => r._isNegativeLine).length;
-    const creditOrders = creditByInvoice.size +
-      new Set(filtered.filter(r => r._isNegativeLine).map(r => r.order_id).filter(Boolean)).size;
+    const creditOrders = creditByInvoice.size + new Set(filtered.filter(r => r._isNegativeLine).map(r => r.order_id).filter(Boolean)).size;
     // Note: "Net Revenue" stays equal to invoice totals (what was sold).
     // Credits are payments-side, not revenue-side, so grossRevenue == revenue here.
     const grossRevenue = revenue;
@@ -703,7 +759,7 @@ function Dashboard({ data, filters, setFilters }) {
     // If Apex isn't returning real COGS, fall back to the modeled ratio
     const isModeled = actualCost === 0 && revenue > 0;
     const cost = isModeled ? revenue * filters.cogsRatio : actualCost;
-    const margin = revenue ? ((revenue - cost) / revenue) * 100 : 0;
+    const margin = revenue ? (revenue - cost) / revenue * 100 : 0;
     const netProfit = revenue - cost;
     const avgUnitPrice = units ? revenue / units : 0;
 
@@ -726,11 +782,10 @@ function Dashboard({ data, filters, setFilters }) {
       momLatestAmount = latest;
       momPrevAmount = prev;
       if (prev) {
-        momChange = ((latest - prev) / prev) * 100;
+        momChange = (latest - prev) / prev * 100;
         momLabel = monthKeys[monthKeys.length - 1] + ' vs ' + monthKeys[monthKeys.length - 2];
       }
     }
-
     return {
       revenue,
       grossRevenue,
@@ -753,7 +808,7 @@ function Dashboard({ data, filters, setFilters }) {
       credits,
       creditCount,
       creditOrders,
-      lineItems: filtered.length,
+      lineItems: filtered.length
     };
   }, [filtered, filters.cogsRatio]);
 
@@ -769,9 +824,14 @@ function Dashboard({ data, filters, setFilters }) {
       if (!map[key]) {
         map[key] = {
           key,
-          monthName: r._date.toLocaleString('en-US', { month: 'long', year: 'numeric' }),
+          monthName: r._date.toLocaleString('en-US', {
+            month: 'long',
+            year: 'numeric'
+          }),
           rows: [],
-          units: 0, netSales: 0, cogs: 0,
+          units: 0,
+          netSales: 0,
+          cogs: 0
         };
       }
       map[key].rows.push(r);
@@ -789,12 +849,19 @@ function Dashboard({ data, filters, setFilters }) {
     // Add MOM and Margin columns. Use modeled COGS when actual is zero.
     return sorted.map((m, i) => {
       const prev = i > 0 ? sorted[i - 1].netSales : 0;
-      const mom = prev ? ((m.netSales - prev) / prev) * 100 : null;
+      const mom = prev ? (m.netSales - prev) / prev * 100 : null;
       const effectiveCogs = m.cogs > 0 ? m.cogs : m.netSales * filters.cogsRatio;
       const netProfit = m.netSales - effectiveCogs;
-      const margin = m.netSales ? (netProfit / m.netSales) * 100 : 0;
+      const margin = m.netSales ? netProfit / m.netSales * 100 : 0;
       const cases = m.units / 30;
-      return { ...m, cogs: effectiveCogs, cases, mom, netProfit, margin };
+      return {
+        ...m,
+        cogs: effectiveCogs,
+        cases,
+        mom,
+        netProfit,
+        margin
+      };
     });
   }, [filtered, filters.cogsRatio]);
 
@@ -804,14 +871,20 @@ function Dashboard({ data, filters, setFilters }) {
     filtered.forEach(r => {
       if (!r._date) return;
       const key = ymd(r._date);
-      if (!map[key]) map[key] = { date: key, revenue: 0, units: 0, orders: new Set() };
+      if (!map[key]) map[key] = {
+        date: key,
+        revenue: 0,
+        units: 0,
+        orders: new Set()
+      };
       map[key].revenue += r._revenue;
       map[key].units += r._quantity;
       if (r.order_id) map[key].orders.add(r.order_id);
     });
-    return Object.values(map)
-      .map(d => ({ ...d, orders: d.orders.size }))
-      .sort((a, b) => a.date.localeCompare(b.date));
+    return Object.values(map).map(d => ({
+      ...d,
+      orders: d.orders.size
+    })).sort((a, b) => a.date.localeCompare(b.date));
   }, [filtered]);
 
   // Group helpers
@@ -820,13 +893,16 @@ function Dashboard({ data, filters, setFilters }) {
     filtered.forEach(r => {
       const k = r[key];
       if (!k) return;
-      if (!map[k]) map[k] = { name: k, revenue: 0, units: 0 };
+      if (!map[k]) map[k] = {
+        name: k,
+        revenue: 0,
+        units: 0
+      };
       map[k].revenue += r._revenue;
       map[k].units += r._quantity;
     });
     return Object.values(map).sort((a, b) => b.revenue - a.revenue).slice(0, n);
   };
-
   const topProducts = useMemo(() => groupSum('product_name'), [filtered]);
   const topBuyers = useMemo(() => groupSum('buyer_name'), [filtered]);
   const byRep = useMemo(() => groupSum('sales_rep', 20), [filtered]);
@@ -847,10 +923,11 @@ function Dashboard({ data, filters, setFilters }) {
           units: 0,
           netSales: 0,
           totalCost: 0,
-          unitPriceSum: 0, // for weighted avg
+          unitPriceSum: 0,
+          // for weighted avg
           listedPrice: r._unitPrice || 0,
           costUnit: r._cost || 0,
-          currentInventory: null,
+          currentInventory: null
         };
       }
       if (r.current_inventory != null) map[k].currentInventory = r.current_inventory;
@@ -867,21 +944,17 @@ function Dashboard({ data, filters, setFilters }) {
       p.gross = p.netSales + p.discounts;
       delete p.rows;
     });
-    return Object.values(map)
-      .map(p => {
-        const effectiveCost = p.totalCost > 0 ? p.totalCost : p.netSales * filters.cogsRatio;
-        const effectiveCostUnit = p.costUnit > 0
-          ? p.costUnit
-          : (p.units ? effectiveCost / p.units : 0);
-        return {
-          ...p,
-          totalCost: effectiveCost,
-          costUnit: effectiveCostUnit,
-          avgUnitPrice: p.units ? p.netSales / p.units : 0,
-          grossProfit: p.netSales - effectiveCost,
-        };
-      })
-      .sort((a, b) => b.netSales - a.netSales);
+    return Object.values(map).map(p => {
+      const effectiveCost = p.totalCost > 0 ? p.totalCost : p.netSales * filters.cogsRatio;
+      const effectiveCostUnit = p.costUnit > 0 ? p.costUnit : p.units ? effectiveCost / p.units : 0;
+      return {
+        ...p,
+        totalCost: effectiveCost,
+        costUnit: effectiveCostUnit,
+        avgUnitPrice: p.units ? p.netSales / p.units : 0,
+        grossProfit: p.netSales - effectiveCost
+      };
+    }).sort((a, b) => b.netSales - a.netSales);
   }, [filtered, filters.cogsRatio]);
 
   // Group line items into invoices (one row per order/invoice)
@@ -893,7 +966,7 @@ function Dashboard({ data, filters, setFilters }) {
       if (!map[id]) {
         map[id] = {
           id,
-          invoice: r.order_number || ('#' + r.order_id),
+          invoice: r.order_number || '#' + r.order_id,
           date: fmtDate(r._date || r.order_date_raw || r.order_date),
           _date: r._date,
           buyer: r.buyer_name || '—',
@@ -908,7 +981,7 @@ function Dashboard({ data, filters, setFilters }) {
           // Credit applied to this invoice. The payments-text field repeats on every
           // line item, so we only capture it once per order (first line wins).
           credit: r._creditFromPayments || 0,
-          creditEntries: r._creditEntries || [],
+          creditEntries: r._creditEntries || []
         };
       }
       map[id].lineItems += 1;
@@ -916,9 +989,7 @@ function Dashboard({ data, filters, setFilters }) {
       map[id].revenue += r._revenue;
       map[id].discount += r._lineDiscount;
     });
-    return Object.values(map).sort((a, b) =>
-      (b._date?.getTime() || 0) - (a._date?.getTime() || 0)
-    );
+    return Object.values(map).sort((a, b) => (b._date?.getTime() || 0) - (a._date?.getTime() || 0));
   }, [filtered]);
 
   // Payment status
@@ -928,7 +999,10 @@ function Dashboard({ data, filters, setFilters }) {
       const k = r.payment_status || 'Unknown';
       map[k] = (map[k] || 0) + r._revenue;
     });
-    return Object.entries(map).map(([name, value]) => ({ name, value }));
+    return Object.entries(map).map(([name, value]) => ({
+      name,
+      value
+    }));
   }, [filtered]);
 
   // Current inventory — from the scraped LeafLink catalog (data.inventory),
@@ -937,7 +1011,8 @@ function Dashboard({ data, filters, setFilters }) {
   // filters by design — current stock is current stock). Sold totals join by sku,
   // then name, using physical units (_quantity).
   const inventory = useMemo(() => {
-    const soldBySku = {}, soldByName = {};
+    const soldBySku = {},
+      soldByName = {};
     normalized.forEach(r => {
       const u = r._quantity || 0;
       if (r.product_sku) soldBySku[r.product_sku] = (soldBySku[r.product_sku] || 0) + u;
@@ -945,13 +1020,17 @@ function Dashboard({ data, filters, setFilters }) {
     });
     const cat = Array.isArray(data.inventory) ? data.inventory : [];
     const list = cat.map(p => {
-      const sold = (p.sku && soldBySku[p.sku] != null) ? soldBySku[p.sku] : (soldByName[p.name] || 0);
+      const sold = p.sku && soldBySku[p.sku] != null ? soldBySku[p.sku] : soldByName[p.name] || 0;
       return {
-        name: p.name || '—', line: p.line || '—', sku: p.sku || '',
-        qty: (p.inventory != null ? p.inventory : null),
-        reserved: (p.reserved != null ? p.reserved : null),
-        inv: (p.available != null ? p.available : null),
-        status: p.status || '', sold, neverSold: sold <= 0,
+        name: p.name || '—',
+        line: p.line || '—',
+        sku: p.sku || '',
+        qty: p.inventory != null ? p.inventory : null,
+        reserved: p.reserved != null ? p.reserved : null,
+        inv: p.available != null ? p.available : null,
+        status: p.status || '',
+        sold,
+        neverSold: sold <= 0
       };
     }).sort((a, b) => (b.inv || 0) - (a.inv || 0));
     const withInv = list.filter(p => p.inv != null);
@@ -959,14 +1038,28 @@ function Dashboard({ data, filters, setFilters }) {
     const reservedTotal = list.reduce((s, p) => s + (p.reserved || 0), 0);
     const onHandTotal = list.reduce((s, p) => s + (p.qty || 0), 0);
     const out = withInv.filter(p => p.inv <= 0).length;
-    return { list, availableTotal, reservedTotal, onHandTotal, skus: list.length, out };
+    return {
+      list,
+      availableTotal,
+      reservedTotal,
+      onHandTotal,
+      skus: list.length,
+      out
+    };
   }, [normalized, data.inventory]);
-
   const resetFilters = () => setFilters({
-    from: '', to: '', brand: '', buyer: '', rep: '', state: '', status: '', invoice: '',
-    productLine: '', excludeSamples: false, cogsRatio: 0.45
+    from: '',
+    to: '',
+    brand: '',
+    buyer: '',
+    rep: '',
+    state: '',
+    status: '',
+    invoice: '',
+    productLine: '',
+    excludeSamples: false,
+    cogsRatio: 0.45
   });
-
   const fetchedAt = new Date(data.fetched_at);
 
   // Diagnostics — helps us see what the dashboard actually sees
@@ -999,15 +1092,15 @@ function Dashboard({ data, filters, setFilters }) {
           invoice: r.order_number || id,
           buyer: r.buyer_name || '—',
           date: fmtDate(r._date || r.order_date_raw || r.order_date),
-          line: 0,
+          line: 0
         });
       }
       discountByInvoice.get(id).line += r._lineDiscount || 0;
     });
-    const discountAudit = [...discountByInvoice.values()]
-      .map(d => ({ ...d, total: d.line }))
-      .filter(d => d.total > 0)
-      .sort((a, b) => b.total - a.total);
+    const discountAudit = [...discountByInvoice.values()].map(d => ({
+      ...d,
+      total: d.line
+    })).filter(d => d.total > 0).sort((a, b) => b.total - a.total);
     const discountAuditTotal = discountAudit.reduce((s, d) => s + d.total, 0);
     // Credits: parsed from the "Payments" text field on each row.
     // Dedupe by invoice since the same payments string appears on every line item.
@@ -1015,747 +1108,1147 @@ function Dashboard({ data, filters, setFilters }) {
     normalized.forEach(r => {
       const id = r.order_id;
       if (id && r._creditFromPayments > 0 && !creditByInvoice.has(id)) {
-        creditByInvoice.set(id, { amount: r._creditFromPayments, entries: r._creditEntries });
+        creditByInvoice.set(id, {
+          amount: r._creditFromPayments,
+          entries: r._creditEntries
+        });
       }
     });
     const creditTotal = [...creditByInvoice.values()].reduce((s, v) => s + v.amount, 0);
     const creditInvoices = [...creditByInvoice.keys()];
     const rawPaymentsSample = rawFirst.payment_dates || rawFirst.payments || rawFirst.payment_text || rawFirst.payment_history || '(no payment_dates field on first row)';
     return {
-      datesValid, datesNull, repsPresent, repsEmpty,
-      sampleDate, sampleRep,
-      orderIdsPresent, distinctOrderIds,
-      rawOrderIdField, rawOrderNumber,
-      sampleDiscount, rawDiscountFields, totalDiscount, filteredDiscount,
-      discountAudit, discountAuditTotal,
+      datesValid,
+      datesNull,
+      repsPresent,
+      repsEmpty,
+      sampleDate,
+      sampleRep,
+      orderIdsPresent,
+      distinctOrderIds,
+      rawOrderIdField,
+      rawOrderNumber,
+      sampleDiscount,
+      rawDiscountFields,
+      totalDiscount,
+      filteredDiscount,
+      discountAudit,
+      discountAuditTotal,
       creditLineCount: creditByInvoice.size,
       creditTotal,
       creditInvoices,
-      rawPaymentsSample,
+      rawPaymentsSample
     };
   }, [normalized, rows, filtered]);
-
-  return (
-    <div className="app">
-      <Topbar fetchedAt={fetchedAt} rowCount={filtered.length} totalCount={rows.length} />
-
-      {/* Diagnostic panel — remove this section once everything works */}
-      <details style={{
-        background: 'var(--bg-elev)',
-        border: '1px solid var(--border)',
-        borderRadius: 4,
-        padding: '10px 14px',
-        marginBottom: 20,
-        fontFamily: 'JetBrains Mono, monospace',
-        fontSize: 11,
-        color: 'var(--text-dim)',
-      }}>
-        <summary style={{ cursor: 'pointer', color: 'var(--accent)' }}>
-          DIAGNOSTICS — click to expand
-        </summary>
-        <div style={{ marginTop: 10, lineHeight: 1.8 }}>
-          <div>Total rows: {normalized.length} · After filters: {filtered.length}</div>
-          <div>Valid dates: {diag.datesValid} · Null/invalid dates: {diag.datesNull}</div>
-          <div>Sample date value (raw): "{diag.sampleDate}"</div>
-          <div>Rows with sales_rep: {diag.repsPresent} · Without: {diag.repsEmpty}</div>
-          <div>Sample sales_rep value: "{diag.sampleRep}"</div>
-          <div>Distinct sales reps in data: {distinct.reps.length} ({distinct.reps.slice(0, 5).join(', ')}{distinct.reps.length > 5 ? '…' : ''})</div>
-          <div style={{ marginTop: 8, color: 'var(--accent)' }}>--- ORDER ID DEBUG ---</div>
-          <div>Rows with order_id: {diag.orderIdsPresent} · Distinct order_ids: {diag.distinctOrderIds}</div>
-          <div>Raw first row: {diag.rawOrderIdField}, {diag.rawOrderNumber}</div>
-          <div style={{ marginTop: 8, color: 'var(--accent)' }}>--- DISCOUNT DEBUG ---</div>
-          <div>Raw first row: {diag.rawDiscountFields}</div>
-          <div>First row computed _discount: ${diag.sampleDiscount?.toFixed(2)}</div>
-          <div>Total discounts (all rows): ${diag.totalDiscount?.toLocaleString(undefined, {maximumFractionDigits:2})}</div>
-          <div>Total discounts (current filter): ${diag.filteredDiscount?.toLocaleString(undefined, {maximumFractionDigits:2})}</div>
-          {diag.discountAudit && diag.discountAudit.length > 0 && (
-            <details style={{ marginTop: 6 }}>
-              <summary style={{ cursor: 'pointer', color: 'var(--accent)' }}>
-                Per-invoice audit ({diag.discountAudit.length} invoice{diag.discountAudit.length === 1 ? '' : 's'}, ${diag.discountAuditTotal.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2})} total · click to expand)
-              </summary>
-              <div style={{ marginTop: 6, marginLeft: 12, fontFamily: 'monospace', fontSize: '0.85em' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '120px 100px 1fr 110px', gap: '4px 12px', color: 'var(--text-dim)' }}>
-                  <div style={{ fontWeight: 600 }}>Invoice</div>
-                  <div style={{ fontWeight: 600 }}>Date</div>
-                  <div style={{ fontWeight: 600 }}>Buyer</div>
-                  <div style={{ fontWeight: 600, textAlign: 'right' }}>Discount</div>
-                  {diag.discountAudit.slice(0, 50).map((d, i) => (
-                    <React.Fragment key={i}>
-                      <div style={{ color: 'var(--accent)' }}>{d.invoice}</div>
-                      <div>{d.date}</div>
-                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={d.buyer}>{d.buyer}</div>
-                      <div style={{ textAlign: 'right', fontWeight: 600 }}>${d.total.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
-                    </React.Fragment>
-                  ))}
-                </div>
-                {diag.discountAudit.length > 50 && (
-                  <div style={{ marginTop: 6, color: 'var(--text-faint)' }}>
-                    Showing top 50 of {diag.discountAudit.length} · narrow with filters to see specific invoices
-                  </div>
-                )}
-              </div>
-            </details>
-          )}
-          <div style={{ marginTop: 8, color: 'var(--accent)' }}>--- CREDIT DEBUG ---</div>
-          <div>Sample "payments" field (first row): {typeof diag.rawPaymentsSample === 'string' ? `"${diag.rawPaymentsSample}"` : JSON.stringify(diag.rawPaymentsSample)}</div>
-          <div>Invoices with credits parsed: {diag.creditLineCount}</div>
-          <div>Total credits applied: ${diag.creditTotal?.toLocaleString(undefined, {maximumFractionDigits:2})}</div>
-          <div>Invoices: {diag.creditInvoices.length === 0 ? '(none)' : diag.creditInvoices.slice(0, 10).join(', ') + (diag.creditInvoices.length > 10 ? ` … +${diag.creditInvoices.length - 10} more` : '')}</div>
-        </div>
-      </details>
-
-      <FilterBar filters={filters} setFilters={setFilters} distinct={distinct} onReset={resetFilters} />
-
-      {/* KPI Row 1 */}
-      <div className="kpi-grid">
-        <Kpi
-          label="Net Revenue"
-          value={fmtMoney(kpis.revenue)}
-          sub={`${fmtNum(kpis.lineItems)} line items`}
-          accent
-        />
-        <Kpi
-          label="MOM Change"
-          value={kpis.momChange == null ? '—' : (kpis.momChange >= 0 ? '+' : '') + kpis.momChange.toFixed(1) + '%'}
-          sub={kpis.momLabel}
-        />
-        <Kpi label="Orders" value={fmtNum(kpis.orders)} sub={`${fmtMoney(kpis.avgOrder)} avg order`} />
-        <Kpi label="Units Sold" value={fmtNum(Math.round(kpis.units))} sub={`${fmtNum(kpis.lineItems)} line items`} />
-      </div>
-
-      {/* KPI Row 2 */}
-      <div className="kpi-grid">
-        <Kpi label="Avg Unit Price" value={fmtMoneyFull(kpis.avgUnitPrice)} sub="revenue ÷ units" />
-        <Kpi label="Avg Units / Invoice" value={kpis.avgUnitsPerInvoice.toFixed(1)} sub={`across ${fmtNum(kpis.orders)} invoices`} />
-        <Kpi label="Active Buyers" value={fmtNum(kpis.buyers)} sub="unique accounts" />
-        <Kpi label="Markets" value={fmtNum(distinct.states.filter(s => filtered.some(r => r.buyer_state === s)).length)} sub="states with sales" />
-      </div>
-
-      {/* KPI Row 3 */}
-      <div className="kpi-grid">
-        <Kpi
-          label="Discounts Given"
-          value={fmtMoney(kpis.discounts)}
-          sub={kpis.grossRevenue
-            ? ((kpis.discounts / (kpis.grossRevenue + kpis.discounts)) * 100).toFixed(1) + '% of gross'
-            : '—'}
-        />
-        <Kpi
-          label="Credits Applied"
-          value={fmtMoney(kpis.credits)}
-          sub={kpis.creditCount
-            ? `${fmtNum(kpis.creditOrders)} invoice${kpis.creditOrders === 1 ? '' : 's'} · applied as payment`
-            : 'none in current view'}
-        />
-      </div>
-      {/* Revenue trend */}
-      <section className="section">
-        <div className="section-header">
-          <h2 className="section-title">Revenue <em>over time</em></h2>
-          <span className="section-meta">{timeSeries.length} days</span>
-        </div>
-        <div className="card" style={{ height: 320 }}>
-          <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={timeSeries} margin={{ top: 12, right: 12, left: 0, bottom: 0 }}>
-              <defs>
-                <linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#d24a92" stopOpacity={0.4} />
-                  <stop offset="100%" stopColor="#d24a92" stopOpacity={0} />
-                </linearGradient>
-              </defs>
-              <CartesianGrid stroke="#262c28" strokeDasharray="2 2" vertical={false} />
-              <XAxis dataKey="date" stroke="#5d6660" tick={{ fontSize: 11, fontFamily: 'JetBrains Mono' }} tickLine={false} axisLine={{ stroke: '#262c28' }} />
-              <YAxis stroke="#5d6660" tick={{ fontSize: 11, fontFamily: 'JetBrains Mono' }} tickLine={false} axisLine={false} tickFormatter={fmtMoney} />
-              <Tooltip
-                contentStyle={{ background: '#161a17', border: '1px solid #262c28', borderRadius: 4, fontSize: 12 }}
-                labelStyle={{ color: '#9aa39c', fontFamily: 'JetBrains Mono', fontSize: 11 }}
-                itemStyle={{ color: '#e8ebe7' }}
-                formatter={(v, n) => n === 'revenue' ? [fmtMoneyFull(v), 'Revenue'] : [fmtNum(v), n]}
-              />
-              <Area type="monotone" dataKey="revenue" stroke="#d24a92" strokeWidth={2} fill="url(#revGrad)" />
-            </AreaChart>
-          </ResponsiveContainer>
-        </div>
-      </section>
-
-      {/* Invoices — one row per order, with units per invoice */}
-      <section className="section">
-        <div className="section-header">
-          <h2 className="section-title">Invoices <em>· units &amp; revenue per order</em></h2>
-          <span className="section-meta">{fmtNum(invoices.length)} invoices</span>
-        </div>
-        <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
-          <div style={{ overflowX: 'auto', maxHeight: 480 }}>
-            <table className="data-table">
-              <thead>
-                <tr>
-                  <th>Invoice #</th>
-                  <th>Date</th>
-                  <th>Buyer</th>
-                  <th>Rep</th>
-                  <th className="num">Line Items</th>
-                  <th className="num">Total Units</th>
-                  <th className="num">Revenue</th>
-                  <th className="num">Credit Applied</th>
-                  <th>Payment</th>
-                </tr>
-              </thead>
-              <tbody>
-                {invoices.slice(0, 100).map((inv, i) => (
-                  <tr
-                    key={i}
-                    style={{ cursor: 'pointer' }}
-                    onClick={() => setFilters(f => ({ ...f, invoice: inv.invoice }))}
-                    title="Click to filter the whole dashboard by this invoice"
-                  >
-                    <td className="font-mono" style={{ color: 'var(--accent)' }}>{inv.invoice}</td>
-                    <td className="dim font-mono">{inv.date}</td>
-                    <td>{inv.buyer}</td>
-                    <td className="dim">{inv.rep}</td>
-                    <td className="num dim">{fmtNum(inv.lineItems)}</td>
-                    <td className="num"><strong>{fmtNum(Math.round(inv.units))}</strong></td>
-                    <td className="num">{fmtMoneyFull(inv.revenue)}</td>
-                    <td
-                      className="num"
-                      style={inv.credit > 0 ? { color: 'var(--accent)' } : { color: 'var(--text-faint)' }}
-                      title={inv.credit > 0 && inv.creditEntries.length
-                        ? inv.creditEntries.map(e => `Credit of $${e.amount.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})} on ${e.date}`).join('\n')
-                        : ''}
-                    >
-                      {inv.credit > 0 ? fmtMoneyFull(inv.credit) : '—'}
-                    </td>
-                    <td><StatusPill status={inv.status} /></td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          {invoices.length > 100 && (
-            <div style={{ padding: '12px 16px', fontFamily: 'JetBrains Mono', fontSize: 11, color: 'var(--text-faint)', textAlign: 'center', borderTop: '1px solid var(--border)' }}>
-              Showing 100 of {fmtNum(invoices.length)} · use filters to narrow further
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Product breakdown — matches Apex's product-line spreadsheet */}
-      <section className="section">
-        <div className="section-header">
-          <h2 className="section-title">Product <em>breakdown</em></h2>
-          <span className="section-meta">{fmtNum(productBreakdown.length)} products</span>
-        </div>
-        <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
-          <div style={{ overflowX: 'auto', maxHeight: 520 }}>
-            <table className="data-table">
-              <thead>
-                <tr>
-                  <th>Product</th>
-                  <th>Line</th>
-                  <th className="num">Units Sold</th>
-                  <th className="num">Gross Sales</th>
-                  <th className="num">Discounts</th>
-                  <th className="num">Net Sales</th>
-                  <th className="num">Avg Unit $</th>
-                  <th className="num">Listed $</th>
-                  <th className="num">Current Inv.</th>
-                </tr>
-              </thead>
-              <tbody>
-                {productBreakdown.slice(0, 100).map((p, i) => (
-                  <tr key={i}>
-                    <td>{p.name}</td>
-                    <td className="dim">{p.line}</td>
-                    <td className="num">{fmtNum(Math.round(p.units))}</td>
-                    <td className="num">{fmtMoneyFull(p.gross)}</td>
-                    <td className="num dim">{fmtMoneyFull(p.discounts)}</td>
-                    <td className="num"><strong>{fmtMoneyFull(p.netSales)}</strong></td>
-                    <td className="num dim">{fmtMoneyFull(p.avgUnitPrice)}</td>
-                    <td className="num dim">{fmtMoneyFull(p.listedPrice)}</td>
-                    <td className="num">{p.currentInventory == null ? <span style={{ color: 'var(--text-faint)' }}>—</span> : fmtNum(Math.round(p.currentInventory))}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          {productBreakdown.length > 100 && (
-            <div style={{ padding: '12px 16px', fontFamily: 'JetBrains Mono', fontSize: 11, color: 'var(--text-faint)', textAlign: 'center', borderTop: '1px solid var(--border)' }}>
-              Showing top 100 of {fmtNum(productBreakdown.length)} products by net sales
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Payment status */}
-      <section className="section">
-        <div className="section-header">
-          <h2 className="section-title">Payment <em>status</em></h2>
-          <span className="section-meta">AR mix</span>
-        </div>
-        <div className="card">
-          <RankList data={paymentMix.map(p => ({ name: p.name, revenue: p.value }))} />
-        </div>
-      </section>
-
-      {/* Current inventory — Available-listed products from the LeafLink catalog */}
-      <section className="section">
-        <div className="section-header">
-          <h2 className="section-title">Current <em>inventory</em></h2>
-          <span className="section-meta">
-            {inventory.skus > 0
-              ? `${fmtNum(inventory.skus)} products · live from product catalog`
-              : 'awaiting scraper inventory pull'}
-          </span>
-        </div>
-        {inventory.skus > 0 ? (
-          <React.Fragment>
-            <div className="kpi-grid" style={{ marginBottom: 24 }}>
-              <Kpi label="Available" value={fmtNum(Math.round(inventory.availableTotal))} sub="units sellable now" accent />
-              <Kpi label="Reserved" value={fmtNum(Math.round(inventory.reservedTotal))} sub="held by open orders" />
-              <Kpi label="On Hand" value={fmtNum(Math.round(inventory.onHandTotal))} sub="total inventory" />
-              <Kpi label="Out Of Stock" value={fmtNum(inventory.out)} sub={`of ${fmtNum(inventory.skus)} products`} />
-            </div>
-            <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
-              <div style={{ overflowX: 'auto', maxHeight: 520 }}>
-                <table className="data-table">
-                  <thead>
-                    <tr>
-                      <th>Product</th>
-                      <th>Line</th>
-                      <th>SKU</th>
-                      <th className="num">Units Sold</th>
-                      <th className="num">On Hand</th>
-                      <th className="num">Reserved</th>
-                      <th className="num">Available</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {inventory.list.map((p, i) => (
-                      <tr key={i}>
-                        <td>{p.name}</td>
-                        <td className="dim">{p.line}</td>
-                        <td className="dim font-mono" style={{ fontSize: 11 }}>{p.sku || '—'}</td>
-                        <td className="num dim">{fmtNum(Math.round(p.sold))}</td>
-                        <td className="num dim">{p.qty == null ? '—' : fmtNum(Math.round(p.qty))}</td>
-                        <td className="num dim">{p.reserved == null ? '—' : fmtNum(Math.round(p.reserved))}</td>
-                        <td className="num"><strong style={{ color: p.inv == null ? 'var(--text-faint)' : p.inv <= 0 ? 'var(--rose)' : 'var(--accent)' }}>{p.inv == null ? '—' : fmtNum(Math.round(p.inv))}</strong></td>
-                        <td>{p.neverSold
-                          ? <span style={{ fontFamily: 'JetBrains Mono', fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--warm)', border: '1px solid var(--warm)', borderRadius: 2, padding: '2px 6px', whiteSpace: 'nowrap' }}>Never sold</span>
-                          : <span style={{ color: 'var(--text-faint)' }}>—</span>}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </React.Fragment>
-        ) : (
-          <div className="card" style={{ padding: '24px', color: 'var(--text-dim)', fontFamily: 'JetBrains Mono', fontSize: 12, lineHeight: 1.7 }}>
-            No inventory in the data yet. Deploy the latest <code style={{ color: 'var(--accent)' }}>scraper.py</code> with
-            {' '}<code style={{ color: 'var(--accent)' }}>LEAFLINK_PULL_INVENTORY=1</code> and run it once — the product
-            catalog will populate this section automatically.
-          </div>
-        )}
-      </section>
-
-
-      {/* Top products + buyers */}
-      <section className="section">
-        <div className="grid-half">
-          <RankCard title="Top products" data={topProducts} />
-          <RankCard title="Top buyers" data={topBuyers} />
-        </div>
-      </section>
-
-      {/* By rep + by category */}
-      <section className="section">
-        <div className="grid-2">
-          <div>
-            <div className="section-header">
-              <h2 className="section-title">Sales <em>by rep</em></h2>
-              <span className="section-meta">{byRep.length} reps</span>
-            </div>
-            <div className="card" style={{ height: 360 }}>
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={byRep} layout="vertical" margin={{ top: 8, right: 16, left: 8, bottom: 8 }}>
-                  <CartesianGrid stroke="#262c28" strokeDasharray="2 2" horizontal={false} />
-                  <XAxis type="number" stroke="#5d6660" tick={{ fontSize: 11, fontFamily: 'JetBrains Mono' }} tickFormatter={fmtMoney} axisLine={false} tickLine={false} />
-                  <YAxis type="category" dataKey="name" stroke="#5d6660" tick={{ fontSize: 11 }} width={130} axisLine={false} tickLine={false} />
-                  <Tooltip
-                    contentStyle={{ background: '#161a17', border: '1px solid #262c28', borderRadius: 4, fontSize: 12 }}
-                    formatter={(v) => [fmtMoneyFull(v), 'Revenue']}
-                  />
-                  <Bar dataKey="revenue" fill="#d24a92" radius={[0, 2, 2, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-          <div>
-            <div className="section-header">
-              <h2 className="section-title">By <em>category</em></h2>
-              <span className="section-meta">mix</span>
-            </div>
-            <div className="card" style={{ height: 360, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={byCategory}
-                    dataKey="revenue"
-                    nameKey="name"
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={60}
-                    outerRadius={110}
-                    paddingAngle={2}
-                    stroke="#110a1a"
-                    strokeWidth={2}
-                  >
-                    {byCategory.map((_, i) => {
-                      // Dark-to-light purple/magenta ramp.
-                      // Slices are sorted by revenue (largest first), so the darkest
-                      // shade represents the biggest category and partitions are
-                      // visibly distinct.
-                      const colors = [
-                        '#3d1a4d',  // darkest — deep aubergine
-                        '#5a2670',  // deep purple
-                        '#7a3fa0',  // brand deep purple
-                        '#a056c2',  // mid violet
-                        '#c074d8',  // light violet
-                        '#d8a3e8',  // soft lavender
-                        '#ecd1f5',  // lightest — pale lilac
-                      ];
-                      return <Cell key={i} fill={colors[i % colors.length]} />;
-                    })}
-                  </Pie>
-                  <Tooltip
-                    contentStyle={{ background: '#161a17', border: '1px solid #262c28', borderRadius: 4, fontSize: 12 }}
-                    formatter={(v) => fmtMoneyFull(v)}
-                  />
-                  <Legend
-                    verticalAlign="bottom"
-                    iconType="square"
-                    wrapperStyle={{ fontSize: 11, fontFamily: 'JetBrains Mono', color: '#9aa39c' }}
-                  />
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* By state */}
-      <section className="section">
-        <div className="section-header">
-          <h2 className="section-title">By <em>state</em></h2>
-          <span className="section-meta">geography</span>
-        </div>
-        <div className="card">
-          <RankList data={byState} />
-        </div>
-      </section>
-
-      {/* Monthly breakdown — matches Apex's monthly sales spreadsheet */}
-      <section className="section">
-        <div className="section-header">
-          <h2 className="section-title">Monthly <em>breakdown</em></h2>
-          <span className="section-meta">{monthlyBreakdown.length} months</span>
-        </div>
-        <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
-          <div style={{ overflowX: 'auto' }}>
-            <table className="data-table">
-              <thead>
-                <tr>
-                  <th>Month</th>
-                  <th className="num">Units</th>
-                  <th className="num">Cases</th>
-                  <th className="num">Gross Sales</th>
-                  <th className="num">Discounts</th>
-                  <th className="num">Net Sales</th>
-                  <th className="num">MOM ±</th>
-                </tr>
-              </thead>
-              <tbody>
-                {monthlyBreakdown.map((m, i) => (
-                  <tr key={i}>
-                    <td>{m.monthName}</td>
-                    <td className="num">{fmtNum(Math.round(m.units))}</td>
-                    <td className="num dim">{m.cases.toFixed(1)}</td>
-                    <td className="num">{fmtMoneyFull(m.gross)}</td>
-                    <td className="num dim">{fmtMoneyFull(m.discounts)}</td>
-                    <td className="num"><strong>{fmtMoneyFull(m.netSales)}</strong></td>
-                    <td className="num" style={{ color: m.mom == null ? 'var(--text-faint)' : m.mom >= 0 ? 'var(--accent)' : 'var(--rose)' }}>
-                      {m.mom == null ? '—' : (m.mom >= 0 ? '+' : '') + m.mom.toFixed(1) + '%'}
-                    </td>
-                  </tr>
-                ))}
-                {monthlyBreakdown.length > 0 && (
-                  <tr style={{ background: 'var(--bg-elev-2)', fontWeight: 600 }}>
-                    <td>TOTAL</td>
-                    <td className="num">{fmtNum(Math.round(monthlyBreakdown.reduce((s, m) => s + m.units, 0)))}</td>
-                    <td className="num dim">{monthlyBreakdown.reduce((s, m) => s + m.cases, 0).toFixed(1)}</td>
-                    <td className="num">{fmtMoneyFull(monthlyBreakdown.reduce((s, m) => s + m.gross, 0))}</td>
-                    <td className="num dim">{fmtMoneyFull(monthlyBreakdown.reduce((s, m) => s + m.discounts, 0))}</td>
-                    <td className="num"><strong>{fmtMoneyFull(monthlyBreakdown.reduce((s, m) => s + m.netSales, 0))}</strong></td>
-                    <td className="num dim">—</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      {/* Recent orders */}
-      <section className="section">
-        <div className="section-header">
-          <h2 className="section-title">Recent <em>line items</em></h2>
-          <span className="section-meta">latest 25</span>
-        </div>
-        <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
-          <div style={{ overflowX: 'auto' }}>
-            <table className="data-table">
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Order</th>
-                  <th>Buyer</th>
-                  <th>Product</th>
-                  <th>Rep</th>
-                  <th className="num">Qty</th>
-                  <th className="num">Revenue</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filtered
-                  .slice()
-                  .sort((a, b) => (b._date?.getTime() || 0) - (a._date?.getTime() || 0))
-                  .slice(0, 25)
-                  .map((r, i) => (
-                    <tr key={i}>
-                      <td className="dim font-mono">{fmtDate(r._date || r.order_date_raw || r.order_date)}</td>
-                      <td className="font-mono">#{r.order_number || r.order_id || '—'}</td>
-                      <td>{r.buyer_name || '—'}</td>
-                      <td className="dim">{r.product_name || '—'}</td>
-                      <td>{r.sales_rep || '—'}</td>
-                      <td className="num">{fmtNum(r._quantity)}</td>
-                      <td className="num">{fmtMoneyFull(r._revenue)}</td>
-                      <td>
-                        <StatusPill status={r.payment_status} />
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <footer style={{ marginTop: 60, padding: '20px 0', borderTop: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', fontFamily: 'JetBrains Mono', fontSize: 11, color: 'var(--text-faint)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>
-        <span>Chill Medicated · Sales Intelligence</span>
-        <span>Auto-refresh every 60s</span>
-      </footer>
-    </div>
-  );
+  return /*#__PURE__*/React.createElement("div", {
+    className: "app"
+  }, /*#__PURE__*/React.createElement(Topbar, {
+    fetchedAt: fetchedAt,
+    rowCount: filtered.length,
+    totalCount: rows.length
+  }), /*#__PURE__*/React.createElement("details", {
+    style: {
+      background: 'var(--bg-elev)',
+      border: '1px solid var(--border)',
+      borderRadius: 4,
+      padding: '10px 14px',
+      marginBottom: 20,
+      fontFamily: 'JetBrains Mono, monospace',
+      fontSize: 11,
+      color: 'var(--text-dim)'
+    }
+  }, /*#__PURE__*/React.createElement("summary", {
+    style: {
+      cursor: 'pointer',
+      color: 'var(--accent)'
+    }
+  }, "DIAGNOSTICS \u2014 click to expand"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 10,
+      lineHeight: 1.8
+    }
+  }, /*#__PURE__*/React.createElement("div", null, "Total rows: ", normalized.length, " \xB7 After filters: ", filtered.length), /*#__PURE__*/React.createElement("div", null, "Valid dates: ", diag.datesValid, " \xB7 Null/invalid dates: ", diag.datesNull), /*#__PURE__*/React.createElement("div", null, "Sample date value (raw): \"", diag.sampleDate, "\""), /*#__PURE__*/React.createElement("div", null, "Rows with sales_rep: ", diag.repsPresent, " \xB7 Without: ", diag.repsEmpty), /*#__PURE__*/React.createElement("div", null, "Sample sales_rep value: \"", diag.sampleRep, "\""), /*#__PURE__*/React.createElement("div", null, "Distinct sales reps in data: ", distinct.reps.length, " (", distinct.reps.slice(0, 5).join(', '), distinct.reps.length > 5 ? '…' : '', ")"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 8,
+      color: 'var(--accent)'
+    }
+  }, "--- ORDER ID DEBUG ---"), /*#__PURE__*/React.createElement("div", null, "Rows with order_id: ", diag.orderIdsPresent, " \xB7 Distinct order_ids: ", diag.distinctOrderIds), /*#__PURE__*/React.createElement("div", null, "Raw first row: ", diag.rawOrderIdField, ", ", diag.rawOrderNumber), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 8,
+      color: 'var(--accent)'
+    }
+  }, "--- DISCOUNT DEBUG ---"), /*#__PURE__*/React.createElement("div", null, "Raw first row: ", diag.rawDiscountFields), /*#__PURE__*/React.createElement("div", null, "First row computed _discount: $", diag.sampleDiscount?.toFixed(2)), /*#__PURE__*/React.createElement("div", null, "Total discounts (all rows): $", diag.totalDiscount?.toLocaleString(undefined, {
+    maximumFractionDigits: 2
+  })), /*#__PURE__*/React.createElement("div", null, "Total discounts (current filter): $", diag.filteredDiscount?.toLocaleString(undefined, {
+    maximumFractionDigits: 2
+  })), diag.discountAudit && diag.discountAudit.length > 0 && /*#__PURE__*/React.createElement("details", {
+    style: {
+      marginTop: 6
+    }
+  }, /*#__PURE__*/React.createElement("summary", {
+    style: {
+      cursor: 'pointer',
+      color: 'var(--accent)'
+    }
+  }, "Per-invoice audit (", diag.discountAudit.length, " invoice", diag.discountAudit.length === 1 ? '' : 's', ", $", diag.discountAuditTotal.toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }), " total \xB7 click to expand)"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 6,
+      marginLeft: 12,
+      fontFamily: 'monospace',
+      fontSize: '0.85em'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'grid',
+      gridTemplateColumns: '120px 100px 1fr 110px',
+      gap: '4px 12px',
+      color: 'var(--text-dim)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 600
+    }
+  }, "Invoice"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 600
+    }
+  }, "Date"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 600
+    }
+  }, "Buyer"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 600,
+      textAlign: 'right'
+    }
+  }, "Discount"), diag.discountAudit.slice(0, 50).map((d, i) => /*#__PURE__*/React.createElement(React.Fragment, {
+    key: i
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: 'var(--accent)'
+    }
+  }, d.invoice), /*#__PURE__*/React.createElement("div", null, d.date), /*#__PURE__*/React.createElement("div", {
+    style: {
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap'
+    },
+    title: d.buyer
+  }, d.buyer), /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: 'right',
+      fontWeight: 600
+    }
+  }, "$", d.total.toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }))))), diag.discountAudit.length > 50 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 6,
+      color: 'var(--text-faint)'
+    }
+  }, "Showing top 50 of ", diag.discountAudit.length, " \xB7 narrow with filters to see specific invoices"))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 8,
+      color: 'var(--accent)'
+    }
+  }, "--- CREDIT DEBUG ---"), /*#__PURE__*/React.createElement("div", null, "Sample \"payments\" field (first row): ", typeof diag.rawPaymentsSample === 'string' ? `"${diag.rawPaymentsSample}"` : JSON.stringify(diag.rawPaymentsSample)), /*#__PURE__*/React.createElement("div", null, "Invoices with credits parsed: ", diag.creditLineCount), /*#__PURE__*/React.createElement("div", null, "Total credits applied: $", diag.creditTotal?.toLocaleString(undefined, {
+    maximumFractionDigits: 2
+  })), /*#__PURE__*/React.createElement("div", null, "Invoices: ", diag.creditInvoices.length === 0 ? '(none)' : diag.creditInvoices.slice(0, 10).join(', ') + (diag.creditInvoices.length > 10 ? ` … +${diag.creditInvoices.length - 10} more` : '')))), /*#__PURE__*/React.createElement(FilterBar, {
+    filters: filters,
+    setFilters: setFilters,
+    distinct: distinct,
+    onReset: resetFilters
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "kpi-grid"
+  }, /*#__PURE__*/React.createElement(Kpi, {
+    label: "Net Revenue",
+    value: fmtMoney(kpis.revenue),
+    sub: `${fmtNum(kpis.lineItems)} line items`,
+    accent: true
+  }), /*#__PURE__*/React.createElement(Kpi, {
+    label: "MOM Change",
+    value: kpis.momChange == null ? '—' : (kpis.momChange >= 0 ? '+' : '') + kpis.momChange.toFixed(1) + '%',
+    sub: kpis.momLabel
+  }), /*#__PURE__*/React.createElement(Kpi, {
+    label: "Orders",
+    value: fmtNum(kpis.orders),
+    sub: `${fmtMoney(kpis.avgOrder)} avg order`
+  }), /*#__PURE__*/React.createElement(Kpi, {
+    label: "Units Sold",
+    value: fmtNum(Math.round(kpis.units)),
+    sub: `${fmtNum(kpis.lineItems)} line items`
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "kpi-grid"
+  }, /*#__PURE__*/React.createElement(Kpi, {
+    label: "Avg Unit Price",
+    value: fmtMoneyFull(kpis.avgUnitPrice),
+    sub: "revenue \xF7 units"
+  }), /*#__PURE__*/React.createElement(Kpi, {
+    label: "Avg Units / Invoice",
+    value: kpis.avgUnitsPerInvoice.toFixed(1),
+    sub: `across ${fmtNum(kpis.orders)} invoices`
+  }), /*#__PURE__*/React.createElement(Kpi, {
+    label: "Active Buyers",
+    value: fmtNum(kpis.buyers),
+    sub: "unique accounts"
+  }), /*#__PURE__*/React.createElement(Kpi, {
+    label: "Markets",
+    value: fmtNum(distinct.states.filter(s => filtered.some(r => r.buyer_state === s)).length),
+    sub: "states with sales"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "kpi-grid"
+  }, /*#__PURE__*/React.createElement(Kpi, {
+    label: "Discounts Given",
+    value: fmtMoney(kpis.discounts),
+    sub: kpis.grossRevenue ? (kpis.discounts / (kpis.grossRevenue + kpis.discounts) * 100).toFixed(1) + '% of gross' : '—'
+  }), /*#__PURE__*/React.createElement(Kpi, {
+    label: "Credits Applied",
+    value: fmtMoney(kpis.credits),
+    sub: kpis.creditCount ? `${fmtNum(kpis.creditOrders)} invoice${kpis.creditOrders === 1 ? '' : 's'} · applied as payment` : 'none in current view'
+  })), /*#__PURE__*/React.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "section-header"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, "Revenue ", /*#__PURE__*/React.createElement("em", null, "over time")), /*#__PURE__*/React.createElement("span", {
+    className: "section-meta"
+  }, timeSeries.length, " days")), /*#__PURE__*/React.createElement("div", {
+    className: "card",
+    style: {
+      height: 320
+    }
+  }, /*#__PURE__*/React.createElement(ResponsiveContainer, {
+    width: "100%",
+    height: "100%"
+  }, /*#__PURE__*/React.createElement(AreaChart, {
+    data: timeSeries,
+    margin: {
+      top: 12,
+      right: 12,
+      left: 0,
+      bottom: 0
+    }
+  }, /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("linearGradient", {
+    id: "revGrad",
+    x1: "0",
+    y1: "0",
+    x2: "0",
+    y2: "1"
+  }, /*#__PURE__*/React.createElement("stop", {
+    offset: "0%",
+    stopColor: "#d24a92",
+    stopOpacity: 0.4
+  }), /*#__PURE__*/React.createElement("stop", {
+    offset: "100%",
+    stopColor: "#d24a92",
+    stopOpacity: 0
+  }))), /*#__PURE__*/React.createElement(CartesianGrid, {
+    stroke: "#262c28",
+    strokeDasharray: "2 2",
+    vertical: false
+  }), /*#__PURE__*/React.createElement(XAxis, {
+    dataKey: "date",
+    stroke: "#5d6660",
+    tick: {
+      fontSize: 11,
+      fontFamily: 'JetBrains Mono'
+    },
+    tickLine: false,
+    axisLine: {
+      stroke: '#262c28'
+    }
+  }), /*#__PURE__*/React.createElement(YAxis, {
+    stroke: "#5d6660",
+    tick: {
+      fontSize: 11,
+      fontFamily: 'JetBrains Mono'
+    },
+    tickLine: false,
+    axisLine: false,
+    tickFormatter: fmtMoney
+  }), /*#__PURE__*/React.createElement(Tooltip, {
+    contentStyle: {
+      background: '#161a17',
+      border: '1px solid #262c28',
+      borderRadius: 4,
+      fontSize: 12
+    },
+    labelStyle: {
+      color: '#9aa39c',
+      fontFamily: 'JetBrains Mono',
+      fontSize: 11
+    },
+    itemStyle: {
+      color: '#e8ebe7'
+    },
+    formatter: (v, n) => n === 'revenue' ? [fmtMoneyFull(v), 'Revenue'] : [fmtNum(v), n]
+  }), /*#__PURE__*/React.createElement(Area, {
+    type: "monotone",
+    dataKey: "revenue",
+    stroke: "#d24a92",
+    strokeWidth: 2,
+    fill: "url(#revGrad)"
+  }))))), /*#__PURE__*/React.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "section-header"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, "Invoices ", /*#__PURE__*/React.createElement("em", null, "\xB7 units & revenue per order")), /*#__PURE__*/React.createElement("span", {
+    className: "section-meta"
+  }, fmtNum(invoices.length), " invoices")), /*#__PURE__*/React.createElement("div", {
+    className: "card",
+    style: {
+      padding: 0,
+      overflow: 'hidden'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      overflowX: 'auto',
+      maxHeight: 480
+    }
+  }, /*#__PURE__*/React.createElement("table", {
+    className: "data-table"
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Invoice #"), /*#__PURE__*/React.createElement("th", null, "Date"), /*#__PURE__*/React.createElement("th", null, "Buyer"), /*#__PURE__*/React.createElement("th", null, "Rep"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Line Items"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Total Units"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Revenue"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Credit Applied"), /*#__PURE__*/React.createElement("th", null, "Payment"))), /*#__PURE__*/React.createElement("tbody", null, invoices.slice(0, 100).map((inv, i) => /*#__PURE__*/React.createElement("tr", {
+    key: i,
+    style: {
+      cursor: 'pointer'
+    },
+    onClick: () => setFilters(f => ({
+      ...f,
+      invoice: inv.invoice
+    })),
+    title: "Click to filter the whole dashboard by this invoice"
+  }, /*#__PURE__*/React.createElement("td", {
+    className: "font-mono",
+    style: {
+      color: 'var(--accent)'
+    }
+  }, inv.invoice), /*#__PURE__*/React.createElement("td", {
+    className: "dim font-mono"
+  }, inv.date), /*#__PURE__*/React.createElement("td", null, inv.buyer), /*#__PURE__*/React.createElement("td", {
+    className: "dim"
+  }, inv.rep), /*#__PURE__*/React.createElement("td", {
+    className: "num dim"
+  }, fmtNum(inv.lineItems)), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, /*#__PURE__*/React.createElement("strong", null, fmtNum(Math.round(inv.units)))), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, fmtMoneyFull(inv.revenue)), /*#__PURE__*/React.createElement("td", {
+    className: "num",
+    style: inv.credit > 0 ? {
+      color: 'var(--accent)'
+    } : {
+      color: 'var(--text-faint)'
+    },
+    title: inv.credit > 0 && inv.creditEntries.length ? inv.creditEntries.map(e => `Credit of $${e.amount.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    })} on ${e.date}`).join('\n') : ''
+  }, inv.credit > 0 ? fmtMoneyFull(inv.credit) : '—'), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement(StatusPill, {
+    status: inv.status
+  }))))))), invoices.length > 100 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '12px 16px',
+      fontFamily: 'JetBrains Mono',
+      fontSize: 11,
+      color: 'var(--text-faint)',
+      textAlign: 'center',
+      borderTop: '1px solid var(--border)'
+    }
+  }, "Showing 100 of ", fmtNum(invoices.length), " \xB7 use filters to narrow further"))), /*#__PURE__*/React.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "section-header"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, "Product ", /*#__PURE__*/React.createElement("em", null, "breakdown")), /*#__PURE__*/React.createElement("span", {
+    className: "section-meta"
+  }, fmtNum(productBreakdown.length), " products")), /*#__PURE__*/React.createElement("div", {
+    className: "card",
+    style: {
+      padding: 0,
+      overflow: 'hidden'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      overflowX: 'auto',
+      maxHeight: 520
+    }
+  }, /*#__PURE__*/React.createElement("table", {
+    className: "data-table"
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Product"), /*#__PURE__*/React.createElement("th", null, "Line"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Units Sold"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Gross Sales"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Discounts"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Net Sales"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Avg Unit $"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Listed $"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Current Inv."))), /*#__PURE__*/React.createElement("tbody", null, productBreakdown.slice(0, 100).map((p, i) => /*#__PURE__*/React.createElement("tr", {
+    key: i
+  }, /*#__PURE__*/React.createElement("td", null, p.name), /*#__PURE__*/React.createElement("td", {
+    className: "dim"
+  }, p.line), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, fmtNum(Math.round(p.units))), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, fmtMoneyFull(p.gross)), /*#__PURE__*/React.createElement("td", {
+    className: "num dim"
+  }, fmtMoneyFull(p.discounts)), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, /*#__PURE__*/React.createElement("strong", null, fmtMoneyFull(p.netSales))), /*#__PURE__*/React.createElement("td", {
+    className: "num dim"
+  }, fmtMoneyFull(p.avgUnitPrice)), /*#__PURE__*/React.createElement("td", {
+    className: "num dim"
+  }, fmtMoneyFull(p.listedPrice)), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, p.currentInventory == null ? /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: 'var(--text-faint)'
+    }
+  }, "\u2014") : fmtNum(Math.round(p.currentInventory)))))))), productBreakdown.length > 100 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '12px 16px',
+      fontFamily: 'JetBrains Mono',
+      fontSize: 11,
+      color: 'var(--text-faint)',
+      textAlign: 'center',
+      borderTop: '1px solid var(--border)'
+    }
+  }, "Showing top 100 of ", fmtNum(productBreakdown.length), " products by net sales"))), /*#__PURE__*/React.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "section-header"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, "Payment ", /*#__PURE__*/React.createElement("em", null, "status")), /*#__PURE__*/React.createElement("span", {
+    className: "section-meta"
+  }, "AR mix")), /*#__PURE__*/React.createElement("div", {
+    className: "card"
+  }, /*#__PURE__*/React.createElement(RankList, {
+    data: paymentMix.map(p => ({
+      name: p.name,
+      revenue: p.value
+    }))
+  }))), /*#__PURE__*/React.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "section-header"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, "Current ", /*#__PURE__*/React.createElement("em", null, "inventory")), /*#__PURE__*/React.createElement("span", {
+    className: "section-meta"
+  }, inventory.skus > 0 ? `${fmtNum(inventory.skus)} products · live from product catalog` : 'awaiting scraper inventory pull')), inventory.skus > 0 ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "kpi-grid",
+    style: {
+      marginBottom: 24
+    }
+  }, /*#__PURE__*/React.createElement(Kpi, {
+    label: "Available",
+    value: fmtNum(Math.round(inventory.availableTotal)),
+    sub: "units sellable now",
+    accent: true
+  }), /*#__PURE__*/React.createElement(Kpi, {
+    label: "Reserved",
+    value: fmtNum(Math.round(inventory.reservedTotal)),
+    sub: "held by open orders"
+  }), /*#__PURE__*/React.createElement(Kpi, {
+    label: "On Hand",
+    value: fmtNum(Math.round(inventory.onHandTotal)),
+    sub: "total inventory"
+  }), /*#__PURE__*/React.createElement(Kpi, {
+    label: "Out Of Stock",
+    value: fmtNum(inventory.out),
+    sub: `of ${fmtNum(inventory.skus)} products`
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "card",
+    style: {
+      padding: 0,
+      overflow: 'hidden'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      overflowX: 'auto',
+      maxHeight: 520
+    }
+  }, /*#__PURE__*/React.createElement("table", {
+    className: "data-table"
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Product"), /*#__PURE__*/React.createElement("th", null, "Line"), /*#__PURE__*/React.createElement("th", null, "SKU"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Units Sold"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "On Hand"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Reserved"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Available"), /*#__PURE__*/React.createElement("th", null, "Status"))), /*#__PURE__*/React.createElement("tbody", null, inventory.list.map((p, i) => /*#__PURE__*/React.createElement("tr", {
+    key: i
+  }, /*#__PURE__*/React.createElement("td", null, p.name), /*#__PURE__*/React.createElement("td", {
+    className: "dim"
+  }, p.line), /*#__PURE__*/React.createElement("td", {
+    className: "dim font-mono",
+    style: {
+      fontSize: 11
+    }
+  }, p.sku || '—'), /*#__PURE__*/React.createElement("td", {
+    className: "num dim"
+  }, fmtNum(Math.round(p.sold))), /*#__PURE__*/React.createElement("td", {
+    className: "num dim"
+  }, p.qty == null ? '—' : fmtNum(Math.round(p.qty))), /*#__PURE__*/React.createElement("td", {
+    className: "num dim"
+  }, p.reserved == null ? '—' : fmtNum(Math.round(p.reserved))), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, /*#__PURE__*/React.createElement("strong", {
+    style: {
+      color: p.inv == null ? 'var(--text-faint)' : p.inv <= 0 ? 'var(--rose)' : 'var(--accent)'
+    }
+  }, p.inv == null ? '—' : fmtNum(Math.round(p.inv)))), /*#__PURE__*/React.createElement("td", null, p.neverSold ? /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'JetBrains Mono',
+      fontSize: 10,
+      textTransform: 'uppercase',
+      letterSpacing: '0.08em',
+      color: 'var(--warm)',
+      border: '1px solid var(--warm)',
+      borderRadius: 2,
+      padding: '2px 6px',
+      whiteSpace: 'nowrap'
+    }
+  }, "Never sold") : /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: 'var(--text-faint)'
+    }
+  }, "\u2014"))))))))) : /*#__PURE__*/React.createElement("div", {
+    className: "card",
+    style: {
+      padding: '24px',
+      color: 'var(--text-dim)',
+      fontFamily: 'JetBrains Mono',
+      fontSize: 12,
+      lineHeight: 1.7
+    }
+  }, "No inventory in the data yet. Deploy the latest ", /*#__PURE__*/React.createElement("code", {
+    style: {
+      color: 'var(--accent)'
+    }
+  }, "scraper.py"), " with", ' ', /*#__PURE__*/React.createElement("code", {
+    style: {
+      color: 'var(--accent)'
+    }
+  }, "LEAFLINK_PULL_INVENTORY=1"), " and run it once \u2014 the product catalog will populate this section automatically.")), /*#__PURE__*/React.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "grid-half"
+  }, /*#__PURE__*/React.createElement(RankCard, {
+    title: "Top products",
+    data: topProducts
+  }), /*#__PURE__*/React.createElement(RankCard, {
+    title: "Top buyers",
+    data: topBuyers
+  }))), /*#__PURE__*/React.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "grid-2"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "section-header"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, "Sales ", /*#__PURE__*/React.createElement("em", null, "by rep")), /*#__PURE__*/React.createElement("span", {
+    className: "section-meta"
+  }, byRep.length, " reps")), /*#__PURE__*/React.createElement("div", {
+    className: "card",
+    style: {
+      height: 360
+    }
+  }, /*#__PURE__*/React.createElement(ResponsiveContainer, {
+    width: "100%",
+    height: "100%"
+  }, /*#__PURE__*/React.createElement(BarChart, {
+    data: byRep,
+    layout: "vertical",
+    margin: {
+      top: 8,
+      right: 16,
+      left: 8,
+      bottom: 8
+    }
+  }, /*#__PURE__*/React.createElement(CartesianGrid, {
+    stroke: "#262c28",
+    strokeDasharray: "2 2",
+    horizontal: false
+  }), /*#__PURE__*/React.createElement(XAxis, {
+    type: "number",
+    stroke: "#5d6660",
+    tick: {
+      fontSize: 11,
+      fontFamily: 'JetBrains Mono'
+    },
+    tickFormatter: fmtMoney,
+    axisLine: false,
+    tickLine: false
+  }), /*#__PURE__*/React.createElement(YAxis, {
+    type: "category",
+    dataKey: "name",
+    stroke: "#5d6660",
+    tick: {
+      fontSize: 11
+    },
+    width: 130,
+    axisLine: false,
+    tickLine: false
+  }), /*#__PURE__*/React.createElement(Tooltip, {
+    contentStyle: {
+      background: '#161a17',
+      border: '1px solid #262c28',
+      borderRadius: 4,
+      fontSize: 12
+    },
+    formatter: v => [fmtMoneyFull(v), 'Revenue']
+  }), /*#__PURE__*/React.createElement(Bar, {
+    dataKey: "revenue",
+    fill: "#d24a92",
+    radius: [0, 2, 2, 0]
+  }))))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "section-header"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, "By ", /*#__PURE__*/React.createElement("em", null, "category")), /*#__PURE__*/React.createElement("span", {
+    className: "section-meta"
+  }, "mix")), /*#__PURE__*/React.createElement("div", {
+    className: "card",
+    style: {
+      height: 360,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }
+  }, /*#__PURE__*/React.createElement(ResponsiveContainer, {
+    width: "100%",
+    height: "100%"
+  }, /*#__PURE__*/React.createElement(PieChart, null, /*#__PURE__*/React.createElement(Pie, {
+    data: byCategory,
+    dataKey: "revenue",
+    nameKey: "name",
+    cx: "50%",
+    cy: "50%",
+    innerRadius: 60,
+    outerRadius: 110,
+    paddingAngle: 2,
+    stroke: "#110a1a",
+    strokeWidth: 2
+  }, byCategory.map((_, i) => {
+    // Dark-to-light purple/magenta ramp.
+    // Slices are sorted by revenue (largest first), so the darkest
+    // shade represents the biggest category and partitions are
+    // visibly distinct.
+    const colors = ['#3d1a4d',
+    // darkest — deep aubergine
+    '#5a2670',
+    // deep purple
+    '#7a3fa0',
+    // brand deep purple
+    '#a056c2',
+    // mid violet
+    '#c074d8',
+    // light violet
+    '#d8a3e8',
+    // soft lavender
+    '#ecd1f5' // lightest — pale lilac
+    ];
+    return /*#__PURE__*/React.createElement(Cell, {
+      key: i,
+      fill: colors[i % colors.length]
+    });
+  })), /*#__PURE__*/React.createElement(Tooltip, {
+    contentStyle: {
+      background: '#161a17',
+      border: '1px solid #262c28',
+      borderRadius: 4,
+      fontSize: 12
+    },
+    formatter: v => fmtMoneyFull(v)
+  }), /*#__PURE__*/React.createElement(Legend, {
+    verticalAlign: "bottom",
+    iconType: "square",
+    wrapperStyle: {
+      fontSize: 11,
+      fontFamily: 'JetBrains Mono',
+      color: '#9aa39c'
+    }
+  }))))))), /*#__PURE__*/React.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "section-header"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, "By ", /*#__PURE__*/React.createElement("em", null, "state")), /*#__PURE__*/React.createElement("span", {
+    className: "section-meta"
+  }, "geography")), /*#__PURE__*/React.createElement("div", {
+    className: "card"
+  }, /*#__PURE__*/React.createElement(RankList, {
+    data: byState
+  }))), /*#__PURE__*/React.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "section-header"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, "Monthly ", /*#__PURE__*/React.createElement("em", null, "breakdown")), /*#__PURE__*/React.createElement("span", {
+    className: "section-meta"
+  }, monthlyBreakdown.length, " months")), /*#__PURE__*/React.createElement("div", {
+    className: "card",
+    style: {
+      padding: 0,
+      overflow: 'hidden'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      overflowX: 'auto'
+    }
+  }, /*#__PURE__*/React.createElement("table", {
+    className: "data-table"
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Month"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Units"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Cases"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Gross Sales"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Discounts"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Net Sales"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "MOM \xB1"))), /*#__PURE__*/React.createElement("tbody", null, monthlyBreakdown.map((m, i) => /*#__PURE__*/React.createElement("tr", {
+    key: i
+  }, /*#__PURE__*/React.createElement("td", null, m.monthName), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, fmtNum(Math.round(m.units))), /*#__PURE__*/React.createElement("td", {
+    className: "num dim"
+  }, m.cases.toFixed(1)), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, fmtMoneyFull(m.gross)), /*#__PURE__*/React.createElement("td", {
+    className: "num dim"
+  }, fmtMoneyFull(m.discounts)), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, /*#__PURE__*/React.createElement("strong", null, fmtMoneyFull(m.netSales))), /*#__PURE__*/React.createElement("td", {
+    className: "num",
+    style: {
+      color: m.mom == null ? 'var(--text-faint)' : m.mom >= 0 ? 'var(--accent)' : 'var(--rose)'
+    }
+  }, m.mom == null ? '—' : (m.mom >= 0 ? '+' : '') + m.mom.toFixed(1) + '%'))), monthlyBreakdown.length > 0 && /*#__PURE__*/React.createElement("tr", {
+    style: {
+      background: 'var(--bg-elev-2)',
+      fontWeight: 600
+    }
+  }, /*#__PURE__*/React.createElement("td", null, "TOTAL"), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, fmtNum(Math.round(monthlyBreakdown.reduce((s, m) => s + m.units, 0)))), /*#__PURE__*/React.createElement("td", {
+    className: "num dim"
+  }, monthlyBreakdown.reduce((s, m) => s + m.cases, 0).toFixed(1)), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, fmtMoneyFull(monthlyBreakdown.reduce((s, m) => s + m.gross, 0))), /*#__PURE__*/React.createElement("td", {
+    className: "num dim"
+  }, fmtMoneyFull(monthlyBreakdown.reduce((s, m) => s + m.discounts, 0))), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, /*#__PURE__*/React.createElement("strong", null, fmtMoneyFull(monthlyBreakdown.reduce((s, m) => s + m.netSales, 0)))), /*#__PURE__*/React.createElement("td", {
+    className: "num dim"
+  }, "\u2014"))))))), /*#__PURE__*/React.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "section-header"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, "Recent ", /*#__PURE__*/React.createElement("em", null, "line items")), /*#__PURE__*/React.createElement("span", {
+    className: "section-meta"
+  }, "latest 25")), /*#__PURE__*/React.createElement("div", {
+    className: "card",
+    style: {
+      padding: 0,
+      overflow: 'hidden'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      overflowX: 'auto'
+    }
+  }, /*#__PURE__*/React.createElement("table", {
+    className: "data-table"
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Date"), /*#__PURE__*/React.createElement("th", null, "Order"), /*#__PURE__*/React.createElement("th", null, "Buyer"), /*#__PURE__*/React.createElement("th", null, "Product"), /*#__PURE__*/React.createElement("th", null, "Rep"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Qty"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Revenue"), /*#__PURE__*/React.createElement("th", null, "Status"))), /*#__PURE__*/React.createElement("tbody", null, filtered.slice().sort((a, b) => (b._date?.getTime() || 0) - (a._date?.getTime() || 0)).slice(0, 25).map((r, i) => /*#__PURE__*/React.createElement("tr", {
+    key: i
+  }, /*#__PURE__*/React.createElement("td", {
+    className: "dim font-mono"
+  }, fmtDate(r._date || r.order_date_raw || r.order_date)), /*#__PURE__*/React.createElement("td", {
+    className: "font-mono"
+  }, "#", r.order_number || r.order_id || '—'), /*#__PURE__*/React.createElement("td", null, r.buyer_name || '—'), /*#__PURE__*/React.createElement("td", {
+    className: "dim"
+  }, r.product_name || '—'), /*#__PURE__*/React.createElement("td", null, r.sales_rep || '—'), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, fmtNum(r._quantity)), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, fmtMoneyFull(r._revenue)), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement(StatusPill, {
+    status: r.payment_status
+  }))))))))), /*#__PURE__*/React.createElement("footer", {
+    style: {
+      marginTop: 60,
+      padding: '20px 0',
+      borderTop: '1px solid var(--border)',
+      display: 'flex',
+      justifyContent: 'space-between',
+      fontFamily: 'JetBrains Mono',
+      fontSize: 11,
+      color: 'var(--text-faint)',
+      textTransform: 'uppercase',
+      letterSpacing: '0.12em'
+    }
+  }, /*#__PURE__*/React.createElement("span", null, "Chill Medicated \xB7 Sales Intelligence"), /*#__PURE__*/React.createElement("span", null, "Auto-refresh every 60s")));
 }
 
 // --- Components -------------------------------------------------------------
-function Topbar({ fetchedAt, rowCount, totalCount }) {
+function Topbar({
+  fetchedAt,
+  rowCount,
+  totalCount
+}) {
   const ago = Math.floor((Date.now() - fetchedAt.getTime()) / 60000);
-  return (
-    <div className="topbar">
-      <div className="brand-mark" style={{ alignItems: 'center', gap: 16 }}>
-       <img src="logo.png" alt="Chill Medicated" style={{ height: 48, width: 'auto', flexShrink: 0 }} />
-        <div>
-          <h1 className="brand-name" style={{ lineHeight: 1, fontSize: 26 }}>
-            <span style={{ background: 'linear-gradient(90deg, #d24a92 0%, #7a3fa0 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Chill</span>{' '}
-            <em style={{ color: 'var(--text-dim)', fontStyle: 'italic', fontWeight: 400 }}>Medicated</em>
-          </h1>
-          <div className="brand-tag" style={{ marginTop: 4, border: 'none', padding: 0, fontSize: 9 }}>
-            New Jersey · Sales Intelligence
-          </div>
-        </div>
-      </div>
-      <div className="topbar-meta">
-        <span><strong>{fmtNum(rowCount)}</strong> / {fmtNum(totalCount)} rows</span>
-        <span>·</span>
-        <span>Updated {ago < 1 ? 'just now' : ago + 'm ago'}</span>
-        <span className="pulse"></span>
-      </div>
-    </div>
-  );
+  return /*#__PURE__*/React.createElement("div", {
+    className: "topbar"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "brand-mark",
+    style: {
+      alignItems: 'center',
+      gap: 16
+    }
+  }, /*#__PURE__*/React.createElement("img", {
+    src: "logo.png",
+    alt: "Chill Medicated",
+    style: {
+      height: 48,
+      width: 'auto',
+      flexShrink: 0
+    }
+  }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", {
+    className: "brand-name",
+    style: {
+      lineHeight: 1,
+      fontSize: 26
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      background: 'linear-gradient(90deg, #d24a92 0%, #7a3fa0 100%)',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      backgroundClip: 'text'
+    }
+  }, "Chill"), ' ', /*#__PURE__*/React.createElement("em", {
+    style: {
+      color: 'var(--text-dim)',
+      fontStyle: 'italic',
+      fontWeight: 400
+    }
+  }, "Medicated")), /*#__PURE__*/React.createElement("div", {
+    className: "brand-tag",
+    style: {
+      marginTop: 4,
+      border: 'none',
+      padding: 0,
+      fontSize: 9
+    }
+  }, "New Jersey \xB7 Sales Intelligence"))), /*#__PURE__*/React.createElement("div", {
+    className: "topbar-meta"
+  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, fmtNum(rowCount)), " / ", fmtNum(totalCount), " rows"), /*#__PURE__*/React.createElement("span", null, "\xB7"), /*#__PURE__*/React.createElement("span", null, "Updated ", ago < 1 ? 'just now' : ago + 'm ago'), /*#__PURE__*/React.createElement("span", {
+    className: "pulse"
+  })));
 }
-
-function FilterBar({ filters, setFilters, distinct, onReset }) {
-  const upd = (k, v) => setFilters(f => ({ ...f, [k]: v }));
-  return (
-    <div className="filters">
-      <div className="filter-group">
-        <label className="filter-label">From</label>
-        <input type="date" className="filter-input" value={filters.from} onChange={e => upd('from', e.target.value)} />
-      </div>
-      <div className="filter-group">
-        <label className="filter-label">To</label>
-        <input type="date" className="filter-input" value={filters.to} onChange={e => upd('to', e.target.value)} />
-      </div>
-      <div className="filter-group" style={{ minWidth: 'auto' }}>
-        <label className="filter-label">Quick range</label>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {[['Today', 0], ['Last wk', 7], ['30 days', 30], ['90 days', 90], ['YTD', 'ytd']].map(([lbl, d]) => (
-            <button key={lbl} className="date-preset" onClick={() => {
-              const t = new Date(); const fmt = x => `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, '0')}-${String(x.getDate()).padStart(2, '0')}`;
-              let from; if (d === 'ytd') { from = new Date(t.getFullYear(), 0, 1); } else { from = new Date(t); from.setDate(from.getDate() - d); }
-              setFilters(f => ({ ...f, from: fmt(from), to: fmt(t) }));
-            }}>{lbl}</button>
-          ))}
-        </div>
-      </div>
-      <div className="filter-group">
-        <label className="filter-label">Brand</label>
-        <select className="filter-select" value={filters.brand} onChange={e => upd('brand', e.target.value)}>
-          <option value="">All</option>
-          {distinct.brands.map(b => <option key={b}>{b}</option>)}
-        </select>
-      </div>
-      <div className="filter-group">
-        <label className="filter-label">Sales Rep</label>
-        <select className="filter-select" value={filters.rep} onChange={e => upd('rep', e.target.value)}>
-          <option value="">All</option>
-          {distinct.reps.map(b => <option key={b}>{b}</option>)}
-        </select>
-      </div>
-      <div className="filter-group">
-        <label className="filter-label">Buyer</label>
-        <select className="filter-select" value={filters.buyer} onChange={e => upd('buyer', e.target.value)}>
-          <option value="">All</option>
-          {distinct.buyers.map(b => <option key={b}>{b}</option>)}
-        </select>
-      </div>
-      <div className="filter-group">
-        <label className="filter-label">State</label>
-        <select className="filter-select" value={filters.state} onChange={e => upd('state', e.target.value)}>
-          <option value="">All</option>
-          {distinct.states.map(b => <option key={b}>{b}</option>)}
-        </select>
-      </div>
-      <div className="filter-group">
-        <label className="filter-label">Payment</label>
-        <select className="filter-select" value={filters.status} onChange={e => upd('status', e.target.value)}>
-          <option value="">All</option>
-          {distinct.statuses.map(b => <option key={b}>{b}</option>)}
-        </select>
-      </div>
-      <div className="filter-group">
-        <label className="filter-label">Invoice #</label>
-        <input
-          type="text"
-          className="filter-input"
-          placeholder="search…"
-          value={filters.invoice}
-          onChange={e => upd('invoice', e.target.value)}
-        />
-      </div>
-      <div className="filter-group">
-        <label className="filter-label">Product Line</label>
-        <select className="filter-select" value={filters.productLine} onChange={e => upd('productLine', e.target.value)}>
-          <option value="">All</option>
-          {distinct.productLines.map(b => <option key={b}>{b}</option>)}
-        </select>
-      </div>
-      <div className="filter-group" style={{ justifyContent: 'flex-end' }}>
-        <label
-          className="filter-label"
-          style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', marginTop: 'auto', paddingBottom: 9 }}
-        >
-          <input
-            type="checkbox"
-            checked={filters.excludeSamples}
-            onChange={e => upd('excludeSamples', e.target.checked)}
-            style={{ accentColor: 'var(--accent)', width: 14, height: 14 }}
-          />
-          Exclude samples
-        </label>
-      </div>
-      <button className="filter-reset" onClick={onReset}>Reset</button>
-    </div>
-  );
+function FilterBar({
+  filters,
+  setFilters,
+  distinct,
+  onReset
+}) {
+  const upd = (k, v) => setFilters(f => ({
+    ...f,
+    [k]: v
+  }));
+  return /*#__PURE__*/React.createElement("div", {
+    className: "filters"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "filter-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "filter-label"
+  }, "From"), /*#__PURE__*/React.createElement("input", {
+    type: "date",
+    className: "filter-input",
+    value: filters.from,
+    onChange: e => upd('from', e.target.value)
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "filter-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "filter-label"
+  }, "To"), /*#__PURE__*/React.createElement("input", {
+    type: "date",
+    className: "filter-input",
+    value: filters.to,
+    onChange: e => upd('to', e.target.value)
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "filter-group",
+    style: {
+      minWidth: 'auto'
+    }
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "filter-label"
+  }, "Quick range"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 6,
+      flexWrap: 'wrap'
+    }
+  }, [['Today', 0], ['Last wk', 7], ['30 days', 30], ['90 days', 90], ['YTD', 'ytd']].map(([lbl, d]) => /*#__PURE__*/React.createElement("button", {
+    key: lbl,
+    className: "date-preset",
+    onClick: () => {
+      const t = new Date();
+      const fmt = x => `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, '0')}-${String(x.getDate()).padStart(2, '0')}`;
+      let from;
+      if (d === 'ytd') {
+        from = new Date(t.getFullYear(), 0, 1);
+      } else {
+        from = new Date(t);
+        from.setDate(from.getDate() - d);
+      }
+      setFilters(f => ({
+        ...f,
+        from: fmt(from),
+        to: fmt(t)
+      }));
+    }
+  }, lbl)))), /*#__PURE__*/React.createElement("div", {
+    className: "filter-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "filter-label"
+  }, "Brand"), /*#__PURE__*/React.createElement("select", {
+    className: "filter-select",
+    value: filters.brand,
+    onChange: e => upd('brand', e.target.value)
+  }, /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "All"), distinct.brands.map(b => /*#__PURE__*/React.createElement("option", {
+    key: b
+  }, b)))), /*#__PURE__*/React.createElement("div", {
+    className: "filter-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "filter-label"
+  }, "Sales Rep"), /*#__PURE__*/React.createElement("select", {
+    className: "filter-select",
+    value: filters.rep,
+    onChange: e => upd('rep', e.target.value)
+  }, /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "All"), distinct.reps.map(b => /*#__PURE__*/React.createElement("option", {
+    key: b
+  }, b)))), /*#__PURE__*/React.createElement("div", {
+    className: "filter-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "filter-label"
+  }, "Buyer"), /*#__PURE__*/React.createElement("select", {
+    className: "filter-select",
+    value: filters.buyer,
+    onChange: e => upd('buyer', e.target.value)
+  }, /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "All"), distinct.buyers.map(b => /*#__PURE__*/React.createElement("option", {
+    key: b
+  }, b)))), /*#__PURE__*/React.createElement("div", {
+    className: "filter-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "filter-label"
+  }, "State"), /*#__PURE__*/React.createElement("select", {
+    className: "filter-select",
+    value: filters.state,
+    onChange: e => upd('state', e.target.value)
+  }, /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "All"), distinct.states.map(b => /*#__PURE__*/React.createElement("option", {
+    key: b
+  }, b)))), /*#__PURE__*/React.createElement("div", {
+    className: "filter-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "filter-label"
+  }, "Payment"), /*#__PURE__*/React.createElement("select", {
+    className: "filter-select",
+    value: filters.status,
+    onChange: e => upd('status', e.target.value)
+  }, /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "All"), distinct.statuses.map(b => /*#__PURE__*/React.createElement("option", {
+    key: b
+  }, b)))), /*#__PURE__*/React.createElement("div", {
+    className: "filter-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "filter-label"
+  }, "Invoice #"), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    className: "filter-input",
+    placeholder: "search\u2026",
+    value: filters.invoice,
+    onChange: e => upd('invoice', e.target.value)
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "filter-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "filter-label"
+  }, "Product Line"), /*#__PURE__*/React.createElement("select", {
+    className: "filter-select",
+    value: filters.productLine,
+    onChange: e => upd('productLine', e.target.value)
+  }, /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "All"), distinct.productLines.map(b => /*#__PURE__*/React.createElement("option", {
+    key: b
+  }, b)))), /*#__PURE__*/React.createElement("div", {
+    className: "filter-group",
+    style: {
+      justifyContent: 'flex-end'
+    }
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "filter-label",
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8,
+      cursor: 'pointer',
+      marginTop: 'auto',
+      paddingBottom: 9
+    }
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "checkbox",
+    checked: filters.excludeSamples,
+    onChange: e => upd('excludeSamples', e.target.checked),
+    style: {
+      accentColor: 'var(--accent)',
+      width: 14,
+      height: 14
+    }
+  }), "Exclude samples")), /*#__PURE__*/React.createElement("button", {
+    className: "filter-reset",
+    onClick: onReset
+  }, "Reset"));
 }
-
-function Kpi({ label, value, sub, accent }) {
-  return (
-    <div className={'kpi' + (accent ? ' kpi-accent' : '')}>
-      <div className="kpi-label">{label}</div>
-      <div className="kpi-value tabular">{value}</div>
-      {sub && <div className="kpi-sub">{sub}</div>}
-    </div>
-  );
+function Kpi({
+  label,
+  value,
+  sub,
+  accent
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: 'kpi' + (accent ? ' kpi-accent' : '')
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "kpi-label"
+  }, label), /*#__PURE__*/React.createElement("div", {
+    className: "kpi-value tabular"
+  }, value), sub && /*#__PURE__*/React.createElement("div", {
+    className: "kpi-sub"
+  }, sub));
 }
-
-function RankCard({ title, data }) {
-  return (
-    <div>
-      <div className="section-header">
-        <h2 className="section-title">{title.split(' ')[0]} <em>{title.split(' ').slice(1).join(' ')}</em></h2>
-        <span className="section-meta">top {data.length}</span>
-      </div>
-      <div className="card">
-        <RankList data={data} />
-      </div>
-    </div>
-  );
+function RankCard({
+  title,
+  data
+}) {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "section-header"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, title.split(' ')[0], " ", /*#__PURE__*/React.createElement("em", null, title.split(' ').slice(1).join(' '))), /*#__PURE__*/React.createElement("span", {
+    className: "section-meta"
+  }, "top ", data.length)), /*#__PURE__*/React.createElement("div", {
+    className: "card"
+  }, /*#__PURE__*/React.createElement(RankList, {
+    data: data
+  })));
 }
-
-function RankList({ data }) {
+function RankList({
+  data
+}) {
   const max = Math.max(...data.map(d => d.revenue), 1);
-  return (
-    <div className="rank-list">
-      {data.length === 0 && <div style={{ padding: 20, color: 'var(--text-faint)', textAlign: 'center', fontSize: 13 }}>No data</div>}
-      {data.map((d, i) => (
-        <div key={i} className="rank-row">
-          <div className="rank-num">{String(i + 1).padStart(2, '0')}</div>
-          <div className="rank-name" title={d.name}>{d.name}</div>
-          <div className="rank-value">{fmtMoneyFull(d.revenue)}</div>
-          <div className="rank-bar" style={{ width: `calc(${(d.revenue / max * 100).toFixed(1)}% - 80px)` }}></div>
-        </div>
-      ))}
-    </div>
-  );
+  return /*#__PURE__*/React.createElement("div", {
+    className: "rank-list"
+  }, data.length === 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: 20,
+      color: 'var(--text-faint)',
+      textAlign: 'center',
+      fontSize: 13
+    }
+  }, "No data"), data.map((d, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "rank-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "rank-num"
+  }, String(i + 1).padStart(2, '0')), /*#__PURE__*/React.createElement("div", {
+    className: "rank-name",
+    title: d.name
+  }, d.name), /*#__PURE__*/React.createElement("div", {
+    className: "rank-value"
+  }, fmtMoneyFull(d.revenue)), /*#__PURE__*/React.createElement("div", {
+    className: "rank-bar",
+    style: {
+      width: `calc(${(d.revenue / max * 100).toFixed(1)}% - 80px)`
+    }
+  }))));
 }
-
-function StatusPill({ status }) {
-  if (!status) return <span className="dim">—</span>;
-  const cls = status.toLowerCase().includes('complet') ? 'pill-completed'
-    : status.toLowerCase().includes('overdue') ? 'pill-overdue'
-    : 'pill-pending';
-  return <span className={'pill ' + cls}>{status}</span>;
+function StatusPill({
+  status
+}) {
+  if (!status) return /*#__PURE__*/React.createElement("span", {
+    className: "dim"
+  }, "\u2014");
+  const cls = status.toLowerCase().includes('complet') ? 'pill-completed' : status.toLowerCase().includes('overdue') ? 'pill-overdue' : 'pill-pending';
+  return /*#__PURE__*/React.createElement("span", {
+    className: 'pill ' + cls
+  }, status);
 }
 
 // --- Mount ------------------------------------------------------------------
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
 </script>
 
 <script>
-/* Fail-loud watchdog: if the React app hasn't mounted a few seconds after load
-   (e.g. a CDN was blocked and the babel script never ran), replace the blank
-   screen with a clear, actionable message instead of nothing. */
+/* Fail-loud watchdog (self-hosted build: libraries load from this repo root). */
 (function () {
   function diagnose() {
     var root = document.getElementById('root');
     if (!root || root.childElementCount > 0) return;
-    var libs = { React: typeof window.React, ReactDOM: typeof window.ReactDOM, Recharts: typeof window.Recharts, Babel: typeof window.Babel };
+    var libs = { React: typeof window.React, ReactDOM: typeof window.ReactDOM, Recharts: typeof window.Recharts };
     var missing = Object.keys(libs).filter(function (k) { return libs[k] === 'undefined'; });
     var why = missing.length
-      ? 'These libraries did not load: <b>' + missing.join(', ') + '</b>. That is almost always a blocked CDN \u2014 a work network / VPN firewall, or an ad- or script-blocking browser extension \u2014 not the dashboard itself.'
+      ? 'These library files did not load: <b>' + missing.join(', ') + '</b>. Make sure all the .js library files were uploaded into the same folder as dashboard.html.'
       : 'The libraries loaded but the app did not render. A hard refresh usually clears this.';
     root.innerHTML =
-      '<div style="max-width:640px;margin:80px auto;padding:28px;background:var(--bg-elev,#161a17);border:1px solid var(--border,#262c28);border-left:3px solid var(--warm,#e0a85a);border-radius:10px;color:var(--text,#e8ebe7);font-family:Inter,system-ui,sans-serif">'
+      '<div style="max-width:680px;margin:80px auto;padding:28px;background:var(--bg-elev,#161a17);border:1px solid var(--border,#262c28);border-left:3px solid var(--warm,#e0a85a);border-radius:10px;color:var(--text,#e8ebe7);font-family:Inter,system-ui,sans-serif">'
       + '<div style="font-family:Fraunces,serif;font-size:22px;font-style:italic;margin-bottom:10px">Dashboard didn\u2019t load</div>'
       + '<p style="color:var(--text-dim,#9aa39c);line-height:1.7;font-size:14px;margin:0 0 12px">' + why + '</p>'
-      + '<ul style="color:var(--text-dim,#9aa39c);line-height:1.85;font-size:13px;margin:0 0 16px 18px">'
-      + '<li>Hard refresh: <b>Ctrl/Cmd + Shift + R</b></li>'
-      + '<li>Try an <b>Incognito</b> window (extensions are disabled there)</li>'
-      + '<li>On a work network or VPN, <b>unpkg.com</b> and <b>jsdelivr.net</b> may be blocked</li>'
-      + '</ul>'
       + '<button onclick="location.reload()" style="background:var(--accent,#4dd4ff);border:none;color:var(--bg,#0a1220);font-weight:600;padding:9px 16px;border-radius:7px;cursor:pointer;font-family:JetBrains Mono,monospace;font-size:12px">Reload</button>'
       + '</div>';
   }

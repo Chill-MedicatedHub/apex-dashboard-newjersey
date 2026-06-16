@@ -10,10 +10,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script>window.React||document.write('<script crossorigin src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"><\/script>');</script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script>window.ReactDOM||document.write('<script crossorigin src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"><\/script>');</script>
 <script crossorigin src="https://unpkg.com/prop-types@15.8.1/prop-types.min.js"></script>
+<script>window.PropTypes||document.write('<script crossorigin src="https://cdn.jsdelivr.net/npm/prop-types@15.8.1/prop-types.min.js"><\/script>');</script>
 <script crossorigin src="https://cdn.jsdelivr.net/npm/recharts@2.12.7/umd/Recharts.min.js"></script>
+<script>window.Recharts||document.write('<script crossorigin src="https://unpkg.com/recharts@2.12.7/umd/Recharts.min.js"><\/script>');</script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script>window.Babel||document.write('<script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7/babel.min.js"><\/script>');</script>
 
 <style>
   :root {
@@ -1727,6 +1732,35 @@ function StatusPill({ status }) {
 
 // --- Mount ------------------------------------------------------------------
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+
+<script>
+/* Fail-loud watchdog: if the React app hasn't mounted a few seconds after load
+   (e.g. a CDN was blocked and the babel script never ran), replace the blank
+   screen with a clear, actionable message instead of nothing. */
+(function () {
+  function diagnose() {
+    var root = document.getElementById('root');
+    if (!root || root.childElementCount > 0) return;
+    var libs = { React: typeof window.React, ReactDOM: typeof window.ReactDOM, Recharts: typeof window.Recharts, Babel: typeof window.Babel };
+    var missing = Object.keys(libs).filter(function (k) { return libs[k] === 'undefined'; });
+    var why = missing.length
+      ? 'These libraries did not load: <b>' + missing.join(', ') + '</b>. That is almost always a blocked CDN \u2014 a work network / VPN firewall, or an ad- or script-blocking browser extension \u2014 not the dashboard itself.'
+      : 'The libraries loaded but the app did not render. A hard refresh usually clears this.';
+    root.innerHTML =
+      '<div style="max-width:640px;margin:80px auto;padding:28px;background:var(--bg-elev,#161a17);border:1px solid var(--border,#262c28);border-left:3px solid var(--warm,#e0a85a);border-radius:10px;color:var(--text,#e8ebe7);font-family:Inter,system-ui,sans-serif">'
+      + '<div style="font-family:Fraunces,serif;font-size:22px;font-style:italic;margin-bottom:10px">Dashboard didn\u2019t load</div>'
+      + '<p style="color:var(--text-dim,#9aa39c);line-height:1.7;font-size:14px;margin:0 0 12px">' + why + '</p>'
+      + '<ul style="color:var(--text-dim,#9aa39c);line-height:1.85;font-size:13px;margin:0 0 16px 18px">'
+      + '<li>Hard refresh: <b>Ctrl/Cmd + Shift + R</b></li>'
+      + '<li>Try an <b>Incognito</b> window (extensions are disabled there)</li>'
+      + '<li>On a work network or VPN, <b>unpkg.com</b> and <b>jsdelivr.net</b> may be blocked</li>'
+      + '</ul>'
+      + '<button onclick="location.reload()" style="background:var(--accent,#4dd4ff);border:none;color:var(--bg,#0a1220);font-weight:600;padding:9px 16px;border-radius:7px;cursor:pointer;font-family:JetBrains Mono,monospace;font-size:12px">Reload</button>'
+      + '</div>';
+  }
+  setTimeout(diagnose, 5000);
+})();
 </script>
 </body>
 </html>

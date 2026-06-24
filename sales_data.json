@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-06-24T20:47:35.131020+00:00",
+  "fetched_at": "2026-06-24T21:02:46.041946+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
@@ -358,8 +358,8 @@
       "discounts": 1,
       "additional_discounts": 0,
       "batch_cost_of_goods": "",
-      "order_status": "Shipped",
-      "payment_status": "Shipped",
+      "order_status": "Complete",
+      "payment_status": "Complete",
       "classification": "Adult Use",
       "sales_rep": "Peter Casey",
       "sales_reps": "Peter Casey",

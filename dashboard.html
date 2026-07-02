@@ -1184,7 +1184,7 @@ function Dashboard({
   const groupSum = (key, n = 10) => {
     const map = {};
     filtered.forEach(r => {
-      const k = r[key];
+      const k = Array.isArray(key) ? (key.map(f => r[f]).find(Boolean) || '') : r[key];
       if (!k) return;
       if (!map[k]) map[k] = {
         name: k,
@@ -1199,7 +1199,7 @@ function Dashboard({
   const topProducts = useMemo(() => groupSum('product_name'), [filtered]);
   const topBuyers = useMemo(() => groupSum('buyer_name'), [filtered]);
   const byRep = useMemo(() => groupSum('sales_rep', 20), [filtered]);
-  const byCategory = useMemo(() => groupSum('product_category'), [filtered]);
+  const byCategory = useMemo(() => groupSum(['product_category','product_type']), [filtered]);
   const byState = useMemo(() => groupSum('buyer_state', 15), [filtered]);
 
   // Per-product breakdown (matches the Apex product-line spreadsheet)

@@ -767,6 +767,7 @@ function InventoryTable({ list }) {
     e("td", { className: "dim font-mono", style: { fontSize: 11 } }, p.sku || "\u2014"),
     e("td", { className: "num dim" }, fmtNum(Math.round(p.sold))),
     e("td", { className: "num" }, e("strong", { style: { color: p.qty == null ? "var(--text-faint)" : p.qty <= 0 ? "var(--rose)" : "var(--accent)" } }, p.qty == null ? "\u2014" : fmtNum(Math.round(p.qty)))),
+    e("td", { className: "num" }, p.qty == null ? e("span", { style: { color: "var(--text-faint)" } }, "\u2014") : p.qty <= 0 ? badge("var(--rose)", "var(--rose)", "Out") : p.daysLeft == null ? badge("var(--text-faint)", "var(--border)", "No recent sales") : e("strong", { style: { color: p.daysLeft < 14 ? "var(--rose)" : p.daysLeft < 30 ? "var(--warm)" : "var(--text)" } }, Math.round(p.daysLeft) + (Math.round(p.daysLeft) === 1 ? " day" : " days"))),
     e("td", { className: "num dim" }, p.value ? fmtMoney(p.value) : "\u2014"),
     e("td", { className: "num dim" }, p.batches || "\u2014"),
     e("td", null, !p.listed ? badge("var(--text-faint)", "var(--border)", "Unlisted") : p.neverSold ? badge("var(--warm)", "var(--warm)", "Never sold") : e("span", { style: { color: "var(--text-faint)" } }, "\u2014"))
@@ -784,11 +785,70 @@ function InventoryTable({ list }) {
           e("th", null, "Product"), e("th", null, "Line"), e("th", null, "SKU"),
           e("th", { className: "num" }, "Units Sold"),
           e("th", { className: "num" }, "On Hand"),
+          e("th", { className: "num", title: "Estimated days until this SKU runs out, based on units sold in the last 30 days" }, "Days Left"),
           e("th", { className: "num" }, "Value"),
           e("th", { className: "num" }, "Batches"),
           e("th", null, "Status"))),
         e("tbody", null, rows))),
     pager);
+}
+
+// ── Sales by category ─────────────────────────────────────────────────
+// New Jersey sells a small, distinct product set, so each product name is its
+// own category. We group the filtered rows by product name, tidy the label (drop
+// the "Chill Medicated" brand prefix, dashes to spaces, collapse double spaces),
+// sort by net sales, and total it. Raw name kept in a hover tooltip.
+const catLabel = s => {
+  s = String(s || '').replace(/^\s*chill medicated\s*-?\s*/i, '');
+  s = s.replace(/\|/g, ' / ').replace(/-/g, ' ').replace(/\s+/g, ' ').trim();
+  return s || '(unnamed)';
+};
+function SalesByCategory({ rows }) {
+  const e = React.createElement;
+  const agg = React.useMemo(() => {
+    const map = {};
+    let tU = 0, tG = 0, tN = 0;
+    rows.forEach(r => {
+      const isS = !!r._isSample;
+      const key = (r.product_name || '(unnamed)') + (isS ? ' \u2014 SAMPLE' : '');
+      if (!map[key]) map[key] = { raw: r.product_name || '(unnamed)', label: catLabel(r.product_name) + (isS ? ' \u2014 SAMPLE' : ''), units: 0, gross: 0, net: 0 };
+      const units = parseFloat(r.inventory_quantity) || r._quantity || 0;
+      const net = r._revenue || 0;
+      const gross = net + (r._lineDiscount || 0);
+      map[key].units += units; map[key].gross += gross; map[key].net += net;
+      tU += units; tG += gross; tN += net;
+    });
+    const list = Object.keys(map).map(k => map[k]).sort((a, b) => b.net - a.net);
+    return { list: list, tU: tU, tG: tG, tN: tN };
+  }, [rows]);
+  const list = agg.list, tU = agg.tU, tG = agg.tG, tN = agg.tN;
+  const pct = v => tN > 0 ? (v / tN * 100).toFixed(1) + '%' : '\u2014';
+  const body = list.map((d, i) => e("tr", { key: i },
+    e("td", { title: d.raw }, d.label),
+    e("td", { className: "num dim" }, d.units ? fmtNum(Math.round(d.units)) : "\u2014"),
+    e("td", { className: "num dim" }, d.gross ? fmtMoney(d.gross) : "\u2014"),
+    e("td", { className: "num" }, d.net ? e("strong", null, fmtMoney(d.net)) : "\u2014"),
+    e("td", { className: "num dim" }, d.net ? pct(d.net) : "\u2014")));
+  body.push(e("tr", { key: '__totals', style: { borderTop: '2px solid var(--border)' } },
+    e("td", null, e("strong", null, "TOTALS")),
+    e("td", { className: "num" }, e("strong", null, fmtNum(Math.round(tU)))),
+    e("td", { className: "num" }, e("strong", null, fmtMoney(tG))),
+    e("td", { className: "num" }, e("strong", null, fmtMoney(tN))),
+    e("td", { className: "num" }, e("strong", null, tN > 0 ? "100%" : "\u2014"))));
+  return e("section", { className: "section" },
+    e("div", { className: "section-header" },
+      e("h2", { className: "section-title" }, "Sales by ", e("em", null, "category")),
+      e("span", { className: "section-meta" }, list.length + " products \u00b7 respects filters \u00b7 net sales")),
+    e("div", { className: "card", style: { padding: 0, overflow: 'hidden' } },
+      e("div", { style: { overflowX: 'auto' } },
+        e("table", { className: "data-table" },
+          e("thead", null, e("tr", null,
+            e("th", null, "Category"),
+            e("th", { className: "num" }, "Units"),
+            e("th", { className: "num" }, "Gross"),
+            e("th", { className: "num" }, "Net Sales"),
+            e("th", { className: "num" }, "Share"))),
+          e("tbody", null, body)))));
 }
 
 function MonthlyGrossBySku({ rows }) {
@@ -1323,12 +1383,34 @@ function Dashboard({
       if (r.product_sku) { soldBySku[r.product_sku] = (soldBySku[r.product_sku] || 0) + u; revBySku[r.product_sku] = (revBySku[r.product_sku] || 0) + rev; }
       if (r.product_name) { soldByName[r.product_name] = (soldByName[r.product_name] || 0) + u; revByName[r.product_name] = (revByName[r.product_name] || 0) + rev; }
     });
+    // Sales velocity for the stock forecast: physical units sold in the trailing
+    // 30 days, measured from the most recent order date in the data (not "today"),
+    // so a lagging scraper doesn't make everything look like it stopped selling.
+    const WIN = 30;
+    let maxT = 0;
+    normalized.forEach(r => { if (r._date && r._date.getTime() > maxT) maxT = r._date.getTime(); });
+    const winStart = maxT ? maxT - WIN * 86400000 : 0;
+    const recentBySku = {}, recentByName = {};
+    normalized.forEach(r => {
+      if (!r._date || r._date.getTime() < winStart) return;
+      const u = parseFloat(r.inventory_quantity) || r._quantity || 0;
+      if (r.product_sku) recentBySku[r.product_sku] = (recentBySku[r.product_sku] || 0) + u;
+      if (r.product_name) recentByName[r.product_name] = (recentByName[r.product_name] || 0) + u;
+    });
     const cat = Array.isArray(data.inventory) ? data.inventory : [];
     const list = cat.map(p => {
       const sold = p.sku && soldBySku[p.sku] != null ? soldBySku[p.sku] : soldByName[p.name] || 0;
       const revT = p.sku && revBySku[p.sku] != null ? revBySku[p.sku] : revByName[p.name] || 0;
       const unitPrice = sold > 0 ? revT / sold : 0;
       const qty = p.qty != null ? p.qty : (p.available != null ? p.available : (p.inventory != null ? p.inventory : null));
+      const recent = p.sku && recentBySku[p.sku] != null ? recentBySku[p.sku] : recentByName[p.name] || 0;
+      const velocity = recent / WIN;
+      let daysLeft = null;
+      if (qty != null) {
+        if (qty <= 0) daysLeft = 0;
+        else if (velocity > 0) daysLeft = qty / velocity;
+        else daysLeft = null;
+      }
       return {
         name: p.name || '—',
         line: p.line || '—',
@@ -1339,7 +1421,9 @@ function Dashboard({
         sold,
         neverSold: sold <= 0,
         unitPrice,
-        value: qty != null ? qty * unitPrice : 0
+        value: qty != null ? qty * unitPrice : 0,
+        velocity,
+        daysLeft
       };
     }).sort((a, b) => (b.qty || 0) - (a.qty || 0));
     const withQty = list.filter(p => p.qty != null);
@@ -1347,13 +1431,15 @@ function Dashboard({
     const listedN = list.filter(p => p.listed).length;
     const out = withQty.filter(p => p.qty <= 0).length;
     const onHandValue = list.reduce((s, p) => s + (p.value || 0), 0);
+    const lowStock = list.filter(p => p.daysLeft != null && p.daysLeft > 0 && p.daysLeft < 14).length;
     return {
       list,
       onHandTotal,
       onHandValue,
       listedN,
       skus: list.length,
-      out
+      out,
+      lowStock
     };
   }, [normalized, data.inventory]);
   const resetFilters = () => setFilters({
@@ -1620,7 +1706,7 @@ function Dashboard({
     label: "Credits Applied",
     value: fmtMoney(kpis.credits),
     sub: kpis.creditCount ? `${fmtNum(kpis.creditOrders)} invoice${kpis.creditOrders === 1 ? '' : 's'} · applied as payment` : 'none in current view'
-  })), /*#__PURE__*/React.createElement(RevenueOverTime, { rows: filtered }), /*#__PURE__*/React.createElement(MonthlyGrossBySku, { rows: filtered }), /*#__PURE__*/React.createElement("section", {
+  })), /*#__PURE__*/React.createElement(RevenueOverTime, { rows: filtered }), /*#__PURE__*/React.createElement(MonthlyGrossBySku, { rows: filtered }), /*#__PURE__*/React.createElement(SalesByCategory, { rows: filtered }), /*#__PURE__*/React.createElement("section", {
     className: "section"
   }, /*#__PURE__*/React.createElement("div", {
     className: "section-header"
@@ -2161,12 +2247,13 @@ function FilterBar({
     e("div", { className: "filter-group", style: { minWidth: 'auto' } },
       e("label", { className: "filter-label" }, "Quick range"),
       e("div", { style: { display: 'flex', gap: 6, flexWrap: 'wrap' } },
-        [['Today', 0], ['Last wk', 7], ['30 days', 30], ['90 days', 90], ['YTD', 'ytd']].map(([lbl, d]) =>
+        [['Today', 0], ['Last 7 days', 7], ['MTD', 'mtd'], ['30 days', 30], ['90 days', 90], ['YTD', 'ytd']].map(([lbl, d]) =>
           e("button", { key: lbl, className: "date-preset", onClick: () => {
             const t = new Date();
             const fmt = x => `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, '0')}-${String(x.getDate()).padStart(2, '0')}`;
             let from;
             if (d === 'ytd') { from = new Date(t.getFullYear(), 0, 1); }
+            else if (d === 'mtd') { from = new Date(t.getFullYear(), t.getMonth(), 1); }
             else { from = new Date(t); from.setDate(from.getDate() - d); }
             setFilters(f => ({ ...f, from: fmt(from), to: fmt(t) }));
           } }, lbl)))),

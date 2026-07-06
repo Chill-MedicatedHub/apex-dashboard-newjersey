@@ -2127,5 +2127,62 @@ ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.c
   setTimeout(diagnose, 5000);
 })();
 </script>
+
+<style id="dash-nav-styles">
+  #dash-nav{position:sticky;top:0;z-index:60;background:rgba(255,255,255,0.82);-webkit-backdrop-filter:saturate(1.3) blur(10px);backdrop-filter:saturate(1.3) blur(10px);border-bottom:1px solid var(--border);}
+  #dash-nav .dn-inner{max-width:1600px;margin:0 auto;padding:9px clamp(22px,5vw,44px);display:flex;align-items:center;justify-content:space-between;gap:16px;}
+  .dn-btn{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-dim);background:#ffffff;border:1px solid var(--border);border-radius:9px;padding:8px 13px;cursor:pointer;text-decoration:none;transition:all .15s;}
+  .dn-btn:hover{color:var(--accent);border-color:var(--brand-cyan);background:var(--bg-elev-2);}
+  .dn-btn svg{width:14px;height:14px;}
+  .dn-jump-wrap{position:relative;}
+  .dn-menu{position:absolute;top:calc(100% + 8px);right:0;min-width:260px;max-height:62vh;overflow:auto;background:var(--bg-elev);border:1px solid var(--border);border-radius:12px;box-shadow:0 14px 36px rgba(20,35,60,0.18);padding:6px;display:none;}
+  .dn-menu.open{display:block;}
+  .dn-item{display:flex;align-items:center;gap:10px;width:100%;text-align:left;font-family:'Inter',sans-serif;font-size:13px;color:var(--text);background:transparent;border:none;border-radius:8px;padding:9px 11px;cursor:pointer;transition:background .12s,color .12s;}
+  .dn-item:hover{background:var(--bg-elev-2);color:var(--accent);}
+  .dn-item .dn-idx{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-faint);min-width:18px;text-align:right;}
+  @media print{#dash-nav{display:none;}}
+</style>
+<script>
+(function(){
+  /* ===== EDIT THIS: URL of the 4-card landing page ("Back to main page" target) ===== */
+  var HUB_URL = 'https://sales-intelligence.chill-hub.workers.dev/';
+  if (document.getElementById('dash-nav')) return;
+  var backSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>';
+  var caret = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>';
+  var nav = document.createElement('div');
+  nav.id = 'dash-nav';
+  nav.innerHTML = '<div class="dn-inner">'
+    + '<a class="dn-btn" href="' + HUB_URL + '">' + backSvg + 'Back to main page</a>'
+    + '<div class="dn-jump-wrap"><button class="dn-btn" id="dn-jump" aria-haspopup="true">Jump to section ' + caret + '</button>'
+    + '<div class="dn-menu" id="dn-menu"></div></div>'
+    + '</div>';
+  document.body.insertBefore(nav, document.body.firstChild);
+  var btn = nav.querySelector('#dn-jump'), menu = nav.querySelector('#dn-menu');
+  function navH(){ return nav.getBoundingClientRect().height || 52; }
+  function build(){
+    menu.innerHTML = '';
+    var items = [{ label: 'Overview (top)', el: null }];
+    document.querySelectorAll('.app .section-title').forEach(function(t){
+      items.push({ label: t.textContent.trim(), el: t });
+    });
+    items.forEach(function(it, i){
+      var b = document.createElement('button');
+      b.className = 'dn-item';
+      b.innerHTML = '<span class="dn-idx">' + (i === 0 ? '&bull;' : String(i).padStart(2,'0')) + '</span><span>' + it.label + '</span>';
+      b.addEventListener('click', function(){
+        close();
+        var y = it.el ? (it.el.getBoundingClientRect().top + window.pageYOffset - navH() - 16) : 0;
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+      });
+      menu.appendChild(b);
+    });
+  }
+  function open(){ build(); menu.classList.add('open'); }
+  function close(){ menu.classList.remove('open'); }
+  btn.addEventListener('click', function(e){ e.stopPropagation(); menu.classList.contains('open') ? close() : open(); });
+  document.addEventListener('click', function(e){ if (!nav.contains(e.target)) close(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+})();
+</script>
 </body>
 </html>

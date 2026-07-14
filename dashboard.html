@@ -65,6 +65,60 @@
   .filter-reset:hover { color: var(--text); border-color: var(--text-dim); }
   .date-preset { background: #ffffff; border: 1px solid var(--border); color: var(--text-dim); padding: 8px 11px; font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; border-radius: 8px; cursor: pointer; transition: all .15s; }
   .date-preset:hover { color: var(--accent); border-color: var(--brand-cyan); background: var(--bg-elev-2); }
+  .date-preset.active { color: #ffffff; background: var(--accent); border-color: var(--accent); font-weight: 700; }
+  .date-preset.active:hover { color: #ffffff; background: var(--brand-cyan); }
+
+  /* Accounts Receivable layout — inherits the default (Sales) dashboard theme */
+  .ar-theme .kpi { min-height: 118px; }
+  .ar-theme .kpi-grid { grid-template-columns: repeat(5, 1fr); }
+
+  /* View tabs (Sales / Accounts Receivable) */
+  .view-tabs-wrap { max-width: 1600px; margin: 0 auto; padding: 28px 44px 0; }
+  .view-tabs { display: flex; gap: 8px; border-bottom: 1px solid var(--border); }
+  .view-tab {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em;
+    padding: 10px 20px; border: 1px solid var(--border); border-bottom: none;
+    border-radius: 10px 10px 0 0; background: var(--bg-elev-2); color: var(--text-dim);
+    cursor: pointer; margin-bottom: -1px; transition: all .15s;
+  }
+  .view-tab:hover { color: var(--accent); }
+  .view-tab.active { background: var(--bg-elev); color: var(--accent); border-color: var(--border); border-bottom: 1px solid var(--bg-elev); font-weight: 600; }
+  @media (max-width: 1100px) { .view-tabs-wrap { padding: 20px 22px 0; } }
+
+  /* Multi-select dropdown (buyer filter) */
+  .ms-wrap { position: relative; }
+  .ms-toggle {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%;
+    background: #ffffff; border: 1px solid var(--border); color: var(--text);
+    padding: 9px 11px; font-family: 'Inter', sans-serif; font-size: 13px;
+    border-radius: 9px; cursor: pointer; text-align: left; transition: border-color .15s, box-shadow .15s;
+  }
+  .ms-toggle:hover { border-color: var(--brand-cyan); }
+  .ms-toggle.active { border-color: var(--brand-cyan); box-shadow: 0 0 0 3px rgba(14,177,232,0.12); }
+  .ms-toggle .ms-caret { color: var(--text-faint); font-size: 10px; }
+  .ms-count { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #ffffff; background: var(--accent); border-radius: 999px; padding: 1px 7px; }
+  .ms-panel {
+    position: absolute; top: calc(100% + 6px); left: 0; z-index: 40; width: 300px; max-width: 80vw;
+    background: var(--bg-elev); border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: 0 14px 36px rgba(20,35,60,0.18); padding: 8px; display: none;
+  }
+  .ms-panel.open { display: block; }
+  .ms-search {
+    width: 100%; box-sizing: border-box; background: #ffffff; border: 1px solid var(--border);
+    color: var(--text); padding: 8px 10px; font-family: 'Inter', sans-serif; font-size: 13px;
+    border-radius: 8px; outline: none; margin-bottom: 6px;
+  }
+  .ms-list { max-height: 240px; overflow-y: auto; }
+  .ms-opt {
+    display: flex; align-items: center; gap: 9px; padding: 7px 8px; border-radius: 7px;
+    font-size: 13px; color: var(--text); cursor: pointer;
+  }
+  .ms-opt:hover { background: var(--bg-elev-2); }
+  .ms-opt input { accent-color: var(--accent); width: 14px; height: 14px; flex: none; }
+  .ms-opt span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ms-actions { display: flex; justify-content: space-between; align-items: center; padding: 6px 4px 2px; border-top: 1px solid var(--border-soft); margin-top: 6px; }
+  .ms-clear { background: transparent; border: none; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; }
+  .ms-clear:hover { color: var(--accent); }
   .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 1px 2px rgba(20,35,60,0.04), 0 10px 30px rgba(20,35,60,0.06); }
   .kpi { background: var(--bg-elev); padding: 22px 22px; display: flex; flex-direction: column; gap: 6px; position: relative; transition: background 0.18s; }
   .kpi:hover { background: var(--bg-elev-2); }
@@ -222,6 +276,10 @@ const fmtMoneyFull = n => '$' + (n || 0).toLocaleString(undefined, {
   maximumFractionDigits: 2
 });
 const fmtNum = n => (n || 0).toLocaleString();
+const buyerBusinessName = raw => {
+  const s = String(raw == null ? '' : raw).trim();
+  return s || '—';
+};
 /* ---- Downloadable sales report (always reflects the current dashboard filters) ---- */
 const __esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const __m2 = n => '$' + (n || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -236,7 +294,10 @@ const __activeFilters = f => {
   if (f.productLine) parts.push('Line ' + f.productLine);
   if (f.status) parts.push('Payment ' + f.status);
   if (f.rep) parts.push('Rep ' + f.rep);
-  if (f.buyer) parts.push('Buyer ' + f.buyer);
+  if (Array.isArray(f.buyer) ? f.buyer.length : f.buyer) {
+    const bl = Array.isArray(f.buyer) ? f.buyer.map(buyerBusinessName) : [buyerBusinessName(f.buyer)];
+    parts.push((bl.length > 1 ? 'Buyers ' : 'Buyer ') + bl.join(', '));
+  }
   if (f.invoice) parts.push('Invoice ' + f.invoice);
   if (f.excludeSamples) parts.push('Samples excluded');
   return parts.length ? parts.join('  \u00b7  ') : 'All data (no filters applied)';
@@ -514,6 +575,10 @@ function InventoryTable({ list }) {
     e("td", { className: "num" }, p.qty == null ? e("span", { style: { color: "var(--text-faint)" } }, "\u2014") : p.qty <= 0 ? badge("var(--rose)", "var(--rose)", "Out") : p.daysLeft == null ? badge("var(--text-faint)", "var(--border)", "No recent sales") : e("strong", { style: { color: p.daysLeft < 14 ? "var(--rose)" : p.daysLeft < 30 ? "var(--warm)" : "var(--text)" } }, Math.round(p.daysLeft) + (Math.round(p.daysLeft) === 1 ? " day" : " days"))),
     e("td", { className: "num dim" }, p.value ? fmtMoney(p.value) : "\u2014"),
     e("td", { className: "num dim" }, p.batches || "\u2014"),
+    e("td", { style: { minWidth: 240, maxWidth: 340, verticalAlign: "top" } }, p.batchNames && p.batchNames.length
+      ? e("div", { style: { display: "flex", flexDirection: "column", gap: 3 } },
+          p.batchNames.map((b, bi) => e("span", { key: bi, title: b, style: { fontFamily: "JetBrains Mono", fontSize: 10, lineHeight: 1.35, color: "var(--text-dim)", wordBreak: "break-all", overflowWrap: "anywhere" } }, b)))
+      : e("span", { style: { color: "var(--text-faint)" } }, "\u2014")),
     e("td", null, !p.listed ? badge("var(--text-faint)", "var(--border)", "Unlisted") : p.neverSold ? badge("var(--warm)", "var(--warm)", "Never sold") : e("span", { style: { color: "var(--text-faint)" } }, "\u2014"))
   ));
   const navBtn = (label, disabled, onClick) => e("button", { className: "date-preset", disabled, onClick, style: { opacity: disabled ? 0.35 : 1, cursor: disabled ? "default" : "pointer" } }, label);
@@ -532,6 +597,7 @@ function InventoryTable({ list }) {
           e("th", { className: "num", title: "Estimated days until this SKU runs out, based on units sold in the last 30 days" }, "Days Left"),
           e("th", { className: "num" }, "Value"),
           e("th", { className: "num" }, "Batches"),
+          e("th", null, "Batch Names"),
           e("th", null, "Status"))),
         e("tbody", null, rows))),
     pager);
@@ -549,6 +615,7 @@ const catLabel = s => {
 };
 function SalesByCategory({ rows }) {
   const e = React.createElement;
+  const [sortBy, setSortBy] = React.useState('net');
   const agg = React.useMemo(() => {
     const map = {};
     let tU = 0, tG = 0, tN = 0;
@@ -567,7 +634,8 @@ function SalesByCategory({ rows }) {
   }, [rows]);
   const list = agg.list, tU = agg.tU, tG = agg.tG, tN = agg.tN;
   const pct = v => tN > 0 ? (v / tN * 100).toFixed(1) + '%' : '\u2014';
-  const body = list.map((d, i) => e("tr", { key: i },
+  const sorted = sortBy === 'units' ? list.slice().sort((a, b) => (b.units || 0) - (a.units || 0)) : list.slice().sort((a, b) => (b.net || 0) - (a.net || 0));
+  const body = sorted.map((d, i) => e("tr", { key: i },
     e("td", { title: d.raw }, d.label),
     e("td", { className: "num dim" }, d.units ? fmtNum(Math.round(d.units)) : "\u2014"),
     e("td", { className: "num dim" }, d.gross ? fmtMoney(d.gross) : "\u2014"),
@@ -582,7 +650,12 @@ function SalesByCategory({ rows }) {
   return e("section", { className: "section" },
     e("div", { className: "section-header" },
       e("h2", { className: "section-title" }, "Sales by ", e("em", null, "category")),
-      e("span", { className: "section-meta" }, list.length + " products \u00b7 respects filters \u00b7 net sales")),
+      e("div", { style: { display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' } },
+        e("label", { className: "filter-label", style: { textTransform: 'uppercase' } }, "Sort"),
+        e("select", { className: "filter-select", value: sortBy, onChange: ev => setSortBy(ev.target.value), style: { minWidth: 150, height: 26, fontSize: 12, padding: '0 8px' } },
+          e("option", { value: "net" }, "Highest sales"),
+          e("option", { value: "units" }, "Most units sold")),
+        e("span", { className: "section-meta" }, list.length + " products \u00b7 respects filters"))),
     e("div", { className: "card", style: { padding: 0, overflow: 'hidden' } },
       e("div", { style: { overflowX: 'auto' } },
         e("table", { className: "data-table" },
@@ -600,6 +673,8 @@ function MonthlyGrossBySku({ rows }) {
   const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   const [yr, setYr] = React.useState('all');
   const [mo, setMo] = React.useState('all');
+  // Metric toggle: 'gross' = gross dollars, 'units' = physical units sold, per SKU/month
+  const [metric, setMetric] = React.useState('gross');
   const base = React.useMemo(() => {
     const monthsSet = new Set();
     const prods = {};
@@ -608,9 +683,12 @@ function MonthlyGrossBySku({ rows }) {
       const ym = r._date.getFullYear() + '-' + String(r._date.getMonth() + 1).padStart(2, '0');
       monthsSet.add(ym);
       const key = r.product_name || '(unnamed)';
-      if (!prods[key]) prods[key] = { name: key, cells: {} };
+      if (!prods[key]) prods[key] = { name: key, sku: r.product_sku || '', cells: {} };
       const gross = (r._revenue || 0) + (r._lineDiscount || 0);
-      prods[key].cells[ym] = (prods[key].cells[ym] || 0) + gross;
+      const units = r._quantity || 0;
+      const c = prods[key].cells[ym] || (prods[key].cells[ym] = { gross: 0, units: 0 });
+      c.gross += gross; c.units += units;
+      if (!prods[key].sku && r.product_sku) prods[key].sku = r.product_sku;
     });
     const allMonths = Array.from(monthsSet).sort();
     const years = Array.from(new Set(allMonths.map(m => m.split('-')[0]))).sort();
@@ -623,28 +701,38 @@ function MonthlyGrossBySku({ rows }) {
       if (mo !== 'all' && p[1] !== mo) return false;
       return true;
     });
+    const val = c => c ? (metric === 'units' ? c.units : c.gross) : 0;
     const list = base.prods.map(p => {
       let total = 0;
-      months.forEach(ym => { total += p.cells[ym] || 0; });
-      return { name: p.name, cells: p.cells, total: total };
+      months.forEach(ym => { total += val(p.cells[ym]); });
+      return { name: p.name, sku: p.sku, cells: p.cells, total: total };
     }).filter(p => p.total !== 0).sort((a, b) => b.total - a.total);
     const colTotals = {}; let grand = 0;
-    months.forEach(ym => { colTotals[ym] = list.reduce((s, p) => s + (p.cells[ym] || 0), 0); grand += colTotals[ym]; });
+    months.forEach(ym => { colTotals[ym] = list.reduce((s, p) => s + val(p.cells[ym]), 0); grand += colTotals[ym]; });
     return { months: months, list: list, colTotals: colTotals, grand: grand };
-  }, [base, yr, mo]);
+  }, [base, yr, mo, metric]);
   const months = view.months, list = view.list, colTotals = view.colTotals, grand = view.grand;
+  const isUnits = metric === 'units';
+  const fmtVal = v => isUnits ? fmtNum(Math.round(v)) : fmtMoney(v);
+  const cellVal = c => isUnits ? (c ? c.units : 0) : (c ? c.gross : 0);
   const stick = { position: 'sticky', left: 0, background: 'var(--bg-elev)', zIndex: 1 };
   const mlabel = ym => { const p = ym.split('-'); return MONTHS[parseInt(p[1], 10) - 1] + " '" + p[0].slice(2); };
-  const cell = v => v ? fmtMoney(v) : e("span", { className: "dim" }, "\u2014");
+  const cell = c => cellVal(c) ? fmtVal(cellVal(c)) : e("span", { className: "dim" }, "\u2014");
   const sel = (val, set, opts) => e("select", { className: "filter-select", value: val, onChange: ev => set(ev.target.value), style: { minWidth: 74, height: 26, fontSize: 12, padding: '0 8px' } },
     opts.map(o => e("option", { key: o.v, value: o.v }, o.l)));
+  const mbtn = (id, label) => e('button', { key: id, onClick: () => setMetric(id),
+    style: { padding: '4px 12px', fontSize: 11, fontFamily: 'JetBrains Mono', cursor: 'pointer', borderRadius: 4,
+      border: '1px solid ' + (metric === id ? '#0EB1E8' : '#e3e9f1'),
+      background: metric === id ? 'rgba(14,177,232,0.12)' : '#ffffff',
+      color: metric === id ? '#0E86C4' : '#566274' } }, label);
   return e("section", { className: "section" },
     e("div", { className: "section-header" },
-      e("h2", { className: "section-title" }, "Monthly gross sales ", e("em", null, "by SKU")),
+      e("h2", { className: "section-title" }, "Monthly ", e("em", null, isUnits ? "units by SKU" : "gross sales by SKU")),
       e("div", { style: { display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' } },
+        e("div", { style: { display: 'flex', gap: 6 } }, mbtn('gross', 'Gross $'), mbtn('units', 'Units')),
         sel(yr, setYr, [{ v: 'all', l: 'All years' }].concat(base.years.map(y => ({ v: y, l: y })))),
         sel(mo, setMo, [{ v: 'all', l: 'All months' }].concat(MONTHS.map((m, i) => ({ v: String(i + 1).padStart(2, '0'), l: m })))),
-        e("span", { className: "section-meta" }, months.length ? fmtNum(list.length) + " products \u00b7 " + months.length + " mo \u00b7 gross" : ""))),
+        e("span", { className: "section-meta" }, months.length ? fmtNum(list.length) + " products \u00b7 " + months.length + " mo \u00b7 " + (isUnits ? "units" : "gross") : ""))),
     months.length === 0
       ? e("div", { className: "card" }, e("div", { style: { color: 'var(--text-faint)', fontSize: 13 } }, "No rows match the current filters."))
       : e("div", { className: "card", style: { padding: 0, overflow: 'hidden' } },
@@ -657,24 +745,298 @@ function MonthlyGrossBySku({ rows }) {
                   e("th", { className: "num" }, "Total"))),
               e("tbody", null,
                 list.slice(0, 100).map((p, i) => e("tr", { key: i },
-                  e("td", { style: stick }, p.name),
+                  e("td", { style: stick, title: p.sku ? 'SKU: ' + p.sku : '' }, p.name),
                   months.map(ym => e("td", { key: ym, className: "num" }, cell(p.cells[ym]))),
-                  e("td", { className: "num" }, e("strong", null, fmtMoney(p.total))))),
+                  e("td", { className: "num" }, e("strong", null, fmtVal(p.total))))),
                 e("tr", { style: { background: 'var(--bg)' } },
                   e("td", { style: Object.assign({}, stick, { background: 'var(--bg)', fontWeight: 700 }) }, "All products"),
-                  months.map(ym => e("td", { key: ym, className: "num" }, e("strong", null, fmtMoney(colTotals[ym])))),
-                  e("td", { className: "num" }, e("strong", null, fmtMoney(grand))))))),
-          list.length > 100 ? e("div", { style: { padding: '8px 14px', color: 'var(--text-faint)', fontSize: 12 } }, "Showing top 100 of " + fmtNum(list.length) + " products by total gross") : null));
+                  months.map(ym => e("td", { key: ym, className: "num" }, e("strong", null, fmtVal(colTotals[ym])))),
+                  e("td", { className: "num" }, e("strong", null, fmtVal(grand))))))),
+          list.length > 100 ? e("div", { style: { padding: '8px 14px', color: 'var(--text-faint)', fontSize: 12 } }, "Showing top 100 of " + fmtNum(list.length) + " products by total " + (isUnits ? "units" : "gross")) : null));
+}
+
+function MultiSelect({ options, selected, onChange, labelFn, placeholder }) {
+  const e = React.createElement;
+  const [open, setOpen] = React.useState(false);
+  const [q, setQ] = React.useState('');
+  const ref = React.useRef(null);
+  const label = labelFn || (x => x);
+  React.useEffect(() => {
+    const onDoc = ev => { if (ref.current && !ref.current.contains(ev.target)) setOpen(false); };
+    document.addEventListener('mousedown', onDoc);
+    return () => document.removeEventListener('mousedown', onDoc);
+  }, []);
+  const sel = Array.isArray(selected) ? selected : (selected ? [selected] : []);
+  const toggle = val => {
+    const next = sel.includes(val) ? sel.filter(x => x !== val) : sel.concat([val]);
+    onChange(next);
+  };
+  const ql = q.trim().toLowerCase();
+  const shown = ql ? options.filter(o => label(o).toLowerCase().includes(ql) || String(o).toLowerCase().includes(ql)) : options;
+  const summary = sel.length === 0 ? (placeholder || 'All') : sel.length === 1 ? label(sel[0]) : sel.length + ' selected';
+  return e("div", { className: "ms-wrap", ref: ref },
+    e("button", { type: "button", className: "ms-toggle" + (open || sel.length ? " active" : ""), onClick: () => setOpen(o => !o) },
+      e("span", { style: { overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' } }, summary),
+      sel.length > 1 ? e("span", { className: "ms-count" }, sel.length) : e("span", { className: "ms-caret" }, "▾")),
+    e("div", { className: "ms-panel" + (open ? " open" : "") },
+      e("input", { className: "ms-search", type: "text", placeholder: "search…", value: q, onChange: ev => setQ(ev.target.value) }),
+      e("div", { className: "ms-list" },
+        shown.length === 0 ? e("div", { style: { padding: 10, color: 'var(--text-faint)', fontSize: 12 } }, "No matches")
+          : shown.map(o => e("label", { key: o, className: "ms-opt" },
+              e("input", { type: "checkbox", checked: sel.includes(o), onChange: () => toggle(o) }),
+              e("span", { title: o }, label(o))))),
+      e("div", { className: "ms-actions" },
+        e("span", { style: { fontFamily: "'JetBrains Mono',monospace", fontSize: 10, color: 'var(--text-faint)' } }, sel.length + " of " + options.length),
+        e("button", { type: "button", className: "ms-clear", onClick: () => { onChange([]); } }, "Clear"))));
+}
+function ViewTabs({ tab, setTab }) {
+  const e = React.createElement;
+  const mk = (id, label) => e('button', {
+    key: id, onClick: () => setTab(id),
+    className: 'view-tab' + (tab === id ? ' active' : '')
+  }, label);
+  return e('div', { className: 'view-tabs-wrap' },
+    e('div', { className: 'view-tabs' }, mk('sales', 'Sales'), mk('ar', 'Accounts Receivable')));
+}
+function AccountsReceivable({ data }) {
+  const e = React.createElement;
+  // AR uses current Apex data only (not the 2024 historical backfill).
+  const rows = data._liveRows || data.rows || [];
+  const AGE = [
+    { key: 'current', label: 'Current', color: '#2e9e57' },
+    { key: 'b3160', label: '31–60', color: '#caa11e' },
+    { key: 'b6190', label: '61–90', color: '#e07b2a' },
+    { key: 'b91', label: '91+', color: '#d6433f' }
+  ];
+  const bucketOf = days => days <= 30 ? 'current' : days <= 60 ? 'b3160' : days <= 90 ? 'b6190' : 'b91';
+  const bucketLabel = k => (AGE.find(a => a.key === k) || {}).label || k;
+  const bucketColor = k => (AGE.find(a => a.key === k) || {}).color || 'var(--text-dim)';
+
+  const [buyerSel, setBuyerSel] = React.useState([]);
+  const [repSel, setRepSel] = React.useState('');
+  const [bucketSel, setBucketSel] = React.useState('all');
+  const [q, setQ] = React.useState('');
+
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const fmtD = d => d ? ((d.getMonth() + 1) + '/' + String(d.getDate()).padStart(2, '0') + '/' + d.getFullYear()) : '—';
+  const repOf = r => (Array.isArray(r.sales_reps_display) && r.sales_reps_display.filter(Boolean).join(', ')) || r.sales_reps || r.distributor_name || '—';
+
+  const invoices = React.useMemo(() => {
+    const map = {};
+    rows.forEach(r => {
+      const stRaw = r.payment_status || '';
+      const st = String(stRaw).toLowerCase().trim();
+      // Open receivable = not paid. Statuses vary by market (Unpaid/Partial/Overdue,
+      // and some markets store them lowercase), so match case-insensitively.
+      if (!({ unpaid:1, partial:1, 'partially paid':1, overdue:1, 'past due':1, 'past-due':1 })[st]) return;
+      const id = r.order_number || r.order_id || r.order;
+      if (!id) return;
+      if (!map[id]) {
+        map[id] = {
+          invoice: r.order_number || r.order_id || ('#' + r.order),
+          buyer: r.buyer_name || '—',
+          rep: repOf(r),
+          status: stRaw,
+          orderDate: parseDate(r.order_date_localized_raw || r.order_date_utc_raw || r.order_date_localized || r.order_date_utc || r.order_date_raw || r.order_date),
+          dueDate: parseDate(r.due_date_raw || r.due_date),
+          amount: 0,
+          credit: parsePaymentsForCredits(r.payment_dates || r.payments || '').total || 0
+        };
+      }
+      // Revenue schema varies by market: line-level (line_total_raw cents / line_total) is
+      // summed; order-level (order_total dollars, or order_price cents) is taken once per order.
+      const lineRev = typeof r.line_total_raw === 'number' ? r.line_total_raw / 100 : parseMoney(r.line_total || r.computed_sale_price);
+      if (lineRev) { map[id].amount += lineRev; map[id]._hasLine = true; }
+      else if (!map[id]._hasLine) {
+        map[id].orderRev = typeof r.order_total === 'number' ? r.order_total : (typeof r.order_price === 'number' ? r.order_price / 100 : 0);
+      }
+    });
+    return Object.values(map).map(o => {
+      const due = o.dueDate || (o.orderDate ? new Date(o.orderDate.getTime() + 30 * 86400000) : null);
+      const base = o._hasLine ? o.amount : (o.orderRev || 0);
+      const net = Math.max(0, base - (o.credit || 0));
+      const daysPastDue = due ? Math.floor((today - due) / 86400000) : 0;
+      return Object.assign({}, o, { due, net, daysPastDue, bucket: bucketOf(daysPastDue) });
+    }).filter(o => o.net > 0);
+  }, [rows]);
+
+  const buyerOptions = React.useMemo(() => [...new Set(invoices.map(o => o.buyer))].sort(), [invoices]);
+  const repOptions = React.useMemo(() => [...new Set(invoices.map(o => o.rep).filter(x => x && x !== '—'))].sort(), [invoices]);
+
+  const shown = React.useMemo(() => invoices.filter(o => {
+    if (buyerSel.length && !buyerSel.includes(o.buyer)) return false;
+    if (repSel && o.rep !== repSel) return false;
+    if (bucketSel !== 'all' && o.bucket !== bucketSel) return false;
+    if (q) { const s = (o.invoice + ' ' + o.buyer + ' ' + o.rep).toLowerCase(); if (!s.includes(q.toLowerCase())) return false; }
+    return true;
+  }), [invoices, buyerSel, repSel, bucketSel, q]);
+
+  const tot = React.useMemo(() => {
+    const agg = { total: 0, credit: 0, overdue: 0, current: 0, b3160: 0, b6190: 0, b91: 0, count: shown.length };
+    const buyers = new Set();
+    shown.forEach(o => {
+      agg.total += o.net; agg.credit += o.credit || 0;
+      if (o.daysPastDue > 30) agg.overdue += o.net;
+      agg[o.bucket] += o.net; buyers.add(o.buyer);
+    });
+    agg.buyers = buyers.size;
+    return agg;
+  }, [shown]);
+  const pctOf = v => tot.total > 0 ? (v / tot.total * 100).toFixed(1) + '%' : '—';
+
+  const byBuyer = React.useMemo(() => {
+    const m = {};
+    shown.forEach(o => {
+      if (!m[o.buyer]) m[o.buyer] = { buyer: o.buyer, total: 0, current: 0, b3160: 0, b6190: 0, b91: 0, invoices: 0, oldest: 0 };
+      m[o.buyer].total += o.net; m[o.buyer][o.bucket] += o.net; m[o.buyer].invoices++;
+      if (o.daysPastDue > m[o.buyer].oldest) m[o.buyer].oldest = o.daysPastDue;
+    });
+    return Object.values(m).sort((a, b) => b.total - a.total);
+  }, [shown]);
+
+  const byRep = React.useMemo(() => {
+    const m = {};
+    shown.forEach(o => {
+      const k = o.rep || '—';
+      if (!m[k]) m[k] = { rep: k, current: 0, b3160: 0, b6190: 0, b91: 0, total: 0 };
+      m[k][o.bucket] += o.net; m[k].total += o.net;
+    });
+    return Object.values(m).sort((a, b) => b.total - a.total).slice(0, 20);
+  }, [shown]);
+
+  const openSorted = React.useMemo(() => shown.slice().sort((a, b) => b.daysPastDue - a.daysPastDue), [shown]);
+  const agingData = AGE.map(a => ({ name: a.label, value: tot[a.key], color: a.color }));
+  const fetchedAt = new Date(data.fetched_at);
+
+  // ── Filter bar ──
+  const repSelect = e('select', { className: 'filter-select', value: repSel, onChange: ev => setRepSel(ev.target.value) },
+    e('option', { value: '' }, 'All'), repOptions.map(o => e('option', { key: o, value: o }, o)));
+  const agingBtns = e('div', { style: { display: 'flex', gap: 6, flexWrap: 'wrap' } },
+    AGE.map(a => {
+      const on = bucketSel === a.key;
+      return e('button', { key: a.key, type: 'button', onClick: () => setBucketSel(on ? 'all' : a.key),
+        style: { fontFamily: 'JetBrains Mono, monospace', fontSize: 12, cursor: 'pointer', padding: '8px 15px', borderRadius: 9, border: '1px solid ' + a.color, color: on ? '#fff' : a.color, background: on ? a.color : '#ffffff', fontWeight: on ? 700 : 500, transition: 'all .15s' } }, a.label);
+    }));
+  const filterBar = e('div', { className: 'filters', style: { marginBottom: 22 } },
+    e('div', { className: 'filter-group', style: { minWidth: 200 } },
+      e('label', { className: 'filter-label' }, 'Buyer ', e('span', { style: { textTransform: 'none', letterSpacing: 0, color: 'var(--text-faint)' } }, '· multi')),
+      e(MultiSelect, { options: buyerOptions, selected: buyerSel, onChange: setBuyerSel, labelFn: buyerBusinessName, placeholder: 'All buyers' })),
+    e('div', { className: 'filter-group', style: { minWidth: 150 } },
+      e('label', { className: 'filter-label' }, 'Sales Rep'), repSelect),
+    e('div', { className: 'filter-group', style: { minWidth: 'auto' } },
+      e('label', { className: 'filter-label' }, 'Aging'), agingBtns),
+    e('div', { className: 'filter-group', style: { minWidth: 190 } },
+      e('label', { className: 'filter-label' }, 'Search'),
+      e('input', { type: 'text', className: 'filter-input', placeholder: 'invoice / buyer / rep…', value: q, onChange: ev => setQ(ev.target.value) })),
+    e('button', { className: 'filter-reset', onClick: () => { setBuyerSel([]); setRepSel(''); setBucketSel('all'); setQ(''); },
+      style: { marginLeft: 'auto', alignSelf: 'flex-end', background: 'var(--accent)', color: '#fff', border: 'none', fontWeight: 700, padding: '10px 22px', borderRadius: 6, cursor: 'pointer', letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: 12 } }, 'Reset'));
+
+  // ── Aging KPI grid (5 cells) ──
+  const cell = (label, value, sub, color, key, accent) => e('div', {
+    className: 'kpi' + (accent ? ' kpi-accent' : ''),
+    onClick: key ? () => setBucketSel(bucketSel === key ? 'all' : key) : undefined,
+    style: Object.assign({ cursor: key ? 'pointer' : 'default' }, color ? { borderTop: '2px solid ' + color } : {}, (key && bucketSel === key) ? { background: 'var(--bg-elev-2)' } : {})
+  }, e('div', { className: 'kpi-label' }, label), e('div', { className: 'kpi-value tabular' }, value), sub ? e('div', { className: 'kpi-sub' }, sub) : null);
+  const kpiGrid = e('div', { className: 'kpi-grid', style: { gridTemplateColumns: 'repeat(5, 1fr)' } },
+    cell('Total Outstanding', fmtMoney(tot.total), fmtNum(tot.count) + ' invoices', null, null, true),
+    cell('Current', fmtMoney(tot.current), pctOf(tot.current) + ' of AR', AGE[0].color, 'current'),
+    cell('31–60 days', fmtMoney(tot.b3160), pctOf(tot.b3160) + ' of AR', AGE[1].color, 'b3160'),
+    cell('61–90 days', fmtMoney(tot.b6190), pctOf(tot.b6190) + ' of AR', AGE[2].color, 'b6190'),
+    cell('91+ days', fmtMoney(tot.b91), pctOf(tot.b91) + ' of AR', AGE[3].color, 'b91'));
+
+  // ── Aging donut + Top balances ──
+  const donutBlock = e('div', null,
+    e('div', { className: 'section-header' },
+      e('h2', { className: 'section-title' }, 'Aging ', e('em', null, 'mix')),
+      e('span', { className: 'section-meta' }, 'by bucket')),
+    e('div', { className: 'card', style: { height: 360, display: 'flex', alignItems: 'center', justifyContent: 'center' } },
+      e(ResponsiveContainer, { width: '100%', height: '100%' },
+        e(PieChart, null,
+          e(Pie, { data: agingData, dataKey: 'value', nameKey: 'name', cx: '50%', cy: '50%', innerRadius: 62, outerRadius: 110, paddingAngle: 2, stroke: 'var(--bg-elev)', strokeWidth: 2 },
+            agingData.map((d, i) => e(Cell, { key: i, fill: d.color }))),
+          e(Tooltip, { contentStyle: { background: '#fff', border: '1px solid var(--border)', borderRadius: 4, fontSize: 12 }, formatter: v => fmtMoneyFull(v) }),
+          e(Legend, { verticalAlign: 'bottom', iconType: 'square', wrapperStyle: { fontSize: 11, fontFamily: 'JetBrains Mono' } })))));
+  const topB = byBuyer.slice(0, 12);
+  const maxB = Math.max(1, ...topB.map(b => b.total));
+  const topBlock = e('div', null,
+    e('div', { className: 'section-header' },
+      e('h2', { className: 'section-title' }, 'Top ', e('em', null, 'balances')),
+      e('span', { className: 'section-meta' }, fmtNum(byBuyer.length) + ' buyers')),
+    e('div', { className: 'card' },
+      e('div', { className: 'rank-list' },
+        topB.length === 0
+          ? e('div', { style: { padding: 20, color: 'var(--text-faint)', textAlign: 'center', fontSize: 13 } }, 'No open balances')
+          : topB.map((b, i) => e('div', { key: i, className: 'rank-row' },
+              e('div', { className: 'rank-num' }, String(i + 1).padStart(2, '0')),
+              e('div', { className: 'rank-name', title: b.buyer }, buyerBusinessName(b.buyer)),
+              e('div', { className: 'rank-value' }, fmtMoneyFull(b.total)),
+              e('div', { className: 'rank-bar', style: { width: 'calc(' + (b.total / maxB * 100).toFixed(1) + '% - 80px)' } }))))));
+  const twoUp = e('section', { className: 'section' }, e('div', { className: 'grid-half' }, donutBlock, topBlock));
+
+  // ── Outstanding by rep (stacked bar) ──
+  const repChart = e('section', { className: 'section' },
+    e('div', { className: 'section-header' },
+      e('h2', { className: 'section-title' }, 'Outstanding ', e('em', null, 'by rep')),
+      e('span', { className: 'section-meta' }, fmtNum(byRep.length) + ' reps')),
+    e('div', { className: 'card', style: { height: 360 } },
+      e(ResponsiveContainer, { width: '100%', height: '100%' },
+        e(BarChart, { data: byRep, layout: 'vertical', margin: { top: 8, right: 16, left: 8, bottom: 8 } },
+          e(CartesianGrid, { stroke: 'var(--border-soft)', strokeDasharray: '2 2', horizontal: false }),
+          e(XAxis, { type: 'number', stroke: '#9d86b3', tick: { fontSize: 11, fontFamily: 'JetBrains Mono' }, tickFormatter: fmtMoney, axisLine: false, tickLine: false }),
+          e(YAxis, { type: 'category', dataKey: 'rep', stroke: '#9d86b3', tick: { fontSize: 11 }, width: 140, axisLine: false, tickLine: false }),
+          e(Tooltip, { contentStyle: { background: '#fff', border: '1px solid var(--border)', borderRadius: 4, fontSize: 12 }, formatter: (v, n) => [fmtMoneyFull(v), n] }),
+          e(Legend, { wrapperStyle: { fontSize: 11, fontFamily: 'JetBrains Mono' } }),
+          AGE.map(a => e(Bar, { key: a.key, dataKey: a.key, name: a.label, stackId: 'a', fill: a.color, radius: [0, 2, 2, 0] }))))));
+
+  // ── Open invoices table ──
+  const invTable = e('section', { className: 'section' },
+    e('div', { className: 'section-header' },
+      e('h2', { className: 'section-title' }, 'Open ', e('em', null, 'invoices')),
+      e('span', { className: 'section-meta' }, fmtNum(openSorted.length) + ' invoices · oldest first')),
+    e('div', { className: 'card', style: { padding: 0, overflow: 'hidden' } },
+      e('div', { style: { overflowX: 'auto', maxHeight: 560 } },
+        e('table', { className: 'data-table', style: { minWidth: 880 } },
+          e('thead', null, e('tr', null,
+            e('th', null, 'Invoice #'), e('th', null, 'Buyer'), e('th', null, 'Rep'),
+            e('th', null, 'Invoice'), e('th', null, 'Due'),
+            e('th', { className: 'num' }, 'Days Past'), e('th', null, 'Aging'),
+            e('th', { className: 'num' }, 'Outstanding'))),
+          e('tbody', null,
+            openSorted.length === 0
+              ? e('tr', null, e('td', { colSpan: 8, style: { padding: 20, color: 'var(--text-faint)', textAlign: 'center' } }, 'No open receivables match the filters.'))
+              : openSorted.slice(0, 300).map((o, i) => e('tr', { key: i },
+                  e('td', { className: 'font-mono', style: { color: 'var(--accent)' } }, o.invoice),
+                  e('td', { title: o.buyer }, buyerBusinessName(o.buyer)),
+                  e('td', { className: 'dim' }, o.rep),
+                  e('td', { className: 'dim font-mono' }, fmtD(o.orderDate)),
+                  e('td', { className: 'dim font-mono' }, fmtD(o.due)),
+                  e('td', { className: 'num', style: { color: bucketColor(o.bucket), fontWeight: o.daysPastDue > 30 ? 700 : 400 } }, o.daysPastDue > 0 ? o.daysPastDue + 'd' : 'Not due'),
+                  e('td', null, e('span', { style: { fontFamily: 'JetBrains Mono', fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.06em', color: bucketColor(o.bucket), border: '1px solid ' + bucketColor(o.bucket), borderRadius: 999, padding: '2px 8px', whiteSpace: 'nowrap' } }, bucketLabel(o.bucket))),
+                  e('td', { className: 'num' }, e('strong', null, fmtMoneyFull(o.net))))))))));
+
+  return e('div', { className: 'app ar-theme' },
+    e(Topbar, { fetchedAt: fetchedAt, rowCount: shown.length, totalCount: invoices.length }),
+    e('div', { style: { marginBottom: 6 } },
+      e('h1', { style: { fontFamily: 'Fraunces, serif', fontWeight: 400, fontSize: 30, letterSpacing: '-0.02em', margin: 0 } },
+        'Accounts ', e('em', { style: { color: 'var(--accent)', fontStyle: 'italic' } }, 'Receivable'))),
+    e('div', { style: { fontFamily: 'JetBrains Mono, monospace', fontSize: 11, color: 'var(--text-dim)', margin: '0 0 20px', letterSpacing: '0.04em' } },
+      'New Jersey · aged as of ' + fmtD(today) + ' · due = invoice date + Net 30 (or Apex due date) · outstanding = net of credits'),
+    filterBar,
+    kpiGrid,
+    twoUp,
+    repChart,
+    invTable);
 }
 
 function App() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
+  const [tab, setTab] = useState('sales'); // 'sales' | 'ar'
   const [filters, setFilters] = useState({
     from: '',
     to: '',
     brand: '',
-    buyer: '',
+    buyer: [],
     rep: '',
     state: '',
     status: '',
@@ -698,7 +1060,10 @@ function App() {
           .catch(() => ({ rows: [] }))
       ]).then(([live, hist]) => {
         const histRows = Array.isArray(hist) ? hist : (hist.rows || []);
-        setData({ ...live, rows: [...histRows, ...(live.rows || [])] });
+        // _liveRows = current Apex data only. Used by Accounts Receivable, which must
+        // ignore the 2024 historical backfill (old records with stale "Unpaid" flags
+        // and no due dates would otherwise inflate AR with settled invoices).
+        setData({ ...live, rows: [...histRows, ...(live.rows || [])], _liveRows: live.rows || [] });
       }).catch(e => setError(e.message));
     };
     load();
@@ -725,11 +1090,15 @@ function App() {
       className: "empty"
     }, /*#__PURE__*/React.createElement("div", { className: "spinner" }), /*#__PURE__*/React.createElement("div", { className: "loading-label" }, "Loading")));
   }
-  return /*#__PURE__*/React.createElement(Dashboard, {
-    data: data,
-    filters: filters,
-    setFilters: setFilters
-  });
+  return /*#__PURE__*/React.createElement(React.Fragment, null,
+    /*#__PURE__*/React.createElement(ViewTabs, { tab: tab, setTab: setTab }),
+    tab === 'ar'
+      ? /*#__PURE__*/React.createElement(AccountsReceivable, { data: data })
+      : /*#__PURE__*/React.createElement(Dashboard, {
+          data: data,
+          filters: filters,
+          setFilters: setFilters
+        }));
 }
 
 // --- Dashboard --------------------------------------------------------------
@@ -822,7 +1191,9 @@ function Dashboard({
       if (filters.from && rowYmd < filters.from) return false;
       if (filters.to && rowYmd > filters.to) return false;
     }
-    if (filters.buyer && r.buyer_name !== filters.buyer) return false;
+    if (Array.isArray(filters.buyer)) {
+      if (filters.buyer.length && !filters.buyer.includes(r.buyer_name)) return false;
+    } else if (filters.buyer && r.buyer_name !== filters.buyer) return false;
     if (filters.rep && r.sales_rep !== filters.rep) return false;
     if (filters.product) {
       const hay = [r.product_name, r.product_type, r.product_sku].map(x => String(x || '').toLowerCase()).join(' ');
@@ -1011,7 +1382,7 @@ function Dashboard({
     return Object.values(map).sort((a, b) => b.revenue - a.revenue).slice(0, n);
   };
   const topProducts = useMemo(() => groupSum('product_name'), [filtered]);
-  const topBuyers = useMemo(() => groupSum('buyer_name'), [filtered]);
+  const topBuyers = useMemo(() => groupSum('buyer_name').map(d => ({ ...d, name: buyerBusinessName(d.name) })), [filtered]);
   const byRep = useMemo(() => groupSum('sales_rep', 20), [filtered]);
   const byCategory = useMemo(() => groupSum(['product_category','product_type']), [filtered]);
   const byState = useMemo(() => groupSum('buyer_state', 15), [filtered]);
@@ -1120,10 +1491,17 @@ function Dashboard({
     const soldBySku = {},
       soldByName = {},
       revBySku = {},
-      revByName = {};
+      revByName = {},
+      batchesBySku = {},
+      batchesByName = {};
     normalized.forEach(r => {
       const u = parseFloat(r.inventory_quantity) || r._quantity || 0;
       const rev = r._revenue || 0;
+      const bn = (r.batch_name || '').trim();
+      if (bn) {
+        if (r.product_sku) (batchesBySku[r.product_sku] = batchesBySku[r.product_sku] || new Set()).add(bn);
+        if (r.product_name) (batchesByName[r.product_name] = batchesByName[r.product_name] || new Set()).add(bn);
+      }
       if (r.product_sku) { soldBySku[r.product_sku] = (soldBySku[r.product_sku] || 0) + u; revBySku[r.product_sku] = (revBySku[r.product_sku] || 0) + rev; }
       if (r.product_name) { soldByName[r.product_name] = (soldByName[r.product_name] || 0) + u; revByName[r.product_name] = (revByName[r.product_name] || 0) + rev; }
     });
@@ -1155,12 +1533,14 @@ function Dashboard({
         else if (velocity > 0) daysLeft = qty / velocity;
         else daysLeft = null;
       }
+      const batchNames = Array.from((p.sku && batchesBySku[p.sku]) ? batchesBySku[p.sku] : (batchesByName[p.name] || [])).sort();
       return {
         name: p.name || '—',
         line: p.line || '—',
         sku: p.sku || '',
         qty,
         batches: p.batches || 0,
+        batchNames,
         listed: p.listed != null ? !!p.listed : (p.status ? String(p.status).toLowerCase() === 'available' : false),
         sold,
         neverSold: sold <= 0,
@@ -1190,7 +1570,7 @@ function Dashboard({
     from: '',
     to: '',
     brand: '',
-    buyer: '',
+    buyer: [],
     rep: '',
     state: '',
     status: '',
@@ -1377,7 +1757,7 @@ function Dashboard({
       whiteSpace: 'nowrap'
     },
     title: d.buyer
-  }, d.buyer), /*#__PURE__*/React.createElement("div", {
+  }, buyerBusinessName(d.buyer)), /*#__PURE__*/React.createElement("div", {
     style: {
       textAlign: 'right',
       fontWeight: 600
@@ -1456,9 +1836,16 @@ function Dashboard({
     className: "section-header"
   }, /*#__PURE__*/React.createElement("h2", {
     className: "section-title"
-  }, "Invoices ", /*#__PURE__*/React.createElement("em", null, "\xB7 units & revenue per order")), /*#__PURE__*/React.createElement("span", {
+  }, "Invoices ", /*#__PURE__*/React.createElement("em", null, "\xB7 units & revenue per order")), /*#__PURE__*/React.createElement("div", {
+    style: { display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "text", className: "filter-input", placeholder: "search invoice #\u2026", value: filters.invoice,
+    onChange: ev => setFilters(f => ({ ...f, invoice: ev.target.value })), style: { height: 36, fontSize: 13, minWidth: 180 }
+  }), /*#__PURE__*/React.createElement("button", {
+    className: "date-preset", onClick: () => setFilters(f => ({ ...f, invoice: '' })), title: "Clear the invoice search"
+  }, "Reset"), /*#__PURE__*/React.createElement("span", {
     className: "section-meta"
-  }, fmtNum(invoices.length), " invoices")), /*#__PURE__*/React.createElement("div", {
+  }, fmtNum(invoices.length), " invoices"))), /*#__PURE__*/React.createElement("div", {
     className: "card",
     style: {
       padding: 0,
@@ -1496,7 +1883,7 @@ function Dashboard({
     }
   }, inv.invoice), /*#__PURE__*/React.createElement("td", {
     className: "dim font-mono"
-  }, inv.date), /*#__PURE__*/React.createElement("td", null, inv.buyer), /*#__PURE__*/React.createElement("td", {
+  }, inv.date), /*#__PURE__*/React.createElement("td", { title: inv.buyer }, buyerBusinessName(inv.buyer)), /*#__PURE__*/React.createElement("td", {
     className: "dim"
   }, inv.rep), /*#__PURE__*/React.createElement("td", {
     className: "num dim"
@@ -1546,7 +1933,8 @@ function Dashboard({
       maxHeight: 520
     }
   }, /*#__PURE__*/React.createElement("table", {
-    className: "data-table"
+    className: "data-table",
+    style: { minWidth: 820 }
   }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Product"), /*#__PURE__*/React.createElement("th", null, "Line"), /*#__PURE__*/React.createElement("th", {
     className: "num"
   }, "Units Sold"), /*#__PURE__*/React.createElement("th", {
@@ -1991,19 +2379,35 @@ function FilterBar({
     e("div", { className: "filter-group", style: { minWidth: 'auto' } },
       e("label", { className: "filter-label" }, "Quick range"),
       e("div", { style: { display: 'flex', gap: 6, flexWrap: 'wrap' } },
-        [['Today', 0], ['Last 7 days', 7], ['MTD', 'mtd'], ['30 days', 30], ['90 days', 90], ['YTD', 'ytd']].map(([lbl, d]) =>
-          e("button", { key: lbl, className: "date-preset", onClick: () => {
-            const t = new Date();
-            const fmt = x => `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, '0')}-${String(x.getDate()).padStart(2, '0')}`;
-            let from;
-            if (d === 'ytd') { from = new Date(t.getFullYear(), 0, 1); }
-            else if (d === 'mtd') { from = new Date(t.getFullYear(), t.getMonth(), 1); }
-            else { from = new Date(t); from.setDate(from.getDate() - d); }
-            setFilters(f => ({ ...f, from: fmt(from), to: fmt(t) }));
-          } }, lbl)))),
+        [['Today', 0], ['Last 7 days', 7], ['MTD', 'mtd'], ['Last month', 'lastmonth'], ['90 days', 90], ['YTD', 'ytd']].map(([lbl, d]) => {
+          // Compute the from/to this preset represents, so we can both apply it and
+          // highlight it in blue when it matches the current filter range.
+          const t = new Date();
+          const fmt = x => `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, '0')}-${String(x.getDate()).padStart(2, '0')}`;
+          let from, to = t;
+          if (d === 'ytd') { from = new Date(t.getFullYear(), 0, 1); }
+          else if (d === 'mtd') { from = new Date(t.getFullYear(), t.getMonth(), 1); }
+          else if (d === 'lastmonth') {
+            from = new Date(t.getFullYear(), t.getMonth() - 1, 1);
+            to = new Date(t.getFullYear(), t.getMonth(), 0);
+          }
+          else { from = new Date(t); from.setDate(from.getDate() - d); }
+          const fromS = fmt(from), toS = fmt(to);
+          const active = filters.from === fromS && filters.to === toS;
+          return e("button", { key: lbl, className: "date-preset" + (active ? " active" : ""),
+            onClick: () => setFilters(f => ({ ...f, from: fromS, to: toS })) }, lbl);
+        }))),
     group("Product", e("input", { type: "text", className: "filter-input", placeholder: "search products\u2026", value: filters.product, onChange: ev => upd('product', ev.target.value) })),
     group("Sales Rep", sel('rep', distinct.reps)),
-    group("Buyer", sel('buyer', distinct.buyers)),
+    e("div", { className: "filter-group", style: { minWidth: 180 } },
+      e("label", { className: "filter-label" }, "Buyer ", e("span", { style: { textTransform: 'none', letterSpacing: 0, color: 'var(--text-faint)' } }, "· multi")),
+      e(MultiSelect, {
+        options: distinct.buyers,
+        selected: Array.isArray(filters.buyer) ? filters.buyer : (filters.buyer ? [filters.buyer] : []),
+        onChange: vals => upd('buyer', vals),
+        labelFn: buyerBusinessName,
+        placeholder: "All buyers"
+      })),
     group("Payment", sel('status', distinct.statuses)),
     group("Invoice #", e("input", { type: "text", className: "filter-input", placeholder: "search\u2026", value: filters.invoice, onChange: ev => upd('invoice', ev.target.value) })),
     group("Product Line", sel('productLine', distinct.productLines)),
@@ -2182,6 +2586,25 @@ ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.c
   btn.addEventListener('click', function(e){ e.stopPropagation(); menu.classList.contains('open') ? close() : open(); });
   document.addEventListener('click', function(e){ if (!nav.contains(e.target)) close(); });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+})();
+</script>
+<style id="back-to-top-styles">
+  #back-to-top{ position:fixed; right:24px; bottom:24px; z-index:70; width:44px; height:44px; display:flex; align-items:center; justify-content:center; background:var(--accent,#0EB1E8); color:#ffffff; border:none; border-radius:50%; box-shadow:0 6px 18px rgba(20,35,60,0.22); cursor:pointer; opacity:0; visibility:hidden; transform:translateY(10px); transition:opacity .2s, transform .2s, visibility .2s, background .15s; }
+  #back-to-top.show{ opacity:1; visibility:visible; transform:translateY(0); }
+  #back-to-top:hover{ background:var(--brand-purple,#8462AF); }
+  #back-to-top svg{ width:20px; height:20px; }
+  @media print{ #back-to-top{ display:none; } }
+</style>
+<script>
+(function(){
+  if (document.getElementById('back-to-top')) return;
+  var btn=document.createElement('button'); btn.id='back-to-top'; btn.type='button';
+  btn.setAttribute('aria-label','Back to top'); btn.title='Back to top';
+  btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>';
+  document.body.appendChild(btn);
+  var toggle=function(){ if(window.pageYOffset>300) btn.classList.add('show'); else btn.classList.remove('show'); };
+  window.addEventListener('scroll',toggle,{passive:true}); toggle();
+  btn.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
 })();
 </script>
 </body>

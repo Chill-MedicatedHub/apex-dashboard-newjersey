@@ -1015,6 +1015,18 @@ function AccountsReceivable({ data }) {
                   e('td', null, e('span', { style: { fontFamily: 'JetBrains Mono', fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.06em', color: bucketColor(o.bucket), border: '1px solid ' + bucketColor(o.bucket), borderRadius: 999, padding: '2px 8px', whiteSpace: 'nowrap' } }, bucketLabel(o.bucket))),
                   e('td', { className: 'num' }, e('strong', null, fmtMoneyFull(o.net))))))))));
 
+  // Diagnostic: when nothing matches the open-status filter, surface the statuses that ARE
+  // present in the feed so an empty AR tab explains itself (and reveals unusual status labels).
+  const _statusSummary = (() => {
+    const m = {};
+    rows.forEach(r => { const s = (r.payment_status == null || r.payment_status === '') ? '(blank)' : String(r.payment_status); m[s] = (m[s] || 0) + 1; });
+    return Object.keys(m).sort((a, b) => m[b] - m[a]).map(k => k + ' \u00d7 ' + m[k]);
+  })();
+  const _arDiag = invoices.length === 0 ? e('div', { className: 'card', style: { padding: '16px 20px', marginBottom: 20, borderLeft: '3px solid #E0A24E' } },
+    e('div', { style: { fontFamily: 'Fraunces, serif', fontSize: 17, marginBottom: 8 } }, 'No open invoices in this feed'),
+    e('div', { style: { fontFamily: 'JetBrains Mono, monospace', fontSize: 11, color: 'var(--text-dim)', lineHeight: 1.7 } },
+      'AR lists invoices whose payment status is Unpaid / Partial / Overdue (and similar). ',
+      rows.length ? ('Statuses present in ' + fmtNum(rows.length) + ' rows: ' + (_statusSummary.length ? _statusSummary.join('  \u00b7  ') : 'none') + '.') : 'The feed has no rows yet.')) : null;
   return e('div', { className: 'app ar-theme' },
     e(Topbar, { fetchedAt: fetchedAt, rowCount: shown.length, totalCount: invoices.length }),
     e('div', { style: { marginBottom: 6 } },
@@ -1022,6 +1034,7 @@ function AccountsReceivable({ data }) {
         'Accounts ', e('em', { style: { color: 'var(--accent)', fontStyle: 'italic' } }, 'Receivable'))),
     e('div', { style: { fontFamily: 'JetBrains Mono, monospace', fontSize: 11, color: 'var(--text-dim)', margin: '0 0 20px', letterSpacing: '0.04em' } },
       'New Jersey · aged as of ' + fmtD(today) + ' · due = invoice date + Net 30 (or Apex due date) · outstanding = net of credits'),
+    _arDiag,
     filterBar,
     kpiGrid,
     twoUp,

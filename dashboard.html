@@ -588,7 +588,7 @@ function InventoryTable({ list }) {
       navBtn("\u2039 Prev", cur <= 0, () => setPage(cur - 1)),
       navBtn("Next \u203a", cur >= pages - 1, () => setPage(cur + 1))));
   return e("div", { className: "card", style: { padding: 0, overflow: "hidden" } },
-    e("div", { style: { overflowX: "auto" } },
+    e("div", { style: { overflowX: "auto", maxHeight: 560 } },
       e("table", { className: "data-table" },
         e("thead", null, e("tr", null,
           e("th", null, "Product"), e("th", null, "Line"), e("th", null, "SKU"),
@@ -796,7 +796,7 @@ function ViewTabs({ tab, setTab }) {
     className: 'view-tab' + (tab === id ? ' active' : '')
   }, label);
   return e('div', { className: 'view-tabs-wrap' },
-    e('div', { className: 'view-tabs' }, mk('sales', 'Sales'), mk('ar', 'Accounts Receivable')));
+    e('div', { className: 'view-tabs' }, mk('sales', 'Sales'), mk('ar', 'Accounts Receivable'), mk('inventory', 'Inventory')));
 }
 function AccountsReceivable({ data }) {
   const e = React.createElement;
@@ -840,6 +840,7 @@ function AccountsReceivable({ data }) {
           orderDate: parseDate(r.order_date_localized_raw || r.order_date_utc_raw || r.order_date_localized || r.order_date_utc || r.order_date_raw || r.order_date),
           dueDate: parseDate(r.due_date_raw || r.due_date),
           amount: 0,
+          addlDiscount: typeof r.additional_discounts === 'number' ? r.additional_discounts / 100 : parseMoney(r.additional_discounts),
           credit: parsePaymentsForCredits(r.payment_dates || r.payments || '').total || 0
         };
       }
@@ -853,7 +854,7 @@ function AccountsReceivable({ data }) {
     });
     return Object.values(map).map(o => {
       const due = o.dueDate || (o.orderDate ? new Date(o.orderDate.getTime() + 30 * 86400000) : null);
-      const base = o._hasLine ? o.amount : (o.orderRev || 0);
+      const base = Math.max(0, (o._hasLine ? o.amount : (o.orderRev || 0)) - (o.addlDiscount || 0));
       const net = Math.max(0, base - (o.credit || 0));
       const daysPastDue = due ? Math.floor((today - due) / 86400000) : 0;
       return Object.assign({}, o, { due, net, daysPastDue, bucket: bucketOf(daysPastDue) });
@@ -1028,6 +1029,149 @@ function AccountsReceivable({ data }) {
     invTable);
 }
 
+function InventoryView({ data }) {
+  const e = React.createElement;
+  const rows = (data.rows || []).filter(r => !r._arReport);
+  const [q, setQ] = React.useState('');
+  const [lineSel, setLineSel] = React.useState('');
+  const [metric, setMetric] = React.useState('onhand'); // 'onhand' | 'value'
+  const fetchedAt = new Date(data.fetched_at);
+  const COLORS = ['#0EB1E8', '#588BCD', '#8462AF', '#4696D5', '#E0A24E', '#D6607E', '#4CA07A', '#8A97A9'];
+
+  const built = React.useMemo(() => {
+    const soldBySku = {}, soldByName = {}, revBySku = {}, revByName = {}, activeSku = {}, activeName = {};
+    let maxT = 0;
+    const dOf = r => parseDate(r.order_date_localized_raw || r.order_date_utc_raw || r.order_date_raw || r.order_date);
+    rows.forEach(r => { const dt = dOf(r); if (dt && dt.getTime() > maxT) maxT = dt.getTime(); });
+    const WIN = 30, winStart = maxT ? maxT - WIN * 86400000 : 0;
+    const recentSku = {}, recentName = {};
+    rows.forEach(r => {
+      const u = parseFloat(r.inventory_quantity != null ? r.inventory_quantity : (r.quantity_raw != null ? r.quantity_raw : r.quantity)) || 0;
+      const rev = typeof r.line_total_raw === 'number' ? r.line_total_raw / 100 : parseMoney(r.line_total || r.computed_sale_price || r.total);
+      if (r.product_sku) { soldBySku[r.product_sku] = (soldBySku[r.product_sku] || 0) + u; revBySku[r.product_sku] = (revBySku[r.product_sku] || 0) + rev; }
+      if (r.product_name) { soldByName[r.product_name] = (soldByName[r.product_name] || 0) + u; revByName[r.product_name] = (revByName[r.product_name] || 0) + rev; }
+      const bn = (r.batch_name || '').trim();
+      if (bn) {
+        const c = String(r.batch_created_at_raw || r.batch_created_at || '');
+        if (r.product_sku) { (activeSku[r.product_sku] = activeSku[r.product_sku] || {})[bn] = c; }
+        if (r.product_name) { (activeName[r.product_name] = activeName[r.product_name] || {})[bn] = c; }
+      }
+      const dt = dOf(r);
+      if (dt && dt.getTime() >= winStart) { if (r.product_sku) recentSku[r.product_sku] = (recentSku[r.product_sku] || 0) + u; if (r.product_name) recentName[r.product_name] = (recentName[r.product_name] || 0) + u; }
+    });
+    const cat = Array.isArray(data.inventory) ? data.inventory : [];
+    return cat.map(p => {
+      const sold = p.sku && soldBySku[p.sku] != null ? soldBySku[p.sku] : (soldByName[p.name] || 0);
+      const revT = p.sku && revBySku[p.sku] != null ? revBySku[p.sku] : (revByName[p.name] || 0);
+      const unitPrice = sold > 0 ? revT / sold : 0;
+      const qty = p.qty != null ? p.qty : (p.available != null ? p.available : (p.inventory != null ? p.inventory : null));
+      const recent = p.sku && recentSku[p.sku] != null ? recentSku[p.sku] : (recentName[p.name] || 0);
+      const velocity = recent / WIN;
+      let daysLeft = null;
+      if (qty != null) { if (qty <= 0) daysLeft = 0; else if (velocity > 0) daysLeft = qty / velocity; else daysLeft = null; }
+      const bmap = (p.sku && activeSku[p.sku]) ? activeSku[p.sku] : (activeName[p.name] || {});
+      const bsorted = Object.keys(bmap).sort((a, b) => String(bmap[b]).localeCompare(String(bmap[a])));
+      const nActive = p.batches > 0 ? p.batches : (bsorted.length ? 1 : 0);
+      const batchNames = bsorted.slice(0, nActive);
+      return { name: p.name || '—', line: p.line || '—', sku: p.sku || '', qty: qty, batches: p.batches || 0, batchNames: batchNames, listed: p.listed != null ? !!p.listed : (p.status ? String(p.status).toLowerCase() === 'available' : false), sold: sold, neverSold: sold <= 0, unitPrice: unitPrice, value: qty != null ? qty * unitPrice : 0, velocity: velocity, daysLeft: daysLeft };
+    });
+  }, [rows, data.inventory]);
+
+  const lines = [...new Set(built.map(p => p.line).filter(Boolean))].sort();
+  const filtered = built.filter(p => {
+    if (lineSel && p.line !== lineSel) return false;
+    if (q) { const s = (p.name + ' ' + p.sku + ' ' + p.line).toLowerCase(); if (!s.includes(q.toLowerCase())) return false; }
+    return true;
+  });
+  const inStock = filtered.filter(p => p.qty != null && p.qty > 0).sort((a, b) => (b.qty || 0) - (a.qty || 0));
+  const oos = filtered.filter(p => p.qty != null && p.qty <= 0).sort((a, b) => a.name.localeCompare(b.name));
+  const onHandTotal = filtered.reduce((s, p) => s + (p.qty || 0), 0);
+  const onHandValue = filtered.reduce((s, p) => s + (p.value || 0), 0);
+  const skus = filtered.length;
+  const listedN = filtered.filter(p => p.listed).length;
+  const outN = oos.length;
+  const lowN = filtered.filter(p => p.daysLeft != null && p.daysLeft > 0 && p.daysLeft < 14).length;
+
+  const byLine = (() => {
+    const m = {};
+    filtered.forEach(p => { const k = p.line || '—'; if (!m[k]) m[k] = { name: k, onhand: 0, value: 0, skus: 0 }; m[k].onhand += p.qty || 0; m[k].value += p.value || 0; m[k].skus++; });
+    return Object.values(m).sort((a, b) => b[metric] - a[metric]);
+  })();
+
+  const mbtn = (id, label) => e('button', { key: id, onClick: () => setMetric(id), style: { padding: '4px 12px', fontSize: 11, fontFamily: 'JetBrains Mono', cursor: 'pointer', borderRadius: 4, border: '1px solid ' + (metric === id ? '#0EB1E8' : '#e3e9f1'), background: metric === id ? 'rgba(14,177,232,0.12)' : '#ffffff', color: metric === id ? '#0E86C4' : '#566274' } }, label);
+
+  const filterBar = e('div', { className: 'filters', style: { marginBottom: 24 } },
+    e('div', { className: 'filter-group', style: { minWidth: 200 } },
+      e('label', { className: 'filter-label' }, 'Search'),
+      e('input', { type: 'text', className: 'filter-input', placeholder: 'product / sku / line…', value: q, onChange: ev => setQ(ev.target.value) })),
+    e('div', { className: 'filter-group', style: { minWidth: 160 } },
+      e('label', { className: 'filter-label' }, 'Product Line'),
+      e('select', { className: 'filter-select', value: lineSel, onChange: ev => setLineSel(ev.target.value) },
+        e('option', { value: '' }, 'All lines'), lines.map(l => e('option', { key: l, value: l }, l)))),
+    e('button', { className: 'filter-reset', onClick: () => { setQ(''); setLineSel(''); }, style: { marginLeft: 'auto', alignSelf: 'flex-end', background: 'var(--accent)', color: '#fff', border: 'none', fontWeight: 700, padding: '10px 22px', borderRadius: 6, cursor: 'pointer', letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: 12 } }, 'Reset'));
+
+  const kpis = e('div', { className: 'kpi-grid' },
+    e(Kpi, { label: 'Units On Hand', value: fmtNum(Math.round(onHandTotal)), sub: fmtNum(skus) + ' SKUs · ' + fmtMoney(onHandValue), accent: true }),
+    e(Kpi, { label: 'On-Hand Value', value: fmtMoney(onHandValue), sub: fmtNum(listedN) + ' listed' }),
+    e(Kpi, { label: 'Out of Stock', value: fmtNum(outN), sub: 'SKUs · 0 on hand' }),
+    e(Kpi, { label: 'Low Stock', value: fmtNum(lowN), sub: '< 14 days of supply' }));
+
+  const byLineChart = e('section', { className: 'section' },
+    e('div', { className: 'section-header' },
+      e('h2', { className: 'section-title' }, (metric === 'value' ? 'Value ' : 'On hand '), e('em', null, 'by product line')),
+      e('div', { style: { display: 'flex', gap: 6 } }, mbtn('onhand', 'On hand'), mbtn('value', 'Value'))),
+    e('div', { className: 'card', style: { height: 340 } },
+      e(ResponsiveContainer, { width: '100%', height: '100%' },
+        e(BarChart, { data: byLine, margin: { top: 12, right: 16, left: 0, bottom: 40 } },
+          e(CartesianGrid, { stroke: '#e7ecf2', strokeDasharray: '2 2', vertical: false }),
+          e(XAxis, { dataKey: 'name', stroke: '#a7b2c0', tick: { fontSize: 10 }, tickLine: false, axisLine: { stroke: '#e7ecf2' }, interval: 0, angle: -18, textAnchor: 'end', height: 70 }),
+          e(YAxis, { stroke: '#a7b2c0', tick: { fontSize: 11, fontFamily: 'JetBrains Mono' }, tickFormatter: metric === 'value' ? fmtMoney : fmtNum, tickLine: false, axisLine: false }),
+          e(Tooltip, { contentStyle: { background: '#fff', border: '1px solid var(--border)', borderRadius: 4, fontSize: 12 }, formatter: v => metric === 'value' ? fmtMoneyFull(v) : fmtNum(Math.round(v)) }),
+          e(Bar, { dataKey: metric, radius: [3, 3, 0, 0] }, byLine.map((d, i) => e(Cell, { key: i, fill: COLORS[i % COLORS.length] })))))));
+
+  const lineCards = e('section', { className: 'section' },
+    e('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16 } },
+      byLine.map((L, i) => e('div', { key: i, className: 'card', style: { borderTop: '3px solid ' + COLORS[i % COLORS.length] } },
+        e('div', { style: { fontFamily: 'Fraunces, serif', fontSize: 16, color: COLORS[i % COLORS.length] } }, L.name),
+        e('div', { className: 'kpi-sub' }, fmtNum(L.skus) + ' SKUs'),
+        e('div', { style: { marginTop: 12, display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' } }, e('span', { className: 'kpi-label' }, 'On hand'), e('strong', { style: { fontFamily: 'JetBrains Mono' } }, fmtNum(Math.round(L.onhand)))),
+        e('div', { style: { marginTop: 6, display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' } }, e('span', { className: 'kpi-label' }, 'Value'), e('strong', { style: { fontFamily: 'JetBrains Mono' } }, fmtMoney(L.value)))))));
+
+  const productSection = e('section', { className: 'section' },
+    e('div', { className: 'section-header' },
+      e('h2', { className: 'section-title' }, 'Product ', e('em', null, 'inventory')),
+      e('span', { className: 'section-meta' }, fmtNum(inStock.length) + ' SKUs in stock')),
+    e(InventoryTable, { list: inStock }));
+
+  const oosSection = e('section', { className: 'section' },
+    e('div', { className: 'section-header' },
+      e('h2', { className: 'section-title' }, 'Out of ', e('em', null, 'stock')),
+      e('span', { className: 'section-meta' }, fmtNum(oos.length) + ' SKUs · 0 on hand')),
+    e('div', { className: 'card', style: { padding: 0, overflow: 'hidden' } },
+      e('div', { style: { overflowX: 'auto', maxHeight: 420 } },
+        e('table', { className: 'data-table' },
+          e('thead', null, e('tr', null,
+            e('th', null, 'Product'), e('th', null, 'Line'), e('th', null, 'SKU'),
+            e('th', { className: 'num' }, 'Units Sold'), e('th', { className: 'num' }, 'Batches'), e('th', null, 'Status'))),
+          e('tbody', null,
+            oos.length === 0
+              ? e('tr', null, e('td', { colSpan: 6, style: { padding: 20, color: 'var(--text-faint)', textAlign: 'center' } }, 'Nothing out of stock — every SKU has units on hand'))
+              : oos.map((p, i) => e('tr', { key: i },
+                  e('td', null, p.name),
+                  e('td', { className: 'dim' }, p.line),
+                  e('td', { className: 'dim font-mono', style: { fontSize: 11 } }, p.sku || '—'),
+                  e('td', { className: 'num dim' }, fmtNum(Math.round(p.sold))),
+                  e('td', { className: 'num dim' }, p.batches || '—'),
+                  e('td', null, e('span', { style: { fontFamily: 'JetBrains Mono', fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--rose)', border: '1px solid var(--rose)', borderRadius: 999, padding: '2px 8px' } }, 'Out')))))))));
+
+  return e('div', { className: 'app' },
+    e(Topbar, { fetchedAt: fetchedAt, rowCount: inStock.length, totalCount: built.length }),
+    e('div', { style: { marginBottom: 20 } },
+      e('h1', { style: { fontFamily: 'Fraunces, serif', fontWeight: 400, fontSize: 30, letterSpacing: '-0.02em', margin: 0 } }, 'Inventory'),
+      e('div', { style: { fontFamily: 'JetBrains Mono, monospace', fontSize: 11, color: 'var(--text-dim)', marginTop: 6 } }, 'New Jersey · Chill Medicated · live from Apex inventory')),
+    filterBar, kpis, byLineChart, lineCards, productSection, oosSection);
+}
+
 function App() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
@@ -1094,6 +1238,8 @@ function App() {
     /*#__PURE__*/React.createElement(ViewTabs, { tab: tab, setTab: setTab }),
     tab === 'ar'
       ? /*#__PURE__*/React.createElement(AccountsReceivable, { data: data })
+      : tab === 'inventory'
+      ? /*#__PURE__*/React.createElement(InventoryView, { data: data })
       : /*#__PURE__*/React.createElement(Dashboard, {
           data: data,
           filters: filters,
@@ -1102,6 +1248,23 @@ function App() {
 }
 
 // --- Dashboard --------------------------------------------------------------
+function usePager(total, pageSize) {
+  const size = pageSize || 50;
+  const [page, setPage] = React.useState(0);
+  const pages = Math.max(1, Math.ceil((total || 0) / size));
+  const cur = Math.min(page, pages - 1);
+  return { page: cur, pages: pages, size: size, start: cur * size, end: cur * size + size, setPage: setPage };
+}
+function Pager({ pager, total, unit }) {
+  const e = React.createElement;
+  if (!pager || pager.pages <= 1) return null;
+  const nav = (label, disabled, onClick) => e("button", { className: "date-preset", disabled: disabled, onClick: onClick, style: { opacity: disabled ? 0.35 : 1, cursor: disabled ? "default" : "pointer" } }, label);
+  return e("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 16px", borderTop: "1px solid var(--border)", fontFamily: "JetBrains Mono", fontSize: 11, color: "var(--text-dim)" } },
+    e("span", null, fmtNum(total) + " " + (unit || "items") + " \u00b7 page " + (pager.page + 1) + " of " + pager.pages),
+    e("div", { style: { display: "flex", gap: 8 } },
+      nav("\u2039 Prev", pager.page <= 0, function () { pager.setPage(pager.page - 1); }),
+      nav("Next \u203a", pager.page >= pager.pages - 1, function () { pager.setPage(pager.page + 1); })));
+}
 function Dashboard({
   data,
   filters,
@@ -1213,12 +1376,27 @@ function Dashboard({
 
   // KPIs
   const kpis = useMemo(() => {
-    const revenue = filtered.reduce((s, r) => s + r._revenue, 0);
+    const lineRevenue = filtered.reduce((s, r) => s + r._revenue, 0);
     const actualCost = filtered.reduce((s, r) => s + r._cost * r._quantity, 0);
     const units = filtered.reduce((s, r) => s + r._quantity, 0);
     const orderIds = new Set(filtered.map(r => r.order_id).filter(Boolean));
     const buyers = new Set(filtered.map(r => r.buyer_name).filter(Boolean));
-    const discounts = sumLineDiscounts(filtered);
+    const lineDiscounts = sumLineDiscounts(filtered);
+    // Invoice-level "additional discounts" repeat on every line of an invoice, so capture
+    // them once per invoice. They reduce what the buyer actually pays but aren't in line totals.
+    const addlByInvoice = new Map();
+    filtered.forEach(r => {
+      const id = r.order_id || r.order_number;
+      if (id && !addlByInvoice.has(id)) {
+        const ad = typeof r.additional_discounts === 'number' ? r.additional_discounts / 100 : parseMoney(r.additional_discounts);
+        if (ad) addlByInvoice.set(id, ad);
+      }
+    });
+    const addlDiscounts = [...addlByInvoice.values()].reduce((s, n) => s + n, 0);
+    // Net Revenue = line subtotal minus invoice-level additional discounts (actual amount billed).
+    const revenue = Math.max(0, lineRevenue - addlDiscounts);
+    // Discounts Given = per-line discounts plus the invoice-level additional discounts.
+    const discounts = lineDiscounts + addlDiscounts;
 
     // Credits — pulled from Apex's "Payments" text field where credits are recorded
     // as text like "Credit of $1,045.22 on 03/17/2026". The same payments string repeats
@@ -1660,6 +1838,8 @@ function Dashboard({
       rawPaymentsSample
     };
   }, [normalized, rows, filtered]);
+  const invPg = usePager(invoices.length, 50);
+  const pbPg = usePager(productBreakdown.length, 50);
   return /*#__PURE__*/React.createElement("div", {
     className: "app"
   }, /*#__PURE__*/React.createElement(Topbar, {
@@ -1866,7 +2046,7 @@ function Dashboard({
     className: "num"
   }, "Revenue"), /*#__PURE__*/React.createElement("th", {
     className: "num"
-  }, "Credit Applied"), /*#__PURE__*/React.createElement("th", null, "Payment"))), /*#__PURE__*/React.createElement("tbody", null, invoices.slice(0, 100).map((inv, i) => /*#__PURE__*/React.createElement("tr", {
+  }, "Credit Applied"), /*#__PURE__*/React.createElement("th", null, "Payment"))), /*#__PURE__*/React.createElement("tbody", null, invoices.slice(invPg.start, invPg.end).map((inv, i) => /*#__PURE__*/React.createElement("tr", {
     key: i,
     style: {
       cursor: 'pointer'
@@ -1904,16 +2084,7 @@ function Dashboard({
     })} on ${e.date}`).join('\n') : ''
   }, inv.credit > 0 ? fmtMoneyFull(inv.credit) : '—'), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement(StatusPill, {
     status: inv.status
-  }))))))), invoices.length > 100 && /*#__PURE__*/React.createElement("div", {
-    style: {
-      padding: '12px 16px',
-      fontFamily: 'JetBrains Mono',
-      fontSize: 11,
-      color: 'var(--text-faint)',
-      textAlign: 'center',
-      borderTop: '1px solid var(--border)'
-    }
-  }, "Showing 100 of ", fmtNum(invoices.length), " \xB7 use filters to narrow further"))), /*#__PURE__*/React.createElement("section", {
+  }))))))), /*#__PURE__*/React.createElement(Pager, { pager: invPg, total: invoices.length, unit: "invoices" }))), /*#__PURE__*/React.createElement("section", {
     className: "section"
   }, /*#__PURE__*/React.createElement("div", {
     className: "section-header"
@@ -1949,7 +2120,7 @@ function Dashboard({
     className: "num"
   }, "Listed $"), /*#__PURE__*/React.createElement("th", {
     className: "num"
-  }, "Current Inv."))), /*#__PURE__*/React.createElement("tbody", null, productBreakdown.slice(0, 100).map((p, i) => /*#__PURE__*/React.createElement("tr", {
+  }, "Current Inv."))), /*#__PURE__*/React.createElement("tbody", null, productBreakdown.slice(pbPg.start, pbPg.end).map((p, i) => /*#__PURE__*/React.createElement("tr", {
     key: i
   }, /*#__PURE__*/React.createElement("td", null, p.name), /*#__PURE__*/React.createElement("td", {
     className: "dim"
@@ -1971,16 +2142,7 @@ function Dashboard({
     style: {
       color: 'var(--text-faint)'
     }
-  }, "\u2014") : fmtNum(Math.round(p.currentInventory)))))))), productBreakdown.length > 100 && /*#__PURE__*/React.createElement("div", {
-    style: {
-      padding: '12px 16px',
-      fontFamily: 'JetBrains Mono',
-      fontSize: 11,
-      color: 'var(--text-faint)',
-      textAlign: 'center',
-      borderTop: '1px solid var(--border)'
-    }
-  }, "Showing top 100 of ", fmtNum(productBreakdown.length), " products by net sales"))), /*#__PURE__*/React.createElement("section", {
+  }, "\u2014") : fmtNum(Math.round(p.currentInventory)))))))), /*#__PURE__*/React.createElement(Pager, { pager: pbPg, total: productBreakdown.length, unit: "products" }))), /*#__PURE__*/React.createElement("section", {
     className: "section"
   }, /*#__PURE__*/React.createElement("div", {
     className: "section-header"
@@ -2197,7 +2359,8 @@ function Dashboard({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      overflowX: 'auto'
+      overflowX: 'auto',
+      maxHeight: 560
     }
   }, /*#__PURE__*/React.createElement("table", {
     className: "data-table"
@@ -2263,7 +2426,8 @@ function Dashboard({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      overflowX: 'auto'
+      overflowX: 'auto',
+      maxHeight: 560
     }
   }, /*#__PURE__*/React.createElement("table", {
     className: "data-table"

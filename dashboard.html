@@ -828,7 +828,7 @@ function AccountsReceivable({ data }) {
       const st = String(stRaw).toLowerCase().trim();
       // Open receivable = not paid. Statuses vary by market (Unpaid/Partial/Overdue,
       // and some markets store them lowercase), so match case-insensitively.
-      if (!({ unpaid:1, partial:1, 'partially paid':1, overdue:1, 'past due':1, 'past-due':1 })[st]) return;
+      if (!({ unpaid:1, 'un-paid':1, 'not paid':1, partial:1, 'partially paid':1, 'partially-paid':1, overdue:1, 'over due':1, 'past due':1, 'past-due':1, open:1, outstanding:1, due:1, 'balance due':1, 'awaiting payment':1, 'payment due':1 })[st]) return;
       const id = r.order_number || r.order_id || r.order;
       if (!id) return;
       if (!map[id]) {

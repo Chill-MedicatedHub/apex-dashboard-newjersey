@@ -1406,10 +1406,16 @@ function Dashboard({
       }
     });
     const addlDiscounts = [...addlByInvoice.values()].reduce((s, n) => s + n, 0);
-    // Net Revenue = line subtotal minus invoice-level additional discounts (actual amount billed).
-    const revenue = Math.max(0, lineRevenue - addlDiscounts);
-    // Discounts Given = per-line discounts plus the invoice-level additional discounts.
-    const discounts = lineDiscounts + addlDiscounts;
+    // Net Revenue = sum of invoice line totals, matching what Apex Trading reports and
+    // what the PDF/Excel export shows. We deliberately do NOT subtract
+    // `additional_discounts` here: that field is not consistently reflected in the Apex
+    // UI (see the note on the discount fields above), so subtracting it made the KPI
+    // disagree with Apex and with our own export by the additional-discount total for
+    // whatever range was filtered. It stays available as `additionalDiscounts` below if
+    // we ever want to surface it as its own metric.
+    const revenue = lineRevenue;
+    // Discounts Given = per-line discounts only, matching the PDF summary table.
+    const discounts = lineDiscounts;
 
     // Credits — pulled from Apex's "Payments" text field where credits are recorded
     // as text like "Credit of $1,045.22 on 03/17/2026". The same payments string repeats
@@ -1474,6 +1480,9 @@ function Dashboard({
       momChange,
       momLabel,
       discounts,
+      // Invoice-level "additional discounts" for the current filter range. Not folded
+      // into revenue or `discounts` (see note above) - exposed for reporting only.
+      additionalDiscounts: addlDiscounts,
       credits,
       creditCount,
       creditOrders,

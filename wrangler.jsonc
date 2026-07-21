@@ -1,0 +1,8 @@
+{
+  // Must match the NJ Worker name in Cloudflare (Workers & Pages → your NJ project).
+  // If it's named something else, change this to match, or wrangler deploys to the wrong Worker.
+  "name": "apex-dashboard-newjersey",
+  "compatibility_date": "2025-01-01",
+  // Serve the repo root (dashboard.html + JS assets) as a static site — no Worker script needed.
+  "assets": { "directory": "./" }
+}

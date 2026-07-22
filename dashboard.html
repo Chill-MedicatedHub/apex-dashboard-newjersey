@@ -796,7 +796,7 @@ function ViewTabs({ tab, setTab }) {
     className: 'view-tab' + (tab === id ? ' active' : '')
   }, label);
   return e('div', { className: 'view-tabs-wrap' },
-    e('div', { className: 'view-tabs' }, mk('sales', 'Sales'), mk('ar', 'Accounts Receivable'), mk('inventory', 'Inventory')));
+    e('div', { className: 'view-tabs' }, mk('sales', 'Sales'), mk('ar', 'Accounts Receivable'), mk('inventory', 'Inventory'), mk('prospecting', 'Prospecting')));
 }
 function AccountsReceivable({ data }) {
   const e = React.createElement;
@@ -1185,6 +1185,367 @@ function InventoryView({ data }) {
     filterBar, kpis, byLineChart, lineCards, productSection, oosSection);
 }
 
+// ── Prospecting tab (New Jersey) ───────────────────────────────────
+// As-of-today account development, independent of the dashboard date filter.
+// Three lenses:
+//   • New / potential buyers — licensed retailers we've never invoiced
+//     (needs prospects.json; matched to our book on license number).
+//   • Lapsed buyers — bought before, gone quiet (31–60 / 61–90 / 90+ days).
+//   • Growth opportunities — active buyers trending down, or carrying only a
+//     narrow slice of the catalog who could take more lines.
+function Prospecting({ data }) {
+  const e = React.createElement;
+  const normLic = s => String(s || '').trim().toUpperCase();
+  const DAY = 86400000;
+
+  // Buyer activity is measured on the current Apex book (live rows only), never
+  // the 2024 historical backfill or the synthetic AR-report rows.
+  const liveRows = (data._liveRows && data._liveRows.length ? data._liveRows : (data.rows || []))
+    .filter(r => !r._arReport)
+    .filter(r => String(r.is_sample || '').toLowerCase() !== 'yes'
+      && !/samp(le)?/i.test(String(r.product_name || '')));
+
+  const rowRev = r => {
+    if (typeof r.line_total_raw === 'number') return r.line_total_raw / 100;
+    if (typeof r.order_price === 'number') return r.order_price / 100;
+    if (r.gross != null) {
+      const g = parseFloat(r.gross) || 0;
+      const complete = String(r.order_status || '').toLowerCase() === 'complete';
+      return g - (complete ? (parseFloat(r.discount) || 0) : 0);
+    }
+    return parseMoney(r.line_total || r.computed_sale_price || r.total || r.revenue);
+  };
+  const rowDate = r => parseDate(r.order_date_localized_raw || r.order_date_utc_raw
+    || r.order_date_raw || r.order_date_localized || r.order_date_utc || r.order_date);
+
+  // Category universe present in the catalog (excludes AR/blank).
+  const catUniverse = useMemo(() => {
+    const s = new Set();
+    liveRows.forEach(r => {
+      const c = r.product_category_name || r.product_category;
+      if (c && !/^AR /.test(String(c))) s.add(String(c));
+    });
+    return [...s].sort();
+  }, [data]);
+
+  // Per-buyer rollup, keyed by license (fallback to name).
+  const buyers = useMemo(() => {
+    const m = new Map();
+    let latest = 0;
+    liveRows.forEach(r => {
+      const lic = normLic(r.buyer_license);
+      const key = lic || ('name:' + (r.buyer_name || '?'));
+      let b = m.get(key);
+      if (!b) { b = { key, license: lic, name: r.buyer_name || '—', city: r.buyer_city || '',
+        rep: '', rev: 0, orders: new Set(), cats: new Set(), first: null, last: null,
+        rev30: 0, revPrev30: 0 }; m.set(key, b); }
+      const rev = rowRev(r) || 0;
+      b.rev += rev;
+      if (r.order_number) b.orders.add(r.order_number);
+      const c = r.product_category_name || r.product_category;
+      if (c && !/^AR /.test(String(c))) b.cats.add(String(c));
+      if (!b.rep) { const rp = Array.isArray(r.sales_reps_display) && r.sales_reps_display.length
+        ? r.sales_reps_display.filter(Boolean).join(', ') : (r.sales_reps || ''); if (rp) b.rep = String(rp); }
+      if (!b.city && r.buyer_city) b.city = r.buyer_city;
+      const d = rowDate(r);
+      if (d) { const t = d.getTime();
+        if (!b.first || t < b.first) b.first = t;
+        if (!b.last || t > b.last) b.last = t;
+        if (t > latest) latest = t; }
+    });
+    // As-of anchor: newest order in the data (≈ today in daily-refreshed
+    // production; stays meaningful if the export is a few days stale).
+    const asOf = latest ? new Date(latest) : new Date();
+    const asOfT = asOf.getTime();
+    m.forEach(b => {
+      b.orderCount = b.orders.size;
+      b.gap = b.last ? Math.floor((asOfT - b.last) / DAY) : null;
+      b.catCount = b.cats.size;
+      b.missing = catUniverse.filter(c => !b.cats.has(c));
+    });
+    // Recent vs prior 30-day windows for trend.
+    liveRows.forEach(r => {
+      const d = rowDate(r); if (!d) return;
+      const age = Math.floor((asOfT - d.getTime()) / DAY);
+      const lic = normLic(r.buyer_license);
+      const b = m.get(lic || ('name:' + (r.buyer_name || '?')));
+      if (!b) return;
+      const rev = rowRev(r) || 0;
+      if (age >= 0 && age < 30) b.rev30 += rev;
+      else if (age >= 30 && age < 60) b.revPrev30 += rev;
+    });
+    return { list: [...m.values()], asOf };
+  }, [data]);
+
+  const asOf = buyers.asOf;
+  const fmtD = d => d ? ((d.getMonth() + 1) + '/' + String(d.getDate()).padStart(2, '0') + '/' + d.getFullYear()) : '—';
+  const exportXls = (filename, title, headers, rows2d) => {
+    if (!rows2d.length) { window.alert('Nothing to download in this view.'); return; }
+    const esc = v => String(v == null ? '' : v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const thead = '<tr>' + headers.map(h => '<th>' + esc(h) + '</th>').join('') + '</tr>';
+    const body = rows2d.map(r => '<tr>' + r.map(c => '<td>' + esc(c) + '</td>').join('') + '</tr>').join('');
+    const html = '<html xmlns:x="urn:schemas-microsoft-com:office:excel"><head><meta charset="utf-8"></head><body>'
+      + '<table><tr><td><b>' + esc(title) + '</b></td></tr><tr><td>Generated ' + esc(new Date().toLocaleString()) + '</td></tr></table><br>'
+      + '<table border="1"><thead>' + thead + '</thead><tbody>' + body + '</tbody></table></body></html>';
+    __dl(filename, new Blob([html], { type: 'application/vnd.ms-excel' }));
+  };
+  const dlBtn = onClick => e('button', { className: 'date-preset', onClick: onClick, title: 'Download this view as Excel' }, '⬇ Excel');
+  const ourLics = useMemo(() => {
+    const s = new Set();
+    (data.rows || []).forEach(r => { const l = normLic(r.buyer_license); if (l) s.add(l); });
+    return s;
+  }, [data]);
+
+  const [section, setSection] = React.useState('new');
+  const [q, setQ] = React.useState('');
+  const [bucket, setBucket] = React.useState('all'); // lapsed bucket
+
+  // ── Derived lists ──
+  const prospects = useMemo(() => {
+    const recs = (data.prospects && Array.isArray(data.prospects.records)) ? data.prospects.records : null;
+    if (!recs) return null;
+    const seen = new Set();
+    return recs.filter(p => {
+      const lic = normLic(p.license);
+      const type = String(p.type || '');
+      const status = String(p.status || '');
+      if (status && !/active/i.test(status)) return false;
+      if (type && !/retail|treatment/i.test(type)) return false;
+      if (!lic) return false;
+      if (ourLics.has(lic)) return false;           // already a customer
+      if (seen.has(lic)) return false;              // dedupe
+      seen.add(lic);
+      return true;
+    }).map(p => ({ name: p.name || '—', license: normLic(p.license), city: p.city || '',
+      county: p.county || '', address: p.address || '', zip: p.zip || '' }))
+      .sort((a, b) => (a.city || '').localeCompare(b.city || '') || a.name.localeCompare(b.name));
+  }, [data, ourLics]);
+
+  const lapsed = useMemo(() => buyers.list
+    .filter(b => b.gap != null && b.gap > 30)
+    .map(b => ({ ...b, bucket: b.gap <= 60 ? 'b3160' : b.gap <= 90 ? 'b6190' : 'b91' }))
+    .sort((a, b) => b.rev - a.rev), [buyers]);
+
+  const growth = useMemo(() => buyers.list
+    .filter(b => b.gap != null && b.gap <= 90)  // still reasonably active
+    .map(b => {
+      const declining = b.revPrev30 > 0 && b.rev30 < b.revPrev30 * 0.75;
+      const trend = b.revPrev30 > 0 ? (b.rev30 - b.revPrev30) / b.revPrev30 : null;
+      const narrow = b.catCount > 0 && b.catCount <= 2;
+      return { ...b, declining, trend, narrow };
+    })
+    .filter(b => b.declining || b.narrow)
+    .sort((a, b) => b.rev - a.rev), [buyers]);
+
+  // ── Section switcher ──
+  const segBtn = (id, label, n) => {
+    const on = section === id;
+    return e('button', { key: id, type: 'button', onClick: () => { setSection(id); setQ(''); },
+      style: { fontFamily: 'JetBrains Mono, monospace', fontSize: 12, cursor: 'pointer', padding: '9px 16px',
+        borderRadius: 9, border: '1px solid ' + (on ? 'var(--accent)' : '#e3e9f1'),
+        color: on ? '#fff' : 'var(--text-dim)', background: on ? 'var(--accent)' : '#fff',
+        fontWeight: on ? 700 : 500, transition: 'all .15s' } },
+      label, n != null ? e('span', { style: { opacity: 0.7, marginLeft: 7 } }, n) : null);
+  };
+
+  const cell = (label, value, sub, color) => e('div', { className: 'kpi',
+    style: color ? { borderTop: '2px solid ' + color } : {} },
+    e('div', { className: 'kpi-label' }, label),
+    e('div', { className: 'kpi-value tabular' }, value),
+    sub ? e('div', { className: 'kpi-sub' }, sub) : null);
+
+  const searchBox = ph => e('div', { className: 'filter-group', style: { minWidth: 220, marginLeft: 'auto' } },
+    e('label', { className: 'filter-label' }, 'Search'),
+    e('input', { type: 'text', className: 'filter-input', placeholder: ph, value: q,
+      onChange: ev => setQ(ev.target.value) }));
+
+  // Pagination hoisted to top level so hook order is stable across section
+  // switches (Rules of Hooks): compute each section's filtered list, then ONE pager.
+  const _newFlt = prospects
+    ? (q ? prospects.filter(p => (p.name + ' ' + p.city + ' ' + p.license + ' ' + p.county).toLowerCase().includes(q.toLowerCase())) : prospects)
+    : [];
+  let _lapList = bucket === 'all' ? lapsed : lapsed.filter(b => b.bucket === bucket);
+  if (q) _lapList = _lapList.filter(b => (buyerBusinessName(b.name) + ' ' + b.city + ' ' + b.rep).toLowerCase().includes(q.toLowerCase()));
+  const _groList = q ? growth.filter(b => (buyerBusinessName(b.name) + ' ' + b.city + ' ' + b.rep).toLowerCase().includes(q.toLowerCase())) : growth;
+  const _activeLen = section === 'new' ? _newFlt.length : section === 'lapsed' ? _lapList.length : _groList.length;
+  const pg = usePager(_activeLen, 50);
+
+  // ── NEW BUYERS ──
+  let body;
+  if (section === 'new') {
+    if (!prospects) {
+      body = e('section', { className: 'section' },
+        e('div', { className: 'card', style: { padding: 28, textAlign: 'center' } },
+          e('div', { style: { fontSize: 15, fontWeight: 700, marginBottom: 8 } }, 'No prospect list loaded yet'),
+          e('div', { style: { color: 'var(--text-dim)', fontSize: 13, lineHeight: 1.6, maxWidth: 620, margin: '0 auto' } },
+            'Add a ', e('code', null, 'prospects.json'), ' file to this dashboard folder — a list of licensed ',
+            'New Jersey retailers. This tab compares it against your book (by license number) and shows every ',
+            'licensed dispensary you have not yet invoiced. Generate it from your state regulator\'s ',
+            'licensed-business export.')));
+    } else {
+      const flt = _newFlt;
+      const cities = new Set(prospects.map(p => p.city).filter(Boolean));
+      body = e(React.Fragment, null,
+        e('div', { className: 'kpi-grid', style: { gridTemplateColumns: 'repeat(3, 1fr)', marginBottom: 20 } },
+          cell('Untapped retailers', fmtNum(prospects.length), 'licensed · never invoiced', 'var(--accent)'),
+          cell('Towns covered', fmtNum(cities.size), 'distinct municipalities'),
+          cell('Already customers', fmtNum(ourLics.size), 'licenses in your book')),
+        e('div', { className: 'filters', style: { marginBottom: 16 } }, searchBox('name / town / license…')),
+        e('section', { className: 'section' },
+          e('div', { className: 'section-header' },
+            e('h2', { className: 'section-title' }, 'New / potential ', e('em', null, 'buyers')),
+            e('div', { style: { display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' } },
+              e('span', { className: 'section-meta' }, fmtNum(flt.length) + ' prospects · A→Z by town'),
+              dlBtn(() => exportXls('Chill_NJ_Prospects_New.xls', 'Chill Medicated NJ \u2014 New / Potential Buyers',
+                ['Dispensary', 'Town', 'County', 'License #', 'Address'],
+                flt.map(p => [p.name, p.city, p.county, p.license, p.address]))))),
+          e('div', { className: 'card', style: { padding: 0, overflow: 'hidden' } },
+            e('div', { style: { overflowX: 'auto', maxHeight: 620 } },
+              e('table', { className: 'data-table', style: { minWidth: 820 } },
+                e('thead', null, e('tr', null,
+                  e('th', null, 'Dispensary'), e('th', null, 'Town'), e('th', null, 'County'),
+                  e('th', null, 'License #'), e('th', null, 'Address'))),
+                e('tbody', null,
+                  flt.length === 0
+                    ? e('tr', null, e('td', { colSpan: 5, style: { padding: 20, textAlign: 'center', color: 'var(--text-faint)' } }, 'No prospects match your search.'))
+                    : flt.slice(pg.start, pg.end).map((p, i) => e('tr', { key: i },
+                        e('td', { style: { whiteSpace: 'normal', minWidth: 200, fontWeight: 600 } }, p.name),
+                        e('td', null, p.city || '—'),
+                        e('td', { className: 'dim' }, p.county || '—'),
+                        e('td', { className: 'font-mono', style: { color: 'var(--accent)', fontSize: 11 } }, p.license),
+                        e('td', { className: 'dim', style: { whiteSpace: 'normal', minWidth: 200, fontSize: 12 } }, p.address || '—'))))))),
+          e(Pager, { pager: pg, total: flt.length, unit: 'prospects' })));
+    }
+  }
+
+  // ── LAPSED ──
+  if (section === 'lapsed') {
+    const BK = [
+      { key: 'b3160', label: '31–60 days', color: '#caa11e' },
+      { key: 'b6190', label: '61–90 days', color: '#e07b2a' },
+      { key: 'b91', label: '90+ days', color: '#d6433f' }
+    ];
+    const cnt = k => lapsed.filter(b => b.bucket === k).length;
+    const sumRev = k => lapsed.filter(b => k === 'all' || b.bucket === k).reduce((s, b) => s + b.rev, 0);
+    const list = _lapList;
+    const bkColor = k => (BK.find(x => x.key === k) || {}).color || 'var(--text-dim)';
+    const bkLabel = k => (BK.find(x => x.key === k) || {}).label || k;
+    const chip = (id, label, color) => {
+      const on = bucket === id;
+      return e('button', { key: id, type: 'button', onClick: () => setBucket(on ? 'all' : id),
+        style: { fontFamily: 'JetBrains Mono, monospace', fontSize: 12, cursor: 'pointer', padding: '8px 15px',
+          borderRadius: 9, border: '1px solid ' + color, color: on ? '#fff' : color,
+          background: on ? color : '#fff', fontWeight: on ? 700 : 500 } }, label);
+    };
+    body = e(React.Fragment, null,
+      e('div', { className: 'kpi-grid', style: { gridTemplateColumns: 'repeat(4, 1fr)', marginBottom: 20 } },
+        cell('At risk (all lapsed)', fmtNum(lapsed.length), fmtMoney(sumRev('all')) + ' lifetime value', 'var(--accent)'),
+        cell('Quiet · 31–60', fmtNum(cnt('b3160')), fmtMoney(sumRev('b3160')), BK[0].color),
+        cell('Slipping · 61–90', fmtNum(cnt('b6190')), fmtMoney(sumRev('b6190')), BK[1].color),
+        cell('Lapsed · 90+', fmtNum(cnt('b91')), fmtMoney(sumRev('b91')), BK[2].color)),
+      e('div', { className: 'filters', style: { marginBottom: 16, alignItems: 'flex-end' } },
+        e('div', { className: 'filter-group', style: { minWidth: 'auto' } },
+          e('label', { className: 'filter-label' }, 'Bucket'),
+          e('div', { style: { display: 'flex', gap: 6, flexWrap: 'wrap' } }, BK.map(b => chip(b.key, b.label, b.color)))),
+        searchBox('buyer / town / rep…')),
+      e('section', { className: 'section' },
+        e('div', { className: 'section-header' },
+          e('h2', { className: 'section-title' }, 'Lapsed ', e('em', null, 'buyers')),
+          e('div', { style: { display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' } },
+            e('span', { className: 'section-meta' }, fmtNum(list.length) + ' buyers · highest value first · as of ' + fmtD(asOf)),
+            dlBtn(() => exportXls('Chill_NJ_Lapsed_Buyers.xls', 'Chill Medicated NJ \u2014 Lapsed Buyers (as of ' + fmtD(asOf) + ')',
+              ['Buyer', 'Town', 'Last order', 'Days quiet', 'Lifetime value', 'Orders', 'Avg order', 'Rep'],
+              list.map(b => [buyerBusinessName(b.name), b.city, fmtD(b.last ? new Date(b.last) : null), b.gap, b.rev.toFixed(2), b.orderCount, (b.orderCount ? b.rev / b.orderCount : 0).toFixed(2), b.rep]))))),
+        e('div', { className: 'card', style: { padding: 0, overflow: 'hidden' } },
+          e('div', { style: { overflowX: 'auto', maxHeight: 620 } },
+            e('table', { className: 'data-table', style: { minWidth: 940 } },
+              e('thead', null, e('tr', null,
+                e('th', null, 'Buyer'), e('th', null, 'Town'), e('th', null, 'Last order'),
+                e('th', { className: 'num' }, 'Days quiet'), e('th', { className: 'num' }, 'Lifetime value'),
+                e('th', { className: 'num' }, 'Orders'), e('th', { className: 'num' }, 'Avg order'), e('th', null, 'Rep'))),
+              e('tbody', null,
+                list.length === 0
+                  ? e('tr', null, e('td', { colSpan: 8, style: { padding: 20, textAlign: 'center', color: 'var(--text-faint)' } }, 'No lapsed buyers in this bucket.'))
+                  : list.slice(pg.start, pg.end).map((b, i) => e('tr', { key: i },
+                      e('td', { style: { whiteSpace: 'normal', minWidth: 190, fontWeight: 600 } }, buyerBusinessName(b.name)),
+                      e('td', null, b.city || '—'),
+                      e('td', { className: 'dim font-mono' }, fmtD(b.last ? new Date(b.last) : null)),
+                      e('td', { className: 'num', style: { color: bkColor(b.bucket), fontWeight: 700 } }, b.gap),
+                      e('td', { className: 'num' }, e('strong', null, fmtMoneyFull(b.rev))),
+                      e('td', { className: 'num dim' }, b.orderCount),
+                      e('td', { className: 'num dim' }, fmtMoneyFull(b.orderCount ? b.rev / b.orderCount : 0)),
+                      e('td', { className: 'dim' }, b.rep || '—'))))))),
+        e(Pager, { pager: pg, total: list.length, unit: 'buyers' })));
+  }
+
+  // ── GROWTH ──
+  if (section === 'growth') {
+    const declineN = growth.filter(b => b.declining).length;
+    const narrowN = growth.filter(b => b.narrow).length;
+    const list = _groList;
+    const badge = (txt, color) => e('span', { style: { display: 'inline-block', fontSize: 10.5,
+      fontFamily: 'JetBrains Mono, monospace', padding: '2px 7px', borderRadius: 20, marginRight: 5,
+      border: '1px solid ' + color, color: color, fontWeight: 700 } }, txt);
+    const trendCell = b => b.trend == null
+      ? e('span', { className: 'dim' }, 'new')
+      : e('span', { style: { color: b.trend < 0 ? 'var(--rose)' : 'var(--sage, #2e9e57)', fontWeight: 700 } },
+          (b.trend > 0 ? '+' : '') + Math.round(b.trend * 100) + '%');
+    body = e(React.Fragment, null,
+      e('div', { className: 'kpi-grid', style: { gridTemplateColumns: 'repeat(3, 1fr)', marginBottom: 20 } },
+        cell('Opportunities', fmtNum(growth.length), 'active buyers to grow', 'var(--accent)'),
+        cell('Trending down', fmtNum(declineN), 'last 30d vs prior 30d', '#d6433f'),
+        cell('Narrow assortment', fmtNum(narrowN), '≤2 of ' + catUniverse.length + ' categories', '#caa11e')),
+      e('div', { className: 'filters', style: { marginBottom: 16 } }, searchBox('buyer / town / rep…')),
+      e('section', { className: 'section' },
+        e('div', { className: 'section-header' },
+          e('h2', { className: 'section-title' }, 'Growth ', e('em', null, 'opportunities')),
+          e('div', { style: { display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' } },
+            e('span', { className: 'section-meta' }, fmtNum(list.length) + ' buyers · highest value first · as of ' + fmtD(asOf)),
+            dlBtn(() => exportXls('Chill_NJ_Growth_Opportunities.xls', 'Chill Medicated NJ \u2014 Growth Opportunities (as of ' + fmtD(asOf) + ')',
+              ['Buyer', 'Town', 'Signal', 'Last 30d', 'Prior 30d', 'Trend', 'Lines', 'Missing lines', 'Rep'],
+              list.map(b => [buyerBusinessName(b.name), b.city, [b.declining ? 'Declining' : '', b.narrow ? 'Narrow' : ''].filter(Boolean).join(' + '), b.rev30.toFixed(2), b.revPrev30.toFixed(2), (b.trend == null ? 'new' : Math.round(b.trend * 100) + '%'), b.catCount + '/' + catUniverse.length, b.missing.join(', '), b.rep]))))),
+        e('div', { className: 'card', style: { padding: 0, overflow: 'hidden' } },
+          e('div', { style: { overflowX: 'auto', maxHeight: 620 } },
+            e('table', { className: 'data-table', style: { minWidth: 1040 } },
+              e('thead', null, e('tr', null,
+                e('th', null, 'Buyer'), e('th', null, 'Town'), e('th', null, 'Signal'),
+                e('th', { className: 'num' }, 'Last 30d'), e('th', { className: 'num' }, 'Prior 30d'),
+                e('th', { className: 'num' }, 'Trend'), e('th', { className: 'num' }, 'Lines'),
+                e('th', null, 'Missing lines'), e('th', null, 'Rep'))),
+              e('tbody', null,
+                list.length === 0
+                  ? e('tr', null, e('td', { colSpan: 9, style: { padding: 20, textAlign: 'center', color: 'var(--text-faint)' } }, 'No growth opportunities match your search.'))
+                  : list.slice(pg.start, pg.end).map((b, i) => e('tr', { key: i },
+                      e('td', { style: { whiteSpace: 'normal', minWidth: 180, fontWeight: 600 } }, buyerBusinessName(b.name)),
+                      e('td', null, b.city || '—'),
+                      e('td', { style: { whiteSpace: 'nowrap' } },
+                        b.declining ? badge('↓ Declining', '#d6433f') : null,
+                        b.narrow ? badge('Narrow', '#caa11e') : null),
+                      e('td', { className: 'num dim' }, fmtMoneyFull(b.rev30)),
+                      e('td', { className: 'num dim' }, fmtMoneyFull(b.revPrev30)),
+                      e('td', { className: 'num' }, trendCell(b)),
+                      e('td', { className: 'num', style: { fontWeight: 700 } }, b.catCount + '/' + catUniverse.length),
+                      e('td', { className: 'dim', style: { whiteSpace: 'normal', minWidth: 190, fontSize: 11.5 } },
+                        b.missing.length ? b.missing.join(', ') : '— full range'),
+                      e('td', { className: 'dim' }, b.rep || '—'))))))),
+        e(Pager, { pager: pg, total: list.length, unit: 'buyers' })));
+  }
+
+  return e('div', { className: 'app' },
+    e(Topbar, { fetchedAt: (data.fetched_at ? new Date(data.fetched_at) : new Date()),
+      rowCount: buyers.list.length, totalCount: buyers.list.length }),
+    e('div', { style: { marginBottom: 6 } },
+      e('h1', { style: { fontFamily: 'Fraunces, serif', fontWeight: 400, fontSize: 30, letterSpacing: '-0.02em', margin: 0 } },
+        'Prospecting ', e('em', { style: { color: 'var(--accent)', fontStyle: 'italic' } }, '& growth'))),
+    e('div', { style: { fontFamily: 'JetBrains Mono, monospace', fontSize: 11, color: 'var(--text-dim)', margin: '0 0 20px', letterSpacing: '0.04em' } },
+      'New Jersey · account development · as of ' + fmtD(asOf) + ' · independent of the date filter'),
+    e('div', { style: { display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 22 } },
+      segBtn('new', 'New / potential', prospects ? fmtNum(prospects.length) : null),
+      segBtn('lapsed', 'Lapsed', fmtNum(lapsed.length)),
+      segBtn('growth', 'Growth', fmtNum(growth.length))),
+    body);
+}
+
 function App() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
@@ -1214,13 +1575,17 @@ function App() {
         // or fails to parse, fall back to live-only instead of breaking.
         fetch('https://raw.githubusercontent.com/chill-medicatedhub/apex-dashboard-newjersey/refs/heads/main/historical_data.json?t=' + Date.now())
           .then(r => r.ok ? r.json() : { rows: [] })
-          .catch(() => ({ rows: [] }))
-      ]).then(([live, hist]) => {
+          .catch(() => ({ rows: [] })),
+        // Prospect list (licensed retailers). Optional: powers the New/potential buyers section.
+        fetch('https://raw.githubusercontent.com/chill-medicatedhub/apex-dashboard-newjersey/refs/heads/main/prospects.json?t=' + Date.now())
+          .then(r => r.ok ? r.json() : null)
+          .catch(() => null)
+      ]).then(([live, hist, prospects]) => {
         const histRows = Array.isArray(hist) ? hist : (hist.rows || []);
         // _liveRows = current Apex data only. Used by Accounts Receivable, which must
         // ignore the 2024 historical backfill (old records with stale "Unpaid" flags
         // and no due dates would otherwise inflate AR with settled invoices).
-        setData({ ...live, rows: [...histRows, ...(live.rows || [])], _liveRows: live.rows || [] });
+        setData({ ...live, rows: [...histRows, ...(live.rows || [])], _liveRows: live.rows || [], prospects: prospects });
       }).catch(e => setError(e.message));
     };
     load();
@@ -1251,6 +1616,8 @@ function App() {
     /*#__PURE__*/React.createElement(ViewTabs, { tab: tab, setTab: setTab }),
     tab === 'ar'
       ? /*#__PURE__*/React.createElement(AccountsReceivable, { data: data })
+      : tab === 'prospecting'
+      ? /*#__PURE__*/React.createElement(Prospecting, { data: data })
       : tab === 'inventory'
       ? /*#__PURE__*/React.createElement(InventoryView, { data: data })
       : /*#__PURE__*/React.createElement(Dashboard, {

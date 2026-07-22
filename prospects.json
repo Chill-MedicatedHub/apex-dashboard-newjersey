@@ -1,0 +1,2280 @@
+{
+  "as_of": "2026-07-22",
+  "source": "LeafLink customer directory (/api/v2/customers/)",
+  "state": "NJ",
+  "count": 284,
+  "records": [
+    {
+      "name": "Red Oak Dispensary - Absecon",
+      "license": "RE000523",
+      "type": "",
+      "status": "",
+      "city": "ABSECON",
+      "state": "NJ"
+    },
+    {
+      "name": "OTC JERSEY, LLC",
+      "license": "RE000977",
+      "type": "",
+      "status": "",
+      "city": "Absecon",
+      "state": "NJ"
+    },
+    {
+      "name": "Public Abescon",
+      "license": "RE000445",
+      "type": "",
+      "status": "",
+      "city": "Absecon",
+      "state": "NJ"
+    },
+    {
+      "name": "Andover Cannabis LLC",
+      "license": "RE000587",
+      "type": "",
+      "status": "",
+      "city": "Andover",
+      "state": "NJ"
+    },
+    {
+      "name": "Buddy'S Dispensary",
+      "license": "RE000094",
+      "type": "",
+      "status": "",
+      "city": "Andover",
+      "state": "NJ"
+    },
+    {
+      "name": "Green Oasis Dispensary",
+      "license": "RE000492",
+      "type": "",
+      "status": "",
+      "city": "Atco",
+      "state": "NJ"
+    },
+    {
+      "name": "AC LEEF LLC",
+      "license": "RE000527",
+      "type": "",
+      "status": "",
+      "city": "Atlantic City",
+      "state": "NJ"
+    },
+    {
+      "name": "Bakin' Bad",
+      "license": "RE000038",
+      "type": "",
+      "status": "",
+      "city": "Atlantic City",
+      "state": "NJ"
+    },
+    {
+      "name": "Design 710",
+      "license": "RE000691",
+      "type": "",
+      "status": "",
+      "city": "Atlantic City",
+      "state": "NJ"
+    },
+    {
+      "name": "Everest Dispensary",
+      "license": "RE000897",
+      "type": "",
+      "status": "",
+      "city": "Atlantic City",
+      "state": "NJ"
+    },
+    {
+      "name": "Green Eyed Chief",
+      "license": "RE000802",
+      "type": "",
+      "status": "",
+      "city": "Atlantic City",
+      "state": "NJ"
+    },
+    {
+      "name": "Green eyed chief llc",
+      "license": "RE00082",
+      "type": "",
+      "status": "",
+      "city": "Atlantic City",
+      "state": "NJ"
+    },
+    {
+      "name": "High Rollers Dispensary LLC",
+      "license": "RE000164",
+      "type": "",
+      "status": "",
+      "city": "Atlantic City",
+      "state": "NJ"
+    },
+    {
+      "name": "Honeybuzz Farms",
+      "license": "RE000305",
+      "type": "",
+      "status": "",
+      "city": "Atlantic City",
+      "state": "NJ"
+    },
+    {
+      "name": "Juniper Lane NJ",
+      "license": "RE000704",
+      "type": "",
+      "status": "",
+      "city": "Atlantic City",
+      "state": "NJ"
+    },
+    {
+      "name": "Legal Distribution",
+      "license": "RE000796",
+      "type": "",
+      "status": "",
+      "city": "Atlantic City",
+      "state": "NJ"
+    },
+    {
+      "name": "MPX/iAnthus - Atlantic City",
+      "license": "RE000368",
+      "type": "",
+      "status": "",
+      "city": "Atlantic City",
+      "state": "NJ"
+    },
+    {
+      "name": "PPP Dispensary LLC",
+      "license": "RE000247",
+      "type": "",
+      "status": "",
+      "city": "Atlantic City",
+      "state": "NJ"
+    },
+    {
+      "name": "Peaches Garden",
+      "license": "RE000049",
+      "type": "",
+      "status": "",
+      "city": "Atlantic City",
+      "state": "NJ"
+    },
+    {
+      "name": "ROLLIN' GREEN LLC",
+      "license": "RE001033",
+      "type": "",
+      "status": "",
+      "city": "Atlantic City",
+      "state": "NJ"
+    },
+    {
+      "name": "Rollin' Green",
+      "license": "RE0001033",
+      "type": "",
+      "status": "",
+      "city": "Atlantic City",
+      "state": "NJ"
+    },
+    {
+      "name": "SWEET LEAF'S DISPENSARY LLC DBA Sweet Leaf'S LLC And Sweet Leaf Dispensary",
+      "license": "RE000346",
+      "type": "",
+      "status": "",
+      "city": "Atlantic City",
+      "state": "NJ"
+    },
+    {
+      "name": "Salt Air Botanicals",
+      "license": "RE000279",
+      "type": "",
+      "status": "",
+      "city": "Atlantic City",
+      "state": "NJ"
+    },
+    {
+      "name": "SunnyTien LLC",
+      "license": "RE000290",
+      "type": "",
+      "status": "",
+      "city": "Atlantic City",
+      "state": "NJ"
+    },
+    {
+      "name": "The Healing Side LLC",
+      "license": "RE000148",
+      "type": "",
+      "status": "",
+      "city": "Atlantic City",
+      "state": "NJ"
+    },
+    {
+      "name": "The THC Shop LLC",
+      "license": "RE000880",
+      "type": "",
+      "status": "",
+      "city": "Atlantic City",
+      "state": "NJ"
+    },
+    {
+      "name": "Mad Hatter Dispensary",
+      "license": "RE000405",
+      "type": "",
+      "status": "",
+      "city": "Avenel",
+      "state": "NJ"
+    },
+    {
+      "name": "Emerald Tea Supply Co.",
+      "license": "RE000241",
+      "type": "",
+      "status": "",
+      "city": "BLOOMFIELD",
+      "state": "NJ"
+    },
+    {
+      "name": "La Vida Gardens LLC",
+      "license": "RE000406",
+      "type": "",
+      "status": "",
+      "city": "Belleville",
+      "state": "NJ"
+    },
+    {
+      "name": "Natural Apothecary LLC",
+      "license": "RE000174",
+      "type": "",
+      "status": "",
+      "city": "Belleville",
+      "state": "NJ"
+    },
+    {
+      "name": "Nevaeh Verde Dispensary",
+      "license": "RE000935",
+      "type": "",
+      "status": "",
+      "city": "Belleville",
+      "state": "NJ"
+    },
+    {
+      "name": "Blackwood Wellness",
+      "license": "RE000991",
+      "type": "",
+      "status": "",
+      "city": "Blackwood",
+      "state": "NJ"
+    },
+    {
+      "name": "A-Z Supply",
+      "license": "RE000943",
+      "type": "",
+      "status": "",
+      "city": "Bloomfield",
+      "state": "NJ"
+    },
+    {
+      "name": "Nightjar Cannabis",
+      "license": "RE000474",
+      "type": "",
+      "status": "",
+      "city": "Bloomfield",
+      "state": "NJ"
+    },
+    {
+      "name": "Oopachi",
+      "license": "RE001056",
+      "type": "",
+      "status": "",
+      "city": "Bloomfield",
+      "state": "NJ"
+    },
+    {
+      "name": "Rise (Bloomfield)",
+      "license": "MRE000811",
+      "type": "",
+      "status": "",
+      "city": "Bloomfield",
+      "state": "NJ"
+    },
+    {
+      "name": "The Public Garden",
+      "license": "RE000334",
+      "type": "",
+      "status": "",
+      "city": "Bloomfield",
+      "state": "NJ"
+    },
+    {
+      "name": "Evolve Cannabis",
+      "license": "RE000766",
+      "type": "",
+      "status": "",
+      "city": "Bordentown",
+      "state": "NJ"
+    },
+    {
+      "name": "Blazin Buddiez",
+      "license": "RE000676",
+      "type": "",
+      "status": "",
+      "city": "Bridgeton",
+      "state": "NJ"
+    },
+    {
+      "name": "Social Dispensary",
+      "license": "RE000249",
+      "type": "",
+      "status": "",
+      "city": "Bridgeton",
+      "state": "NJ"
+    },
+    {
+      "name": "Indigo Dispensary",
+      "license": "RE000723",
+      "type": "",
+      "status": "",
+      "city": "Brooklawn",
+      "state": "NJ"
+    },
+    {
+      "name": "Taste Of Earth",
+      "license": "RE000540",
+      "type": "",
+      "status": "",
+      "city": "Buena",
+      "state": "NJ"
+    },
+    {
+      "name": "Evergreen Natures Remedy",
+      "license": "RE000887",
+      "type": "",
+      "status": "",
+      "city": "Butler",
+      "state": "NJ"
+    },
+    {
+      "name": "HoneyGrove South Corp",
+      "license": "RE000752",
+      "type": "",
+      "status": "",
+      "city": "CLEMENTON",
+      "state": "NJ"
+    },
+    {
+      "name": "Camden Apothecary, Inc.",
+      "license": "RE000741",
+      "type": "",
+      "status": "",
+      "city": "Camden",
+      "state": "NJ"
+    },
+    {
+      "name": "Cuzzie\u2019s Dispensary",
+      "license": "RE000069",
+      "type": "",
+      "status": "",
+      "city": "Camden",
+      "state": "NJ"
+    },
+    {
+      "name": "Loud House",
+      "license": "RE000847",
+      "type": "",
+      "status": "",
+      "city": "Camden",
+      "state": "NJ"
+    },
+    {
+      "name": "Organic Farms",
+      "license": "RE000070",
+      "type": "",
+      "status": "",
+      "city": "Camden",
+      "state": "NJ"
+    },
+    {
+      "name": "Shore House Canna",
+      "license": "RE000707",
+      "type": "",
+      "status": "",
+      "city": "Cape May",
+      "state": "NJ"
+    },
+    {
+      "name": "Coastline Dispensary",
+      "license": "RE000804",
+      "type": "",
+      "status": "",
+      "city": "Cape May Court House",
+      "state": "NJ"
+    },
+    {
+      "name": "Illicit Gardens - Carlstadt,",
+      "license": "RE000850",
+      "type": "",
+      "status": "",
+      "city": "Carlstadt",
+      "state": "NJ"
+    },
+    {
+      "name": "Twisted Hat Cannabis",
+      "license": "RE000056",
+      "type": "",
+      "status": "",
+      "city": "Carneys Point",
+      "state": "NJ"
+    },
+    {
+      "name": "Green Lightning Cultivation",
+      "license": "RE000925",
+      "type": "",
+      "status": "",
+      "city": "Cinnaminson",
+      "state": "NJ"
+    },
+    {
+      "name": "The Leaf and Seed Company",
+      "license": "RE000554",
+      "type": "",
+      "status": "",
+      "city": "Clementon",
+      "state": "NJ"
+    },
+    {
+      "name": "The Botanist Collingswood Dispensary",
+      "license": "RE000903",
+      "type": "",
+      "status": "",
+      "city": "Collingswood",
+      "state": "NJ"
+    },
+    {
+      "name": "Castaway Cannabis LLC",
+      "license": "RE000810",
+      "type": "",
+      "status": "",
+      "city": "Delran",
+      "state": "NJ"
+    },
+    {
+      "name": "Casa Verde Wellness",
+      "license": "RE000881",
+      "type": "",
+      "status": "",
+      "city": "Dover",
+      "state": "NJ"
+    },
+    {
+      "name": "Sugar Leaves",
+      "license": "RE000232",
+      "type": "",
+      "status": "",
+      "city": "Dover",
+      "state": "NJ"
+    },
+    {
+      "name": "The Goods Supply Co. Victory Gardens LLC.",
+      "license": "RE000455",
+      "type": "",
+      "status": "",
+      "city": "Dover",
+      "state": "NJ"
+    },
+    {
+      "name": "Baked Goodz",
+      "license": "RE000128",
+      "type": "",
+      "status": "",
+      "city": "EAST ORANGE",
+      "state": "NJ"
+    },
+    {
+      "name": "Bloc Dispensary (Ewing)",
+      "license": "RE000385",
+      "type": "",
+      "status": "",
+      "city": "EWING, MERCER",
+      "state": "NJ"
+    },
+    {
+      "name": "Garden State Dispensary - Eatontown",
+      "license": "RE000016",
+      "type": "",
+      "status": "",
+      "city": "Eatontown",
+      "state": "NJ"
+    },
+    {
+      "name": "NJ Pure LLC",
+      "license": "RE000417",
+      "type": "",
+      "status": "",
+      "city": "Edgewater Park",
+      "state": "NJ"
+    },
+    {
+      "name": "The Botanist Egg Harbor",
+      "license": "RE000013",
+      "type": "",
+      "status": "",
+      "city": "Egg Harbor",
+      "state": "NJ"
+    },
+    {
+      "name": "Atlantic Flower Dispensary",
+      "license": "RE000617",
+      "type": "",
+      "status": "",
+      "city": "Egg Harbor City",
+      "state": "NJ"
+    },
+    {
+      "name": "Med Leaf LLC",
+      "license": "RE000024",
+      "type": "",
+      "status": "",
+      "city": "Egg Harbor City",
+      "state": "NJ"
+    },
+    {
+      "name": "City Leaves",
+      "license": "RE000242",
+      "type": "",
+      "status": "",
+      "city": "Egg Harbor Township",
+      "state": "NJ"
+    },
+    {
+      "name": "Conservatory Cannabis Company",
+      "license": "RE000868",
+      "type": "",
+      "status": "",
+      "city": "Egg Harbor Township",
+      "state": "NJ"
+    },
+    {
+      "name": "Red Oak Dispensary - EHT, LLC",
+      "license": "RE000886",
+      "type": "",
+      "status": "",
+      "city": "Egg Harbor Township",
+      "state": "NJ"
+    },
+    {
+      "name": "Budzooka Dispensary LLC",
+      "license": "RE000924",
+      "type": "",
+      "status": "",
+      "city": "Elizabeth",
+      "state": "NJ"
+    },
+    {
+      "name": "Fresh Elizabeth LLC",
+      "license": "RE000541",
+      "type": "",
+      "status": "",
+      "city": "Elizabeth",
+      "state": "NJ"
+    },
+    {
+      "name": "Urge New Jersey LLC",
+      "license": "RE000074",
+      "type": "",
+      "status": "",
+      "city": "Elizabeth",
+      "state": "NJ"
+    },
+    {
+      "name": "CannaVibes",
+      "license": "RE000036",
+      "type": "",
+      "status": "",
+      "city": "Elmwood Park",
+      "state": "NJ"
+    },
+    {
+      "name": "OHM THEORY",
+      "license": "RE000177",
+      "type": "",
+      "status": "",
+      "city": "Elmwood Park",
+      "state": "NJ"
+    },
+    {
+      "name": "Bud It Up",
+      "license": "RE000295",
+      "type": "",
+      "status": "",
+      "city": "Englishtown",
+      "state": "NJ"
+    },
+    {
+      "name": "Plantopia LLC",
+      "license": "RE000509",
+      "type": "",
+      "status": "",
+      "city": "Englishtown",
+      "state": "NJ"
+    },
+    {
+      "name": "RUUTED LLC",
+      "license": "RE000394",
+      "type": "",
+      "status": "",
+      "city": "Englishtown",
+      "state": "NJ"
+    },
+    {
+      "name": "Scarlet Reserve Room",
+      "license": "RE000559",
+      "type": "",
+      "status": "",
+      "city": "Englishtown",
+      "state": "NJ"
+    },
+    {
+      "name": "Floro Evesham",
+      "license": "RE000832",
+      "type": "",
+      "status": "",
+      "city": "Evesham",
+      "state": "NJ"
+    },
+    {
+      "name": "Highway 90 LLC",
+      "license": "RE000775",
+      "type": "",
+      "status": "",
+      "city": "Evesham",
+      "state": "NJ"
+    },
+    {
+      "name": "Simply Pure Trenton NJ Inc",
+      "license": "RE000028",
+      "type": "",
+      "status": "",
+      "city": "Ewing Township",
+      "state": "NJ"
+    },
+    {
+      "name": "Aunt Mary'S Dispensary",
+      "license": "RE000689",
+      "type": "",
+      "status": "",
+      "city": "Flemington",
+      "state": "NJ"
+    },
+    {
+      "name": "Ascend Wellness - Fort Lee",
+      "license": "RE000259",
+      "type": "",
+      "status": "",
+      "city": "Fort Lee",
+      "state": "NJ"
+    },
+    {
+      "name": "GW LEAF DISPENSARY LLC",
+      "license": "RE001011",
+      "type": "",
+      "status": "",
+      "city": "Fort Lee",
+      "state": "NJ"
+    },
+    {
+      "name": "High Almighty",
+      "license": "RE000581",
+      "type": "",
+      "status": "",
+      "city": "Franklin Park",
+      "state": "NJ"
+    },
+    {
+      "name": "Citi Roots LLC",
+      "license": "RE000588",
+      "type": "",
+      "status": "",
+      "city": "Franklin Township",
+      "state": "NJ"
+    },
+    {
+      "name": "Garden State Natural Green",
+      "license": "RE000347",
+      "type": "",
+      "status": "",
+      "city": "Franklin Township",
+      "state": "NJ"
+    },
+    {
+      "name": "Somerset Green LLC",
+      "license": "RE000994",
+      "type": "",
+      "status": "",
+      "city": "Franklin Township",
+      "state": "NJ"
+    },
+    {
+      "name": "Sparkology",
+      "license": "RE000936",
+      "type": "",
+      "status": "",
+      "city": "Franklin Township",
+      "state": "NJ"
+    },
+    {
+      "name": "THEO A CANNABIS",
+      "license": "RE000843",
+      "type": "",
+      "status": "",
+      "city": "Franklin Township",
+      "state": "NJ"
+    },
+    {
+      "name": "Timber 5",
+      "license": "RE000149",
+      "type": "",
+      "status": "",
+      "city": "Franklin Township",
+      "state": "NJ"
+    },
+    {
+      "name": "NJ Leaf (Freehold)",
+      "license": "RE000640",
+      "type": "",
+      "status": "",
+      "city": "Freehold",
+      "state": "NJ"
+    },
+    {
+      "name": "Garfield Gardens Dispensary LLC",
+      "license": "RE000728",
+      "type": "",
+      "status": "",
+      "city": "Garfield",
+      "state": "NJ"
+    },
+    {
+      "name": "One Green Leaf LLC",
+      "license": "RE000846",
+      "type": "",
+      "status": "",
+      "city": "Gibbsboro",
+      "state": "NJ"
+    },
+    {
+      "name": "Altius",
+      "license": "RE000216",
+      "type": "",
+      "status": "",
+      "city": "Glassboro",
+      "state": "NJ"
+    },
+    {
+      "name": "The Jersey Joint",
+      "license": "RE000020",
+      "type": "",
+      "status": "",
+      "city": "Glassboro",
+      "state": "NJ"
+    },
+    {
+      "name": "Blulight Cannabis Dispensary- Gloucester City",
+      "license": "RE000956",
+      "type": "",
+      "status": "",
+      "city": "Gloucester City",
+      "state": "NJ"
+    },
+    {
+      "name": "Flower & Flame LLC",
+      "license": "RE000219",
+      "type": "",
+      "status": "",
+      "city": "Gloucester Township",
+      "state": "NJ"
+    },
+    {
+      "name": "Midnight Greens",
+      "license": "RE000486",
+      "type": "",
+      "status": "",
+      "city": "Gloucester Township",
+      "state": "NJ"
+    },
+    {
+      "name": "Quality Cannabliss",
+      "license": "RE000575",
+      "type": "",
+      "status": "",
+      "city": "Gloucester Township",
+      "state": "NJ"
+    },
+    {
+      "name": "Hashery",
+      "license": "RE000185",
+      "type": "",
+      "status": "",
+      "city": "Hackensack",
+      "state": "NJ"
+    },
+    {
+      "name": "Hackettstown Dispensary",
+      "license": "RE0000108",
+      "type": "",
+      "status": "",
+      "city": "Hacketstown",
+      "state": "NJ"
+    },
+    {
+      "name": "High Street Dispensary LLC",
+      "license": "RE000165",
+      "type": "",
+      "status": "",
+      "city": "Hackettstown",
+      "state": "NJ"
+    },
+    {
+      "name": "Molly Ann Farms",
+      "license": "RE000173",
+      "type": "",
+      "status": "",
+      "city": "Haledon",
+      "state": "NJ"
+    },
+    {
+      "name": "Northeast Alternatives",
+      "license": "RE001004",
+      "type": "",
+      "status": "",
+      "city": "Hamilton",
+      "state": "NJ"
+    },
+    {
+      "name": "Botera Harrison LLC",
+      "license": "RE000269",
+      "type": "",
+      "status": "",
+      "city": "Harrison",
+      "state": "NJ"
+    },
+    {
+      "name": "Cookies Harrison LLC",
+      "license": "RE000240",
+      "type": "",
+      "status": "",
+      "city": "Harrison",
+      "state": "NJ"
+    },
+    {
+      "name": "ANJA Life LLC",
+      "license": "RE000312",
+      "type": "",
+      "status": "",
+      "city": "Highland Park",
+      "state": "NJ"
+    },
+    {
+      "name": "BLKBRN Dispensary",
+      "license": "RE000946",
+      "type": "",
+      "status": "",
+      "city": "Highland Park",
+      "state": "NJ"
+    },
+    {
+      "name": "Main Street Dispensary",
+      "license": "RE000439",
+      "type": "",
+      "status": "",
+      "city": "Highland Park",
+      "state": "NJ"
+    },
+    {
+      "name": "The Honorable Plant LLC",
+      "license": "RE000189",
+      "type": "",
+      "status": "",
+      "city": "Highlands",
+      "state": "NJ"
+    },
+    {
+      "name": "Blue Violets",
+      "license": "RE000817",
+      "type": "",
+      "status": "",
+      "city": "Hoboken",
+      "state": "NJ"
+    },
+    {
+      "name": "Test Buyer",
+      "license": "M000086",
+      "type": "",
+      "status": "",
+      "city": "Hoboken",
+      "state": "NJ"
+    },
+    {
+      "name": "The Station Hoboken LLC F/K/A Terrapin Investment Group II LLC",
+      "license": "RE000785",
+      "type": "",
+      "status": "",
+      "city": "Hoboken",
+      "state": "NJ"
+    },
+    {
+      "name": "Village Hoboken",
+      "license": "RE000875",
+      "type": "",
+      "status": "",
+      "city": "Hoboken",
+      "state": "NJ"
+    },
+    {
+      "name": "SKY CANNABIS NJ",
+      "license": "RE000981",
+      "type": "",
+      "status": "",
+      "city": "Hopewell",
+      "state": "NJ"
+    },
+    {
+      "name": "ORGANIC FUSION LLC",
+      "license": "RE000478",
+      "type": "",
+      "status": "",
+      "city": "Irvington",
+      "state": "NJ"
+    },
+    {
+      "name": "1634 Funk",
+      "license": "RE000035",
+      "type": "",
+      "status": "",
+      "city": "Jersey City",
+      "state": "NJ"
+    },
+    {
+      "name": "Altalune Dispensary LLC",
+      "license": "RE000395",
+      "type": "",
+      "status": "",
+      "city": "Jersey City",
+      "state": "NJ"
+    },
+    {
+      "name": "Authorized Dealer Dispensary III",
+      "license": "RE000825",
+      "type": "",
+      "status": "",
+      "city": "Jersey City",
+      "state": "NJ"
+    },
+    {
+      "name": "Benedict'S Supply",
+      "license": "RE000525",
+      "type": "",
+      "status": "",
+      "city": "Jersey City",
+      "state": "NJ"
+    },
+    {
+      "name": "Cannabis Connoisseurs Collective",
+      "license": "RE000601",
+      "type": "",
+      "status": "",
+      "city": "Jersey City",
+      "state": "NJ"
+    },
+    {
+      "name": "Cream",
+      "license": "RE000834",
+      "type": "",
+      "status": "",
+      "city": "Jersey City",
+      "state": "NJ"
+    },
+    {
+      "name": "Downtown FLWR",
+      "license": "RE000725",
+      "type": "",
+      "status": "",
+      "city": "Jersey City",
+      "state": "NJ"
+    },
+    {
+      "name": "Garden Greenz",
+      "license": "RE000133",
+      "type": "",
+      "status": "",
+      "city": "Jersey City",
+      "state": "NJ"
+    },
+    {
+      "name": "Golden Door Dispensary",
+      "license": "RE000265",
+      "type": "",
+      "status": "",
+      "city": "Jersey City",
+      "state": "NJ"
+    },
+    {
+      "name": "Greenstop Wellness LLC",
+      "license": "RE000221",
+      "type": "",
+      "status": "",
+      "city": "Jersey City",
+      "state": "NJ"
+    },
+    {
+      "name": "Hamm and Chaz",
+      "license": "RE000356",
+      "type": "",
+      "status": "",
+      "city": "Jersey City",
+      "state": "NJ"
+    },
+    {
+      "name": "Hazy Harvest",
+      "license": "RE000136",
+      "type": "",
+      "status": "",
+      "city": "Jersey City",
+      "state": "NJ"
+    },
+    {
+      "name": "Jersey Dispensary",
+      "license": "RE000699",
+      "type": "",
+      "status": "",
+      "city": "Jersey City",
+      "state": "NJ"
+    },
+    {
+      "name": "Jersey Leaf LLC",
+      "license": "RE000045",
+      "type": "",
+      "status": "",
+      "city": "Jersey City",
+      "state": "NJ"
+    },
+    {
+      "name": "Legacy to Lifted",
+      "license": "RE000380",
+      "type": "",
+      "status": "",
+      "city": "Jersey City",
+      "state": "NJ"
+    },
+    {
+      "name": "Lifted Vision",
+      "license": "RE000381",
+      "type": "",
+      "status": "",
+      "city": "Jersey City",
+      "state": "NJ"
+    },
+    {
+      "name": "Meme'S Danckk World, LLC",
+      "license": "RE000546",
+      "type": "",
+      "status": "",
+      "city": "Jersey City",
+      "state": "NJ"
+    },
+    {
+      "name": "The Cannabis Place",
+      "license": "RE000246",
+      "type": "",
+      "status": "",
+      "city": "Jersey City",
+      "state": "NJ"
+    },
+    {
+      "name": "The Leaf Joint LLC",
+      "license": "RE000264",
+      "type": "",
+      "status": "",
+      "city": "Jersey City",
+      "state": "NJ"
+    },
+    {
+      "name": "The Medicine Woman",
+      "license": "RE000947",
+      "type": "",
+      "status": "",
+      "city": "Jersey City",
+      "state": "NJ"
+    },
+    {
+      "name": "The Retreat",
+      "license": "RE000571",
+      "type": "",
+      "status": "",
+      "city": "Jersey City",
+      "state": "NJ"
+    },
+    {
+      "name": "UFORIA",
+      "license": "RE000858",
+      "type": "",
+      "status": "",
+      "city": "Jersey City",
+      "state": "NJ"
+    },
+    {
+      "name": "XENA",
+      "license": "RE000052",
+      "type": "",
+      "status": "",
+      "city": "Jersey City",
+      "state": "NJ"
+    },
+    {
+      "name": "NJ Leaf Keansburg",
+      "license": "RE001024",
+      "type": "",
+      "status": "",
+      "city": "Keansburg",
+      "state": "NJ"
+    },
+    {
+      "name": "Premo Cannabis Co",
+      "license": "RE000446",
+      "type": "",
+      "status": "",
+      "city": "Keyport",
+      "state": "NJ"
+    },
+    {
+      "name": "Gas & Grass Dispensary",
+      "license": "RE001012",
+      "type": "",
+      "status": "",
+      "city": "Lake Hopatcong",
+      "state": "NJ"
+    },
+    {
+      "name": "Greenlight Apothecary",
+      "license": "RE000586",
+      "type": "",
+      "status": "",
+      "city": "Lake Hopatcong",
+      "state": "NJ"
+    },
+    {
+      "name": "Earth & Ivy - Lakehurst",
+      "license": "RE000979",
+      "type": "",
+      "status": "",
+      "city": "Lakehurst",
+      "state": "NJ"
+    },
+    {
+      "name": "High Profile - Lakehurst",
+      "license": "RE000794",
+      "type": "",
+      "status": "",
+      "city": "Lakehurst",
+      "state": "NJ"
+    },
+    {
+      "name": "Baked By The River",
+      "license": "RE000077",
+      "type": "",
+      "status": "",
+      "city": "Lambertville",
+      "state": "NJ"
+    },
+    {
+      "name": "Collective Beleaf",
+      "license": "RE000931",
+      "type": "",
+      "status": "",
+      "city": "Lambertville",
+      "state": "NJ"
+    },
+    {
+      "name": "Union Chill Cannabis Company",
+      "license": "RE000636",
+      "type": "",
+      "status": "",
+      "city": "Lambertville",
+      "state": "NJ"
+    },
+    {
+      "name": "Mister Jones Dispensary",
+      "license": "RE001029",
+      "type": "",
+      "status": "",
+      "city": "Little Falls Township",
+      "state": "NJ"
+    },
+    {
+      "name": "Beyond Hello",
+      "license": "123456",
+      "type": "",
+      "status": "",
+      "city": "Little Ferry",
+      "state": "NJ"
+    },
+    {
+      "name": "Quality Roots - Evesham, LLC",
+      "license": "RE000270",
+      "type": "",
+      "status": "",
+      "city": "MARLTON",
+      "state": "NJ"
+    },
+    {
+      "name": "HoneyStash LLC",
+      "license": "RE000463",
+      "type": "",
+      "status": "",
+      "city": "METUCHEN",
+      "state": "NJ"
+    },
+    {
+      "name": "Elevated by the CannaBoss Lady",
+      "license": "RE000080",
+      "type": "",
+      "status": "",
+      "city": "Maplewood",
+      "state": "NJ"
+    },
+    {
+      "name": "Sweet Spot Farms",
+      "license": "RE000427",
+      "type": "",
+      "status": "",
+      "city": "Maplewood",
+      "state": "NJ"
+    },
+    {
+      "name": "Canna Bar",
+      "license": "RE000965",
+      "type": "",
+      "status": "",
+      "city": "Matawan",
+      "state": "NJ"
+    },
+    {
+      "name": "Vigor Dispensary",
+      "license": "RE000448",
+      "type": "",
+      "status": "",
+      "city": "Matawan",
+      "state": "NJ"
+    },
+    {
+      "name": "Kine Buds Dispensary",
+      "license": "RE000939",
+      "type": "",
+      "status": "",
+      "city": "Maywood",
+      "state": "NJ"
+    },
+    {
+      "name": "Gynsyng",
+      "license": "RE000163",
+      "type": "",
+      "status": "",
+      "city": "Merchantville",
+      "state": "NJ"
+    },
+    {
+      "name": "Carry-On Cannabis LLC",
+      "license": "RE000348",
+      "type": "",
+      "status": "",
+      "city": "Monroe",
+      "state": "NJ"
+    },
+    {
+      "name": "UMA Flowers",
+      "license": "RE000181",
+      "type": "",
+      "status": "",
+      "city": "Morristown",
+      "state": "NJ"
+    },
+    {
+      "name": "Brotherly Bud LLC",
+      "license": "RE000229",
+      "type": "",
+      "status": "",
+      "city": "Mount Ephraim",
+      "state": "NJ"
+    },
+    {
+      "name": "Mass Grown",
+      "license": "RE000336",
+      "type": "",
+      "status": "",
+      "city": "Mount Holly",
+      "state": "NJ"
+    },
+    {
+      "name": "Voltaire NJ",
+      "license": "RE000183",
+      "type": "",
+      "status": "",
+      "city": "Mount Holly",
+      "state": "NJ"
+    },
+    {
+      "name": "NAR Cannabis LLC",
+      "license": "RE000900",
+      "type": "",
+      "status": "",
+      "city": "Mount Laurel",
+      "state": "NJ"
+    },
+    {
+      "name": "Daylite Cannabis",
+      "license": "RE000021",
+      "type": "",
+      "status": "",
+      "city": "Mount Laurel Township",
+      "state": "NJ"
+    },
+    {
+      "name": "Nirvana Dispensary",
+      "license": "RE000823",
+      "type": "",
+      "status": "",
+      "city": "Mount Laurel Township",
+      "state": "NJ"
+    },
+    {
+      "name": "Phula LLC",
+      "license": "RE000125",
+      "type": "",
+      "status": "",
+      "city": "Mt Holly",
+      "state": "NJ"
+    },
+    {
+      "name": "Milligrams",
+      "license": "RE000222",
+      "type": "",
+      "status": "",
+      "city": "Mt. Laurel",
+      "state": "NJ"
+    },
+    {
+      "name": "Releaf Newton",
+      "license": "RE000653",
+      "type": "",
+      "status": "",
+      "city": "NEWTON",
+      "state": "NJ"
+    },
+    {
+      "name": "Shipwreck'D",
+      "license": "RE000993",
+      "type": "",
+      "status": "",
+      "city": "Neptune City",
+      "state": "NJ"
+    },
+    {
+      "name": "Bud 2 Bloom LLC",
+      "license": "RE000239",
+      "type": "",
+      "status": "",
+      "city": "Netcong",
+      "state": "NJ"
+    },
+    {
+      "name": "Earth & Ivy, LLC",
+      "license": "RE000620",
+      "type": "",
+      "status": "",
+      "city": "New Brunswick",
+      "state": "NJ"
+    },
+    {
+      "name": "Jesters Joint Dispensary",
+      "license": "RE000120",
+      "type": "",
+      "status": "",
+      "city": "New Brunswick",
+      "state": "NJ"
+    },
+    {
+      "name": "Puffin Store NJ LLC",
+      "license": "RE000688",
+      "type": "",
+      "status": "",
+      "city": "New Brunswick",
+      "state": "NJ"
+    },
+    {
+      "name": "Hashatoria",
+      "license": "RE000898",
+      "type": "",
+      "status": "",
+      "city": "Newark",
+      "state": "NJ"
+    },
+    {
+      "name": "The Station Dispensary LLC",
+      "license": "RE000615",
+      "type": "",
+      "status": "",
+      "city": "Newark",
+      "state": "NJ"
+    },
+    {
+      "name": "Treeotics LLC",
+      "license": "RE000082",
+      "type": "",
+      "status": "",
+      "city": "Newark",
+      "state": "NJ"
+    },
+    {
+      "name": "URB'N dispensary",
+      "license": "RE000692",
+      "type": "",
+      "status": "",
+      "city": "Newark",
+      "state": "NJ"
+    },
+    {
+      "name": "Bud City NJ LLC",
+      "license": "RE000696",
+      "type": "",
+      "status": "",
+      "city": "Newton",
+      "state": "NJ"
+    },
+    {
+      "name": "Feels Of Green LLC",
+      "license": "RE000076",
+      "type": "",
+      "status": "",
+      "city": "Newton",
+      "state": "NJ"
+    },
+    {
+      "name": "Authorized Dealer Dispensary",
+      "license": "RE001010",
+      "type": "",
+      "status": "",
+      "city": "North Bergen",
+      "state": "NJ"
+    },
+    {
+      "name": "Hudhaus",
+      "license": "RE00309",
+      "type": "",
+      "status": "",
+      "city": "North Bergen",
+      "state": "NJ"
+    },
+    {
+      "name": "Liberty Cannabis",
+      "license": "RE001039",
+      "type": "",
+      "status": "",
+      "city": "North Brunswick",
+      "state": "NJ"
+    },
+    {
+      "name": "Nj Leaf (North Brunswick)",
+      "license": "RE000751",
+      "type": "",
+      "status": "",
+      "city": "North Brunswick",
+      "state": "NJ"
+    },
+    {
+      "name": "Sea & Leaf LLC",
+      "license": "RE000211",
+      "type": "",
+      "status": "",
+      "city": "North Cape May",
+      "state": "NJ"
+    },
+    {
+      "name": "Good Karma Dispensary",
+      "license": "RE001030",
+      "type": "",
+      "status": "",
+      "city": "North Plainfield",
+      "state": "NJ"
+    },
+    {
+      "name": "J & J Cannabis Company LLC",
+      "license": "RE000167",
+      "type": "",
+      "status": "",
+      "city": "Oak RIdge",
+      "state": "NJ"
+    },
+    {
+      "name": "Ginger Hale LLC",
+      "license": "RE000195",
+      "type": "",
+      "status": "",
+      "city": "Oaklyn",
+      "state": "NJ"
+    },
+    {
+      "name": "The Next Chapter Market",
+      "license": "RE000296",
+      "type": "",
+      "status": "",
+      "city": "Ocean",
+      "state": "NJ"
+    },
+    {
+      "name": "BLAZE GREEN LLC",
+      "license": "RE001049",
+      "type": "",
+      "status": "",
+      "city": "Paterson",
+      "state": "NJ"
+    },
+    {
+      "name": "RIse Paterson",
+      "license": "MRE000812",
+      "type": "",
+      "status": "",
+      "city": "Paterson",
+      "state": "NJ"
+    },
+    {
+      "name": "Aurum Botanics",
+      "license": "RE000928",
+      "type": "",
+      "status": "",
+      "city": "Pemberton",
+      "state": "NJ"
+    },
+    {
+      "name": "Jersey Meds",
+      "license": "RE000227",
+      "type": "",
+      "status": "",
+      "city": "Pennington",
+      "state": "NJ"
+    },
+    {
+      "name": "Pure Blossom",
+      "license": "RE000100",
+      "type": "",
+      "status": "",
+      "city": "Pennington",
+      "state": "NJ"
+    },
+    {
+      "name": "Frosted Nug - Carneys Point",
+      "license": "RE000992",
+      "type": "",
+      "status": "",
+      "city": "Penns Grove",
+      "state": "NJ"
+    },
+    {
+      "name": "Uncle Beez Greeneryz",
+      "license": "RE001058",
+      "type": "",
+      "status": "",
+      "city": "Penns Grove",
+      "state": "NJ"
+    },
+    {
+      "name": "MPX/iAnthus - Pennsauken",
+      "license": "RE000783",
+      "type": "",
+      "status": "",
+      "city": "Pennsauken",
+      "state": "NJ"
+    },
+    {
+      "name": "Island Vibez",
+      "license": "RE000040",
+      "type": "",
+      "status": "",
+      "city": "Plainfield",
+      "state": "NJ"
+    },
+    {
+      "name": "KOTA CANNA LLC",
+      "license": "RE001009",
+      "type": "",
+      "status": "",
+      "city": "Plainfield",
+      "state": "NJ"
+    },
+    {
+      "name": "Mind Lift Dispensary",
+      "license": "RE000097",
+      "type": "",
+      "status": "",
+      "city": "Plainfield",
+      "state": "NJ"
+    },
+    {
+      "name": "Queen City",
+      "license": "RE000209",
+      "type": "",
+      "status": "",
+      "city": "Plainfield",
+      "state": "NJ"
+    },
+    {
+      "name": "Green Wellness Haven",
+      "license": "RE000767",
+      "type": "",
+      "status": "",
+      "city": "Pleasantville",
+      "state": "NJ"
+    },
+    {
+      "name": "Got Your Six Dispensary Of New Jersey LLC.",
+      "license": "RE000544",
+      "type": "",
+      "status": "",
+      "city": "Princeton",
+      "state": "NJ"
+    },
+    {
+      "name": "Plantabis Dispensary LLC",
+      "license": "RE000178",
+      "type": "",
+      "status": "",
+      "city": "Rahway",
+      "state": "NJ"
+    },
+    {
+      "name": "Valley Wellness",
+      "license": "RE000367",
+      "type": "",
+      "status": "",
+      "city": "Raritan",
+      "state": "NJ"
+    },
+    {
+      "name": "Canopy Crossroad LLC",
+      "license": "RE000258",
+      "type": "",
+      "status": "",
+      "city": "Red Bank",
+      "state": "NJ"
+    },
+    {
+      "name": "Monteverde",
+      "license": "RE000799",
+      "type": "",
+      "status": "",
+      "city": "Red Bank",
+      "state": "NJ"
+    },
+    {
+      "name": "The Frosted Nug At Red Bank",
+      "license": "RE000121",
+      "type": "",
+      "status": "",
+      "city": "Red Bank",
+      "state": "NJ"
+    },
+    {
+      "name": "Township Green LLC",
+      "license": "RE000814",
+      "type": "",
+      "status": "",
+      "city": "Riverside",
+      "state": "NJ"
+    },
+    {
+      "name": "Ascend Wellness - Rochelle Park",
+      "license": "RE000012",
+      "type": "",
+      "status": "",
+      "city": "Rochelle Park",
+      "state": "NJ"
+    },
+    {
+      "name": "G2 Dispensary",
+      "license": "RE000160",
+      "type": "",
+      "status": "",
+      "city": "Rockaway",
+      "state": "NJ"
+    },
+    {
+      "name": "Kind Kush Dispensary",
+      "license": "RE000019",
+      "type": "",
+      "status": "",
+      "city": "Rockaway",
+      "state": "NJ"
+    },
+    {
+      "name": "Holistic Re-Leaf",
+      "license": "RE000786",
+      "type": "",
+      "status": "",
+      "city": "Rockway",
+      "state": "NJ"
+    },
+    {
+      "name": "JoyLeaf",
+      "license": "RE000124",
+      "type": "",
+      "status": "",
+      "city": "Roselle",
+      "state": "NJ"
+    },
+    {
+      "name": "Cottonmouth Dispensary LLC",
+      "license": "RE000055",
+      "type": "",
+      "status": "",
+      "city": "Runnemede",
+      "state": "NJ"
+    },
+    {
+      "name": "Phasal Dispensary",
+      "license": "RE000063",
+      "type": "",
+      "status": "",
+      "city": "Runnemede",
+      "state": "NJ"
+    },
+    {
+      "name": "Bridge CIty Collective Dispensary",
+      "license": "RE000989",
+      "type": "",
+      "status": "",
+      "city": "SOMERSET",
+      "state": "NJ"
+    },
+    {
+      "name": "The Dispensary Of Saddle Brook",
+      "license": "RE000371",
+      "type": "",
+      "status": "",
+      "city": "Saddle Brook",
+      "state": "NJ"
+    },
+    {
+      "name": "New Frontier Solutiuons",
+      "license": "RE000342",
+      "type": "",
+      "status": "",
+      "city": "Salem",
+      "state": "NJ"
+    },
+    {
+      "name": "A21 WELLNESS DISPENSARY",
+      "license": "RE000192",
+      "type": "",
+      "status": "",
+      "city": "Scotch Plains",
+      "state": "NJ"
+    },
+    {
+      "name": "B CAF Dispensary",
+      "license": "RE000888",
+      "type": "",
+      "status": "",
+      "city": "Scotch Plains",
+      "state": "NJ"
+    },
+    {
+      "name": "Illicit Gardens Secaucus",
+      "license": "RE001043",
+      "type": "",
+      "status": "",
+      "city": "Seaucus",
+      "state": "NJ"
+    },
+    {
+      "name": "MPX/iAnthus - Glouster",
+      "license": "RE000639",
+      "type": "",
+      "status": "",
+      "city": "Sicklerville",
+      "state": "NJ"
+    },
+    {
+      "name": "Happy Leaf LLC",
+      "license": "RE000091",
+      "type": "",
+      "status": "",
+      "city": "Somerdale",
+      "state": "NJ"
+    },
+    {
+      "name": "High Profile - Somerdale",
+      "license": "RE000477",
+      "type": "",
+      "status": "",
+      "city": "Somerdale",
+      "state": "NJ"
+    },
+    {
+      "name": "Bloc Dispensary (Somerset)",
+      "license": "RE000384",
+      "type": "",
+      "status": "",
+      "city": "Somerset",
+      "state": "NJ"
+    },
+    {
+      "name": "Dazed Cannabis",
+      "license": "RE000567",
+      "type": "",
+      "status": "",
+      "city": "Somerset",
+      "state": "NJ"
+    },
+    {
+      "name": "Green Knight Dispensary",
+      "license": "RE000980",
+      "type": "",
+      "status": "",
+      "city": "Somerset",
+      "state": "NJ"
+    },
+    {
+      "name": "Herb'S Premium Dispensary",
+      "license": "RE000919",
+      "type": "",
+      "status": "",
+      "city": "Somerset",
+      "state": "NJ"
+    },
+    {
+      "name": "Silver Leaf",
+      "license": "RE000824",
+      "type": "",
+      "status": "",
+      "city": "Somerset",
+      "state": "NJ"
+    },
+    {
+      "name": "The Dispensary of Somerset, LLC",
+      "license": "RE000589",
+      "type": "",
+      "status": "",
+      "city": "Somerset",
+      "state": "NJ"
+    },
+    {
+      "name": "77 Main Street, LLC",
+      "license": "RE000503",
+      "type": "",
+      "status": "",
+      "city": "South Bound Brook",
+      "state": "NJ"
+    },
+    {
+      "name": "New Era Dispensary LLC",
+      "license": "RE000126",
+      "type": "",
+      "status": "",
+      "city": "South Bound Brook",
+      "state": "NJ"
+    },
+    {
+      "name": "Zacate",
+      "license": "RE000280",
+      "type": "",
+      "status": "",
+      "city": "South Delran",
+      "state": "NJ"
+    },
+    {
+      "name": "Story Dispensary Of Springfield",
+      "license": "RE000114",
+      "type": "",
+      "status": "",
+      "city": "Springfield",
+      "state": "NJ"
+    },
+    {
+      "name": "Cannabis Clubhouse",
+      "license": "RE000147",
+      "type": "",
+      "status": "",
+      "city": "Sussex",
+      "state": "NJ"
+    },
+    {
+      "name": "Sussex Pharms LLC",
+      "license": "RE000266",
+      "type": "",
+      "status": "",
+      "city": "Sussex",
+      "state": "NJ"
+    },
+    {
+      "name": "The Wild Flower Market",
+      "license": "RE000293",
+      "type": "",
+      "status": "",
+      "city": "Tinton Falls",
+      "state": "NJ"
+    },
+    {
+      "name": "Altitude Cannabis",
+      "license": "RE000912",
+      "type": "",
+      "status": "",
+      "city": "Toms River",
+      "state": "NJ"
+    },
+    {
+      "name": "The Social Leaf",
+      "license": "RE000649",
+      "type": "",
+      "status": "",
+      "city": "Toms River",
+      "state": "NJ"
+    },
+    {
+      "name": "Canna Remedies",
+      "license": "RE000051",
+      "type": "",
+      "status": "",
+      "city": "Trenton",
+      "state": "NJ"
+    },
+    {
+      "name": "Moja Life LLC",
+      "license": "RE000025",
+      "type": "",
+      "status": "",
+      "city": "Trenton",
+      "state": "NJ"
+    },
+    {
+      "name": "Theory Wellness Of NJ",
+      "license": "RE000861",
+      "type": "",
+      "status": "",
+      "city": "Trenton",
+      "state": "NJ"
+    },
+    {
+      "name": "Toke Lane",
+      "license": "RE001034",
+      "type": "",
+      "status": "",
+      "city": "Trenton",
+      "state": "NJ"
+    },
+    {
+      "name": "The Dispensary of Union",
+      "license": "RE000373",
+      "type": "",
+      "status": "",
+      "city": "UNION",
+      "state": "NJ"
+    },
+    {
+      "name": "Botera NJ",
+      "license": "RE000822",
+      "type": "",
+      "status": "",
+      "city": "Union",
+      "state": "NJ"
+    },
+    {
+      "name": "Garden State Dispensary - Union",
+      "license": "RE000017",
+      "type": "",
+      "status": "",
+      "city": "Union",
+      "state": "NJ"
+    },
+    {
+      "name": "Mountain Dispensary LLC",
+      "license": "RE000885",
+      "type": "",
+      "status": "",
+      "city": "Vernon Township",
+      "state": "NJ"
+    },
+    {
+      "name": "Eastern Green Dispensary",
+      "license": "RE000726",
+      "type": "",
+      "status": "",
+      "city": "Voorhees Township",
+      "state": "NJ"
+    },
+    {
+      "name": "Tree House Co-Op Dispensary LLC",
+      "license": "RE000884",
+      "type": "",
+      "status": "",
+      "city": "Voorhees Township",
+      "state": "NJ"
+    },
+    {
+      "name": "ReLeaf Cannabis LLC",
+      "license": "RE000313",
+      "type": "",
+      "status": "",
+      "city": "WIlliamstown",
+      "state": "NJ"
+    },
+    {
+      "name": "Bloc Dispensary (Waretown)",
+      "license": "RE000750",
+      "type": "",
+      "status": "",
+      "city": "Waretown",
+      "state": "NJ"
+    },
+    {
+      "name": "Dank Poet Dispensary LLC",
+      "license": "RE000499",
+      "type": "",
+      "status": "",
+      "city": "Washington",
+      "state": "NJ"
+    },
+    {
+      "name": "Holistic Solutions LLC",
+      "license": "RE000603",
+      "type": "",
+      "status": "",
+      "city": "Waterford",
+      "state": "NJ"
+    },
+    {
+      "name": "The Green Initiative",
+      "license": "RE0001031",
+      "type": "",
+      "status": "",
+      "city": "Wenonah",
+      "state": "NJ"
+    },
+    {
+      "name": "4TwentySomewhere",
+      "license": "RE000252",
+      "type": "",
+      "status": "",
+      "city": "West Milford",
+      "state": "NJ"
+    },
+    {
+      "name": "Beyond Bleaf",
+      "license": "RE 000422",
+      "type": "",
+      "status": "",
+      "city": "West Milford",
+      "state": "NJ"
+    },
+    {
+      "name": "Beyond Bleaf",
+      "license": "RE000422",
+      "type": "",
+      "status": "",
+      "city": "West Milford",
+      "state": "NJ"
+    },
+    {
+      "name": "Doobiez LLC",
+      "license": "RE000047",
+      "type": "",
+      "status": "",
+      "city": "West Milford",
+      "state": "NJ"
+    },
+    {
+      "name": "Elevated Herb LLC",
+      "license": "RE000250",
+      "type": "",
+      "status": "",
+      "city": "West Milford",
+      "state": "NJ"
+    },
+    {
+      "name": "Jersey Roots Dispensary",
+      "license": "RE000338",
+      "type": "",
+      "status": "",
+      "city": "West Milford",
+      "state": "NJ"
+    },
+    {
+      "name": "SoulFlora",
+      "license": "RE000749",
+      "type": "",
+      "status": "",
+      "city": "West Milford",
+      "state": "NJ"
+    },
+    {
+      "name": "Spot 23 LLC",
+      "license": "RE000534",
+      "type": "",
+      "status": "",
+      "city": "West Milford",
+      "state": "NJ"
+    },
+    {
+      "name": "Mountain View Farmacy LLC \"MVF\"",
+      "license": "RE000088",
+      "type": "",
+      "status": "",
+      "city": "West Milford Township",
+      "state": "NJ"
+    },
+    {
+      "name": "Backpack Boyz West New York LLC",
+      "license": "RE001016",
+      "type": "",
+      "status": "",
+      "city": "West New York",
+      "state": "NJ"
+    },
+    {
+      "name": "Nile Cannabis",
+      "license": "RE000937",
+      "type": "",
+      "status": "",
+      "city": "West New York",
+      "state": "NJ"
+    },
+    {
+      "name": "Dogwood Green",
+      "license": "RE000345",
+      "type": "",
+      "status": "",
+      "city": "West Orange",
+      "state": "NJ"
+    },
+    {
+      "name": "The Library of NJ",
+      "license": "RE000228",
+      "type": "",
+      "status": "",
+      "city": "West Orange",
+      "state": "NJ"
+    },
+    {
+      "name": "Cannaboy Treehouse",
+      "license": "RE000130",
+      "type": "",
+      "status": "",
+      "city": "West South Orange",
+      "state": "NJ"
+    },
+    {
+      "name": "Ascend Wellness - Wharton",
+      "license": "RE000015",
+      "type": "",
+      "status": "",
+      "city": "Wharton",
+      "state": "NJ"
+    },
+    {
+      "name": "Green Leaf Wellness Solutions",
+      "license": "RE000497",
+      "type": "",
+      "status": "",
+      "city": "Williamstown",
+      "state": "NJ"
+    },
+    {
+      "name": "The Botanist Williamstown Dispensary",
+      "license": "RE000014",
+      "type": "",
+      "status": "",
+      "city": "Williamstown",
+      "state": "NJ"
+    },
+    {
+      "name": "Authorized Dealer Dispensary IV",
+      "license": "RE001037",
+      "type": "",
+      "status": "",
+      "city": "Willingboro",
+      "state": "NJ"
+    },
+    {
+      "name": "Roots Dispensary",
+      "license": "RE000819",
+      "type": "",
+      "status": "",
+      "city": "Willingboro",
+      "state": "NJ"
+    },
+    {
+      "name": "Garden State Dispensary - Woodbridge",
+      "license": "RE000018",
+      "type": "",
+      "status": "",
+      "city": "Woodbridge",
+      "state": "NJ"
+    },
+    {
+      "name": "BestBuds",
+      "license": "RE000289",
+      "type": "",
+      "status": "",
+      "city": "Woodbury",
+      "state": "NJ"
+    },
+    {
+      "name": "Nova Farms Woodbury LLC",
+      "license": "RE000626",
+      "type": "",
+      "status": "",
+      "city": "Woodbury",
+      "state": "NJ"
+    },
+    {
+      "name": "Woodbury Wellness",
+      "license": "RE0000187",
+      "type": "",
+      "status": "",
+      "city": "Woodbury",
+      "state": "NJ"
+    },
+    {
+      "name": "Woodbury Wellness LLC",
+      "license": "RE000187",
+      "type": "",
+      "status": "",
+      "city": "Woodbury",
+      "state": "NJ"
+    },
+    {
+      "name": "Blulight Cannabis (Woodbury)",
+      "license": "RE000404",
+      "type": "",
+      "status": "",
+      "city": "Woodbury Heights",
+      "state": "NJ"
+    },
+    {
+      "name": "Blue Oak",
+      "license": "RE000792",
+      "type": "",
+      "status": "",
+      "city": "bloomfield",
+      "state": "NJ"
+    },
+    {
+      "name": "Boone Town Provisions",
+      "license": "RE000197",
+      "type": "",
+      "status": "",
+      "city": "boonton",
+      "state": "NJ"
+    },
+    {
+      "name": "Herbalcity LLC",
+      "license": "RE000337",
+      "type": "",
+      "status": "",
+      "city": "highland park",
+      "state": "NJ"
+    }
+  ]
+}

@@ -1206,13 +1206,13 @@ function App() {
   useEffect(() => {
     const load = () => {
       Promise.all([
-        fetch('sales_data.json?t=' + Date.now()).then(r => {
+        fetch('https://raw.githubusercontent.com/chill-medicatedhub/apex-dashboard-newjersey/refs/heads/main/sales_data.json?t=' + Date.now()).then(r => {
           if (!r.ok) throw new Error('Could not load sales_data.json');
           return r.json();
         }),
         // Historical backfill (2024 LeafLink). Optional: if the file is missing
         // or fails to parse, fall back to live-only instead of breaking.
-        fetch('historical_data.json?t=' + Date.now())
+        fetch('https://raw.githubusercontent.com/chill-medicatedhub/apex-dashboard-newjersey/refs/heads/main/historical_data.json?t=' + Date.now())
           .then(r => r.ok ? r.json() : { rows: [] })
           .catch(() => ({ rows: [] }))
       ]).then(([live, hist]) => {

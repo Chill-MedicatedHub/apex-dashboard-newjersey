@@ -1290,10 +1290,18 @@ function Prospecting({ data }) {
     __dl(filename, new Blob([html], { type: 'application/vnd.ms-excel' }));
   };
   const dlBtn = onClick => e('button', { className: 'date-preset', onClick: onClick, title: 'Download this view as Excel' }, '⬇ Excel');
-  const ourLics = useMemo(() => {
-    const s = new Set();
-    (data.rows || []).forEach(r => { const l = normLic(r.buyer_license); if (l) s.add(l); });
-    return s;
+  const normName = s => String(s || '').trim().toLowerCase().replace(/\s+/g, ' ');
+  // Match new-vs-existing on license when present (Apex / MI LeafLink), otherwise
+  // on buyer name. NJ's LeafLink feed carries no license, but its buyer names come
+  // from the same LeafLink customer directory a prospect list does, so name
+  // matching is exact there.
+  const ourBook = useMemo(() => {
+    const lics = new Set(), names = new Set();
+    (data.rows || []).forEach(r => {
+      const l = normLic(r.buyer_license); if (l) lics.add(l);
+      const n = normName(r.buyer_name); if (n) names.add(n);
+    });
+    return { lics, names };
   }, [data]);
 
   const [section, setSection] = React.useState('new');
@@ -1311,15 +1319,18 @@ function Prospecting({ data }) {
       const status = String(p.status || '');
       if (status && !/active/i.test(status)) return false;
       if (type && !/retail|treatment/i.test(type)) return false;
-      if (!lic) return false;
-      if (ourLics.has(lic)) return false;           // already a customer
-      if (seen.has(lic)) return false;              // dedupe
-      seen.add(lic);
+      const nm = normName(p.name);
+      if (!lic && !nm) return false;                    // need some identifier
+      if (lic && ourBook.lics.has(lic)) return false;   // already a customer (by license)
+      if (nm && ourBook.names.has(nm)) return false;    // already a customer (by name)
+      const key = lic || nm;
+      if (seen.has(key)) return false;                  // dedupe
+      seen.add(key);
       return true;
     }).map(p => ({ name: p.name || '—', license: normLic(p.license), city: p.city || '',
       county: p.county || '', address: p.address || '', zip: p.zip || '' }))
       .sort((a, b) => (a.city || '').localeCompare(b.city || '') || a.name.localeCompare(b.name));
-  }, [data, ourLics]);
+  }, [data, ourBook]);
 
   const lapsed = useMemo(() => buyers.list
     .filter(b => b.gap != null && b.gap > 30)
@@ -1389,7 +1400,7 @@ function Prospecting({ data }) {
         e('div', { className: 'kpi-grid', style: { gridTemplateColumns: 'repeat(3, 1fr)', marginBottom: 20 } },
           cell('Untapped retailers', fmtNum(prospects.length), 'licensed · never invoiced', 'var(--accent)'),
           cell('Towns covered', fmtNum(cities.size), 'distinct municipalities'),
-          cell('Already customers', fmtNum(ourLics.size), 'licenses in your book')),
+          cell('Already customers', fmtNum(Math.max(ourBook.lics.size, ourBook.names.size)), 'accounts in your book')),
         e('div', { className: 'filters', style: { marginBottom: 16 } }, searchBox('name / town / license…')),
         e('section', { className: 'section' },
           e('div', { className: 'section-header' },

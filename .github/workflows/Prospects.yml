@@ -1,0 +1,63 @@
+name: Build Prospects (New Jersey)
+on:
+  schedule:
+    - cron: '30 6 * * *'    # once a day at 06:30 UTC — the customer list changes slowly
+  workflow_dispatch:          # manual "Run workflow" button
+permissions:
+  contents: write
+# Share the scraper's concurrency group so this never pushes at the same time as
+# a sales scrape. If your NJ scraper workflow uses a different group name, set
+# this to match it.
+concurrency:
+  group: scrape-leaflink
+  cancel-in-progress: false
+jobs:
+  prospects:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Build prospects.json
+        env:
+          PYTHONUNBUFFERED: '1'
+          # New Jersey uses a LeafLink Token (not an App key). Uses the SAME
+          # secret your NJ scraper uses; rename here if yours differs.
+          LEAFLINK_TOKEN: ${{ secrets.LEAFLINK_TOKEN }}
+          LEAFLINK_STATE: 'NJ'
+        run: python make_prospects_leaflink.py
+      - name: Commit prospects.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Stage FIRST, then check the staged diff. Plain `git diff` ignores
+          # untracked files, so on the first run (prospects.json brand new) it
+          # would wrongly report "no changes" and skip the commit.
+          git add prospects.json
+          if git diff --cached --quiet -- prospects.json; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          cp prospects.json /tmp/prospects.json
+          for i in 1 2 3 4 5; do
+            git add prospects.json
+            git commit -m "Auto-update prospects.json [skip ci]" || true
+            if git push origin HEAD:main; then
+              echo "Pushed on attempt $i."
+              exit 0
+            fi
+            echo "Push $i failed (remote moved); resyncing and reapplying..."
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/prospects.json prospects.json
+            sleep 3
+          done
+          echo "ERROR: push failed after 5 attempts."
+          exit 1

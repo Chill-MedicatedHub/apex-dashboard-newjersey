@@ -96,9 +96,37 @@ def _sub_field(c, keys, subs=("buyer", "company", "address", "billing_address",
                     return v.strip()
     return ""
 
+def _scan(c, needles, valid=None,
+          subs=("buyer", "company", "contact", "primary_contact", "main_contact",
+                "address", "billing_address", "shipping_address", "default_address",
+                "location", "delivery_address", "corporate_address")):
+    """Fuzzy: first string value whose KEY contains any needle, on c or one nested
+    level. `valid` optionally sanity-checks the value (e.g. an email has an @)."""
+    def hit(d):
+        for k, v in d.items():
+            kl = str(k).lower()
+            if any(n in kl for n in needles) and isinstance(v, str) and v.strip():
+                s = v.strip()
+                if valid is None or valid(s):
+                    return s
+        return ""
+    r = hit(c)
+    if r:
+        return r
+    for sk in subs:
+        sub = c.get(sk)
+        if isinstance(sub, dict):
+            r = hit(sub)
+            if r:
+                return r
+    return ""
+
 def _license_of(c): return _sub_field(c, ("license", "license_number", "license_no"))
 def _state_of(c):   return _sub_field(c, ("state", "state_code", "region"))
 def _city_of(c):    return _sub_field(c, ("city",))
+def _phone_of(c):   return _scan(c, ("phone", "tel"), lambda s: any(ch.isdigit() for ch in s))
+def _email_of(c):   return _scan(c, ("email",), lambda s: "@" in s)
+def _website_of(c): return _scan(c, ("website", "homepage", "web_site"), lambda s: "." in s and "@" not in s)
 
 def _name_full(c):
     return (_name_of(c) or _name_of(c.get("buyer")) or _name_of(c.get("company"))
@@ -136,6 +164,15 @@ def main():
     customers = fetch_customers()
     print(f"  {len(customers)} customers returned.")
 
+    # One-time diagnostic: show the shape of the first customer so we can confirm
+    # which fields carry phone/email/website (LeafLink's names vary by account).
+    if customers and isinstance(customers[0], dict):
+        c0 = customers[0]
+        print("  DIAGNOSTIC — first customer top-level keys:", sorted(c0.keys()))
+        for sk in ("buyer", "company", "contact", "primary_contact"):
+            if isinstance(c0.get(sk), dict):
+                print(f"  DIAGNOSTIC — {sk} keys:", sorted(c0[sk].keys()))
+
     seen, records = set(), []
     kept_no_state = 0
     for c in customers:
@@ -160,6 +197,9 @@ def main():
             "status": "",                 # (its filter only excludes non-active/non-retail)
             "city": _city_of(c),
             "state": st or STATE,
+            "phone": _phone_of(c),
+            "email": _email_of(c),
+            "website": _website_of(c),
         })
 
     records.sort(key=lambda x: (x["city"], x["name"]))

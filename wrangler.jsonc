@@ -1,8 +1,14 @@
 {
-  // Must match the NJ Worker name in Cloudflare (Workers & Pages → your NJ project).
-  // If it's named something else, change this to match, or wrangler deploys to the wrong Worker.
-  "name": "apex-dashboard-newjersey",
+  // Keep this matching the Worker's name (from its URL: <name>.chill-hub.workers.dev).
+  "name": "nj-dashboard",
+  "main": "index.js",
   "compatibility_date": "2025-01-01",
-  // Serve the repo root (dashboard.html + JS assets) as a static site — no Worker script needed.
-  "assets": { "directory": "./" }
+  // Worker runs first (auth check), then serves the repo's files via ASSETS.
+  "assets": {
+    "directory": "./",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  }
+  // Do NOT add AUTH_USER / AUTH_PASS here as "vars" — set them as encrypted
+  // secrets instead, or they'd be stored in plaintext and overwrite the secrets.
 }

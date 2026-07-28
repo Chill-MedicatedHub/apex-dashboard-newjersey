@@ -615,52 +615,81 @@ const catLabel = s => {
 };
 function SalesByCategory({ rows }) {
   const e = React.createElement;
-  const [sortBy, setSortBy] = React.useState('net');
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  // Metric drives BOTH the highlighted column emphasis and the sort (greatest first).
+  const [metric, setMetric] = React.useState('gross');   // 'gross' | 'units'
+  const [yr, setYr] = React.useState('all');
+  const [mo, setMo] = React.useState('all');
+  const clean = s => String(s || '')
+    .replace(/\s*\|\s*/g, ' ')                     // pipe separators to spaces
+    .replace(/\b\d+\/\d+\/\d+ct\s+Case\b/gi, '')   // 24/48/72ct Case
+    .replace(/\b\d+ct\s+Case\b/gi, '')             // 30ct Case, 50ct Case
+    .replace(/\bCase\b/gi, '')                     // stray "Case"
+    .replace(/\s+/g, ' ').trim();
+  // Years / months present in the (globally filtered) rows, for the dropdowns.
+  const periods = React.useMemo(() => {
+    const ys = new Set(), ms = new Set();
+    rows.forEach(r => { if (r._date) { ys.add(String(r._date.getFullYear())); ms.add(String(r._date.getMonth() + 1).padStart(2, '0')); } });
+    return { years: Array.from(ys).sort(), months: Array.from(ms).sort() };
+  }, [rows]);
   const agg = React.useMemo(() => {
     const map = {};
     let tU = 0, tG = 0, tN = 0;
     rows.forEach(r => {
+      if (r._date) {
+        if (yr !== 'all' && String(r._date.getFullYear()) !== yr) return;
+        if (mo !== 'all' && String(r._date.getMonth() + 1).padStart(2, '0') !== mo) return;
+      } else if (yr !== 'all' || mo !== 'all') { return; }   // date-filtered but no date -> drop
       const isS = !!r._isSample;
-      const key = (r.product_name || '(unnamed)') + (isS ? ' \u2014 SAMPLE' : '');
-      if (!map[key]) map[key] = { raw: r.product_name || '(unnamed)', label: catLabel(r.product_name) + (isS ? ' \u2014 SAMPLE' : ''), units: 0, gross: 0, net: 0 };
+      const sku = String(r.product_sku || '').trim();
+      const nm = clean(r.product_name) || '(unnamed)';
+      const key = (sku || nm.toLowerCase()) + (isS ? ' #s' : '');
       const units = parseFloat(r.inventory_quantity) || r._quantity || 0;
       const net = r._revenue || 0;
       const gross = net + (r._lineDiscount || 0);
+      if (!map[key]) map[key] = { label: nm + (isS ? ' — SAMPLE' : ''), sku: sku, units: 0, gross: 0, net: 0 };
+      if (!map[key].sku && sku) map[key].sku = sku;
       map[key].units += units; map[key].gross += gross; map[key].net += net;
       tU += units; tG += gross; tN += net;
     });
-    const list = Object.keys(map).map(k => map[k]).sort((a, b) => b.net - a.net);
-    return { list: list, tU: tU, tG: tG, tN: tN };
-  }, [rows]);
+    return { list: Object.keys(map).map(k => map[k]), tU: tU, tG: tG, tN: tN };
+  }, [rows, yr, mo]);
   const list = agg.list, tU = agg.tU, tG = agg.tG, tN = agg.tN;
-  const pct = v => tN > 0 ? (v / tN * 100).toFixed(1) + '%' : '\u2014';
-  const sorted = sortBy === 'units' ? list.slice().sort((a, b) => (b.units || 0) - (a.units || 0)) : list.slice().sort((a, b) => (b.net || 0) - (a.net || 0));
+  const pct = v => tN > 0 ? (v / tN * 100).toFixed(1) + '%' : '—';
+  const sorted = list.slice().sort((a, b) => metric === 'units'
+    ? (b.units || 0) - (a.units || 0)
+    : (b.gross || 0) - (a.gross || 0));
   const body = sorted.map((d, i) => e("tr", { key: i },
-    e("td", { title: d.raw }, d.label),
-    e("td", { className: "num dim" }, d.units ? fmtNum(Math.round(d.units)) : "\u2014"),
-    e("td", { className: "num dim" }, d.gross ? fmtMoney(d.gross) : "\u2014"),
-    e("td", { className: "num" }, d.net ? e("strong", null, fmtMoney(d.net)) : "\u2014"),
-    e("td", { className: "num dim" }, d.net ? pct(d.net) : "\u2014")));
+    e("td", null, d.label, d.sku ? e("span", { style: { color: 'var(--text-faint)', fontSize: 10, marginLeft: 6 } }, d.sku) : null),
+    e("td", { className: metric === 'units' ? "num" : "num dim" }, d.units ? (metric === 'units' ? e("strong", null, fmtNum(Math.round(d.units))) : fmtNum(Math.round(d.units))) : "—"),
+    e("td", { className: metric === 'gross' ? "num" : "num dim" }, d.gross ? (metric === 'gross' ? e("strong", null, fmtMoney(d.gross)) : fmtMoney(d.gross)) : "—"),
+    e("td", { className: "num" }, d.net ? fmtMoney(d.net) : "—"),
+    e("td", { className: "num dim" }, d.net ? pct(d.net) : "—")));
   body.push(e("tr", { key: '__totals', style: { borderTop: '2px solid var(--border)' } },
     e("td", null, e("strong", null, "TOTALS")),
     e("td", { className: "num" }, e("strong", null, fmtNum(Math.round(tU)))),
     e("td", { className: "num" }, e("strong", null, fmtMoney(tG))),
     e("td", { className: "num" }, e("strong", null, fmtMoney(tN))),
-    e("td", { className: "num" }, e("strong", null, tN > 0 ? "100%" : "\u2014"))));
+    e("td", { className: "num" }, e("strong", null, tN > 0 ? "100%" : "—"))));
+  const sel = (val, set, opts) => e("select", { className: "filter-select", value: val, onChange: ev => set(ev.target.value), style: { minWidth: 108, height: 26, fontSize: 12, padding: '0 8px' } }, opts);
   return e("section", { className: "section" },
     e("div", { className: "section-header" },
-      e("h2", { className: "section-title" }, "Sales by ", e("em", null, "category")),
+      e("h2", { className: "section-title" }, "Sales by ", e("em", null, "SKU")),
       e("div", { style: { display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' } },
-        e("label", { className: "filter-label", style: { textTransform: 'uppercase' } }, "Sort"),
-        e("select", { className: "filter-select", value: sortBy, onChange: ev => setSortBy(ev.target.value), style: { minWidth: 150, height: 26, fontSize: 12, padding: '0 8px' } },
-          e("option", { value: "net" }, "Highest sales"),
-          e("option", { value: "units" }, "Most units sold")),
-        e("span", { className: "section-meta" }, list.length + " products \u00b7 respects filters"))),
+        e("label", { className: "filter-label", style: { textTransform: 'uppercase' } }, "Rank by"),
+        sel(metric, setMetric, [
+          e("option", { key: 'g', value: "gross" }, "Gross ↓"),
+          e("option", { key: 'u', value: "units" }, "Units ↓")]),
+        sel(yr, setYr, [e("option", { key: 'all', value: "all" }, "All years")].concat(
+          periods.years.map(y => e("option", { key: y, value: y }, y)))),
+        sel(mo, setMo, [e("option", { key: 'all', value: "all" }, "All months")].concat(
+          periods.months.map(m => e("option", { key: m, value: m }, MONTHS[parseInt(m, 10) - 1])))),
+        e("span", { className: "section-meta" }, list.length + " SKUs · respects filters"))),
     e("div", { className: "card", style: { padding: 0, overflow: 'hidden' } },
-      e("div", { style: { overflowX: 'auto' } },
+      e("div", { style: { overflowX: 'auto', maxHeight: 560 } },
         e("table", { className: "data-table" },
           e("thead", null, e("tr", null,
-            e("th", null, "Category"),
+            e("th", null, "Product / SKU"),
             e("th", { className: "num" }, "Units"),
             e("th", { className: "num" }, "Gross"),
             e("th", { className: "num" }, "Net Sales"),
@@ -2495,6 +2524,45 @@ function Dashboard({
     className: "section-header"
   }, /*#__PURE__*/React.createElement("h2", {
     className: "section-title"
+  }, "Recent ", /*#__PURE__*/React.createElement("em", null, "line items")), /*#__PURE__*/React.createElement("span", {
+    className: "section-meta"
+  }, "latest 25")), /*#__PURE__*/React.createElement("div", {
+    className: "card",
+    style: {
+      padding: 0,
+      overflow: 'hidden'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      overflowX: 'auto',
+      maxHeight: 560
+    }
+  }, /*#__PURE__*/React.createElement("table", {
+    className: "data-table"
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Date"), /*#__PURE__*/React.createElement("th", null, "Order"), /*#__PURE__*/React.createElement("th", null, "Buyer"), /*#__PURE__*/React.createElement("th", null, "Product"), /*#__PURE__*/React.createElement("th", null, "Rep"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Qty"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Revenue"), /*#__PURE__*/React.createElement("th", null, "Status"))), /*#__PURE__*/React.createElement("tbody", null, filtered.slice().sort((a, b) => (b._date?.getTime() || 0) - (a._date?.getTime() || 0)).slice(0, 25).map((r, i) => /*#__PURE__*/React.createElement("tr", {
+    key: i
+  }, /*#__PURE__*/React.createElement("td", {
+    className: "dim font-mono"
+  }, r.order_date || '—'), /*#__PURE__*/React.createElement("td", {
+    className: "font-mono"
+  }, "#", r.order_number || r.order_id || '—'), /*#__PURE__*/React.createElement("td", null, r.buyer_name || '—'), /*#__PURE__*/React.createElement("td", {
+    className: "dim"
+  }, r.product_name || '—'), /*#__PURE__*/React.createElement("td", null, r.sales_rep || '—'), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, fmtNum(r._quantity)), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, fmtMoneyFull(r._revenue)), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement(StatusPill, {
+    status: r.payment_status
+  }))))))))), React.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "section-header"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
   }, "Product ", /*#__PURE__*/React.createElement("em", null, "breakdown")), /*#__PURE__*/React.createElement("span", {
     className: "section-meta"
   }, fmtNum(productBreakdown.length), " products")), /*#__PURE__*/React.createElement("div", {
@@ -2547,46 +2615,7 @@ function Dashboard({
     style: {
       color: 'var(--text-faint)'
     }
-  }, "\u2014") : fmtNum(Math.round(p.currentInventory)))))))), /*#__PURE__*/React.createElement(Pager, { pager: pbPg, total: productBreakdown.length, unit: "products" }))), React.createElement("section", {
-    className: "section"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "section-header"
-  }, /*#__PURE__*/React.createElement("h2", {
-    className: "section-title"
-  }, "Recent ", /*#__PURE__*/React.createElement("em", null, "line items")), /*#__PURE__*/React.createElement("span", {
-    className: "section-meta"
-  }, "latest 25")), /*#__PURE__*/React.createElement("div", {
-    className: "card",
-    style: {
-      padding: 0,
-      overflow: 'hidden'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      overflowX: 'auto',
-      maxHeight: 560
-    }
-  }, /*#__PURE__*/React.createElement("table", {
-    className: "data-table"
-  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Date"), /*#__PURE__*/React.createElement("th", null, "Order"), /*#__PURE__*/React.createElement("th", null, "Buyer"), /*#__PURE__*/React.createElement("th", null, "Product"), /*#__PURE__*/React.createElement("th", null, "Rep"), /*#__PURE__*/React.createElement("th", {
-    className: "num"
-  }, "Qty"), /*#__PURE__*/React.createElement("th", {
-    className: "num"
-  }, "Revenue"), /*#__PURE__*/React.createElement("th", null, "Status"))), /*#__PURE__*/React.createElement("tbody", null, filtered.slice().sort((a, b) => (b._date?.getTime() || 0) - (a._date?.getTime() || 0)).slice(0, 25).map((r, i) => /*#__PURE__*/React.createElement("tr", {
-    key: i
-  }, /*#__PURE__*/React.createElement("td", {
-    className: "dim font-mono"
-  }, r.order_date || '—'), /*#__PURE__*/React.createElement("td", {
-    className: "font-mono"
-  }, "#", r.order_number || r.order_id || '—'), /*#__PURE__*/React.createElement("td", null, r.buyer_name || '—'), /*#__PURE__*/React.createElement("td", {
-    className: "dim"
-  }, r.product_name || '—'), /*#__PURE__*/React.createElement("td", null, r.sales_rep || '—'), /*#__PURE__*/React.createElement("td", {
-    className: "num"
-  }, fmtNum(r._quantity)), /*#__PURE__*/React.createElement("td", {
-    className: "num"
-  }, fmtMoneyFull(r._revenue)), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement(StatusPill, {
-    status: r.payment_status
-  }))))))))), React.createElement(SalesByCategory, { rows: filtered }), React.createElement(MonthlyGrossBySku, { rows: filtered }), React.createElement("section", {
+  }, "\u2014") : fmtNum(Math.round(p.currentInventory)))))))), /*#__PURE__*/React.createElement(Pager, { pager: pbPg, total: productBreakdown.length, unit: "products" }))), React.createElement(SalesByCategory, { rows: filtered }), React.createElement("section", {
     className: "section"
   }, /*#__PURE__*/React.createElement("div", {
     className: "section-header"

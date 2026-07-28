@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-07-27",
+  "as_of": "2026-07-28",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
   "count": 284,
@@ -10,7 +10,10 @@
       "type": "",
       "status": "",
       "city": "ABSECON",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6192085327",
+      "email": "lunaverdellc@gmail.com",
+      "website": "https://www.redoakdispensary.com/"
     },
     {
       "name": "OTC JERSEY, LLC",
@@ -18,7 +21,10 @@
       "type": "",
       "status": "",
       "city": "Absecon",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6098679140",
+      "email": "absecon@offthechartsshop.com",
+      "website": "https://otcjersey.com/"
     },
     {
       "name": "Public Abescon",
@@ -26,7 +32,10 @@
       "type": "",
       "status": "",
       "city": "Absecon",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6092410447",
+      "email": "abseconstaff@gmail.com",
+      "website": "https://yourpublic.co/"
     },
     {
       "name": "Andover Cannabis LLC",
@@ -34,7 +43,10 @@
       "type": "",
       "status": "",
       "city": "Andover",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9734373040",
+      "email": "nicki@andovercannabis.llc",
+      "website": "https://andovercannabis.llc/"
     },
     {
       "name": "Buddy'S Dispensary",
@@ -42,7 +54,10 @@
       "type": "",
       "status": "",
       "city": "Andover",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9734405577",
+      "email": "bryanjannuzzi@buddysnj.com",
+      "website": "https://buddysnj.com/"
     },
     {
       "name": "Green Oasis Dispensary",
@@ -50,7 +65,10 @@
       "type": "",
       "status": "",
       "city": "Atco",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8563884126",
+      "email": "ccost724@gmail.com",
+      "website": "https://greenoasisnj.com"
     },
     {
       "name": "AC LEEF LLC",
@@ -58,7 +76,10 @@
       "type": "",
       "status": "",
       "city": "Atlantic City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "Bakin' Bad",
@@ -66,7 +87,10 @@
       "type": "",
       "status": "",
       "city": "Atlantic City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "Design 710",
@@ -74,7 +98,10 @@
       "type": "",
       "status": "",
       "city": "Atlantic City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6099647420",
+      "email": "contact@design710.com",
+      "website": "https://design710.com/"
     },
     {
       "name": "Everest Dispensary",
@@ -82,7 +109,10 @@
       "type": "",
       "status": "",
       "city": "Atlantic City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6097839333",
+      "email": "inventory@everestdispensary.com",
+      "website": "https://everestdispensary.com/"
     },
     {
       "name": "Green Eyed Chief",
@@ -90,7 +120,10 @@
       "type": "",
       "status": "",
       "city": "Atlantic City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8564051063",
+      "email": "greeneyedchief200@gmail.com",
+      "website": "https://greeneyedchief.com/"
     },
     {
       "name": "Green eyed chief llc",
@@ -98,7 +131,10 @@
       "type": "",
       "status": "",
       "city": "Atlantic City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "High Rollers Dispensary LLC",
@@ -106,7 +142,10 @@
       "type": "",
       "status": "",
       "city": "Atlantic City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6094180094",
+      "email": "info@highrollersdispensary.com",
+      "website": ""
     },
     {
       "name": "Honeybuzz Farms",
@@ -114,7 +153,10 @@
       "type": "",
       "status": "",
       "city": "Atlantic City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6099575658",
+      "email": "alexis@honeybuzzfarms.com",
+      "website": "https://honeybuzzfarms.com/"
     },
     {
       "name": "Juniper Lane NJ",
@@ -122,7 +164,10 @@
       "type": "",
       "status": "",
       "city": "Atlantic City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2155709636",
+      "email": "juniperlanevt@gmail.com",
+      "website": "https://www.juniperlanecannabis.com/"
     },
     {
       "name": "Legal Distribution",
@@ -130,7 +175,10 @@
       "type": "",
       "status": "",
       "city": "Atlantic City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6096044444",
+      "email": "brian.f@legaldistributionnj.com",
+      "website": "https://legaldistributionnj.com/"
     },
     {
       "name": "MPX/iAnthus - Atlantic City",
@@ -138,7 +186,10 @@
       "type": "",
       "status": "",
       "city": "Atlantic City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2677560050",
+      "email": "apinvoices@ianthus.com",
+      "website": "https://mpxnj.com/"
     },
     {
       "name": "PPP Dispensary LLC",
@@ -146,7 +197,10 @@
       "type": "",
       "status": "",
       "city": "Atlantic City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "passit@pppdispensary.com",
+      "website": ""
     },
     {
       "name": "Peaches Garden",
@@ -154,7 +208,10 @@
       "type": "",
       "status": "",
       "city": "Atlantic City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@peachesgarden.ac",
+      "website": ""
     },
     {
       "name": "ROLLIN' GREEN LLC",
@@ -162,7 +219,10 @@
       "type": "",
       "status": "",
       "city": "Atlantic City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "Rollin' Green",
@@ -170,7 +230,10 @@
       "type": "",
       "status": "",
       "city": "Atlantic City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6093506041",
+      "email": "vendors@rollingnj.com",
+      "website": "https://rollingnj.com/"
     },
     {
       "name": "SWEET LEAF'S DISPENSARY LLC DBA Sweet Leaf'S LLC And Sweet Leaf Dispensary",
@@ -178,7 +241,10 @@
       "type": "",
       "status": "",
       "city": "Atlantic City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "Salt Air Botanicals",
@@ -186,7 +252,10 @@
       "type": "",
       "status": "",
       "city": "Atlantic City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6092001584",
+      "email": "rachel@saltairbotanicals.com",
+      "website": "https://www.saltairbotanicals.com/"
     },
     {
       "name": "SunnyTien LLC",
@@ -194,7 +263,10 @@
       "type": "",
       "status": "",
       "city": "Atlantic City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6094286235",
+      "email": "info@sunnytien.com",
+      "website": "https://www.sunnytien.com/"
     },
     {
       "name": "The Healing Side LLC",
@@ -202,7 +274,10 @@
       "type": "",
       "status": "",
       "city": "Atlantic City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "The THC Shop LLC",
@@ -210,7 +285,10 @@
       "type": "",
       "status": "",
       "city": "Atlantic City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6402327467",
+      "email": "info@ourthcshop.com",
+      "website": "https://www.coastalherb.info/?meadowQuery="
     },
     {
       "name": "Mad Hatter Dispensary",
@@ -218,7 +296,10 @@
       "type": "",
       "status": "",
       "city": "Avenel",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7326365070",
+      "email": "aj@madhatterdispensary.com",
+      "website": "https://www.madhatterdispensary.com/"
     },
     {
       "name": "Emerald Tea Supply Co.",
@@ -226,7 +307,10 @@
       "type": "",
       "status": "",
       "city": "BLOOMFIELD",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8623958464",
+      "email": "dan.fusco@emeraldteasupplycompany.com",
+      "website": "https://etsc.store/"
     },
     {
       "name": "La Vida Gardens LLC",
@@ -234,7 +318,10 @@
       "type": "",
       "status": "",
       "city": "Belleville",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9732596736",
+      "email": "dvielhauer@ftemo.com",
+      "website": "https://lavidagardens.com/"
     },
     {
       "name": "Natural Apothecary LLC",
@@ -242,7 +329,10 @@
       "type": "",
       "status": "",
       "city": "Belleville",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@natural-apothecary.com",
+      "website": ""
     },
     {
       "name": "Nevaeh Verde Dispensary",
@@ -250,7 +340,10 @@
       "type": "",
       "status": "",
       "city": "Belleville",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9737586011",
+      "email": "sasha@nevaehverdedispensary.com",
+      "website": "https://nevaehverdedispensary.com/"
     },
     {
       "name": "Blackwood Wellness",
@@ -258,7 +351,10 @@
       "type": "",
       "status": "",
       "city": "Blackwood",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8568271420",
+      "email": "hello@blackwoodwellness.com",
+      "website": "https://blackwoodwellness.com/"
     },
     {
       "name": "A-Z Supply",
@@ -266,7 +362,10 @@
       "type": "",
       "status": "",
       "city": "Bloomfield",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2013623238",
+      "email": "info@azsupplynj.com",
+      "website": "https://azsupplynj.com/"
     },
     {
       "name": "Nightjar Cannabis",
@@ -274,7 +373,10 @@
       "type": "",
       "status": "",
       "city": "Bloomfield",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "whatsgood@nightjarcannabis.com",
+      "website": ""
     },
     {
       "name": "Oopachi",
@@ -282,7 +384,10 @@
       "type": "",
       "status": "",
       "city": "Bloomfield",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "Rise (Bloomfield)",
@@ -290,7 +395,10 @@
       "type": "",
       "status": "",
       "city": "Bloomfield",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9733273442",
+      "email": "info@risecannabis.com",
+      "website": "https://risecannabis.com/dispensaries/new-jersey/bloomfield/"
     },
     {
       "name": "The Public Garden",
@@ -298,7 +406,10 @@
       "type": "",
       "status": "",
       "city": "Bloomfield",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8624024366",
+      "email": "amanda@thepublic.garden",
+      "website": "https://public.garden/"
     },
     {
       "name": "Evolve Cannabis",
@@ -306,7 +417,10 @@
       "type": "",
       "status": "",
       "city": "Bordentown",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6094005590",
+      "email": "elly@evolvecannanj.com",
+      "website": "https://www.evolvecannanj.com/"
     },
     {
       "name": "Blazin Buddiez",
@@ -314,7 +428,10 @@
       "type": "",
       "status": "",
       "city": "Bridgeton",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "Social Dispensary",
@@ -322,7 +439,10 @@
       "type": "",
       "status": "",
       "city": "Bridgeton",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7328879752",
+      "email": "shyam@thesocialcannabis.com",
+      "website": "https://thesocialcannabis.com/"
     },
     {
       "name": "Indigo Dispensary",
@@ -330,7 +450,10 @@
       "type": "",
       "status": "",
       "city": "Brooklawn",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "Taste Of Earth",
@@ -338,7 +461,10 @@
       "type": "",
       "status": "",
       "city": "Buena",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8563008783",
+      "email": "info@tasteofearth.co",
+      "website": "https://tasteofearth.co/"
     },
     {
       "name": "Evergreen Natures Remedy",
@@ -346,7 +472,10 @@
       "type": "",
       "status": "",
       "city": "Butler",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9732912500",
+      "email": "billm@evergreen23.com",
+      "website": "https://evergreen23.com/"
     },
     {
       "name": "HoneyGrove South Corp",
@@ -354,7 +483,10 @@
       "type": "",
       "status": "",
       "city": "CLEMENTON",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8565043138",
+      "email": "",
+      "website": "https://honeygrovedispensary.com/location/clementon/"
     },
     {
       "name": "Camden Apothecary, Inc.",
@@ -362,7 +494,10 @@
       "type": "",
       "status": "",
       "city": "Camden",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "aminniti@bellpharmacycamden.com",
+      "website": ""
     },
     {
       "name": "Cuzzie\u2019s Dispensary",
@@ -370,7 +505,10 @@
       "type": "",
       "status": "",
       "city": "Camden",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8328994374",
+      "email": "",
+      "website": "https://www.shopcuzzies.com/"
     },
     {
       "name": "Loud House",
@@ -378,7 +516,10 @@
       "type": "",
       "status": "",
       "city": "Camden",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8563617396",
+      "email": "aaron@loudhouse.info",
+      "website": "https://loudhouse.info/"
     },
     {
       "name": "Organic Farms",
@@ -386,7 +527,10 @@
       "type": "",
       "status": "",
       "city": "Camden",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@organicfarms21.com",
+      "website": ""
     },
     {
       "name": "Shore House Canna",
@@ -394,7 +538,10 @@
       "type": "",
       "status": "",
       "city": "Cape May",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6096003452",
+      "email": "dave@shorehousecanna.com",
+      "website": "https://www.shorehousecanna.com/"
     },
     {
       "name": "Coastline Dispensary",
@@ -402,7 +549,10 @@
       "type": "",
       "status": "",
       "city": "Cape May Court House",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6094454420",
+      "email": "darnell@vrpent.com",
+      "website": "https://coastlinedispensary.com/"
     },
     {
       "name": "Illicit Gardens - Carlstadt,",
@@ -410,7 +560,10 @@
       "type": "",
       "status": "",
       "city": "Carlstadt",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2018142743",
+      "email": "dvielhauer@ftemo.com",
+      "website": "https://illicitgardens.com/stores/illicit-gardens-cannabis-dispensary-carlstadt-nj/?utm_source=terrayn_gbp&utm_medium=organic&utm_campaign=carlstadt"
     },
     {
       "name": "Twisted Hat Cannabis",
@@ -418,7 +571,10 @@
       "type": "",
       "status": "",
       "city": "Carneys Point",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "Toast@twistedhatcannabis.com",
+      "website": ""
     },
     {
       "name": "Green Lightning Cultivation",
@@ -426,7 +582,10 @@
       "type": "",
       "status": "",
       "city": "Cinnaminson",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "The Leaf and Seed Company",
@@ -434,7 +593,10 @@
       "type": "",
       "status": "",
       "city": "Clementon",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6096823510",
+      "email": "zacktheleafandseed@gmail.com",
+      "website": "https://www.theleafandseednj.com"
     },
     {
       "name": "The Botanist Collingswood Dispensary",
@@ -442,7 +604,10 @@
       "type": "",
       "status": "",
       "city": "Collingswood",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8564770012",
+      "email": "Rebecca.Zappalorta@shopbotanist.com",
+      "website": "https://shopbotanist.com/"
     },
     {
       "name": "Castaway Cannabis LLC",
@@ -450,7 +615,10 @@
       "type": "",
       "status": "",
       "city": "Delran",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8565443029",
+      "email": "mmaffei@castawaycanna.com",
+      "website": "https://www.castawaycanna.com/"
     },
     {
       "name": "Casa Verde Wellness",
@@ -458,7 +626,10 @@
       "type": "",
       "status": "",
       "city": "Dover",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9733432322",
+      "email": "roger@casaverdenj.com",
+      "website": "https://casaverdenj.com/"
     },
     {
       "name": "Sugar Leaves",
@@ -466,7 +637,10 @@
       "type": "",
       "status": "",
       "city": "Dover",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": "https://sugarleavesnj.com/"
     },
     {
       "name": "The Goods Supply Co. Victory Gardens LLC.",
@@ -474,7 +648,10 @@
       "type": "",
       "status": "",
       "city": "Dover",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "Baked Goodz",
@@ -482,7 +659,10 @@
       "type": "",
       "status": "",
       "city": "EAST ORANGE",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8622164746",
+      "email": "Bakedgoodz6@yahoo.com",
+      "website": ""
     },
     {
       "name": "Bloc Dispensary (Ewing)",
@@ -490,7 +670,10 @@
       "type": "",
       "status": "",
       "city": "EWING, MERCER",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9734948499",
+      "email": "hello@blocdispensary.com",
+      "website": "https://www.blocdispensary.com/dispensaries/ewing-nj"
     },
     {
       "name": "Garden State Dispensary - Eatontown",
@@ -498,7 +681,10 @@
       "type": "",
       "status": "",
       "city": "Eatontown",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "garret.reams@ayrwellness.com",
+      "website": ""
     },
     {
       "name": "NJ Pure LLC",
@@ -506,7 +692,10 @@
       "type": "",
       "status": "",
       "city": "Edgewater Park",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "ewp@njpure.net",
+      "website": ""
     },
     {
       "name": "The Botanist Egg Harbor",
@@ -514,7 +703,10 @@
       "type": "",
       "status": "",
       "city": "Egg Harbor",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6092777547",
+      "email": "eggharbortownship@shopbotanist.com",
+      "website": "https://shopbotanist.com/locations/egg-harbor-township-dispensary/"
     },
     {
       "name": "Atlantic Flower Dispensary",
@@ -522,7 +714,10 @@
       "type": "",
       "status": "",
       "city": "Egg Harbor City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6098336760",
+      "email": "nichi@atlanticflowerdispensary.com",
+      "website": "https://atlanticflowerdispensary.com/"
     },
     {
       "name": "Med Leaf LLC",
@@ -530,7 +725,10 @@
       "type": "",
       "status": "",
       "city": "Egg Harbor City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "20181519895",
+      "email": "info@medleafdispensary.com",
+      "website": "www.medleafdispensary.com"
     },
     {
       "name": "City Leaves",
@@ -538,7 +736,10 @@
       "type": "",
       "status": "",
       "city": "Egg Harbor Township",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@cityleaves.com",
+      "website": ""
     },
     {
       "name": "Conservatory Cannabis Company",
@@ -546,7 +747,10 @@
       "type": "",
       "status": "",
       "city": "Egg Harbor Township",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6099049409",
+      "email": "jon@conservatorycannabis.com",
+      "website": "https://www.conservatorycannabis.com/"
     },
     {
       "name": "Red Oak Dispensary - EHT, LLC",
@@ -554,7 +758,10 @@
       "type": "",
       "status": "",
       "city": "Egg Harbor Township",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@oldoakdispensary.com",
+      "website": ""
     },
     {
       "name": "Budzooka Dispensary LLC",
@@ -562,7 +769,10 @@
       "type": "",
       "status": "",
       "city": "Elizabeth",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9083802414",
+      "email": "info@budzookanj.com",
+      "website": "https://budzookanj.com/"
     },
     {
       "name": "Fresh Elizabeth LLC",
@@ -570,7 +780,10 @@
       "type": "",
       "status": "",
       "city": "Elizabeth",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@freshcannabis.co",
+      "website": ""
     },
     {
       "name": "Urge New Jersey LLC",
@@ -578,7 +791,10 @@
       "type": "",
       "status": "",
       "city": "Elizabeth",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9089361100",
+      "email": "contact@urgenj.com",
+      "website": "https://urgenj.com/"
     },
     {
       "name": "CannaVibes",
@@ -586,7 +802,10 @@
       "type": "",
       "status": "",
       "city": "Elmwood Park",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2012924489",
+      "email": "bwaldron@cannavibesnj.com",
+      "website": "https://cannavibesnj.com/"
     },
     {
       "name": "OHM THEORY",
@@ -594,7 +813,10 @@
       "type": "",
       "status": "",
       "city": "Elmwood Park",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2014200004",
+      "email": "urvesh@ohmtheory.com",
+      "website": "https://ohmtheory.com/"
     },
     {
       "name": "Bud It Up",
@@ -602,7 +824,10 @@
       "type": "",
       "status": "",
       "city": "Englishtown",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8482339344",
+      "email": "info@buditupnj.com",
+      "website": "https://www.buditupnj.com/"
     },
     {
       "name": "Plantopia LLC",
@@ -610,7 +835,10 @@
       "type": "",
       "status": "",
       "city": "Englishtown",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7329101060",
+      "email": "plantopia7@gmail.com",
+      "website": "http://www.plantopiadispensaries.com"
     },
     {
       "name": "RUUTED LLC",
@@ -618,7 +846,10 @@
       "type": "",
       "status": "",
       "city": "Englishtown",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7325842209",
+      "email": "ruutedinventory@gmail.com",
+      "website": "https://ruuteddispensary.com/"
     },
     {
       "name": "Scarlet Reserve Room",
@@ -626,7 +857,10 @@
       "type": "",
       "status": "",
       "city": "Englishtown",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8565379300",
+      "email": "nick@scarletreserveroom.com",
+      "website": "https://scarletreserveroom.com/"
     },
     {
       "name": "Floro Evesham",
@@ -634,7 +868,10 @@
       "type": "",
       "status": "",
       "city": "Evesham",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8563345281",
+      "email": "info@floronewjersey.com",
+      "website": "www.floronewjersey.com"
     },
     {
       "name": "Highway 90 LLC",
@@ -642,7 +879,10 @@
       "type": "",
       "status": "",
       "city": "Evesham",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@thehighway90.com",
+      "website": ""
     },
     {
       "name": "Simply Pure Trenton NJ Inc",
@@ -650,7 +890,10 @@
       "type": "",
       "status": "",
       "city": "Ewing Township",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2023657310",
+      "email": "info@simplypuretrenton.com",
+      "website": "www.simplypuretrenton.com"
     },
     {
       "name": "Aunt Mary'S Dispensary",
@@ -658,7 +901,10 @@
       "type": "",
       "status": "",
       "city": "Flemington",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9082570421",
+      "email": "vanessa@auntmarysnj.co",
+      "website": "https://auntmarysnj.co/"
     },
     {
       "name": "Ascend Wellness - Fort Lee",
@@ -666,7 +912,10 @@
       "type": "",
       "status": "",
       "city": "Fort Lee",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9732007696",
+      "email": "proller@awholdings.com",
+      "website": "https://www.awholdings.com/"
     },
     {
       "name": "GW LEAF DISPENSARY LLC",
@@ -674,7 +923,10 @@
       "type": "",
       "status": "",
       "city": "Fort Lee",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2014292284",
+      "email": "Ta-leia@gwleaf.com",
+      "website": "https://gwleaf.com/"
     },
     {
       "name": "High Almighty",
@@ -682,7 +934,10 @@
       "type": "",
       "status": "",
       "city": "Franklin Park",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7324365452",
+      "email": "Chad@growfire.co",
+      "website": "https://gethighalmighty.com/"
     },
     {
       "name": "Citi Roots LLC",
@@ -690,7 +945,10 @@
       "type": "",
       "status": "",
       "city": "Franklin Township",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "(609) 924-4585",
+      "email": "citirootsnj@gmail.com",
+      "website": "https://citirootsnj.com"
     },
     {
       "name": "Garden State Natural Green",
@@ -698,7 +956,10 @@
       "type": "",
       "status": "",
       "city": "Franklin Township",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": "https://gsngdispensary.com/"
     },
     {
       "name": "Somerset Green LLC",
@@ -706,7 +967,10 @@
       "type": "",
       "status": "",
       "city": "Franklin Township",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9088872673",
+      "email": "",
+      "website": ""
     },
     {
       "name": "Sparkology",
@@ -714,7 +978,10 @@
       "type": "",
       "status": "",
       "city": "Franklin Township",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@sparkology.com",
+      "website": ""
     },
     {
       "name": "THEO A CANNABIS",
@@ -722,7 +989,10 @@
       "type": "",
       "status": "",
       "city": "Franklin Township",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7328354345",
+      "email": "",
+      "website": "https://njtheo.com/"
     },
     {
       "name": "Timber 5",
@@ -730,7 +1000,10 @@
       "type": "",
       "status": "",
       "city": "Franklin Township",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7324442002",
+      "email": "michael@timber5.com",
+      "website": "https://timber5.com/"
     },
     {
       "name": "NJ Leaf (Freehold)",
@@ -738,7 +1011,10 @@
       "type": "",
       "status": "",
       "city": "Freehold",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7322047172",
+      "email": "contact@njleaf.com",
+      "website": "https://njleaf.com/location/freehold-nj/"
     },
     {
       "name": "Garfield Gardens Dispensary LLC",
@@ -746,7 +1022,10 @@
       "type": "",
       "status": "",
       "city": "Garfield",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9737555420",
+      "email": "garfieldgardens@yumaway.com",
+      "website": "https://gardensdispensary.com/"
     },
     {
       "name": "One Green Leaf LLC",
@@ -754,7 +1033,10 @@
       "type": "",
       "status": "",
       "city": "Gibbsboro",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "hello@onegreenleafdispensary.com",
+      "website": ""
     },
     {
       "name": "Altius",
@@ -762,7 +1044,10 @@
       "type": "",
       "status": "",
       "city": "Glassboro",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "The Jersey Joint",
@@ -770,7 +1055,10 @@
       "type": "",
       "status": "",
       "city": "Glassboro",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "18564624910",
+      "email": "Info@jerseyjoint.com",
+      "website": "https://www.jerseyjointdispensary.com/"
     },
     {
       "name": "Blulight Cannabis Dispensary- Gloucester City",
@@ -778,7 +1066,10 @@
       "type": "",
       "status": "",
       "city": "Gloucester City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8564326114",
+      "email": "rahul@blulight.com",
+      "website": "http://www.blulight.com"
     },
     {
       "name": "Flower & Flame LLC",
@@ -786,7 +1077,10 @@
       "type": "",
       "status": "",
       "city": "Gloucester Township",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6092000320",
+      "email": "admin@njflowerandflame.com",
+      "website": "https://njflowerandflame.com/"
     },
     {
       "name": "Midnight Greens",
@@ -794,7 +1088,10 @@
       "type": "",
       "status": "",
       "city": "Gloucester Township",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@midnightgreensnj.com",
+      "website": ""
     },
     {
       "name": "Quality Cannabliss",
@@ -802,7 +1099,10 @@
       "type": "",
       "status": "",
       "city": "Gloucester Township",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6099802002",
+      "email": "richelle@qualitycannabliss.com",
+      "website": "https://qualitycannabliss.com/"
     },
     {
       "name": "Hashery",
@@ -810,7 +1110,10 @@
       "type": "",
       "status": "",
       "city": "Hackensack",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2013032999",
+      "email": "haig@hasherynj.com",
+      "website": "https://hasherynj.com/"
     },
     {
       "name": "Hackettstown Dispensary",
@@ -818,7 +1121,10 @@
       "type": "",
       "status": "",
       "city": "Hacketstown",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9086515542",
+      "email": "hackettstowndispensary@gmail.com",
+      "website": "https://www.hackettstowndispensarynj.com/"
     },
     {
       "name": "High Street Dispensary LLC",
@@ -826,7 +1132,10 @@
       "type": "",
       "status": "",
       "city": "Hackettstown",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9083191996",
+      "email": "chris@njhighstreet.com",
+      "website": "https://njhighstreet.com/"
     },
     {
       "name": "Molly Ann Farms",
@@ -834,7 +1143,10 @@
       "type": "",
       "status": "",
       "city": "Haledon",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9733154900",
+      "email": "receiving@mollyannfarms.com",
+      "website": "https://www.mollyannfarms.com/"
     },
     {
       "name": "Northeast Alternatives",
@@ -842,7 +1154,10 @@
       "type": "",
       "status": "",
       "city": "Hamilton",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6092622262",
+      "email": "coryv@nealternatives.com",
+      "website": "https://nealternatives.com/"
     },
     {
       "name": "Botera Harrison LLC",
@@ -850,7 +1165,10 @@
       "type": "",
       "status": "",
       "city": "Harrison",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "ginacalitri@boteranj.com",
+      "website": ""
     },
     {
       "name": "Cookies Harrison LLC",
@@ -858,7 +1176,10 @@
       "type": "",
       "status": "",
       "city": "Harrison",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "office@cookiesharrison.com",
+      "website": ""
     },
     {
       "name": "ANJA Life LLC",
@@ -866,7 +1187,10 @@
       "type": "",
       "status": "",
       "city": "Highland Park",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7329959390",
+      "email": "support@getanja.com",
+      "website": "https://www.getanja.com/"
     },
     {
       "name": "BLKBRN Dispensary",
@@ -874,7 +1198,10 @@
       "type": "",
       "status": "",
       "city": "Highland Park",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8482021963",
+      "email": "emilio.pazmino@blkbrndispensary.com",
+      "website": "https://www.blkbrndispensary.com/"
     },
     {
       "name": "Main Street Dispensary",
@@ -882,7 +1209,10 @@
       "type": "",
       "status": "",
       "city": "Highland Park",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7322530095",
+      "email": "josh@mainstreetdispensarynj.com",
+      "website": "https://mainstreetdispensarynj.com/"
     },
     {
       "name": "The Honorable Plant LLC",
@@ -890,7 +1220,10 @@
       "type": "",
       "status": "",
       "city": "Highlands",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7323346545",
+      "email": "Jakes@honorableplant.com",
+      "website": "https://honorableplant.com/"
     },
     {
       "name": "Blue Violets",
@@ -898,7 +1231,10 @@
       "type": "",
       "status": "",
       "city": "Hoboken",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2017710323",
+      "email": "hello@blueviolets.co",
+      "website": "https://www.blueviolets.co/"
     },
     {
       "name": "Test Buyer",
@@ -906,7 +1242,10 @@
       "type": "",
       "status": "",
       "city": "Hoboken",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "800-431-7724",
+      "email": "",
+      "website": "https://www.canfectionsedibles.com/"
     },
     {
       "name": "The Station Hoboken LLC F/K/A Terrapin Investment Group II LLC",
@@ -914,7 +1253,10 @@
       "type": "",
       "status": "",
       "city": "Hoboken",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "vincentc@thestationhoboken.com",
+      "website": ""
     },
     {
       "name": "Village Hoboken",
@@ -922,7 +1264,10 @@
       "type": "",
       "status": "",
       "city": "Hoboken",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "SKY CANNABIS NJ",
@@ -930,7 +1275,10 @@
       "type": "",
       "status": "",
       "city": "Hopewell",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6093095005",
+      "email": "saj@evolvecannanj.com",
+      "website": "https://www.skycannanj.com/"
     },
     {
       "name": "ORGANIC FUSION LLC",
@@ -938,7 +1286,10 @@
       "type": "",
       "status": "",
       "city": "Irvington",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "1634 Funk",
@@ -946,7 +1297,10 @@
       "type": "",
       "status": "",
       "city": "Jersey City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2018628877",
+      "email": "1634funk11@gmail.com",
+      "website": "https://1634funk.com/"
     },
     {
       "name": "Altalune Dispensary LLC",
@@ -954,7 +1308,10 @@
       "type": "",
       "status": "",
       "city": "Jersey City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2013600040",
+      "email": "amanda420@altalunedispo.org",
+      "website": "https://altalunedispo.org/"
     },
     {
       "name": "Authorized Dealer Dispensary III",
@@ -962,7 +1319,10 @@
       "type": "",
       "status": "",
       "city": "Jersey City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2013032999",
+      "email": "haig@yourdealer.co",
+      "website": "https://yourdealer.co/"
     },
     {
       "name": "Benedict'S Supply",
@@ -970,7 +1330,10 @@
       "type": "",
       "status": "",
       "city": "Jersey City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2017215434",
+      "email": "sarah@benedictssupply.com",
+      "website": "https://benedictssupply.com/"
     },
     {
       "name": "Cannabis Connoisseurs Collective",
@@ -978,7 +1341,10 @@
       "type": "",
       "status": "",
       "city": "Jersey City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "Cream",
@@ -986,7 +1352,10 @@
       "type": "",
       "status": "",
       "city": "Jersey City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8485009333",
+      "email": "heinrich@cream.online",
+      "website": "https://cream.online/"
     },
     {
       "name": "Downtown FLWR",
@@ -994,7 +1363,10 @@
       "type": "",
       "status": "",
       "city": "Jersey City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2013514048",
+      "email": "jazz@downtownflwr.com",
+      "website": "https://downtownflwr.com/"
     },
     {
       "name": "Garden Greenz",
@@ -1002,7 +1374,10 @@
       "type": "",
       "status": "",
       "city": "Jersey City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2019634500",
+      "email": "evagreenz201@gmail.com",
+      "website": "https://gardengreenz201.com/"
     },
     {
       "name": "Golden Door Dispensary",
@@ -1010,7 +1385,10 @@
       "type": "",
       "status": "",
       "city": "Jersey City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9737350950",
+      "email": "jayt@goldendoordispensary.com",
+      "website": "https://goldendoordispensary.com/"
     },
     {
       "name": "Greenstop Wellness LLC",
@@ -1018,7 +1396,10 @@
       "type": "",
       "status": "",
       "city": "Jersey City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "Hamm and Chaz",
@@ -1026,7 +1407,10 @@
       "type": "",
       "status": "",
       "city": "Jersey City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8622201711",
+      "email": "c.peters@hammchaz.com",
+      "website": "https://www.hammchaz.com/"
     },
     {
       "name": "Hazy Harvest",
@@ -1034,7 +1418,10 @@
       "type": "",
       "status": "",
       "city": "Jersey City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "5513599161",
+      "email": "info@hazyharvest.com",
+      "website": "https://hazyharvest.com/"
     },
     {
       "name": "Jersey Dispensary",
@@ -1042,7 +1429,10 @@
       "type": "",
       "status": "",
       "city": "Jersey City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2017215037",
+      "email": "",
+      "website": "https://jerseydispensary.com/"
     },
     {
       "name": "Jersey Leaf LLC",
@@ -1050,7 +1440,10 @@
       "type": "",
       "status": "",
       "city": "Jersey City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2019515380",
+      "email": "wpena.jr87@gmail.com",
+      "website": "https://jerseyleaf.net/"
     },
     {
       "name": "Legacy to Lifted",
@@ -1058,7 +1451,10 @@
       "type": "",
       "status": "",
       "city": "Jersey City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@liftednj.com",
+      "website": ""
     },
     {
       "name": "Lifted Vision",
@@ -1066,7 +1462,10 @@
       "type": "",
       "status": "",
       "city": "Jersey City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2015395882",
+      "email": "liftedvisionnj@gmail.com",
+      "website": "https://liftedvisionnj.com/"
     },
     {
       "name": "Meme'S Danckk World, LLC",
@@ -1074,7 +1473,10 @@
       "type": "",
       "status": "",
       "city": "Jersey City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "The Cannabis Place",
@@ -1082,7 +1484,10 @@
       "type": "",
       "status": "",
       "city": "Jersey City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8444201542",
+      "email": "kevin@thecannabisplace.org",
+      "website": "http://thecannabisplace.org"
     },
     {
       "name": "The Leaf Joint LLC",
@@ -1090,7 +1495,10 @@
       "type": "",
       "status": "",
       "city": "Jersey City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2016304356",
+      "email": "info@theleafjoint.net",
+      "website": ""
     },
     {
       "name": "The Medicine Woman",
@@ -1098,7 +1506,10 @@
       "type": "",
       "status": "",
       "city": "Jersey City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8558696337",
+      "email": "casey@Themedwoman.com",
+      "website": "https://www.themedicinewoman.com/pages/21-entry"
     },
     {
       "name": "The Retreat",
@@ -1106,7 +1517,10 @@
       "type": "",
       "status": "",
       "city": "Jersey City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "UFORIA",
@@ -1114,7 +1528,10 @@
       "type": "",
       "status": "",
       "city": "Jersey City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "bashkim.spahi@gmail.com",
+      "website": ""
     },
     {
       "name": "XENA",
@@ -1122,7 +1539,10 @@
       "type": "",
       "status": "",
       "city": "Jersey City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@xenanj.com",
+      "website": ""
     },
     {
       "name": "NJ Leaf Keansburg",
@@ -1130,7 +1550,10 @@
       "type": "",
       "status": "",
       "city": "Keansburg",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "Premo Cannabis Co",
@@ -1138,7 +1561,10 @@
       "type": "",
       "status": "",
       "city": "Keyport",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9086767320",
+      "email": "darrin@premocannabis.co",
+      "website": "https://premocannabis.co/"
     },
     {
       "name": "Gas & Grass Dispensary",
@@ -1146,7 +1572,10 @@
       "type": "",
       "status": "",
       "city": "Lake Hopatcong",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "5513706514",
+      "email": "taleia@gasandgrassnj.com",
+      "website": "https://gasandgrassnj.com/"
     },
     {
       "name": "Greenlight Apothecary",
@@ -1154,7 +1583,10 @@
       "type": "",
       "status": "",
       "city": "Lake Hopatcong",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9734096650",
+      "email": "evan@greenlightnj.com",
+      "website": "https://www.greenlightnj.com"
     },
     {
       "name": "Earth & Ivy - Lakehurst",
@@ -1162,7 +1594,10 @@
       "type": "",
       "status": "",
       "city": "Lakehurst",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7323172992",
+      "email": "",
+      "website": "https://earthandivy.co/lakehurst-nj-dispensary/"
     },
     {
       "name": "High Profile - Lakehurst",
@@ -1170,7 +1605,10 @@
       "type": "",
       "status": "",
       "city": "Lakehurst",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@highprofilecannabis.com",
+      "website": ""
     },
     {
       "name": "Baked By The River",
@@ -1178,7 +1616,10 @@
       "type": "",
       "status": "",
       "city": "Lambertville",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6094604207",
+      "email": "info@bakedbytheriver.com",
+      "website": "http://www.bakedbytheriver.com/"
     },
     {
       "name": "Collective Beleaf",
@@ -1186,7 +1627,10 @@
       "type": "",
       "status": "",
       "city": "Lambertville",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "LunaVerdeLLC@gmail.com",
+      "website": "https://www.collectivebeleaf.com/"
     },
     {
       "name": "Union Chill Cannabis Company",
@@ -1194,7 +1638,10 @@
       "type": "",
       "status": "",
       "city": "Lambertville",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@unionchillco.com",
+      "website": ""
     },
     {
       "name": "Mister Jones Dispensary",
@@ -1202,7 +1649,10 @@
       "type": "",
       "status": "",
       "city": "Little Falls Township",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9736382454",
+      "email": "leronejones@aol.com",
+      "website": "https://www.awholdings.com/"
     },
     {
       "name": "Beyond Hello",
@@ -1210,7 +1660,10 @@
       "type": "",
       "status": "",
       "city": "Little Ferry",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8884988842",
+      "email": "tnewsom@beyond-hello.com",
+      "website": "https://beyond-hello.com/"
     },
     {
       "name": "Quality Roots - Evesham, LLC",
@@ -1218,7 +1671,10 @@
       "type": "",
       "status": "",
       "city": "MARLTON",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8567021800",
+      "email": "info@getqualityroots.com",
+      "website": "https://getqualityroots.com/"
     },
     {
       "name": "HoneyStash LLC",
@@ -1226,7 +1682,10 @@
       "type": "",
       "status": "",
       "city": "METUCHEN",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7323952444",
+      "email": "",
+      "website": "https://honeygrovedispensary.com/shop/metuchen/"
     },
     {
       "name": "Elevated by the CannaBoss Lady",
@@ -1234,7 +1693,10 @@
       "type": "",
       "status": "",
       "city": "Maplewood",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "jill@thecannabosslady.com",
+      "website": ""
     },
     {
       "name": "Sweet Spot Farms",
@@ -1242,7 +1704,10 @@
       "type": "",
       "status": "",
       "city": "Maplewood",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9733272027",
+      "email": "cocchipinti@sweetspotfarms.com",
+      "website": "https://sweetspotfarms.com/"
     },
     {
       "name": "Canna Bar",
@@ -1250,7 +1715,10 @@
       "type": "",
       "status": "",
       "city": "Matawan",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6466444641",
+      "email": "david@thecannabar.com",
+      "website": "https://thecannabar.com/"
     },
     {
       "name": "Vigor Dispensary",
@@ -1258,7 +1726,10 @@
       "type": "",
       "status": "",
       "city": "Matawan",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7325100400",
+      "email": "mike@vigordispensary.com",
+      "website": "https://vigordispensary.com/"
     },
     {
       "name": "Kine Buds Dispensary",
@@ -1266,7 +1737,10 @@
       "type": "",
       "status": "",
       "city": "Maywood",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2019568800",
+      "email": "citypeaknm@gmail.com",
+      "website": "https://kinebudsdispensary.com"
     },
     {
       "name": "Gynsyng",
@@ -1274,7 +1748,10 @@
       "type": "",
       "status": "",
       "city": "Merchantville",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "Carry-On Cannabis LLC",
@@ -1282,7 +1759,10 @@
       "type": "",
       "status": "",
       "city": "Monroe",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "UMA Flowers",
@@ -1290,7 +1770,10 @@
       "type": "",
       "status": "",
       "city": "Morristown",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8622604115",
+      "email": "dillan@umaflowers.co",
+      "website": "https://www.umaflowers.co/"
     },
     {
       "name": "Brotherly Bud LLC",
@@ -1298,7 +1781,10 @@
       "type": "",
       "status": "",
       "city": "Mount Ephraim",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8566550838",
+      "email": "nick@brotherlybud.com",
+      "website": "https://brotherlybud.com"
     },
     {
       "name": "Mass Grown",
@@ -1306,7 +1792,10 @@
       "type": "",
       "status": "",
       "city": "Mount Holly",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6095189333",
+      "email": "massgrownllc@gmail.com",
+      "website": "https://massgrownnj.com/"
     },
     {
       "name": "Voltaire NJ",
@@ -1314,7 +1803,10 @@
       "type": "",
       "status": "",
       "city": "Mount Holly",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6097025520",
+      "email": "joshua@voltairenj.com",
+      "website": "https://shopvoltaire.com/"
     },
     {
       "name": "NAR Cannabis LLC",
@@ -1322,7 +1814,10 @@
       "type": "",
       "status": "",
       "city": "Mount Laurel",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "Daylite Cannabis",
@@ -1330,7 +1825,10 @@
       "type": "",
       "status": "",
       "city": "Mount Laurel Township",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@daylitecannabis.com",
+      "website": ""
     },
     {
       "name": "Nirvana Dispensary",
@@ -1338,7 +1836,10 @@
       "type": "",
       "status": "",
       "city": "Mount Laurel Township",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "5515803644",
+      "email": "nirmit63@gmail.com",
+      "website": "https://explorenirvana.com/"
     },
     {
       "name": "Phula LLC",
@@ -1346,7 +1847,10 @@
       "type": "",
       "status": "",
       "city": "Mt Holly",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6096677343",
+      "email": "contact@phulaweed.com",
+      "website": "https://www.phulaweed.com/"
     },
     {
       "name": "Milligrams",
@@ -1354,7 +1858,10 @@
       "type": "",
       "status": "",
       "city": "Mt. Laurel",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8563607697",
+      "email": "Justin@milligrams.co",
+      "website": "https://milligrams.co/"
     },
     {
       "name": "Releaf Newton",
@@ -1362,7 +1869,10 @@
       "type": "",
       "status": "",
       "city": "NEWTON",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9734405552",
+      "email": "dan@releafnewton.com",
+      "website": "https://www.releafnewton.com/location/releafnewton"
     },
     {
       "name": "Shipwreck'D",
@@ -1370,7 +1880,10 @@
       "type": "",
       "status": "",
       "city": "Neptune City",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7324813136",
+      "email": "info@shipwreckd.com",
+      "website": "https://shipwreckd.com/"
     },
     {
       "name": "Bud 2 Bloom LLC",
@@ -1378,7 +1891,10 @@
       "type": "",
       "status": "",
       "city": "Netcong",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "ariel@bud2bloomdispensary.com",
+      "website": ""
     },
     {
       "name": "Earth & Ivy, LLC",
@@ -1386,7 +1902,10 @@
       "type": "",
       "status": "",
       "city": "New Brunswick",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "contact@earthandivy.co",
+      "website": ""
     },
     {
       "name": "Jesters Joint Dispensary",
@@ -1394,7 +1913,10 @@
       "type": "",
       "status": "",
       "city": "New Brunswick",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8488002700",
+      "email": "",
+      "website": "http://WWW.JESTERSNJ.COM"
     },
     {
       "name": "Puffin Store NJ LLC",
@@ -1402,7 +1924,10 @@
       "type": "",
       "status": "",
       "city": "New Brunswick",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7323783346",
+      "email": "elianna@puffinteam.com",
+      "website": "https://puffinstorenj.com/"
     },
     {
       "name": "Hashatoria",
@@ -1410,7 +1935,10 @@
       "type": "",
       "status": "",
       "city": "Newark",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "newarkinfo@hashstoria.com",
+      "website": ""
     },
     {
       "name": "The Station Dispensary LLC",
@@ -1418,7 +1946,10 @@
       "type": "",
       "status": "",
       "city": "Newark",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "Treeotics LLC",
@@ -1426,7 +1957,10 @@
       "type": "",
       "status": "",
       "city": "Newark",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@treeotics.com",
+      "website": ""
     },
     {
       "name": "URB'N dispensary",
@@ -1434,7 +1968,10 @@
       "type": "",
       "status": "",
       "city": "Newark",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9732000618",
+      "email": "info@urbndispensary.com",
+      "website": "https://urbndispensary.com/"
     },
     {
       "name": "Bud City NJ LLC",
@@ -1442,7 +1979,10 @@
       "type": "",
       "status": "",
       "city": "Newton",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9734405945",
+      "email": "david@budcitynj.com",
+      "website": "https://budcitynj.com/"
     },
     {
       "name": "Feels Of Green LLC",
@@ -1450,7 +1990,10 @@
       "type": "",
       "status": "",
       "city": "Newton",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9734443079",
+      "email": "jennifer@feelsofgreendispensary.com",
+      "website": "https://feelsofgreendispensary.com/"
     },
     {
       "name": "Authorized Dealer Dispensary",
@@ -1458,7 +2001,10 @@
       "type": "",
       "status": "",
       "city": "North Bergen",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2013032999",
+      "email": "alap@yourdealer.co",
+      "website": "https://yourdealer.co/"
     },
     {
       "name": "Hudhaus",
@@ -1466,7 +2012,10 @@
       "type": "",
       "status": "",
       "city": "North Bergen",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8774834287",
+      "email": "salam@hudhaus.co",
+      "website": "http://www.hudhaus.co"
     },
     {
       "name": "Liberty Cannabis",
@@ -1474,7 +2023,10 @@
       "type": "",
       "status": "",
       "city": "North Brunswick",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8488004795",
+      "email": "rory.monahan@libertycannabis.com",
+      "website": "https://libertycannabis.com/"
     },
     {
       "name": "Nj Leaf (North Brunswick)",
@@ -1482,7 +2034,10 @@
       "type": "",
       "status": "",
       "city": "North Brunswick",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2015748060",
+      "email": "contact@njleaf.com",
+      "website": "https://njleaf.com/location/north-brunswick-township-nj/"
     },
     {
       "name": "Sea & Leaf LLC",
@@ -1490,7 +2045,10 @@
       "type": "",
       "status": "",
       "city": "North Cape May",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6095512750",
+      "email": "Garry071993@gmail.com",
+      "website": "https://seaandleaf.com/"
     },
     {
       "name": "Good Karma Dispensary",
@@ -1498,7 +2056,10 @@
       "type": "",
       "status": "",
       "city": "North Plainfield",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "J & J Cannabis Company LLC",
@@ -1506,7 +2067,10 @@
       "type": "",
       "status": "",
       "city": "Oak RIdge",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9732000705",
+      "email": "info@jjdispensary.com",
+      "website": "http://www.jjdispensary.com"
     },
     {
       "name": "Ginger Hale LLC",
@@ -1514,7 +2078,10 @@
       "type": "",
       "status": "",
       "city": "Oaklyn",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8568564253",
+      "email": "matt@gingerhale.com",
+      "website": "http://www.gingerhaledispensary.com"
     },
     {
       "name": "The Next Chapter Market",
@@ -1522,7 +2089,10 @@
       "type": "",
       "status": "",
       "city": "Ocean",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "4107769894",
+      "email": "brads@honorableplant.com",
+      "website": ""
     },
     {
       "name": "BLAZE GREEN LLC",
@@ -1530,7 +2100,10 @@
       "type": "",
       "status": "",
       "city": "Paterson",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "RIse Paterson",
@@ -1538,7 +2111,10 @@
       "type": "",
       "status": "",
       "city": "Paterson",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@risecannabis.com",
+      "website": ""
     },
     {
       "name": "Aurum Botanics",
@@ -1546,7 +2122,10 @@
       "type": "",
       "status": "",
       "city": "Pemberton",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6097265025",
+      "email": "",
+      "website": "https://aurumbotanics.com/"
     },
     {
       "name": "Jersey Meds",
@@ -1554,7 +2133,10 @@
       "type": "",
       "status": "",
       "city": "Pennington",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6093653002",
+      "email": "karan@jerseymeds.com",
+      "website": ""
     },
     {
       "name": "Pure Blossom",
@@ -1562,7 +2144,10 @@
       "type": "",
       "status": "",
       "city": "Pennington",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "support@pureblossom.com",
+      "website": ""
     },
     {
       "name": "Frosted Nug - Carneys Point",
@@ -1570,7 +2155,10 @@
       "type": "",
       "status": "",
       "city": "Penns Grove",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8563763359",
+      "email": "kris@frostednug.com",
+      "website": "https://frostednug.com/carneys-point-dispensary/"
     },
     {
       "name": "Uncle Beez Greeneryz",
@@ -1578,7 +2166,10 @@
       "type": "",
       "status": "",
       "city": "Penns Grove",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2012709277",
+      "email": "kevin@unclebeezgreeneryz.com",
+      "website": "https://unclebeezgreeneryz.com/"
     },
     {
       "name": "MPX/iAnthus - Pennsauken",
@@ -1586,7 +2177,10 @@
       "type": "",
       "status": "",
       "city": "Pennsauken",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2677560050",
+      "email": "apinvoices@ianthus.com",
+      "website": "https://mpxnj.com/"
     },
     {
       "name": "Island Vibez",
@@ -1594,7 +2188,10 @@
       "type": "",
       "status": "",
       "city": "Plainfield",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@islandvibezdispensary.com",
+      "website": ""
     },
     {
       "name": "KOTA CANNA LLC",
@@ -1602,7 +2199,10 @@
       "type": "",
       "status": "",
       "city": "Plainfield",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9089414565",
+      "email": "shawn@kotacanna.com",
+      "website": "https://kotacanna.com/"
     },
     {
       "name": "Mind Lift Dispensary",
@@ -1610,7 +2210,10 @@
       "type": "",
       "status": "",
       "city": "Plainfield",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9085882322",
+      "email": "sales@mindliftdispensary.com",
+      "website": "https://mindliftdispensary.com/"
     },
     {
       "name": "Queen City",
@@ -1618,7 +2221,10 @@
       "type": "",
       "status": "",
       "city": "Plainfield",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9089417909",
+      "email": "leaders@queencitynj.com",
+      "website": "https://queencitynj.com/"
     },
     {
       "name": "Green Wellness Haven",
@@ -1626,7 +2232,10 @@
       "type": "",
       "status": "",
       "city": "Pleasantville",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6093825553",
+      "email": "greenhavenwellness24@gmail.com",
+      "website": "https://learngreenhaven.com/"
     },
     {
       "name": "Got Your Six Dispensary Of New Jersey LLC.",
@@ -1634,7 +2243,10 @@
       "type": "",
       "status": "",
       "city": "Princeton",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7324442060",
+      "email": "Lauren@gotyoursix.co",
+      "website": "https://gotyoursixdispensary.com/"
     },
     {
       "name": "Plantabis Dispensary LLC",
@@ -1642,7 +2254,10 @@
       "type": "",
       "status": "",
       "city": "Rahway",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@plantabis.com",
+      "website": ""
     },
     {
       "name": "Valley Wellness",
@@ -1650,7 +2265,10 @@
       "type": "",
       "status": "",
       "city": "Raritan",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9084296680",
+      "email": "sarah.trent@valleywellnessnj.com",
+      "website": "https://valleywellnessnj.com/"
     },
     {
       "name": "Canopy Crossroad LLC",
@@ -1658,7 +2276,10 @@
       "type": "",
       "status": "",
       "city": "Red Bank",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7324385880",
+      "email": "samantha@canopycrossroad.com",
+      "website": "https://www.canopycrossroad.com"
     },
     {
       "name": "Monteverde",
@@ -1666,7 +2287,10 @@
       "type": "",
       "status": "",
       "city": "Red Bank",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7327044575",
+      "email": "derek.obrien@monteverdenj.com",
+      "website": "https://monteverdenj.com/"
     },
     {
       "name": "The Frosted Nug At Red Bank",
@@ -1674,7 +2298,10 @@
       "type": "",
       "status": "",
       "city": "Red Bank",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8488781110",
+      "email": "contact@frostednug.com",
+      "website": "https://frostednug.com/"
     },
     {
       "name": "Township Green LLC",
@@ -1682,7 +2309,10 @@
       "type": "",
       "status": "",
       "city": "Riverside",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8565443065",
+      "email": "scott@townshipgreen.com",
+      "website": "https://townshipgreen.com/"
     },
     {
       "name": "Ascend Wellness - Rochelle Park",
@@ -1690,7 +2320,10 @@
       "type": "",
       "status": "",
       "city": "Rochelle Park",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6097410644",
+      "email": "proller@awholdings.com",
+      "website": "https://www.awholdings.com/"
     },
     {
       "name": "G2 Dispensary",
@@ -1698,7 +2331,10 @@
       "type": "",
       "status": "",
       "city": "Rockaway",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9735922708",
+      "email": "chris@g2dispensary.com",
+      "website": "https://www.g2dispensary.com/"
     },
     {
       "name": "Kind Kush Dispensary",
@@ -1706,7 +2342,10 @@
       "type": "",
       "status": "",
       "city": "Rockaway",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2013165708",
+      "email": "kindkushllc@gmail.com",
+      "website": "https://www.kindkushdispensary.com/"
     },
     {
       "name": "Holistic Re-Leaf",
@@ -1714,7 +2353,10 @@
       "type": "",
       "status": "",
       "city": "Rockway",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8455208512",
+      "email": "anmol@hrlnj.com",
+      "website": "https://holisticreleafnj.com/"
     },
     {
       "name": "JoyLeaf",
@@ -1722,7 +2364,10 @@
       "type": "",
       "status": "",
       "city": "Roselle",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@joyleaf.com",
+      "website": ""
     },
     {
       "name": "Cottonmouth Dispensary LLC",
@@ -1730,7 +2375,10 @@
       "type": "",
       "status": "",
       "city": "Runnemede",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8563123877",
+      "email": "sam@getcottonmouth.com",
+      "website": "https://getcottonmouth.com/"
     },
     {
       "name": "Phasal Dispensary",
@@ -1738,7 +2386,10 @@
       "type": "",
       "status": "",
       "city": "Runnemede",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "hello@phasaldispensary.com",
+      "website": ""
     },
     {
       "name": "Bridge CIty Collective Dispensary",
@@ -1746,7 +2397,10 @@
       "type": "",
       "status": "",
       "city": "SOMERSET",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7322208411",
+      "email": "kknodle@bridgecitycollective.com",
+      "website": "https://bridgecitycollective.com/"
     },
     {
       "name": "The Dispensary Of Saddle Brook",
@@ -1754,7 +2408,10 @@
       "type": "",
       "status": "",
       "city": "Saddle Brook",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "5515803644",
+      "email": "teamsaddlebrook@gmail.com",
+      "website": "https://dispensaryofsaddlebrook.com/"
     },
     {
       "name": "New Frontier Solutiuons",
@@ -1762,7 +2419,10 @@
       "type": "",
       "status": "",
       "city": "Salem",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "A21 WELLNESS DISPENSARY",
@@ -1770,7 +2430,10 @@
       "type": "",
       "status": "",
       "city": "Scotch Plains",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9082282619",
+      "email": "info@a21dispensary.com",
+      "website": "https://a21dispensary.com/"
     },
     {
       "name": "B CAF Dispensary",
@@ -1778,7 +2441,10 @@
       "type": "",
       "status": "",
       "city": "Scotch Plains",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9089362838",
+      "email": "bobby@bcafdispensary.com",
+      "website": "https://www.bcafdispensary.com/"
     },
     {
       "name": "Illicit Gardens Secaucus",
@@ -1786,7 +2452,10 @@
       "type": "",
       "status": "",
       "city": "Seaucus",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7327144037",
+      "email": "",
+      "website": "https://illicitgardens.com/"
     },
     {
       "name": "MPX/iAnthus - Glouster",
@@ -1794,7 +2463,10 @@
       "type": "",
       "status": "",
       "city": "Sicklerville",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2677560050",
+      "email": "apinvoices@ianthus.com",
+      "website": "https://mpxnj.com/"
     },
     {
       "name": "Happy Leaf LLC",
@@ -1802,7 +2474,10 @@
       "type": "",
       "status": "",
       "city": "Somerdale",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8565457024",
+      "email": "john@happyleafdispensarynj.com",
+      "website": "https://happyleafdispensarynj.com/"
     },
     {
       "name": "High Profile - Somerdale",
@@ -1810,7 +2485,10 @@
       "type": "",
       "status": "",
       "city": "Somerdale",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@highprofilecannabis.com",
+      "website": ""
     },
     {
       "name": "Bloc Dispensary (Somerset)",
@@ -1818,7 +2496,10 @@
       "type": "",
       "status": "",
       "city": "Somerset",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7327905899",
+      "email": "hello@blocdispensary.com",
+      "website": "https://www.blocdispensary.com/dispensaries/somerset-nj"
     },
     {
       "name": "Dazed Cannabis",
@@ -1826,7 +2507,10 @@
       "type": "",
       "status": "",
       "city": "Somerset",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9172329869",
+      "email": "Njorders@dazed.fun",
+      "website": "https://dazed.fun/"
     },
     {
       "name": "Green Knight Dispensary",
@@ -1834,7 +2518,10 @@
       "type": "",
       "status": "",
       "city": "Somerset",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7324442080",
+      "email": "info@greenknightdispensary.com",
+      "website": "https://greenknightdispensary.com/"
     },
     {
       "name": "Herb'S Premium Dispensary",
@@ -1842,7 +2529,10 @@
       "type": "",
       "status": "",
       "city": "Somerset",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7325228893",
+      "email": "alec@herbspremiumdispensary.com",
+      "website": "https://herbspremiumdispensary.com"
     },
     {
       "name": "Silver Leaf",
@@ -1850,7 +2540,10 @@
       "type": "",
       "status": "",
       "city": "Somerset",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7326559842",
+      "email": "team@silverleafnj.com",
+      "website": "https://silverleafnj.com/"
     },
     {
       "name": "The Dispensary of Somerset, LLC",
@@ -1858,7 +2551,10 @@
       "type": "",
       "status": "",
       "city": "Somerset",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7329974799",
+      "email": "",
+      "website": "https://thedispensariesofnj.com/somerset/"
     },
     {
       "name": "77 Main Street, LLC",
@@ -1866,7 +2562,10 @@
       "type": "",
       "status": "",
       "city": "South Bound Brook",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "5625478065",
+      "email": "sbb@rushbudz.com",
+      "website": "https://rushbudz.com/"
     },
     {
       "name": "New Era Dispensary LLC",
@@ -1874,7 +2573,10 @@
       "type": "",
       "status": "",
       "city": "South Bound Brook",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7327099842",
+      "email": "neweradispensary.nj@gmail.com",
+      "website": "https://neweradispensary.com/"
     },
     {
       "name": "Zacate",
@@ -1882,7 +2584,10 @@
       "type": "",
       "status": "",
       "city": "South Delran",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8562003225",
+      "email": "hello@zacate.co",
+      "website": "https://zacate.co/"
     },
     {
       "name": "Story Dispensary Of Springfield",
@@ -1890,7 +2595,10 @@
       "type": "",
       "status": "",
       "city": "Springfield",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9084308689",
+      "email": "JDeSane@storypartners.com",
+      "website": "http://storycannibas.com"
     },
     {
       "name": "Cannabis Clubhouse",
@@ -1898,7 +2606,10 @@
       "type": "",
       "status": "",
       "city": "Sussex",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8623516021",
+      "email": "dzillbarryrealtor@gmail.com",
+      "website": "https://www.cannabisclubhousenj.com/"
     },
     {
       "name": "Sussex Pharms LLC",
@@ -1906,7 +2617,10 @@
       "type": "",
       "status": "",
       "city": "Sussex",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@sussexpharms.com",
+      "website": ""
     },
     {
       "name": "The Wild Flower Market",
@@ -1914,7 +2628,10 @@
       "type": "",
       "status": "",
       "city": "Tinton Falls",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7327057550",
+      "email": "Jakes@honorableplant.com",
+      "website": "https://thewildflowernj.com/"
     },
     {
       "name": "Altitude Cannabis",
@@ -1922,7 +2639,10 @@
       "type": "",
       "status": "",
       "city": "Toms River",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8482237265",
+      "email": "info@altitudecannanj.com",
+      "website": "https://www.altitudecannanj.com/"
     },
     {
       "name": "The Social Leaf",
@@ -1930,7 +2650,10 @@
       "type": "",
       "status": "",
       "city": "Toms River",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7323586800",
+      "email": "angel.capalbo@thesocialleaf.com",
+      "website": "https://thesocialleaf.com/"
     },
     {
       "name": "Canna Remedies",
@@ -1938,7 +2661,10 @@
       "type": "",
       "status": "",
       "city": "Trenton",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@cannaremediesnj.com",
+      "website": ""
     },
     {
       "name": "Moja Life LLC",
@@ -1946,7 +2672,10 @@
       "type": "",
       "status": "",
       "city": "Trenton",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@moja-life.com",
+      "website": ""
     },
     {
       "name": "Theory Wellness Of NJ",
@@ -1954,7 +2683,10 @@
       "type": "",
       "status": "",
       "city": "Trenton",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@theorywellness.org",
+      "website": ""
     },
     {
       "name": "Toke Lane",
@@ -1962,7 +2694,10 @@
       "type": "",
       "status": "",
       "city": "Trenton",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8556685843",
+      "email": "dnath@tokelane.com",
+      "website": "https://tokelane.com/"
     },
     {
       "name": "The Dispensary of Union",
@@ -1970,7 +2705,10 @@
       "type": "",
       "status": "",
       "city": "UNION",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9082082912",
+      "email": "jaime@thedispensariesofnj.com",
+      "website": "https://thedispensariesofnj.com/"
     },
     {
       "name": "Botera NJ",
@@ -1978,7 +2716,10 @@
       "type": "",
       "status": "",
       "city": "Union",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9084810001",
+      "email": "gcalitri@boteranj.com",
+      "website": "https://boteranj.com/"
     },
     {
       "name": "Garden State Dispensary - Union",
@@ -1986,7 +2727,10 @@
       "type": "",
       "status": "",
       "city": "Union",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8489992005",
+      "email": "garret.reams@ayrwellness.com",
+      "website": "https://ayrwellness.com/"
     },
     {
       "name": "Mountain Dispensary LLC",
@@ -1994,7 +2738,10 @@
       "type": "",
       "status": "",
       "city": "Vernon Township",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7322325593",
+      "email": "erinmountaindispensary@gmail.com",
+      "website": "https://mountaindispensarynj.com/"
     },
     {
       "name": "Eastern Green Dispensary",
@@ -2002,7 +2749,10 @@
       "type": "",
       "status": "",
       "city": "Voorhees Township",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8562053257",
+      "email": "info@easterngreendispensary.com",
+      "website": "https://easterngreendispensary.com/"
     },
     {
       "name": "Tree House Co-Op Dispensary LLC",
@@ -2010,7 +2760,10 @@
       "type": "",
       "status": "",
       "city": "Voorhees Township",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8569250420",
+      "email": "richard.julio@thcvoorhees.com",
+      "website": "https://thcvoorhees.com/"
     },
     {
       "name": "ReLeaf Cannabis LLC",
@@ -2018,7 +2771,10 @@
       "type": "",
       "status": "",
       "city": "WIlliamstown",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8565168187",
+      "email": "dan@releafnewton.com",
+      "website": "http://Releafcanna.biz/"
     },
     {
       "name": "Bloc Dispensary (Waretown)",
@@ -2026,7 +2782,10 @@
       "type": "",
       "status": "",
       "city": "Waretown",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9734948550",
+      "email": "hello@blocdispensary.com",
+      "website": "https://www.blocdispensary.com/dispensaries/waretown-nj-rec"
     },
     {
       "name": "Dank Poet Dispensary LLC",
@@ -2034,7 +2793,10 @@
       "type": "",
       "status": "",
       "city": "Washington",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9084509900",
+      "email": "chriscaruso@dankpoet.com",
+      "website": "https://dankpoet.com/"
     },
     {
       "name": "Holistic Solutions LLC",
@@ -2042,7 +2804,10 @@
       "type": "",
       "status": "",
       "city": "Waterford",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8562707067",
+      "email": "accounting@myholisticsolutions.com",
+      "website": "https://myholisticsolutions.com/"
     },
     {
       "name": "The Green Initiative",
@@ -2050,7 +2815,10 @@
       "type": "",
       "status": "",
       "city": "Wenonah",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8565395900",
+      "email": "cwest@tginj.com",
+      "website": "https://tginj.com/"
     },
     {
       "name": "4TwentySomewhere",
@@ -2058,7 +2826,10 @@
       "type": "",
       "status": "",
       "city": "West Milford",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9735064503",
+      "email": "stevenjr@4twentysomewhere.com",
+      "website": "https://4twentysomewhere.com/"
     },
     {
       "name": "Beyond Bleaf",
@@ -2066,7 +2837,10 @@
       "type": "",
       "status": "",
       "city": "West Milford",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8774204203",
+      "email": "info@beyondbleafus.com",
+      "website": "https://www.beyondbleafus.com/"
     },
     {
       "name": "Beyond Bleaf",
@@ -2074,7 +2848,10 @@
       "type": "",
       "status": "",
       "city": "West Milford",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "Doobiez LLC",
@@ -2082,7 +2859,10 @@
       "type": "",
       "status": "",
       "city": "West Milford",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9735130514",
+      "email": "info@doobiez.com",
+      "website": "http://www.doobiez.com"
     },
     {
       "name": "Elevated Herb LLC",
@@ -2090,7 +2870,10 @@
       "type": "",
       "status": "",
       "city": "West Milford",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9732916840",
+      "email": "rmartin@elevated-herb.com",
+      "website": "https://elevated-herb.com/"
     },
     {
       "name": "Jersey Roots Dispensary",
@@ -2098,7 +2881,10 @@
       "type": "",
       "status": "",
       "city": "West Milford",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9735064853",
+      "email": "rlyons@jerseyrootsdispensary.com",
+      "website": "https://www.jerseyrootsdispensary.com/"
     },
     {
       "name": "SoulFlora",
@@ -2106,7 +2892,10 @@
       "type": "",
       "status": "",
       "city": "West Milford",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2017215434",
+      "email": "jennyb@soulflora.com",
+      "website": "https://www.soulflora.com/"
     },
     {
       "name": "Spot 23 LLC",
@@ -2114,7 +2903,10 @@
       "type": "",
       "status": "",
       "city": "West Milford",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9734094757",
+      "email": "spot23llc@gmail.com",
+      "website": "https://spot23llc.com/"
     },
     {
       "name": "Mountain View Farmacy LLC \"MVF\"",
@@ -2122,7 +2914,10 @@
       "type": "",
       "status": "",
       "city": "West Milford Township",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "clients@mvf.earth",
+      "website": ""
     },
     {
       "name": "Backpack Boyz West New York LLC",
@@ -2130,7 +2925,10 @@
       "type": "",
       "status": "",
       "city": "West New York",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9512937565",
+      "email": "analia@backpackboyzeast.com",
+      "website": "https://backpackboyzdispensary.com/"
     },
     {
       "name": "Nile Cannabis",
@@ -2138,7 +2936,10 @@
       "type": "",
       "status": "",
       "city": "West New York",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2018666547",
+      "email": "mtrigg@nile-cannabis.com",
+      "website": "https://nile-cannabis.com/"
     },
     {
       "name": "Dogwood Green",
@@ -2146,7 +2947,10 @@
       "type": "",
       "status": "",
       "city": "West Orange",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@dogwoodgreen.com",
+      "website": ""
     },
     {
       "name": "The Library of NJ",
@@ -2154,7 +2958,10 @@
       "type": "",
       "status": "",
       "city": "West Orange",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@thelibrarynj.com",
+      "website": "https://thelibrarynj.com/"
     },
     {
       "name": "Cannaboy Treehouse",
@@ -2162,7 +2969,10 @@
       "type": "",
       "status": "",
       "city": "West South Orange",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9732884740",
+      "email": "cannaboytreehouse@gmail.com",
+      "website": "https://cannaboytreehouse.com/"
     },
     {
       "name": "Ascend Wellness - Wharton",
@@ -2170,7 +2980,10 @@
       "type": "",
       "status": "",
       "city": "Wharton",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9737861810",
+      "email": "",
+      "website": "https://www.awholdings.com/"
     },
     {
       "name": "Green Leaf Wellness Solutions",
@@ -2178,7 +2991,10 @@
       "type": "",
       "status": "",
       "city": "Williamstown",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@gleafwellness.com",
+      "website": "https://www.gleafwellness.com/"
     },
     {
       "name": "The Botanist Williamstown Dispensary",
@@ -2186,7 +3002,10 @@
       "type": "",
       "status": "",
       "city": "Williamstown",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8564783530",
+      "email": "Rebecca.Zappalorta@shopbotanist.com",
+      "website": "https://shopbotanist.com/"
     },
     {
       "name": "Authorized Dealer Dispensary IV",
@@ -2194,7 +3013,10 @@
       "type": "",
       "status": "",
       "city": "Willingboro",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "2013032999",
+      "email": "haig@yourdealer.co",
+      "website": "https://yourdealer.co/"
     },
     {
       "name": "Roots Dispensary",
@@ -2202,7 +3024,10 @@
       "type": "",
       "status": "",
       "city": "Willingboro",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6092322722",
+      "email": "info@rootsnj.com",
+      "website": "https://rootsnj.com/"
     },
     {
       "name": "Garden State Dispensary - Woodbridge",
@@ -2210,7 +3035,10 @@
       "type": "",
       "status": "",
       "city": "Woodbridge",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "garret.reams@ayrwellness.com",
+      "website": ""
     },
     {
       "name": "BestBuds",
@@ -2218,7 +3046,10 @@
       "type": "",
       "status": "",
       "city": "Woodbury",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8565351367",
+      "email": "inventory@bestbudsnj.com",
+      "website": "https://bestbudsnj.com/"
     },
     {
       "name": "Nova Farms Woodbury LLC",
@@ -2226,7 +3057,10 @@
       "type": "",
       "status": "",
       "city": "Woodbury",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8562027273",
+      "email": "",
+      "website": "https://novafarms.com/locations/woodbury-nj/"
     },
     {
       "name": "Woodbury Wellness",
@@ -2234,7 +3068,10 @@
       "type": "",
       "status": "",
       "city": "Woodbury",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "6092280243",
+      "email": "info@woodburywellnessdispensary.com",
+      "website": "https://woodburywellnessdispensary.com/"
     },
     {
       "name": "Woodbury Wellness LLC",
@@ -2242,7 +3079,10 @@
       "type": "",
       "status": "",
       "city": "Woodbury",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "Blulight Cannabis (Woodbury)",
@@ -2250,7 +3090,10 @@
       "type": "",
       "status": "",
       "city": "Woodbury Heights",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "8562214000",
+      "email": "mickee@blulight.com",
+      "website": "https://blulight.com/"
     },
     {
       "name": "Blue Oak",
@@ -2258,7 +3101,10 @@
       "type": "",
       "status": "",
       "city": "bloomfield",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "9738938111",
+      "email": "danielle@blueoaknj.com",
+      "website": "https://blueoaknj.com/"
     },
     {
       "name": "Boone Town Provisions",
@@ -2266,7 +3112,10 @@
       "type": "",
       "status": "",
       "city": "boonton",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "",
+      "email": "info@boonetownprovisions.com",
+      "website": ""
     },
     {
       "name": "Herbalcity LLC",
@@ -2274,7 +3123,10 @@
       "type": "",
       "status": "",
       "city": "highland park",
-      "state": "NJ"
+      "state": "NJ",
+      "phone": "7323259077",
+      "email": "melissa@leafhaus.com",
+      "website": "https://herbalicity.com/"
     }
   ]
 }

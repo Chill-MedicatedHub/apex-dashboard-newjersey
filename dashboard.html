@@ -1154,7 +1154,7 @@ function InventoryView({ data }) {
 
   const kpis = e('div', { className: 'kpi-grid' },
     e(Kpi, { label: 'Units On Hand', value: fmtNum(Math.round(onHandTotal)), sub: fmtNum(skus) + ' SKUs · ' + fmtMoney(onHandValue), accent: true }),
-    e(Kpi, { label: 'On-Hand Value', value: fmtMoney(onHandValue), sub: fmtNum(listedN) + ' listed' }),
+    e(Kpi, { label: 'On-Hand Value', value: fmtMoney(onHandValue), sub: fmtNum(listedN) + ' listed · at avg unit price' }),
     e(Kpi, { label: 'Out of Stock', value: fmtNum(outN), sub: 'SKUs · 0 on hand' }),
     e(Kpi, { label: 'Low Stock', value: fmtNum(lowN), sub: '< 14 days of supply' }));
 
@@ -1792,7 +1792,7 @@ function Dashboard({
     if (filters.productLine && r.product_type !== filters.productLine) return false;
     if (filters.excludeSamples && r._isSample) return false;
     if (filters.invoice) {
-      const q = filters.invoice.toLowerCase();
+      const q = filters.invoice.toLowerCase().replace(/^#/, '').trim();
       const inv = String(r.order_number || r.order_id || '').toLowerCase();
       if (!inv.includes(q)) return false;
     }

@@ -1086,12 +1086,13 @@ function InventoryView({ data }) {
     const dOf = r => parseDate(r.order_date_localized_raw || r.order_date_utc_raw || r.order_date_raw || r.order_date);
     rows.forEach(r => { const dt = dOf(r); if (dt && dt.getTime() > maxT) maxT = dt.getTime(); });
     const WIN = 30, winStart = maxT ? maxT - WIN * 86400000 : 0;
-    const recentSku = {}, recentName = {};
+    const recentSku = {}, recentName = {}, listedBySku = {}, listedByName = {};
     rows.forEach(r => {
       const u = parseFloat(r.inventory_quantity != null ? r.inventory_quantity : (r.quantity_raw != null ? r.quantity_raw : r.quantity)) || 0;
       const rev = typeof r.line_total_raw === 'number' ? r.line_total_raw / 100 : parseMoney(r.line_total || r.computed_sale_price || r.total);
-      if (r.product_sku) { soldBySku[r.product_sku] = (soldBySku[r.product_sku] || 0) + u; revBySku[r.product_sku] = (revBySku[r.product_sku] || 0) + rev; }
-      if (r.product_name) { soldByName[r.product_name] = (soldByName[r.product_name] || 0) + u; revByName[r.product_name] = (revByName[r.product_name] || 0) + rev; }
+      const lp = parseMoney(r.product_listing_price || r.unit_price) || 0;
+      if (r.product_sku) { soldBySku[r.product_sku] = (soldBySku[r.product_sku] || 0) + u; revBySku[r.product_sku] = (revBySku[r.product_sku] || 0) + rev; if (lp > (listedBySku[r.product_sku] || 0)) listedBySku[r.product_sku] = lp; }
+      if (r.product_name) { soldByName[r.product_name] = (soldByName[r.product_name] || 0) + u; revByName[r.product_name] = (revByName[r.product_name] || 0) + rev; if (lp > (listedByName[r.product_name] || 0)) listedByName[r.product_name] = lp; }
       const bn = (r.batch_name || '').trim();
       if (bn) {
         const c = String(r.batch_created_at_raw || r.batch_created_at || '');
@@ -1106,6 +1107,8 @@ function InventoryView({ data }) {
       const sold = p.sku && soldBySku[p.sku] != null ? soldBySku[p.sku] : (soldByName[p.name] || 0);
       const revT = p.sku && revBySku[p.sku] != null ? revBySku[p.sku] : (revByName[p.name] || 0);
       const unitPrice = sold > 0 ? revT / sold : 0;
+      const listedPrice = (p.sku && listedBySku[p.sku]) || listedByName[p.name] || 0;
+      const priceForValue = listedPrice > 0 ? listedPrice : unitPrice;
       const qty = p.qty != null ? p.qty : (p.available != null ? p.available : (p.inventory != null ? p.inventory : null));
       const recent = p.sku && recentSku[p.sku] != null ? recentSku[p.sku] : (recentName[p.name] || 0);
       const velocity = recent / WIN;
@@ -1115,7 +1118,7 @@ function InventoryView({ data }) {
       const bsorted = Object.keys(bmap).sort((a, b) => String(bmap[b]).localeCompare(String(bmap[a])));
       const nActive = p.batches > 0 ? p.batches : (bsorted.length ? 1 : 0);
       const batchNames = bsorted.slice(0, nActive);
-      return { name: p.name || '—', line: p.line || '—', sku: p.sku || '', qty: qty, batches: p.batches || 0, batchNames: batchNames, listed: p.listed != null ? !!p.listed : (p.status ? String(p.status).toLowerCase() === 'available' : false), sold: sold, neverSold: sold <= 0, unitPrice: unitPrice, value: qty != null ? qty * unitPrice : 0, velocity: velocity, daysLeft: daysLeft };
+      return { name: p.name || '—', line: p.line || '—', sku: p.sku || '', qty: qty, batches: p.batches || 0, batchNames: batchNames, listed: p.listed != null ? !!p.listed : (p.status ? String(p.status).toLowerCase() === 'available' : false), sold: sold, neverSold: sold <= 0, unitPrice: unitPrice, listedPrice: listedPrice, value: qty != null ? qty * priceForValue : 0, velocity: velocity, daysLeft: daysLeft };
     });
   }, [rows, data.inventory]);
 
@@ -1154,7 +1157,7 @@ function InventoryView({ data }) {
 
   const kpis = e('div', { className: 'kpi-grid' },
     e(Kpi, { label: 'Units On Hand', value: fmtNum(Math.round(onHandTotal)), sub: fmtNum(skus) + ' SKUs · ' + fmtMoney(onHandValue), accent: true }),
-    e(Kpi, { label: 'On-Hand Value', value: fmtMoney(onHandValue), sub: fmtNum(listedN) + ' listed · at avg unit price' }),
+    e(Kpi, { label: 'On-Hand Value', value: fmtMoney(onHandValue), sub: fmtNum(listedN) + ' listed · at listed price' }),
     e(Kpi, { label: 'Out of Stock', value: fmtNum(outN), sub: 'SKUs · 0 on hand' }),
     e(Kpi, { label: 'Low Stock', value: fmtNum(lowN), sub: '< 14 days of supply' }));
 

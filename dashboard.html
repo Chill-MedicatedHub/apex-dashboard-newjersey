@@ -1118,7 +1118,7 @@ function InventoryView({ data }) {
       const bsorted = Object.keys(bmap).sort((a, b) => String(bmap[b]).localeCompare(String(bmap[a])));
       const nActive = p.batches > 0 ? p.batches : (bsorted.length ? 1 : 0);
       const batchNames = bsorted.slice(0, nActive);
-      return { name: p.name || '—', line: p.line || '—', sku: p.sku || '', qty: qty, batches: p.batches || 0, batchNames: batchNames, listed: p.listed != null ? !!p.listed : (p.status ? String(p.status).toLowerCase() === 'available' : false), sold: sold, neverSold: sold <= 0, unitPrice: unitPrice, listedPrice: listedPrice, value: qty != null ? qty * priceForValue : 0, velocity: velocity, daysLeft: daysLeft };
+      return { name: p.name || '—', line: p.line || '—', sku: p.sku || '', qty: qty, batches: p.batches || 0, batchNames: batchNames, listed: p.listed != null ? !!p.listed : (p.status ? String(p.status).toLowerCase() === 'available' : false), sold: sold, neverSold: sold <= 0, unitPrice: unitPrice, listedPrice: listedPrice, value: qty != null ? qty * unitPrice : 0, velocity: velocity, daysLeft: daysLeft };
     });
   }, [rows, data.inventory]);
 
@@ -1157,7 +1157,7 @@ function InventoryView({ data }) {
 
   const kpis = e('div', { className: 'kpi-grid' },
     e(Kpi, { label: 'Units On Hand', value: fmtNum(Math.round(onHandTotal)), sub: fmtNum(skus) + ' SKUs · ' + fmtMoney(onHandValue), accent: true }),
-    e(Kpi, { label: 'On-Hand Value', value: fmtMoney(onHandValue), sub: fmtNum(listedN) + ' listed · at listed price' }),
+    e(Kpi, { label: 'On-Hand Value', value: fmtMoney(onHandValue), sub: fmtNum(listedN) + ' listed' }),
     e(Kpi, { label: 'Out of Stock', value: fmtNum(outN), sub: 'SKUs · 0 on hand' }),
     e(Kpi, { label: 'Low Stock', value: fmtNum(lowN), sub: '< 14 days of supply' }));
 

@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-07-28",
+  "as_of": "2026-07-29",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
   "count": 284,
@@ -632,6 +632,17 @@
       "website": "https://casaverdenj.com/"
     },
     {
+      "name": "Premo - Dover",
+      "license": "RE000455",
+      "type": "",
+      "status": "",
+      "city": "Dover",
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
+    },
+    {
       "name": "Sugar Leaves",
       "license": "RE000232",
       "type": "",
@@ -641,17 +652,6 @@
       "phone": "",
       "email": "",
       "website": "https://sugarleavesnj.com/"
-    },
-    {
-      "name": "The Goods Supply Co. Victory Gardens LLC.",
-      "license": "RE000455",
-      "type": "",
-      "status": "",
-      "city": "Dover",
-      "state": "NJ",
-      "phone": "",
-      "email": "",
-      "website": ""
     },
     {
       "name": "Baked Goodz",
@@ -1728,7 +1728,7 @@
       "city": "Matawan",
       "state": "NJ",
       "phone": "7325100400",
-      "email": "mike@vigordispensary.com",
+      "email": "jaime@vigordispensary.com",
       "website": "https://vigordispensary.com/"
     },
     {

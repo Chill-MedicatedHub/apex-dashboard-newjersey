@@ -1,8 +1,8 @@
 {
-  "as_of": "2026-07-29",
+  "as_of": "2026-07-30",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
-  "count": 284,
+  "count": 285,
   "records": [
     {
       "name": "Red Oak Dispensary - Absecon",
@@ -451,9 +451,9 @@
       "status": "",
       "city": "Brooklawn",
       "state": "NJ",
-      "phone": "",
-      "email": "",
-      "website": ""
+      "phone": "6099201818",
+      "email": "Ivan@indigodispensary.com",
+      "website": "http://www.indigodispensary.com"
     },
     {
       "name": "Taste Of Earth",
@@ -1994,6 +1994,17 @@
       "phone": "9734443079",
       "email": "jennifer@feelsofgreendispensary.com",
       "website": "https://feelsofgreendispensary.com/"
+    },
+    {
+      "name": "Munsee Three Sisters Cannabis LLC",
+      "license": "RE000140",
+      "type": "",
+      "status": "",
+      "city": "Newton",
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "Authorized Dealer Dispensary",

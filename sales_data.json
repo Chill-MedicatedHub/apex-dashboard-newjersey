@@ -1,10 +1,10 @@
 {
-  "fetched_at": "2026-08-03T12:47:57.594194+00:00",
+  "fetched_at": "2026-08-03T13:03:30.644807+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
-  "orders_seen": 1665,
-  "orders_kept": 1638,
+  "orders_seen": 1669,
+  "orders_kept": 1642,
   "inventory": [
     {
       "id": "2675942",
@@ -1162,8 +1162,8 @@
       "order_date_localized_raw": "2026-07-20T13:22:55-04:00",
       "order_date": "07/20/2026",
       "order_date_raw": "2026-07-20T13:22:55-04:00",
-      "delivery_date": "08/03/2026",
-      "delivery_date_raw": "2026-08-03T08:00:00-04:00",
+      "delivery_date": "08/04/2026",
+      "delivery_date_raw": "2026-08-04T08:00:00-04:00",
       "paid_date": "",
       "buyer_name": "Valley Wellness",
       "buyer_state": "NJ",

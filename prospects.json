@@ -1,8 +1,8 @@
 {
-  "as_of": "2026-08-03",
+  "as_of": "2026-08-04",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
-  "count": 286,
+  "count": 287,
   "records": [
     {
       "name": "Red Oak Dispensary - Absecon",
@@ -1237,6 +1237,17 @@
       "website": "https://www.blueviolets.co/"
     },
     {
+      "name": "Hudsonica Dispensary",
+      "license": "RE000225",
+      "type": "",
+      "status": "",
+      "city": "Hoboken",
+      "state": "NJ",
+      "phone": "",
+      "email": "yash@hudsonicadispensary.com",
+      "website": "https://hudsonicadispensary.com/"
+    },
+    {
       "name": "Test Buyer",
       "license": "M000086",
       "type": "",
@@ -2244,8 +2255,8 @@
       "status": "",
       "city": "Plainfield",
       "state": "NJ",
-      "phone": "",
-      "email": "",
+      "phone": "1917474512",
+      "email": "eduard.wellgreensnj@gmail.com",
       "website": ""
     },
     {

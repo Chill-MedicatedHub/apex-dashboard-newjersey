@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-08-05",
+  "as_of": "2026-08-06",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
   "count": 287,
@@ -88,9 +88,9 @@
       "status": "",
       "city": "Atlantic City",
       "state": "NJ",
-      "phone": "",
-      "email": "",
-      "website": ""
+      "phone": "6092466415",
+      "email": "bakinbadllc@gmail.com",
+      "website": "https://www.bakinbadac.com/"
     },
     {
       "name": "Design 710",

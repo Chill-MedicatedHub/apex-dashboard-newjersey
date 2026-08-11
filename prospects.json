@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-08-10",
+  "as_of": "2026-08-11",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
   "count": 287,
@@ -2425,7 +2425,7 @@
       "website": ""
     },
     {
-      "name": "Bridge CIty Collective Dispensary",
+      "name": "Bridge City Collective Dispensary",
       "license": "RE000989",
       "type": "",
       "status": "",

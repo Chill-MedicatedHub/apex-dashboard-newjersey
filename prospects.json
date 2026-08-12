@@ -1,8 +1,8 @@
 {
-  "as_of": "2026-08-11",
+  "as_of": "2026-08-12",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
-  "count": 287,
+  "count": 288,
   "records": [
     {
       "name": "Red Oak Dispensary - Absecon",
@@ -1090,7 +1090,7 @@
       "city": "Gloucester Township",
       "state": "NJ",
       "phone": "",
-      "email": "info@midnightgreensnj.com",
+      "email": "inventory@midnightgreensnj.com",
       "website": ""
     },
     {
@@ -2984,6 +2984,17 @@
       "phone": "",
       "email": "info@dogwoodgreen.com",
       "website": ""
+    },
+    {
+      "name": "Pure Natural Vibes",
+      "license": "RE000098",
+      "type": "",
+      "status": "",
+      "city": "West Orange",
+      "state": "NJ",
+      "phone": "8884292010",
+      "email": "info@purenaturalvibes.com",
+      "website": "http://www.purenaturalvibes.com"
     },
     {
       "name": "The Library of NJ",

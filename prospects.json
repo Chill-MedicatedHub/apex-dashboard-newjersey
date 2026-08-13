@@ -1,8 +1,8 @@
 {
-  "as_of": "2026-08-12",
+  "as_of": "2026-08-13",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
-  "count": 288,
+  "count": 289,
   "records": [
     {
       "name": "Red Oak Dispensary - Absecon",
@@ -1884,6 +1884,17 @@
       "phone": "9734405552",
       "email": "dan@releafnewton.com",
       "website": "https://www.releafnewton.com/location/releafnewton"
+    },
+    {
+      "name": "Pink Balloon",
+      "license": "RE000425",
+      "type": "",
+      "status": "",
+      "city": "Neptune City",
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "Shipwreck'D",

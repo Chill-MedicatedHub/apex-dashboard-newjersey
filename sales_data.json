@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-08-17T17:48:19.087396+00:00",
+  "fetched_at": "2026-08-17T18:16:21.298250+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
@@ -150,8 +150,8 @@
       "order_date_localized_raw": "2026-08-17T11:44:01-04:00",
       "order_date": "08/17/2026",
       "order_date_raw": "2026-08-17T11:44:01-04:00",
-      "delivery_date": "08/21/2026",
-      "delivery_date_raw": "2026-08-21T08:00:00-04:00",
+      "delivery_date": "08/20/2026",
+      "delivery_date_raw": "2026-08-20T08:00:00-04:00",
       "paid_date": "",
       "buyer_name": "Twisted Hat Cannabis",
       "buyer_state": "NJ",

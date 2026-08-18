@@ -1,8 +1,8 @@
 {
-  "as_of": "2026-08-17",
+  "as_of": "2026-08-18",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
-  "count": 289,
+  "count": 291,
   "records": [
     {
       "name": "Red Oak Dispensary - Absecon",
@@ -1677,6 +1677,17 @@
       "website": "https://beyond-hello.com/"
     },
     {
+      "name": "Baked Rooster",
+      "license": "RE001073",
+      "type": "",
+      "status": "",
+      "city": "Lodi",
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": "https://bakedrooster.com/"
+    },
+    {
       "name": "Quality Roots - Evesham, LLC",
       "license": "RE000270",
       "type": "",
@@ -2775,6 +2786,17 @@
       "phone": "8489992005",
       "email": "garret.reams@ayrwellness.com",
       "website": "https://ayrwellness.com/"
+    },
+    {
+      "name": "Green Lane Distribution LLC",
+      "license": "W000019",
+      "type": "",
+      "status": "",
+      "city": "Union",
+      "state": "NJ",
+      "phone": "9085943420",
+      "email": "aeckstein@greenlanedistribution.com",
+      "website": "https://greenlanedistribution.com/"
     },
     {
       "name": "Mountain Dispensary LLC",

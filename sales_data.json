@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-08-18T19:03:28.373571+00:00",
+  "fetched_at": "2026-08-18T19:18:21.400905+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
@@ -123,8 +123,8 @@
       "line": "",
       "brand": "Chill Medicated",
       "status": "available",
-      "inventory": 240.0,
-      "reserved": 30.0,
+      "inventory": 210.0,
+      "reserved": 0.0,
       "available": 210.0
     },
     {

@@ -1,8 +1,8 @@
 {
-  "as_of": "2026-08-18",
+  "as_of": "2026-08-19",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
-  "count": 291,
+  "count": 292,
   "records": [
     {
       "name": "Red Oak Dispensary - Absecon",
@@ -2291,6 +2291,17 @@
       "phone": "6093825553",
       "email": "greenhavenwellness24@gmail.com",
       "website": "https://learngreenhaven.com/"
+    },
+    {
+      "name": "Happy Tree Farmacy LLC",
+      "license": "RE001077",
+      "type": "",
+      "status": "",
+      "city": "Pleasantville",
+      "state": "NJ",
+      "phone": "6192461784",
+      "email": "pleasantville@happytreefarmacy.com",
+      "website": "https://happytreefarmacy.com/"
     },
     {
       "name": "Got Your Six Dispensary Of New Jersey LLC.",

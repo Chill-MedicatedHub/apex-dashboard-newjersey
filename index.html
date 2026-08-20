@@ -1,14 +1,3231 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="refresh" content="0; url=./dashboard.html">
-<link rel="canonical" href="./dashboard.html">
-<title>Redirecting…</title>
-<script>location.replace('./dashboard.html' + location.search + location.hash);</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chill Medicated · New Jersey · Sales Intelligence</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Libraries served from this repo root (no external CDN, no subfolder). -->
+<script src="react.production.min.js"></script>
+<script src="react-dom.production.min.js"></script>
+<script src="prop-types.min.js"></script>
+<script src="Recharts.js"></script>
+
+<style>
+  :root {
+    --bg:            #f0eef7;
+    --bg-elev:       #ffffff;
+    --bg-elev-2:     #f5f2fb;
+    --border:        #e5e1f0;
+    --border-soft:   #f0ecf7;
+    --text:          #182234;
+    --text-dim:      #5a6678;
+    --text-faint:    #97a2b3;
+    --brand-cyan:    #8B5FBF;
+    --brand-blue:    #7A4FB0;
+    --brand-peri:    #6E52B8;
+    --brand-purple:  #4A2E7A;
+    --accent:        #6E42A6;
+    --accent-dim:    #9A78C8;
+    --accent-deep:   #4A2E7A;
+    --warm:          #c07d18;
+    --cool:          #5b8fb0;
+    --rose:          #d6455f;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.5; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+  body { background-image: radial-gradient(1200px 620px at 88% -12%, rgba(139,95,191,0.10), transparent 58%), radial-gradient(1000px 560px at -6% 108%, rgba(74,46,122,0.07), transparent 58%); background-attachment: fixed; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: var(--brand-cyan); }
+  .font-display { font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144; letter-spacing: -0.02em; }
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
+  .tabular { font-variant-numeric: tabular-nums; }
+  .app { max-width: 1600px; margin: 0 auto; padding: 36px 44px 96px; }
+  .topbar { display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 26px; border-bottom: 1px solid var(--border); margin-bottom: 32px; gap: 20px; flex-wrap: wrap; }
+  .brand-mark { display: flex; align-items: center; gap: 14px; }
+  .brand-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--text-faint); }
+  .brand-name { font-family: 'Fraunces', serif; font-weight: 500; font-size: 28px; letter-spacing: -0.02em; color: var(--text); }
+  .brand-name em { color: var(--accent); font-style: italic; font-weight: 400; }
+  .topbar img { border-radius: 12px; box-shadow: 0 4px 16px rgba(20,35,60,0.14); }
+  .topbar-meta { display: flex; gap: 18px; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); }
+  .topbar-meta strong { color: var(--text); font-weight: 600; }
+  .pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--brand-cyan); box-shadow: 0 0 12px var(--brand-cyan); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .filters { display: flex; gap: 16px; flex-wrap: wrap; padding: 18px 20px; background: var(--bg-elev); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 1px 2px rgba(20,35,60,0.04), 0 10px 30px rgba(20,35,60,0.06); margin-bottom: 32px; }
+  .filter-group { display: flex; flex-direction: column; gap: 6px; min-width: 140px; }
+  .filter-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-dim); }
+  .filter-input, .filter-select { background: #ffffff; border: 1px solid var(--border); color: var(--text); padding: 9px 11px; font-family: 'Inter', sans-serif; font-size: 13px; border-radius: 9px; outline: none; transition: border-color 0.15s, box-shadow 0.15s; }
+  .filter-input:focus, .filter-select:focus { border-color: var(--brand-cyan); box-shadow: 0 0 0 3px rgba(139,95,191,0.16); }
+  .filter-input::placeholder { color: var(--text-faint); }
+  .filter-reset { background: transparent; border: 1px solid var(--border); color: var(--text-dim); padding: 8px 14px; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 9px; cursor: pointer; align-self: flex-end; transition: all 0.15s; }
+  .filter-reset:hover { color: var(--text); border-color: var(--text-dim); }
+  .date-preset { background: #ffffff; border: 1px solid var(--border); color: var(--text-dim); padding: 8px 11px; font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; border-radius: 8px; cursor: pointer; transition: all .15s; }
+  .date-preset:hover { color: var(--accent); border-color: var(--brand-cyan); background: var(--bg-elev-2); }
+  .date-preset.active { color: #ffffff; background: var(--accent); border-color: var(--accent); font-weight: 700; }
+  .date-preset.active:hover { color: #ffffff; background: var(--brand-cyan); }
+
+  /* Accounts Receivable layout — inherits the default (Sales) dashboard theme */
+  .ar-theme .kpi { min-height: 118px; }
+  .ar-theme .kpi-grid { grid-template-columns: repeat(5, 1fr); }
+
+  /* View tabs (Sales / Accounts Receivable) */
+  .view-tabs-wrap { max-width: 1600px; margin: 0 auto; padding: 28px 44px 0; }
+  .view-tabs { display: flex; gap: 8px; border-bottom: 1px solid var(--border); }
+  .view-tab {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em;
+    padding: 10px 20px; border: 1px solid var(--border); border-bottom: none;
+    border-radius: 10px 10px 0 0; background: var(--bg-elev-2); color: var(--text-dim);
+    cursor: pointer; margin-bottom: -1px; transition: all .15s;
+  }
+  .view-tab:hover { color: var(--accent); }
+  .view-tab.active { background: var(--bg-elev); color: var(--accent); border-color: var(--border); border-bottom: 1px solid var(--bg-elev); font-weight: 600; }
+  @media (max-width: 1100px) { .view-tabs-wrap { padding: 20px 22px 0; } }
+
+  /* Multi-select dropdown (buyer filter) */
+  .ms-wrap { position: relative; }
+  .ms-toggle {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%;
+    background: #ffffff; border: 1px solid var(--border); color: var(--text);
+    padding: 9px 11px; font-family: 'Inter', sans-serif; font-size: 13px;
+    border-radius: 9px; cursor: pointer; text-align: left; transition: border-color .15s, box-shadow .15s;
+  }
+  .ms-toggle:hover { border-color: var(--brand-cyan); }
+  .ms-toggle.active { border-color: var(--brand-cyan); box-shadow: 0 0 0 3px rgba(14,177,232,0.12); }
+  .ms-toggle .ms-caret { color: var(--text-faint); font-size: 10px; }
+  .ms-count { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #ffffff; background: var(--accent); border-radius: 999px; padding: 1px 7px; }
+  .ms-panel {
+    position: absolute; top: calc(100% + 6px); left: 0; z-index: 40; width: 300px; max-width: 80vw;
+    background: var(--bg-elev); border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: 0 14px 36px rgba(20,35,60,0.18); padding: 8px; display: none;
+  }
+  .ms-panel.open { display: block; }
+  .ms-search {
+    width: 100%; box-sizing: border-box; background: #ffffff; border: 1px solid var(--border);
+    color: var(--text); padding: 8px 10px; font-family: 'Inter', sans-serif; font-size: 13px;
+    border-radius: 8px; outline: none; margin-bottom: 6px;
+  }
+  .ms-list { max-height: 240px; overflow-y: auto; }
+  .ms-opt {
+    display: flex; align-items: center; gap: 9px; padding: 7px 8px; border-radius: 7px;
+    font-size: 13px; color: var(--text); cursor: pointer;
+  }
+  .ms-opt:hover { background: var(--bg-elev-2); }
+  .ms-opt input { accent-color: var(--accent); width: 14px; height: 14px; flex: none; }
+  .ms-opt span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ms-actions { display: flex; justify-content: space-between; align-items: center; padding: 6px 4px 2px; border-top: 1px solid var(--border-soft); margin-top: 6px; }
+  .ms-clear { background: transparent; border: none; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; }
+  .ms-clear:hover { color: var(--accent); }
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 1px 2px rgba(20,35,60,0.04), 0 10px 30px rgba(20,35,60,0.06); }
+  .kpi { background: var(--bg-elev); padding: 20px 18px; display: flex; flex-direction: column; gap: 6px; position: relative; transition: background 0.18s; }
+  .kpi:hover { background: var(--bg-elev-2); }
+  .kpi-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-faint); }
+  /* Full, unrounded figures are far longer than the abbreviated "$1.2M" form.
+     The figure is sized off the CARD's own width (container query units), not
+     the viewport, so it fills the card whatever the grid does - 4-across,
+     5-across on the AR aging row, or stacked on a phone. 10cqw keeps a
+     15-character worst case like $122,807,459.72 on one line; nowrap
+     guarantees it never breaks mid-number.
+     The vw values below are the fallback for browsers without container
+     queries, and are deliberately more conservative. */
+  .kpi { container-type: inline-size; }
+  .kpi-value {
+    font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: clamp(21px, 2.3vw, 40px);
+    line-height: 1.08; letter-spacing: -0.03em; color: var(--text);
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  .ar-theme .kpi-value { font-size: clamp(19px, 1.75vw, 31px); }
+  @media (max-width: 1100px) {
+    .kpi-value { font-size: clamp(22px, 4.6vw, 40px); }
+    .ar-theme .kpi-value { font-size: clamp(20px, 4vw, 34px); }
+  }
+  @supports (font-size: 1cqw) {
+    /* 9cqw fills the card while leaving headroom for a 15-character figure
+       such as $122,807,459.72 in a narrow 5-across AR cell. */
+    .kpi-value,
+    .ar-theme .kpi-value { font-size: clamp(20px, 9cqw, 60px); }
+    @media (max-width: 1100px) {
+      .kpi-value,
+      .ar-theme .kpi-value { font-size: clamp(22px, 9cqw, 60px); }
+    }
+  }
+  .kpi-sub { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+  .kpi-accent .kpi-value { background-image: linear-gradient(120deg, var(--brand-cyan) 0%, var(--brand-peri) 55%, var(--brand-purple) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .kpi::before { content: ''; position: absolute; top: 0; left: 0; width: 32px; height: 2px; background: linear-gradient(90deg, var(--brand-cyan), var(--brand-purple)); opacity: 0; transition: opacity 0.2s; }
+  .kpi:hover::before { opacity: 1; }
+  .section { margin-bottom: 40px; }
+  .section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 16px; gap: 16px; flex-wrap: wrap; }
+  .section-title { font-family: 'Fraunces', serif; font-weight: 500; font-size: 21px; letter-spacing: -0.01em; }
+  .section-title em { color: var(--accent); font-style: italic; font-weight: 400; }
+  .section-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.12em; }
+  .card { background: var(--bg-elev); border: 1px solid var(--border); border-radius: 16px; padding: 24px; box-shadow: 0 1px 2px rgba(20,35,60,0.04), 0 8px 28px rgba(20,35,60,0.06); }
+  .grid-2 { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .grid-half { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .rank-list { display: flex; flex-direction: column; }
+  .rank-row { display: grid; grid-template-columns: 24px 1fr auto; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--border-soft); position: relative; }
+  .rank-row:last-child { border-bottom: none; }
+  .rank-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-faint); font-variant-numeric: tabular-nums; }
+  .rank-name { font-size: 13px; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .rank-value { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text); font-variant-numeric: tabular-nums; font-weight: 600; }
+  .rank-bar { position: absolute; bottom: 0; left: 38px; right: 0; height: 2px; background: linear-gradient(90deg, var(--brand-cyan), var(--brand-peri)); opacity: 0.5; border-radius: 2px; }
+  .data-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .data-table th { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-dim); font-weight: 600; background: var(--bg-elev-2); }
+  .data-table td { padding: 12px 16px; border-bottom: 1px solid var(--border-soft); color: var(--text); }
+  .data-table tbody tr:last-child td { border-bottom: none; }
+  .data-table tr:hover td { background: rgba(139,95,191,0.09); }
+  .data-table .num { font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; text-align: right; }
+  .data-table .dim { color: var(--text-dim); }
+  .empty { text-align: center; padding: 80px 20px; color: var(--text-dim); }
+  .empty h2 { font-family: 'Fraunces', serif; font-weight: 400; font-style: italic; font-size: 28px; margin-bottom: 12px; color: var(--text); }
+  .empty code { display: inline-block; background: var(--bg-elev); border: 1px solid var(--border); padding: 4px 10px; font-family: 'JetBrains Mono', monospace; font-size: 12px; border-radius: 6px; color: var(--accent); margin: 0 2px; }
+  .pill { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; padding: 3px 9px; border-radius: 999px; border: 1px solid; }
+  .pill-completed { color: #0e8f6e; border-color: rgba(14,143,110,0.35); background: rgba(14,143,110,0.08); }
+  .pill-pending   { color: var(--warm); border-color: rgba(192,125,24,0.35); background: rgba(192,125,24,0.08); }
+  .pill-overdue   { color: var(--rose); border-color: rgba(214,69,95,0.35); background: rgba(214,69,95,0.08); }
+  @media (max-width: 1100px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } .grid-2, .grid-3, .grid-half { grid-template-columns: 1fr; } .app { padding: 28px 22px 80px; } }
+  .spinner { width: 44px; height: 44px; border: 3px solid var(--border); border-top-color: var(--brand-cyan); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 14px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-faint); }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 8px; }
+  ::-webkit-scrollbar-thumb:hover { background: #b6c2d1; }
+  ::-webkit-scrollbar-track { background: transparent; }
+
+</style>
 </head>
-<body style="font-family:system-ui,sans-serif;padding:40px;color:#334">
-<p>Redirecting to <a href="./dashboard.html">the dashboard</a>…</p>
+<body>
+<div id="root"></div>
+
+<script>
+const {
+  useState,
+  useEffect,
+  useMemo
+} = React;
+
+// Guard against CDN failure — show a clear message instead of going blank
+if (typeof Recharts === 'undefined') {
+  document.getElementById('root').innerHTML = `
+    <div style="max-width:600px;margin:80px auto;padding:32px;background:#ffffff;border:1px solid #e7ecf2;border-radius:4px;color:#1a2230;font-family:sans-serif">
+      <h2 style="font-family:Fraunces,serif;font-weight:400;font-style:italic;margin-bottom:12px">Charts library didn't load</h2>
+      <p style="color:#566274;line-height:1.6">The Recharts library failed to load from the CDN. This usually means:</p>
+      <ul style="color:#566274;line-height:1.8;margin-top:8px;padding-left:20px">
+        <li>You're offline or behind a firewall blocking CDNs</li>
+        <li>An ad blocker / privacy extension is blocking jsdelivr.net or unpkg.com</li>
+        <li>Slow network — try refreshing</li>
+      </ul>
+      <p style="color:#6E42A6;margin-top:16px;font-family:monospace;font-size:13px">Try: disable extensions for localhost, or refresh the page.</p>
+    </div>
+  `;
+  throw new Error('Recharts failed to load');
+}
+const {
+  ResponsiveContainer,
+  LineChart,
+  Line,
+  BarChart,
+  Bar,
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  PieChart,
+  Pie,
+  Cell
+} = Recharts;
+
+// --- Helpers ----------------------------------------------------------------
+const parseMoney = str => {
+  if (str == null) return 0;
+  if (typeof str === 'number') return str;
+  // Strip currency, commas, whitespace. Handle accounting-style negatives:
+  // "($50.00)" → -50.00, which is how credits/refunds often appear in reports.
+  let s = String(str).replace(/[$,\s]/g, '');
+  if (/^\(.*\)$/.test(s)) s = '-' + s.slice(1, -1);
+  const n = parseFloat(s);
+  return isNaN(n) ? 0 : n;
+};
+
+// Sum line-level discounts across a set of rows. Apex's `discounts` field is per-line,
+// so it can be summed freely without deduplication. (Apex also has an `additional_discounts`
+// field, but it's not consistently reflected in the Apex UI, so we don't include it.)
+const sumLineDiscounts = rowSet => rowSet.reduce((s, r) => s + (r._lineDiscount || 0), 0);
+
+// `payment_dates` — yes, weirdly named, but it actually holds entries like
+// "Credit of $1,045.22 on 03/17/2026"). Field may be a string OR an array of strings.
+// Returns { total, entries } where total is the summed dollar amount of all credits
+// found and entries is an array of { amount, date } for display.
+const parsePaymentsForCredits = paymentsField => {
+  const empty = {
+    total: 0,
+    entries: []
+  };
+  if (!paymentsField) return empty;
+  // Normalize: accept either an array of strings or a single string
+  const text = Array.isArray(paymentsField) ? paymentsField.filter(Boolean).join(', ') : String(paymentsField);
+  if (!text) return empty;
+  // Match "Credit of $<amount> on <date>". The amount may include commas (e.g. 1,045.22).
+  const re = /Credit\s+of\s+\$([\d,]+(?:\.\d+)?)\s+on\s+(\d{1,2}\/\d{1,2}\/\d{2,4})/gi;
+  const entries = [];
+  let total = 0;
+  let m;
+  while ((m = re.exec(text)) !== null) {
+    const amount = parseFloat(m[1].replace(/,/g, ''));
+    if (!isNaN(amount)) {
+      total += amount;
+      entries.push({
+        amount,
+        date: m[2]
+      });
+    }
+  }
+  return {
+    total,
+    entries
+  };
+};
+const fmtMoney = n => {
+  if (!n && n !== 0) return '—';
+  if (Math.abs(n) >= 1e6) return '$' + (n / 1e6).toFixed(2) + 'M';
+  if (Math.abs(n) >= 1e3) return '$' + (n / 1e3).toFixed(1) + 'K';
+  return '$' + n.toLocaleString(undefined, {
+    maximumFractionDigits: 0
+  });
+};
+const fmtMoneyFull = n => '$' + (n || 0).toLocaleString(undefined, {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+});
+const fmtNum = n => (n || 0).toLocaleString();
+const buyerBusinessName = raw => {
+  const s = String(raw == null ? '' : raw).trim();
+  return s || '—';
+};
+/* ---- Downloadable sales report (always reflects the current dashboard filters) ---- */
+const __esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const __m2 = n => '$' + (n || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const __i0 = n => Math.round(n || 0).toLocaleString();
+const __MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const __ymLabel = ym => __MON[parseInt(ym.slice(5, 7), 10) - 1] + " '" + ym.slice(2, 4);
+const __activeFilters = f => {
+  f = f || {};
+  const parts = [];
+  if (f.from || f.to) parts.push('Dates ' + (f.from || 'start') + ' to ' + (f.to || 'latest'));
+  if (f.product) parts.push('Search "' + f.product + '"');
+  if (f.productLine) parts.push('Line ' + f.productLine);
+  if (f.status) parts.push('Payment ' + f.status);
+  if (f.rep) parts.push('Rep ' + f.rep);
+  if (Array.isArray(f.buyer) ? f.buyer.length : f.buyer) {
+    const bl = Array.isArray(f.buyer) ? f.buyer.map(buyerBusinessName) : [buyerBusinessName(f.buyer)];
+    parts.push((bl.length > 1 ? 'Buyers ' : 'Buyer ') + bl.join(', '));
+  }
+  if (f.invoice) parts.push('Invoice ' + f.invoice);
+  if (f.excludeSamples) parts.push('Samples excluded');
+  return parts.length ? parts.join('  \u00b7  ') : 'All data (no filters applied)';
+};
+const __summaryTable = rows => {
+  let net = 0, disc = 0, units = 0; const orders = {}, prods = {};
+  rows.forEach(r => { net += r._revenue || 0; disc += r._lineDiscount || 0; units += r._quantity || 0; if (r.order_id) orders[r.order_id] = 1; if (r.product_name) prods[r.product_name] = 1; });
+  const body = [['Gross sales', __m2(net + disc)], ['Discounts', __m2(disc)], ['Net sales', __m2(net)], ['Units sold', __i0(units)], ['Orders', __i0(Object.keys(orders).length)], ['Products', __i0(Object.keys(prods).length)]]
+    .map(r => '<tr><td>' + __esc(r[0]) + '</td><td>' + __esc(r[1]) + '</td></tr>').join('');
+  return '<table border="1"><thead><tr><th>Summary</th><th>Value</th></tr></thead><tbody>' + body + '</tbody></table>';
+};
+const __breakdownTable = rows => {
+  const map = {};
+  rows.forEach(r => {
+    const k = r.product_name || '(unnamed)';
+    if (!map[k]) map[k] = { name: k, line: r.product_type || '', units: 0, net: 0, disc: 0 };
+    map[k].units += r._quantity || 0; map[k].net += r._revenue || 0; map[k].disc += r._lineDiscount || 0;
+  });
+  const arr = Object.keys(map).map(k => map[k]).sort((a, b) => (b.net + b.disc) - (a.net + a.disc));
+  const head = '<tr><th>Product</th><th>Line</th><th>Units</th><th>Gross</th><th>Discounts</th><th>Net</th><th>Avg Unit $</th></tr>';
+  const body = arr.map(p => '<tr><td>' + __esc(p.name) + '</td><td>' + __esc(p.line) + '</td><td>' + __i0(p.units) + '</td><td>' + __m2(p.net + p.disc) + '</td><td>' + __m2(p.disc) + '</td><td>' + __m2(p.net) + '</td><td>' + __m2(p.units ? p.net / p.units : 0) + '</td></tr>').join('');
+  return '<table border="1"><thead>' + head + '</thead><tbody>' + body + '</tbody></table>';
+};
+const __pivotTable = rows => {
+  const prods = {}, mset = {};
+  rows.forEach(r => {
+    if (!r._date) return;
+    const ym = r._date.getFullYear() + '-' + String(r._date.getMonth() + 1).padStart(2, '0');
+    mset[ym] = 1;
+    const k = r.product_name || '(unnamed)';
+    if (!prods[k]) prods[k] = { name: k, cells: {}, total: 0 };
+    const g = (r._revenue || 0) + (r._lineDiscount || 0);
+    prods[k].cells[ym] = (prods[k].cells[ym] || 0) + g;
+    prods[k].total += g;
+  });
+  const months = Object.keys(mset).sort();
+  const list = Object.keys(prods).map(k => prods[k]).sort((a, b) => b.total - a.total).slice(0, 100);
+  const colT = {}; let grand = 0;
+  months.forEach(m => { let s = 0; list.forEach(p => { s += p.cells[m] || 0; }); colT[m] = s; grand += s; });
+  const head = '<tr><th>SKU / Product</th>' + months.map(m => '<th>' + __esc(__ymLabel(m)) + '</th>').join('') + '<th>Total</th></tr>';
+  const body = list.map(p => '<tr><td>' + __esc(p.name) + '</td>' + months.map(m => '<td>' + (p.cells[m] ? __m2(p.cells[m]) : '') + '</td>').join('') + '<td>' + __m2(p.total) + '</td></tr>').join('');
+  const tot = '<tr><td>All products</td>' + months.map(m => '<td>' + __m2(colT[m]) + '</td>').join('') + '<td>' + __m2(grand) + '</td></tr>';
+  return '<table border="1"><thead>' + head + '</thead><tbody>' + body + tot + '</tbody></table>';
+};
+const __RTITLE = 'Chill Medicated NJ \u2014 Sales Report';
+const __rMeta = f => 'Filters: ' + __activeFilters(f) + '  \u00b7  Gross = before discounts  \u00b7  Generated ' + new Date().toLocaleString();
+const __dl = (filename, blob) => {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+};
+const downloadReportExcel = (rows, filters) => {
+  if (!rows || !rows.length) { alert('No rows match the current filters, so there is nothing to download.'); return; }
+  const html = '<html xmlns:x="urn:schemas-microsoft-com:office:excel"><head><meta charset="utf-8"></head><body>'
+    + '<table><tr><td><b>' + __esc(__RTITLE) + '</b></td></tr><tr><td>' + __esc(__rMeta(filters)) + '</td></tr></table>'
+    + '<br><b>Summary</b>' + __summaryTable(rows)
+    + '<br><b>Product breakdown</b>' + __breakdownTable(rows)
+    + '<br><b>Monthly gross by SKU</b>' + __pivotTable(rows)
+    + '</body></html>';
+  __dl('Chill_MA_Sales_Report.xls', new Blob([html], { type: 'application/vnd.ms-excel' }));
+};
+const downloadReportPDF = (rows, filters) => {
+  if (!rows || !rows.length) { alert('No rows match the current filters, so there is nothing to download.'); return; }
+  const css = 'body{font-family:Arial,Helvetica,sans-serif;color:#111;padding:24px}h1{font-size:16px;margin:0 0 4px}h2{font-size:12px;margin:18px 0 6px;border-bottom:1px solid #ccc;padding-bottom:2px}.m{font-size:11px;color:#555;margin-bottom:8px}table{border-collapse:collapse;width:100%;font-size:10px;margin-bottom:6px}th,td{border:1px solid #ccc;padding:3px 6px;text-align:right}th:first-child,td:first-child{text-align:left}thead th{background:#eee}@media print{body{padding:0}h2{page-break-after:avoid}}';
+  const w = window.open('', '_blank');
+  if (!w) { alert('Please allow pop-ups so the PDF report can open, then use Save as PDF.'); return; }
+  w.document.write('<html><head><meta charset="utf-8"><title>' + __esc(__RTITLE) + '</title><style>' + css + '</style></head><body>'
+    + '<h1>' + __esc(__RTITLE) + '</h1><div class="m">' + __esc(__rMeta(filters)) + '</div>'
+    + '<h2>Summary</h2>' + __summaryTable(rows)
+    + '<h2>Product breakdown</h2>' + __breakdownTable(rows)
+    + '<h2>Monthly gross by SKU</h2>' + __pivotTable(rows)
+    + '<scr' + 'ipt>window.onload=function(){setTimeout(function(){window.print();},300);};</scr' + 'ipt>'
+    + '</body></html>');
+  w.document.close();
+};
+const parseDate = str => {
+  if (!str) return null;
+  const s = String(str).trim();
+  // YYYY-MM-DD — construct in local timezone to avoid UTC shift
+  const ymdMatch = s.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (ymdMatch) {
+    return new Date(+ymdMatch[1], +ymdMatch[2] - 1, +ymdMatch[3]);
+  }
+  // MM/DD/YYYY
+  const mdyMatch = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+  if (mdyMatch) {
+    return new Date(+mdyMatch[3], +mdyMatch[1] - 1, +mdyMatch[2]);
+  }
+  const d = new Date(s);
+  return isNaN(d) ? null : d;
+};
+const ymd = d => {
+  if (!(d instanceof Date) || isNaN(d)) return '';
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+};
+
+// US state normalization — handles "MA" / "New Jersey" / "Mass." / "massachusetts" → "MA"
+const STATE_TO_ABBR = {
+  'alabama': 'AL',
+  'alaska': 'AK',
+  'arizona': 'AZ',
+  'arkansas': 'AR',
+  'california': 'CA',
+  'colorado': 'CO',
+  'connecticut': 'CT',
+  'delaware': 'DE',
+  'florida': 'FL',
+  'georgia': 'GA',
+  'hawaii': 'HI',
+  'idaho': 'ID',
+  'illinois': 'IL',
+  'indiana': 'IN',
+  'iowa': 'IA',
+  'kansas': 'KS',
+  'kentucky': 'KY',
+  'louisiana': 'LA',
+  'maine': 'ME',
+  'maryland': 'MD',
+  'massachusetts': 'MA',
+  'mass': 'MA',
+  'michigan': 'MI',
+  'minnesota': 'MN',
+  'mississippi': 'MS',
+  'missouri': 'MO',
+  'montana': 'MT',
+  'nebraska': 'NE',
+  'nevada': 'NV',
+  'new hampshire': 'NH',
+  'new jersey': 'NJ',
+  'new mexico': 'NM',
+  'new york': 'NY',
+  'north carolina': 'NC',
+  'north dakota': 'ND',
+  'ohio': 'OH',
+  'oklahoma': 'OK',
+  'oregon': 'OR',
+  'pennsylvania': 'PA',
+  'rhode island': 'RI',
+  'south carolina': 'SC',
+  'south dakota': 'SD',
+  'tennessee': 'TN',
+  'texas': 'TX',
+  'utah': 'UT',
+  'vermont': 'VT',
+  'virginia': 'VA',
+  'washington': 'WA',
+  'west virginia': 'WV',
+  'wisconsin': 'WI',
+  'wyoming': 'WY',
+  'district of columbia': 'DC',
+  'washington dc': 'DC',
+  'washington d.c.': 'DC'
+};
+const normalizeState = raw => {
+  if (!raw) return '';
+  const clean = String(raw).trim().replace(/\./g, '').toLowerCase();
+  if (!clean) return '';
+  // Already a 2-letter abbreviation
+  if (clean.length === 2) return clean.toUpperCase();
+  // Full name → abbreviation
+  if (STATE_TO_ABBR[clean]) return STATE_TO_ABBR[clean];
+  // Unknown — return original with first letter capitalized
+  return raw.toString().trim();
+};
+
+// --- Main App ---------------------------------------------------------------
+
+// ── Revenue Over Time: Month (year-over-year) / Year toggle ──────────────
+function RevenueOverTime({ rows }) {
+  const e = React.createElement;
+  const [view, setView] = React.useState('month');
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const YEAR_COLORS = ['#2A6FDB','#E0723A','#1F9E6B','#8E4FC0','#D64060','#C9A227','#12A5C4','#6B7280'];
+
+  const years = React.useMemo(() => {
+    const s = new Set();
+    rows.forEach(r => { if (r._date) s.add(r._date.getFullYear()); });
+    return [...s].sort((a, b) => a - b);
+  }, [rows]);
+
+  // Month view: one entry per month, a separate revenue key per year.
+  const monthData = React.useMemo(() => {
+    const base = MONTHS.map(m => ({ month: m }));
+    rows.forEach(r => {
+      if (!r._date) return;
+      const y = r._date.getFullYear();
+      const row = base[r._date.getMonth()];
+      row[y] = (row[y] || 0) + r._revenue;
+    });
+    return base;
+  }, [rows, years]);
+
+  // Year view: one entry per year (annual totals).
+  const yearData = React.useMemo(() => {
+    const map = {};
+    rows.forEach(r => { if (r._date) { const y = r._date.getFullYear(); map[y] = (map[y] || 0) + r._revenue; } });
+    return years.map(y => ({ year: String(y), revenue: map[y] || 0 }));
+  }, [rows, years]);
+
+  const colorFor = y => YEAR_COLORS[years.indexOf(y) % YEAR_COLORS.length];
+  const axisTick = { fontSize: 11, fontFamily: 'JetBrains Mono', fill: '#4b5563' };
+  const tooltip = fmt => e(Tooltip, {
+    contentStyle: { background: '#ffffff', border: '1px solid #e7ecf2', borderRadius: 4, fontSize: 12 },
+    labelStyle: { color: '#566274', fontFamily: 'JetBrains Mono', fontSize: 11 },
+    itemStyle: { color: '#1a2230' }, formatter: fmt
+  });
+
+  const btn = (id, label) => e('button', {
+    key: id, onClick: () => setView(id),
+    style: {
+      padding: '4px 12px', fontSize: 11, fontFamily: 'JetBrains Mono', cursor: 'pointer', borderRadius: 4,
+      border: '1px solid ' + (view === id ? '#7A4FB0' : '#e3e9f1'),
+      background: view === id ? 'rgba(139,95,191,0.14)' : '#ffffff',
+      color: view === id ? '#6E42A6' : '#566274'
+    }
+  }, label);
+
+  const chart = view === 'month'
+    ? e(LineChart, { data: monthData, margin: { top: 12, right: 12, left: 0, bottom: 0 } },
+        e(CartesianGrid, { stroke: '#e7ecf2', strokeDasharray: '2 2', vertical: false }),
+        e(XAxis, { dataKey: 'month', stroke: '#a7b2c0', tick: axisTick, tickLine: false, axisLine: { stroke: '#e7ecf2' } }),
+        e(YAxis, { stroke: '#a7b2c0', tick: axisTick, tickLine: false, axisLine: false, tickFormatter: fmtMoney }),
+        tooltip((v, n) => [fmtMoneyFull(v), n]),
+        e(Legend, { wrapperStyle: { fontSize: 11, fontFamily: 'JetBrains Mono' } }),
+        ...years.map(y => e(Line, {
+          key: y, type: 'monotone', dataKey: String(y), name: String(y),
+          stroke: colorFor(y), strokeWidth: 2, dot: { r: 2 }, activeDot: { r: 4 }, connectNulls: false
+        }))
+      )
+    : e(LineChart, { data: yearData, margin: { top: 12, right: 12, left: 0, bottom: 0 } },
+        e(CartesianGrid, { stroke: '#e7ecf2', strokeDasharray: '2 2', vertical: false }),
+        e(XAxis, { dataKey: 'year', stroke: '#a7b2c0', tick: axisTick, tickLine: false, axisLine: { stroke: '#e7ecf2' } }),
+        e(YAxis, { stroke: '#a7b2c0', tick: axisTick, tickLine: false, axisLine: false, tickFormatter: fmtMoney }),
+        tooltip(v => [fmtMoneyFull(v), 'Revenue']),
+        e(Line, { type: 'monotone', dataKey: 'revenue', name: 'Revenue', stroke: '#7A4FB0', strokeWidth: 2.5, dot: { r: 3 }, activeDot: { r: 5 } })
+      );
+
+  const meta = view === 'month'
+    ? years.length + ' year' + (years.length === 1 ? '' : 's') + ' compared'
+    : yearData.length + ' year' + (yearData.length === 1 ? '' : 's');
+
+  return e('section', { className: 'section' },
+    e('div', { className: 'section-header' },
+      e('h2', { className: 'section-title' }, 'Revenue ', e('em', null, 'over time')),
+      e('div', { style: { display: 'flex', alignItems: 'center', gap: 12 } },
+        e('div', { style: { display: 'flex', gap: 6 } }, btn('month', 'Month'), btn('year', 'Year')),
+        e('span', { className: 'section-meta' }, meta)
+      )
+    ),
+    e('div', { className: 'card', style: { height: 320 } },
+      e(ResponsiveContainer, { width: '100%', height: '100%' }, chart)
+    )
+  );
+}
+
+// ── Paginated inventory table with per-product value ──────────────────
+function InventoryTable({ list }) {
+  const e = React.createElement;
+  const PAGE = 25;
+  const [page, setPage] = React.useState(0);
+  const pages = Math.max(1, Math.ceil(list.length / PAGE));
+  const cur = Math.min(page, pages - 1);
+  const slice = list.slice(cur * PAGE, cur * PAGE + PAGE);
+  const badge = (color, border, text) => e("span", { style: { fontFamily: "JetBrains Mono", fontSize: 10, textTransform: "uppercase", letterSpacing: "0.08em", color, border: "1px solid " + border, borderRadius: 2, padding: "2px 6px", whiteSpace: "nowrap" } }, text);
+  const rows = slice.map((p, i) => e("tr", { key: cur * PAGE + i },
+    e("td", null, p.name),
+    e("td", { className: "dim" }, p.line),
+    e("td", { className: "dim font-mono", style: { fontSize: 11 } }, p.sku || "\u2014"),
+    e("td", { className: "num dim" }, fmtNum(Math.round(p.sold))),
+    e("td", { className: "num" }, e("strong", { style: { color: p.qty == null ? "var(--text-faint)" : p.qty <= 0 ? "var(--rose)" : "var(--accent)" } }, p.qty == null ? "\u2014" : fmtNum(Math.round(p.qty)))),
+    e("td", { className: "num" }, p.qty == null ? e("span", { style: { color: "var(--text-faint)" } }, "\u2014") : p.qty <= 0 ? badge("var(--rose)", "var(--rose)", "Out") : p.daysLeft == null ? badge("var(--text-faint)", "var(--border)", "No recent sales") : e("strong", { style: { color: p.daysLeft < 14 ? "var(--rose)" : p.daysLeft < 30 ? "var(--warm)" : "var(--text)" } }, Math.round(p.daysLeft) + (Math.round(p.daysLeft) === 1 ? " day" : " days"))),
+    e("td", { className: "num dim" }, p.value ? fmtMoney(p.value) : "\u2014"),
+    e("td", { className: "num dim" }, p.batches || "\u2014"),
+    e("td", { style: { minWidth: 240, maxWidth: 340, verticalAlign: "top" } }, p.batchNames && p.batchNames.length
+      ? e("div", { style: { display: "flex", flexDirection: "column", gap: 3 } },
+          p.batchNames.map((b, bi) => e("span", { key: bi, title: b, style: { fontFamily: "JetBrains Mono", fontSize: 10, lineHeight: 1.35, color: "var(--text-dim)", wordBreak: "break-all", overflowWrap: "anywhere" } }, b)))
+      : e("span", { style: { color: "var(--text-faint)" } }, "\u2014")),
+    e("td", null, !p.listed ? badge("var(--text-faint)", "var(--border)", "Unlisted") : p.neverSold ? badge("var(--warm)", "var(--warm)", "Never sold") : e("span", { style: { color: "var(--text-faint)" } }, "\u2014"))
+  ));
+  const navBtn = (label, disabled, onClick) => e("button", { className: "date-preset", disabled, onClick, style: { opacity: disabled ? 0.35 : 1, cursor: disabled ? "default" : "pointer" } }, label);
+  const pager = e("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 16px", borderTop: "1px solid var(--border)", fontFamily: "JetBrains Mono", fontSize: 11, color: "var(--text-dim)" } },
+    e("span", null, fmtNum(list.length) + " products \u00b7 page " + (cur + 1) + " of " + pages),
+    e("div", { style: { display: "flex", gap: 8 } },
+      navBtn("\u2039 Prev", cur <= 0, () => setPage(cur - 1)),
+      navBtn("Next \u203a", cur >= pages - 1, () => setPage(cur + 1))));
+  return e("div", { className: "card", style: { padding: 0, overflow: "hidden" } },
+    e("div", { style: { overflowX: "auto", maxHeight: 560 } },
+      e("table", { className: "data-table" },
+        e("thead", null, e("tr", null,
+          e("th", null, "Product"), e("th", null, "Line"), e("th", null, "SKU"),
+          e("th", { className: "num" }, "Units Sold"),
+          e("th", { className: "num" }, "On Hand"),
+          e("th", { className: "num", title: "Estimated days until this SKU runs out, based on units sold in the last 30 days" }, "Days Left"),
+          e("th", { className: "num" }, "Value"),
+          e("th", { className: "num" }, "Batches"),
+          e("th", null, "Batch Names"),
+          e("th", null, "Status"))),
+        e("tbody", null, rows))),
+    pager);
+}
+
+// ── Sales by category ─────────────────────────────────────────────────
+// New Jersey sells a small, distinct product set, so each product name is its
+// own category. We group the filtered rows by product name, tidy the label (drop
+// the "Chill Medicated" brand prefix, dashes to spaces, collapse double spaces),
+// sort by net sales, and total it. Raw name kept in a hover tooltip.
+const catLabel = s => {
+  s = String(s || '').replace(/^\s*chill medicated\s*-?\s*/i, '');
+  s = s.replace(/\|/g, ' / ').replace(/-/g, ' ').replace(/\s+/g, ' ').trim();
+  return s || '(unnamed)';
+};
+function SalesByCategory({ rows }) {
+  const e = React.createElement;
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  // Metric drives BOTH the highlighted column emphasis and the sort (greatest first).
+  const [metric, setMetric] = React.useState('gross');   // 'gross' | 'units'
+  const [yr, setYr] = React.useState('all');
+  const [mo, setMo] = React.useState('all');
+  const clean = s => String(s || '')
+    .replace(/\s*\|\s*/g, ' ')                     // pipe separators to spaces
+    .replace(/\b\d+\/\d+\/\d+ct\s+Case\b/gi, '')   // 24/48/72ct Case
+    .replace(/\b\d+ct\s+Case\b/gi, '')             // 30ct Case, 50ct Case
+    .replace(/\bCase\b/gi, '')                     // stray "Case"
+    .replace(/\s+/g, ' ').trim();
+  // Years / months present in the (globally filtered) rows, for the dropdowns.
+  const periods = React.useMemo(() => {
+    const ys = new Set(), ms = new Set();
+    rows.forEach(r => { if (r._date) { ys.add(String(r._date.getFullYear())); ms.add(String(r._date.getMonth() + 1).padStart(2, '0')); } });
+    return { years: Array.from(ys).sort(), months: Array.from(ms).sort() };
+  }, [rows]);
+  const agg = React.useMemo(() => {
+    const map = {};
+    let tU = 0, tG = 0, tN = 0;
+    rows.forEach(r => {
+      if (r._date) {
+        if (yr !== 'all' && String(r._date.getFullYear()) !== yr) return;
+        if (mo !== 'all' && String(r._date.getMonth() + 1).padStart(2, '0') !== mo) return;
+      } else if (yr !== 'all' || mo !== 'all') { return; }   // date-filtered but no date -> drop
+      const isS = !!r._isSample;
+      const sku = String(r.product_sku || '').trim();
+      const nm = clean(r.product_name) || '(unnamed)';
+      const key = (sku || nm.toLowerCase()) + (isS ? ' #s' : '');
+      const units = parseFloat(r.inventory_quantity) || r._quantity || 0;
+      const net = r._revenue || 0;
+      const gross = net + (r._lineDiscount || 0);
+      if (!map[key]) map[key] = { label: nm + (isS ? ' — SAMPLE' : ''), sku: sku, units: 0, gross: 0, net: 0 };
+      if (!map[key].sku && sku) map[key].sku = sku;
+      map[key].units += units; map[key].gross += gross; map[key].net += net;
+      tU += units; tG += gross; tN += net;
+    });
+    return { list: Object.keys(map).map(k => map[k]), tU: tU, tG: tG, tN: tN };
+  }, [rows, yr, mo]);
+  const list = agg.list, tU = agg.tU, tG = agg.tG, tN = agg.tN;
+  const pct = v => tN > 0 ? (v / tN * 100).toFixed(1) + '%' : '—';
+  const sorted = list.slice().sort((a, b) => metric === 'units'
+    ? (b.units || 0) - (a.units || 0)
+    : (b.gross || 0) - (a.gross || 0));
+  const body = sorted.map((d, i) => e("tr", { key: i },
+    e("td", null, d.label, d.sku ? e("span", { style: { color: 'var(--text-faint)', fontSize: 10, marginLeft: 6 } }, d.sku) : null),
+    e("td", { className: metric === 'units' ? "num" : "num dim" }, d.units ? (metric === 'units' ? e("strong", null, fmtNum(Math.round(d.units))) : fmtNum(Math.round(d.units))) : "—"),
+    e("td", { className: metric === 'gross' ? "num" : "num dim" }, d.gross ? (metric === 'gross' ? e("strong", null, fmtMoney(d.gross)) : fmtMoney(d.gross)) : "—"),
+    e("td", { className: "num" }, d.net ? fmtMoney(d.net) : "—"),
+    e("td", { className: "num dim" }, d.net ? pct(d.net) : "—")));
+  body.push(e("tr", { key: '__totals', style: { borderTop: '2px solid var(--border)' } },
+    e("td", null, e("strong", null, "TOTALS")),
+    e("td", { className: "num" }, e("strong", null, fmtNum(Math.round(tU)))),
+    e("td", { className: "num" }, e("strong", null, fmtMoney(tG))),
+    e("td", { className: "num" }, e("strong", null, fmtMoney(tN))),
+    e("td", { className: "num" }, e("strong", null, tN > 0 ? "100%" : "—"))));
+  const sel = (val, set, opts) => e("select", { className: "filter-select", value: val, onChange: ev => set(ev.target.value), style: { minWidth: 108, height: 26, fontSize: 12, padding: '0 8px' } }, opts);
+  return e("section", { className: "section" },
+    e("div", { className: "section-header" },
+      e("h2", { className: "section-title" }, "Sales by ", e("em", null, "SKU")),
+      e("div", { style: { display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' } },
+        e("label", { className: "filter-label", style: { textTransform: 'uppercase' } }, "Rank by"),
+        sel(metric, setMetric, [
+          e("option", { key: 'g', value: "gross" }, "Gross ↓"),
+          e("option", { key: 'u', value: "units" }, "Units ↓")]),
+        sel(yr, setYr, [e("option", { key: 'all', value: "all" }, "All years")].concat(
+          periods.years.map(y => e("option", { key: y, value: y }, y)))),
+        sel(mo, setMo, [e("option", { key: 'all', value: "all" }, "All months")].concat(
+          periods.months.map(m => e("option", { key: m, value: m }, MONTHS[parseInt(m, 10) - 1])))),
+        e("span", { className: "section-meta" }, list.length + " SKUs · respects filters"))),
+    e("div", { className: "card", style: { padding: 0, overflow: 'hidden' } },
+      e("div", { style: { overflowX: 'auto', maxHeight: 560 } },
+        e("table", { className: "data-table" },
+          e("thead", null, e("tr", null,
+            e("th", null, "Product / SKU"),
+            e("th", { className: "num" }, "Units"),
+            e("th", { className: "num" }, "Gross"),
+            e("th", { className: "num" }, "Net Sales"),
+            e("th", { className: "num" }, "Share"))),
+          e("tbody", null, body)))));
+}
+
+function MonthlyGrossBySku({ rows }) {
+  const e = React.createElement;
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const [yr, setYr] = React.useState('all');
+  const [mo, setMo] = React.useState('all');
+  // Metric toggle: 'gross' = gross dollars, 'units' = physical units sold, per SKU/month
+  const [metric, setMetric] = React.useState('gross');
+  const base = React.useMemo(() => {
+    const monthsSet = new Set();
+    const prods = {};
+    rows.forEach(r => {
+      if (!r._date) return;
+      const ym = r._date.getFullYear() + '-' + String(r._date.getMonth() + 1).padStart(2, '0');
+      monthsSet.add(ym);
+      const key = r.product_name || '(unnamed)';
+      if (!prods[key]) prods[key] = { name: key, sku: r.product_sku || '', cells: {} };
+      const gross = (r._revenue || 0) + (r._lineDiscount || 0);
+      const units = r._quantity || 0;
+      const c = prods[key].cells[ym] || (prods[key].cells[ym] = { gross: 0, units: 0 });
+      c.gross += gross; c.units += units;
+      if (!prods[key].sku && r.product_sku) prods[key].sku = r.product_sku;
+    });
+    const allMonths = Array.from(monthsSet).sort();
+    const years = Array.from(new Set(allMonths.map(m => m.split('-')[0]))).sort();
+    return { allMonths: allMonths, prods: Object.values(prods), years: years };
+  }, [rows]);
+  const view = React.useMemo(() => {
+    const months = base.allMonths.filter(ym => {
+      const p = ym.split('-');
+      if (yr !== 'all' && p[0] !== yr) return false;
+      if (mo !== 'all' && p[1] !== mo) return false;
+      return true;
+    });
+    const val = c => c ? (metric === 'units' ? c.units : c.gross) : 0;
+    const list = base.prods.map(p => {
+      let total = 0;
+      months.forEach(ym => { total += val(p.cells[ym]); });
+      return { name: p.name, sku: p.sku, cells: p.cells, total: total };
+    }).filter(p => p.total !== 0).sort((a, b) => b.total - a.total);
+    const colTotals = {}; let grand = 0;
+    months.forEach(ym => { colTotals[ym] = list.reduce((s, p) => s + val(p.cells[ym]), 0); grand += colTotals[ym]; });
+    return { months: months, list: list, colTotals: colTotals, grand: grand };
+  }, [base, yr, mo, metric]);
+  const months = view.months, list = view.list, colTotals = view.colTotals, grand = view.grand;
+  const isUnits = metric === 'units';
+  const fmtVal = v => isUnits ? fmtNum(Math.round(v)) : fmtMoney(v);
+  const cellVal = c => isUnits ? (c ? c.units : 0) : (c ? c.gross : 0);
+  const stick = { position: 'sticky', left: 0, background: 'var(--bg-elev)', zIndex: 1 };
+  const mlabel = ym => { const p = ym.split('-'); return MONTHS[parseInt(p[1], 10) - 1] + " '" + p[0].slice(2); };
+  const cell = c => cellVal(c) ? fmtVal(cellVal(c)) : e("span", { className: "dim" }, "\u2014");
+  const sel = (val, set, opts) => e("select", { className: "filter-select", value: val, onChange: ev => set(ev.target.value), style: { minWidth: 74, height: 26, fontSize: 12, padding: '0 8px' } },
+    opts.map(o => e("option", { key: o.v, value: o.v }, o.l)));
+  const mbtn = (id, label) => e('button', { key: id, onClick: () => setMetric(id),
+    style: { padding: '4px 12px', fontSize: 11, fontFamily: 'JetBrains Mono', cursor: 'pointer', borderRadius: 4,
+      border: '1px solid ' + (metric === id ? '#0EB1E8' : '#e3e9f1'),
+      background: metric === id ? 'rgba(14,177,232,0.12)' : '#ffffff',
+      color: metric === id ? '#0E86C4' : '#566274' } }, label);
+  return e("section", { className: "section" },
+    e("div", { className: "section-header" },
+      e("h2", { className: "section-title" }, "Monthly ", e("em", null, isUnits ? "units by SKU" : "gross sales by SKU")),
+      e("div", { style: { display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' } },
+        e("div", { style: { display: 'flex', gap: 6 } }, mbtn('gross', 'Gross $'), mbtn('units', 'Units')),
+        sel(yr, setYr, [{ v: 'all', l: 'All years' }].concat(base.years.map(y => ({ v: y, l: y })))),
+        sel(mo, setMo, [{ v: 'all', l: 'All months' }].concat(MONTHS.map((m, i) => ({ v: String(i + 1).padStart(2, '0'), l: m })))),
+        e("span", { className: "section-meta" }, months.length ? fmtNum(list.length) + " products \u00b7 " + months.length + " mo \u00b7 " + (isUnits ? "units" : "gross") : ""))),
+    months.length === 0
+      ? e("div", { className: "card" }, e("div", { style: { color: 'var(--text-faint)', fontSize: 13 } }, "No rows match the current filters."))
+      : e("div", { className: "card", style: { padding: 0, overflow: 'hidden' } },
+          e("div", { style: { overflowX: 'auto', maxHeight: 520 } },
+            e("table", { className: "data-table" },
+              e("thead", null,
+                e("tr", null,
+                  e("th", { style: Object.assign({}, stick, { zIndex: 2 }) }, "SKU / Product"),
+                  months.map(ym => e("th", { key: ym, className: "num" }, mlabel(ym))),
+                  e("th", { className: "num" }, "Total"))),
+              e("tbody", null,
+                list.slice(0, 100).map((p, i) => e("tr", { key: i },
+                  e("td", { style: stick, title: p.sku ? 'SKU: ' + p.sku : '' }, p.name),
+                  months.map(ym => e("td", { key: ym, className: "num" }, cell(p.cells[ym]))),
+                  e("td", { className: "num" }, e("strong", null, fmtVal(p.total))))),
+                e("tr", { style: { background: 'var(--bg)' } },
+                  e("td", { style: Object.assign({}, stick, { background: 'var(--bg)', fontWeight: 700 }) }, "All products"),
+                  months.map(ym => e("td", { key: ym, className: "num" }, e("strong", null, fmtVal(colTotals[ym])))),
+                  e("td", { className: "num" }, e("strong", null, fmtVal(grand))))))),
+          list.length > 100 ? e("div", { style: { padding: '8px 14px', color: 'var(--text-faint)', fontSize: 12 } }, "Showing top 100 of " + fmtNum(list.length) + " products by total " + (isUnits ? "units" : "gross")) : null));
+}
+
+function MultiSelect({ options, selected, onChange, labelFn, placeholder }) {
+  const e = React.createElement;
+  const [open, setOpen] = React.useState(false);
+  const [q, setQ] = React.useState('');
+  const ref = React.useRef(null);
+  const label = labelFn || (x => x);
+  React.useEffect(() => {
+    const onDoc = ev => { if (ref.current && !ref.current.contains(ev.target)) setOpen(false); };
+    document.addEventListener('mousedown', onDoc);
+    return () => document.removeEventListener('mousedown', onDoc);
+  }, []);
+  const sel = Array.isArray(selected) ? selected : (selected ? [selected] : []);
+  const toggle = val => {
+    const next = sel.includes(val) ? sel.filter(x => x !== val) : sel.concat([val]);
+    onChange(next);
+  };
+  const ql = q.trim().toLowerCase();
+  const shown = ql ? options.filter(o => label(o).toLowerCase().includes(ql) || String(o).toLowerCase().includes(ql)) : options;
+  const summary = sel.length === 0 ? (placeholder || 'All') : sel.length === 1 ? label(sel[0]) : sel.length + ' selected';
+  return e("div", { className: "ms-wrap", ref: ref },
+    e("button", { type: "button", className: "ms-toggle" + (open || sel.length ? " active" : ""), onClick: () => setOpen(o => !o) },
+      e("span", { style: { overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' } }, summary),
+      sel.length > 1 ? e("span", { className: "ms-count" }, sel.length) : e("span", { className: "ms-caret" }, "▾")),
+    e("div", { className: "ms-panel" + (open ? " open" : "") },
+      e("input", { className: "ms-search", type: "text", placeholder: "search…", value: q, onChange: ev => setQ(ev.target.value) }),
+      e("div", { className: "ms-list" },
+        shown.length === 0 ? e("div", { style: { padding: 10, color: 'var(--text-faint)', fontSize: 12 } }, "No matches")
+          : shown.map(o => e("label", { key: o, className: "ms-opt" },
+              e("input", { type: "checkbox", checked: sel.includes(o), onChange: () => toggle(o) }),
+              e("span", { title: o }, label(o))))),
+      e("div", { className: "ms-actions" },
+        e("span", { style: { fontFamily: "'JetBrains Mono',monospace", fontSize: 10, color: 'var(--text-faint)' } }, sel.length + " of " + options.length),
+        e("button", { type: "button", className: "ms-clear", onClick: () => { onChange([]); } }, "Clear"))));
+}
+function ViewTabs({ tab, setTab }) {
+  const e = React.createElement;
+  const mk = (id, label) => e('button', {
+    key: id, onClick: () => setTab(id),
+    className: 'view-tab' + (tab === id ? ' active' : '')
+  }, label);
+  return e('div', { className: 'view-tabs-wrap' },
+    e('div', { className: 'view-tabs' }, mk('sales', 'Sales'), mk('ar', 'Accounts Receivable'), mk('inventory', 'Inventory'), mk('prospecting', 'Prospecting')));
+}
+function AccountsReceivable({ data }) {
+  const e = React.createElement;
+  // AR uses current Apex data only (not the 2024 historical backfill).
+  const rows = data._liveRows || data.rows || [];
+  const AGE = [
+    { key: 'current', label: 'Current', color: '#2e9e57' },
+    { key: 'b3160', label: '31–60', color: '#caa11e' },
+    { key: 'b6190', label: '61–90', color: '#e07b2a' },
+    { key: 'b91', label: '91+', color: '#d6433f' }
+  ];
+  const bucketOf = days => days <= 30 ? 'current' : days <= 60 ? 'b3160' : days <= 90 ? 'b6190' : 'b91';
+  const bucketLabel = k => (AGE.find(a => a.key === k) || {}).label || k;
+  const bucketColor = k => (AGE.find(a => a.key === k) || {}).color || 'var(--text-dim)';
+
+  const [buyerSel, setBuyerSel] = React.useState([]);
+  const [repSel, setRepSel] = React.useState('');
+  const [bucketSel, setBucketSel] = React.useState('all');
+  const [q, setQ] = React.useState('');
+
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const fmtD = d => d ? ((d.getMonth() + 1) + '/' + String(d.getDate()).padStart(2, '0') + '/' + d.getFullYear()) : '—';
+  const repOf = r => (Array.isArray(r.sales_reps_display) && r.sales_reps_display.filter(Boolean).join(', ')) || r.sales_reps || r.distributor_name || '—';
+
+  const invoices = React.useMemo(() => {
+    const map = {};
+    rows.forEach(r => {
+      const stRaw = r.payment_status || '';
+      const st = String(stRaw).toLowerCase().trim();
+      // Open receivable = not paid. Statuses vary by market (Unpaid/Partial/Overdue,
+      // and some markets store them lowercase), so match case-insensitively.
+      if (!({ unpaid:1, 'un-paid':1, 'not paid':1, partial:1, 'partially paid':1, 'partially-paid':1, overdue:1, 'over due':1, 'past due':1, 'past-due':1, open:1, outstanding:1, due:1, 'balance due':1, 'awaiting payment':1, 'payment due':1 })[st]) return;
+      const id = r.order_number || r.order_id || r.order;
+      if (!id) return;
+      if (!map[id]) {
+        map[id] = {
+          invoice: r.order_number || r.order_id || ('#' + r.order),
+          buyer: r.buyer_name || '—',
+          rep: repOf(r),
+          status: stRaw,
+          orderDate: parseDate(r.order_date_localized_raw || r.order_date_utc_raw || r.order_date_localized || r.order_date_utc || r.order_date_raw || r.order_date),
+          dueDate: parseDate(r.due_date_raw || r.due_date),
+          amount: 0,
+          addlDiscount: typeof r.additional_discounts === 'number' ? r.additional_discounts / 100 : parseMoney(r.additional_discounts),
+          credit: parsePaymentsForCredits(r.payment_dates || r.payments || '').total || 0
+        };
+      }
+      // Revenue schema varies by market: line-level (line_total_raw cents / line_total) is
+      // summed; order-level (order_total dollars, or order_price cents) is taken once per order.
+      const lineRev = typeof r.line_total_raw === 'number' ? r.line_total_raw / 100 : parseMoney(r.line_total || r.computed_sale_price);
+      if (lineRev) { map[id].amount += lineRev; map[id]._hasLine = true; }
+      else if (!map[id]._hasLine) {
+        map[id].orderRev = typeof r.order_total === 'number' ? r.order_total : (typeof r.order_price === 'number' ? r.order_price / 100 : 0);
+      }
+    });
+    return Object.values(map).map(o => {
+      const due = o.dueDate || (o.orderDate ? new Date(o.orderDate.getTime() + 30 * 86400000) : null);
+      const base = Math.max(0, (o._hasLine ? o.amount : (o.orderRev || 0)) - (o.addlDiscount || 0));
+      const net = Math.max(0, base - (o.credit || 0));
+      const daysPastDue = due ? Math.floor((today - due) / 86400000) : 0;
+      return Object.assign({}, o, { due, net, daysPastDue, bucket: bucketOf(daysPastDue) });
+    }).filter(o => o.net > 0);
+  }, [rows]);
+
+  const buyerOptions = React.useMemo(() => [...new Set(invoices.map(o => o.buyer))].sort(), [invoices]);
+  const repOptions = React.useMemo(() => [...new Set(invoices.map(o => o.rep).filter(x => x && x !== '—'))].sort(), [invoices]);
+
+  const shown = React.useMemo(() => invoices.filter(o => {
+    if (buyerSel.length && !buyerSel.includes(o.buyer)) return false;
+    if (repSel && o.rep !== repSel) return false;
+    if (bucketSel !== 'all' && o.bucket !== bucketSel) return false;
+    if (q) { const s = (o.invoice + ' ' + o.buyer + ' ' + o.rep).toLowerCase(); if (!s.includes(q.toLowerCase())) return false; }
+    return true;
+  }), [invoices, buyerSel, repSel, bucketSel, q]);
+
+  const tot = React.useMemo(() => {
+    const agg = { total: 0, credit: 0, overdue: 0, current: 0, b3160: 0, b6190: 0, b91: 0, count: shown.length };
+    const buyers = new Set();
+    shown.forEach(o => {
+      agg.total += o.net; agg.credit += o.credit || 0;
+      if (o.daysPastDue > 30) agg.overdue += o.net;
+      agg[o.bucket] += o.net; buyers.add(o.buyer);
+    });
+    agg.buyers = buyers.size;
+    return agg;
+  }, [shown]);
+  const pctOf = v => tot.total > 0 ? (v / tot.total * 100).toFixed(1) + '%' : '—';
+
+  const byBuyer = React.useMemo(() => {
+    const m = {};
+    shown.forEach(o => {
+      if (!m[o.buyer]) m[o.buyer] = { buyer: o.buyer, total: 0, current: 0, b3160: 0, b6190: 0, b91: 0, invoices: 0, oldest: 0 };
+      m[o.buyer].total += o.net; m[o.buyer][o.bucket] += o.net; m[o.buyer].invoices++;
+      if (o.daysPastDue > m[o.buyer].oldest) m[o.buyer].oldest = o.daysPastDue;
+    });
+    return Object.values(m).sort((a, b) => b.total - a.total);
+  }, [shown]);
+
+  const byRep = React.useMemo(() => {
+    const m = {};
+    shown.forEach(o => {
+      const k = o.rep || '—';
+      if (!m[k]) m[k] = { rep: k, current: 0, b3160: 0, b6190: 0, b91: 0, total: 0 };
+      m[k][o.bucket] += o.net; m[k].total += o.net;
+    });
+    return Object.values(m).sort((a, b) => b.total - a.total).slice(0, 20);
+  }, [shown]);
+
+  const openSorted = React.useMemo(() => shown.slice().sort((a, b) => b.daysPastDue - a.daysPastDue), [shown]);
+  const agingData = AGE.map(a => ({ name: a.label, value: tot[a.key], color: a.color }));
+  const fetchedAt = new Date(data.fetched_at);
+
+  // ── Filter bar ──
+  const repSelect = e('select', { className: 'filter-select', value: repSel, onChange: ev => setRepSel(ev.target.value) },
+    e('option', { value: '' }, 'All'), repOptions.map(o => e('option', { key: o, value: o }, o)));
+  const agingBtns = e('div', { style: { display: 'flex', gap: 6, flexWrap: 'wrap' } },
+    AGE.map(a => {
+      const on = bucketSel === a.key;
+      return e('button', { key: a.key, type: 'button', onClick: () => setBucketSel(on ? 'all' : a.key),
+        style: { fontFamily: 'JetBrains Mono, monospace', fontSize: 12, cursor: 'pointer', padding: '8px 15px', borderRadius: 9, border: '1px solid ' + a.color, color: on ? '#fff' : a.color, background: on ? a.color : '#ffffff', fontWeight: on ? 700 : 500, transition: 'all .15s' } }, a.label);
+    }));
+  const filterBar = e('div', { className: 'filters', style: { marginBottom: 22 } },
+    e('div', { className: 'filter-group', style: { minWidth: 200 } },
+      e('label', { className: 'filter-label' }, 'Buyer ', e('span', { style: { textTransform: 'none', letterSpacing: 0, color: 'var(--text-faint)' } }, '· multi')),
+      e(MultiSelect, { options: buyerOptions, selected: buyerSel, onChange: setBuyerSel, labelFn: buyerBusinessName, placeholder: 'All buyers' })),
+    e('div', { className: 'filter-group', style: { minWidth: 150 } },
+      e('label', { className: 'filter-label' }, 'Sales Rep'), repSelect),
+    e('div', { className: 'filter-group', style: { minWidth: 'auto' } },
+      e('label', { className: 'filter-label' }, 'Aging'), agingBtns),
+    e('div', { className: 'filter-group', style: { minWidth: 190 } },
+      e('label', { className: 'filter-label' }, 'Search'),
+      e('input', { type: 'text', className: 'filter-input', placeholder: 'invoice / buyer / rep…', value: q, onChange: ev => setQ(ev.target.value) })),
+    e('button', { className: 'filter-reset', onClick: () => { setBuyerSel([]); setRepSel(''); setBucketSel('all'); setQ(''); },
+      style: { marginLeft: 'auto', alignSelf: 'flex-end', background: 'var(--accent)', color: '#fff', border: 'none', fontWeight: 700, padding: '10px 22px', borderRadius: 6, cursor: 'pointer', letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: 12 } }, 'Reset'));
+
+  // ── Aging KPI grid (5 cells) ──
+  const cell = (label, value, sub, color, key, accent) => e('div', {
+    className: 'kpi' + (accent ? ' kpi-accent' : ''),
+    onClick: key ? () => setBucketSel(bucketSel === key ? 'all' : key) : undefined,
+    style: Object.assign({ cursor: key ? 'pointer' : 'default' }, color ? { borderTop: '2px solid ' + color } : {}, (key && bucketSel === key) ? { background: 'var(--bg-elev-2)' } : {})
+  }, e('div', { className: 'kpi-label' }, label), e('div', { className: 'kpi-value tabular' }, value), sub ? e('div', { className: 'kpi-sub' }, sub) : null);
+  const kpiGrid = e('div', { className: 'kpi-grid', style: { gridTemplateColumns: 'repeat(5, 1fr)' } },
+    cell('Total Outstanding', fmtMoneyFull(tot.total), fmtNum(tot.count) + ' invoices', null, null, true),
+    cell('Current', fmtMoneyFull(tot.current), pctOf(tot.current) + ' of AR', AGE[0].color, 'current'),
+    cell('31–60 days', fmtMoneyFull(tot.b3160), pctOf(tot.b3160) + ' of AR', AGE[1].color, 'b3160'),
+    cell('61–90 days', fmtMoneyFull(tot.b6190), pctOf(tot.b6190) + ' of AR', AGE[2].color, 'b6190'),
+    cell('91+ days', fmtMoneyFull(tot.b91), pctOf(tot.b91) + ' of AR', AGE[3].color, 'b91'));
+
+  // ── Aging donut + Top balances ──
+  const donutBlock = e('div', null,
+    e('div', { className: 'section-header' },
+      e('h2', { className: 'section-title' }, 'Aging ', e('em', null, 'mix')),
+      e('span', { className: 'section-meta' }, 'by bucket')),
+    e('div', { className: 'card', style: { height: 360, display: 'flex', alignItems: 'center', justifyContent: 'center' } },
+      e(ResponsiveContainer, { width: '100%', height: '100%' },
+        e(PieChart, null,
+          e(Pie, { data: agingData, dataKey: 'value', nameKey: 'name', cx: '50%', cy: '50%', innerRadius: 62, outerRadius: 110, paddingAngle: 2, stroke: 'var(--bg-elev)', strokeWidth: 2 },
+            agingData.map((d, i) => e(Cell, { key: i, fill: d.color }))),
+          e(Tooltip, { contentStyle: { background: '#fff', border: '1px solid var(--border)', borderRadius: 4, fontSize: 12 }, formatter: v => fmtMoneyFull(v) }),
+          e(Legend, { verticalAlign: 'bottom', iconType: 'square', wrapperStyle: { fontSize: 11, fontFamily: 'JetBrains Mono' } })))));
+  const topB = byBuyer.slice(0, 12);
+  const maxB = Math.max(1, ...topB.map(b => b.total));
+  const topBlock = e('div', null,
+    e('div', { className: 'section-header' },
+      e('h2', { className: 'section-title' }, 'Top ', e('em', null, 'balances')),
+      e('span', { className: 'section-meta' }, fmtNum(byBuyer.length) + ' buyers')),
+    e('div', { className: 'card' },
+      e('div', { className: 'rank-list' },
+        topB.length === 0
+          ? e('div', { style: { padding: 20, color: 'var(--text-faint)', textAlign: 'center', fontSize: 13 } }, 'No open balances')
+          : topB.map((b, i) => e('div', { key: i, className: 'rank-row' },
+              e('div', { className: 'rank-num' }, String(i + 1).padStart(2, '0')),
+              e('div', { className: 'rank-name', title: b.buyer }, buyerBusinessName(b.buyer)),
+              e('div', { className: 'rank-value' }, fmtMoneyFull(b.total)),
+              e('div', { className: 'rank-bar', style: { width: 'calc(' + (b.total / maxB * 100).toFixed(1) + '% - 80px)' } }))))));
+  const twoUp = e('section', { className: 'section' }, e('div', { className: 'grid-half' }, donutBlock, topBlock));
+
+  // ── Outstanding by rep (stacked bar) ──
+  const repChart = e('section', { className: 'section' },
+    e('div', { className: 'section-header' },
+      e('h2', { className: 'section-title' }, 'Outstanding ', e('em', null, 'by rep')),
+      e('span', { className: 'section-meta' }, fmtNum(byRep.length) + ' reps')),
+    e('div', { className: 'card', style: { height: 360 } },
+      e(ResponsiveContainer, { width: '100%', height: '100%' },
+        e(BarChart, { data: byRep, layout: 'vertical', margin: { top: 8, right: 16, left: 8, bottom: 8 } },
+          e(CartesianGrid, { stroke: 'var(--border-soft)', strokeDasharray: '2 2', horizontal: false }),
+          e(XAxis, { type: 'number', stroke: '#9d86b3', tick: { fontSize: 11, fontFamily: 'JetBrains Mono' }, tickFormatter: fmtMoney, axisLine: false, tickLine: false }),
+          e(YAxis, { type: 'category', dataKey: 'rep', stroke: '#9d86b3', tick: { fontSize: 11 }, width: 140, axisLine: false, tickLine: false }),
+          e(Tooltip, { contentStyle: { background: '#fff', border: '1px solid var(--border)', borderRadius: 4, fontSize: 12 }, formatter: (v, n) => [fmtMoneyFull(v), n] }),
+          e(Legend, { wrapperStyle: { fontSize: 11, fontFamily: 'JetBrains Mono' } }),
+          AGE.map(a => e(Bar, { key: a.key, dataKey: a.key, name: a.label, stackId: 'a', fill: a.color, radius: [0, 2, 2, 0] }))))));
+
+  // ── Open invoices table ──
+  const invTable = e('section', { className: 'section' },
+    e('div', { className: 'section-header' },
+      e('h2', { className: 'section-title' }, 'Open ', e('em', null, 'invoices')),
+      e('span', { className: 'section-meta' }, fmtNum(openSorted.length) + ' invoices · oldest first')),
+    e('div', { className: 'card', style: { padding: 0, overflow: 'hidden' } },
+      e('div', { style: { overflowX: 'auto', maxHeight: 560 } },
+        e('table', { className: 'data-table', style: { minWidth: 880 } },
+          e('thead', null, e('tr', null,
+            e('th', null, 'Invoice #'), e('th', null, 'Buyer'), e('th', null, 'Rep'),
+            e('th', null, 'Invoice'), e('th', null, 'Due'),
+            e('th', { className: 'num' }, 'Days Past'), e('th', null, 'Aging'),
+            e('th', { className: 'num' }, 'Outstanding'))),
+          e('tbody', null,
+            openSorted.length === 0
+              ? e('tr', null, e('td', { colSpan: 8, style: { padding: 20, color: 'var(--text-faint)', textAlign: 'center' } }, 'No open receivables match the filters.'))
+              : openSorted.slice(0, 300).map((o, i) => e('tr', { key: i },
+                  e('td', { className: 'font-mono', style: { color: 'var(--accent)' } }, o.invoice),
+                  e('td', { title: o.buyer }, buyerBusinessName(o.buyer)),
+                  e('td', { className: 'dim' }, o.rep),
+                  e('td', { className: 'dim font-mono' }, fmtD(o.orderDate)),
+                  e('td', { className: 'dim font-mono' }, fmtD(o.due)),
+                  e('td', { className: 'num', style: { color: bucketColor(o.bucket), fontWeight: o.daysPastDue > 30 ? 700 : 400 } }, o.daysPastDue > 0 ? o.daysPastDue + 'd' : 'Not due'),
+                  e('td', null, e('span', { style: { fontFamily: 'JetBrains Mono', fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.06em', color: bucketColor(o.bucket), border: '1px solid ' + bucketColor(o.bucket), borderRadius: 999, padding: '2px 8px', whiteSpace: 'nowrap' } }, bucketLabel(o.bucket))),
+                  e('td', { className: 'num' }, e('strong', null, fmtMoneyFull(o.net))))))))));
+
+  // Diagnostic: when nothing matches the open-status filter, surface the statuses that ARE
+  // present in the feed so an empty AR tab explains itself (and reveals unusual status labels).
+  const _statusSummary = (() => {
+    const m = {};
+    rows.forEach(r => { const s = (r.payment_status == null || r.payment_status === '') ? '(blank)' : String(r.payment_status); m[s] = (m[s] || 0) + 1; });
+    return Object.keys(m).sort((a, b) => m[b] - m[a]).map(k => k + ' \u00d7 ' + m[k]);
+  })();
+  const _arDiag = invoices.length === 0 ? e('div', { className: 'card', style: { padding: '16px 20px', marginBottom: 20, borderLeft: '3px solid #E0A24E' } },
+    e('div', { style: { fontFamily: 'Fraunces, serif', fontSize: 17, marginBottom: 8 } }, 'No open invoices in this feed'),
+    e('div', { style: { fontFamily: 'JetBrains Mono, monospace', fontSize: 11, color: 'var(--text-dim)', lineHeight: 1.7 } },
+      'AR lists invoices whose payment status is Unpaid / Partial / Overdue (and similar). ',
+      rows.length ? ('Statuses present in ' + fmtNum(rows.length) + ' rows: ' + (_statusSummary.length ? _statusSummary.join('  \u00b7  ') : 'none') + '.') : 'The feed has no rows yet.')) : null;
+  return e('div', { className: 'app ar-theme' },
+    e(Topbar, { fetchedAt: fetchedAt, rowCount: shown.length, totalCount: invoices.length }),
+    e('div', { style: { marginBottom: 6 } },
+      e('h1', { style: { fontFamily: 'Fraunces, serif', fontWeight: 400, fontSize: 30, letterSpacing: '-0.02em', margin: 0 } },
+        'Accounts ', e('em', { style: { color: 'var(--accent)', fontStyle: 'italic' } }, 'Receivable'))),
+    e('div', { style: { fontFamily: 'JetBrains Mono, monospace', fontSize: 11, color: 'var(--text-dim)', margin: '0 0 20px', letterSpacing: '0.04em' } },
+      'New Jersey · aged as of ' + fmtD(today) + ' · due = invoice date + Net 30 (or Apex due date) · outstanding = net of credits'),
+    _arDiag,
+    filterBar,
+    kpiGrid,
+    twoUp,
+    repChart,
+    invTable);
+}
+
+function InventoryView({ data }) {
+  const e = React.createElement;
+  const rows = (data.rows || []).filter(r => !r._arReport);
+  const [q, setQ] = React.useState('');
+  const [lineSel, setLineSel] = React.useState('');
+  const [metric, setMetric] = React.useState('onhand'); // 'onhand' | 'value'
+  const fetchedAt = new Date(data.fetched_at);
+  const COLORS = ['#0EB1E8', '#588BCD', '#8462AF', '#4696D5', '#E0A24E', '#D6607E', '#4CA07A', '#8A97A9'];
+
+  const built = React.useMemo(() => {
+    const soldBySku = {}, soldByName = {}, revBySku = {}, revByName = {}, activeSku = {}, activeName = {};
+    let maxT = 0;
+    const dOf = r => parseDate(r.order_date_localized_raw || r.order_date_utc_raw || r.order_date_raw || r.order_date);
+    rows.forEach(r => { const dt = dOf(r); if (dt && dt.getTime() > maxT) maxT = dt.getTime(); });
+    const WIN = 30, winStart = maxT ? maxT - WIN * 86400000 : 0;
+    const recentSku = {}, recentName = {}, listedBySku = {}, listedByName = {};
+    rows.forEach(r => {
+      const u = parseFloat(r.inventory_quantity != null ? r.inventory_quantity : (r.quantity_raw != null ? r.quantity_raw : r.quantity)) || 0;
+      const rev = typeof r.line_total_raw === 'number' ? r.line_total_raw / 100 : parseMoney(r.line_total || r.computed_sale_price || r.total);
+      const lp = parseMoney(r.product_listing_price || r.unit_price) || 0;
+      if (r.product_sku) { soldBySku[r.product_sku] = (soldBySku[r.product_sku] || 0) + u; revBySku[r.product_sku] = (revBySku[r.product_sku] || 0) + rev; if (lp > (listedBySku[r.product_sku] || 0)) listedBySku[r.product_sku] = lp; }
+      if (r.product_name) { soldByName[r.product_name] = (soldByName[r.product_name] || 0) + u; revByName[r.product_name] = (revByName[r.product_name] || 0) + rev; if (lp > (listedByName[r.product_name] || 0)) listedByName[r.product_name] = lp; }
+      const bn = (r.batch_name || '').trim();
+      if (bn) {
+        const c = String(r.batch_created_at_raw || r.batch_created_at || '');
+        if (r.product_sku) { (activeSku[r.product_sku] = activeSku[r.product_sku] || {})[bn] = c; }
+        if (r.product_name) { (activeName[r.product_name] = activeName[r.product_name] || {})[bn] = c; }
+      }
+      const dt = dOf(r);
+      if (dt && dt.getTime() >= winStart) { if (r.product_sku) recentSku[r.product_sku] = (recentSku[r.product_sku] || 0) + u; if (r.product_name) recentName[r.product_name] = (recentName[r.product_name] || 0) + u; }
+    });
+    const cat = Array.isArray(data.inventory) ? data.inventory : [];
+    return cat.map(p => {
+      const sold = p.sku && soldBySku[p.sku] != null ? soldBySku[p.sku] : (soldByName[p.name] || 0);
+      const revT = p.sku && revBySku[p.sku] != null ? revBySku[p.sku] : (revByName[p.name] || 0);
+      const unitPrice = sold > 0 ? revT / sold : 0;
+      const listedPrice = (p.sku && listedBySku[p.sku]) || listedByName[p.name] || 0;
+      const priceForValue = listedPrice > 0 ? listedPrice : unitPrice;
+      const qty = p.qty != null ? p.qty : (p.available != null ? p.available : (p.inventory != null ? p.inventory : null));
+      const recent = p.sku && recentSku[p.sku] != null ? recentSku[p.sku] : (recentName[p.name] || 0);
+      const velocity = recent / WIN;
+      let daysLeft = null;
+      if (qty != null) { if (qty <= 0) daysLeft = 0; else if (velocity > 0) daysLeft = qty / velocity; else daysLeft = null; }
+      const bmap = (p.sku && activeSku[p.sku]) ? activeSku[p.sku] : (activeName[p.name] || {});
+      const bsorted = Object.keys(bmap).sort((a, b) => String(bmap[b]).localeCompare(String(bmap[a])));
+      const nActive = p.batches > 0 ? p.batches : (bsorted.length ? 1 : 0);
+      const batchNames = bsorted.slice(0, nActive);
+      return { name: p.name || '—', line: p.line || '—', sku: p.sku || '', qty: qty, batches: p.batches || 0, batchNames: batchNames, listed: p.listed != null ? !!p.listed : (p.status ? String(p.status).toLowerCase() === 'available' : false), sold: sold, neverSold: sold <= 0, unitPrice: unitPrice, listedPrice: listedPrice, value: qty != null ? qty * unitPrice : 0, velocity: velocity, daysLeft: daysLeft };
+    });
+  }, [rows, data.inventory]);
+
+  const lines = [...new Set(built.map(p => p.line).filter(Boolean))].sort();
+  const filtered = built.filter(p => {
+    if (lineSel && p.line !== lineSel) return false;
+    if (q) { const s = (p.name + ' ' + p.sku + ' ' + p.line).toLowerCase(); if (!s.includes(q.toLowerCase())) return false; }
+    return true;
+  });
+  const inStock = filtered.filter(p => p.qty != null && p.qty > 0).sort((a, b) => (b.qty || 0) - (a.qty || 0));
+  const oos = filtered.filter(p => p.qty != null && p.qty <= 0).sort((a, b) => a.name.localeCompare(b.name));
+  const onHandTotal = filtered.reduce((s, p) => s + (p.qty || 0), 0);
+  const onHandValue = filtered.reduce((s, p) => s + (p.value || 0), 0);
+  const skus = filtered.length;
+  const listedN = filtered.filter(p => p.listed).length;
+  const outN = oos.length;
+  const lowN = filtered.filter(p => p.daysLeft != null && p.daysLeft > 0 && p.daysLeft < 14).length;
+
+  const byLine = (() => {
+    const m = {};
+    filtered.forEach(p => { const k = p.line || '—'; if (!m[k]) m[k] = { name: k, onhand: 0, value: 0, skus: 0 }; m[k].onhand += p.qty || 0; m[k].value += p.value || 0; m[k].skus++; });
+    return Object.values(m).sort((a, b) => b[metric] - a[metric]);
+  })();
+
+  const mbtn = (id, label) => e('button', { key: id, onClick: () => setMetric(id), style: { padding: '4px 12px', fontSize: 11, fontFamily: 'JetBrains Mono', cursor: 'pointer', borderRadius: 4, border: '1px solid ' + (metric === id ? '#0EB1E8' : '#e3e9f1'), background: metric === id ? 'rgba(14,177,232,0.12)' : '#ffffff', color: metric === id ? '#0E86C4' : '#566274' } }, label);
+
+  const filterBar = e('div', { className: 'filters', style: { marginBottom: 24 } },
+    e('div', { className: 'filter-group', style: { minWidth: 200 } },
+      e('label', { className: 'filter-label' }, 'Search'),
+      e('input', { type: 'text', className: 'filter-input', placeholder: 'product / sku / line…', value: q, onChange: ev => setQ(ev.target.value) })),
+    e('div', { className: 'filter-group', style: { minWidth: 160 } },
+      e('label', { className: 'filter-label' }, 'Product Line'),
+      e('select', { className: 'filter-select', value: lineSel, onChange: ev => setLineSel(ev.target.value) },
+        e('option', { value: '' }, 'All lines'), lines.map(l => e('option', { key: l, value: l }, l)))),
+    e('button', { className: 'filter-reset', onClick: () => { setQ(''); setLineSel(''); }, style: { marginLeft: 'auto', alignSelf: 'flex-end', background: 'var(--accent)', color: '#fff', border: 'none', fontWeight: 700, padding: '10px 22px', borderRadius: 6, cursor: 'pointer', letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: 12 } }, 'Reset'));
+
+  const kpis = e('div', { className: 'kpi-grid' },
+    e(Kpi, { label: 'Units On Hand', value: fmtNum(Math.round(onHandTotal)), sub: fmtNum(skus) + ' SKUs · ' + fmtMoneyFull(onHandValue), accent: true }),
+    e(Kpi, { label: 'On-Hand Value', value: fmtMoneyFull(onHandValue), sub: fmtNum(listedN) + ' listed' }),
+    e(Kpi, { label: 'Out of Stock', value: fmtNum(outN), sub: 'SKUs · 0 on hand' }),
+    e(Kpi, { label: 'Low Stock', value: fmtNum(lowN), sub: '< 14 days of supply' }));
+
+  const byLineChart = e('section', { className: 'section' },
+    e('div', { className: 'section-header' },
+      e('h2', { className: 'section-title' }, (metric === 'value' ? 'Value ' : 'On hand '), e('em', null, 'by product line')),
+      e('div', { style: { display: 'flex', gap: 6 } }, mbtn('onhand', 'On hand'), mbtn('value', 'Value'))),
+    e('div', { className: 'card', style: { height: 340 } },
+      e(ResponsiveContainer, { width: '100%', height: '100%' },
+        e(BarChart, { data: byLine, margin: { top: 12, right: 16, left: 0, bottom: 40 } },
+          e(CartesianGrid, { stroke: '#e7ecf2', strokeDasharray: '2 2', vertical: false }),
+          e(XAxis, { dataKey: 'name', stroke: '#a7b2c0', tick: { fontSize: 10 }, tickLine: false, axisLine: { stroke: '#e7ecf2' }, interval: 0, angle: -18, textAnchor: 'end', height: 70 }),
+          e(YAxis, { stroke: '#a7b2c0', tick: { fontSize: 11, fontFamily: 'JetBrains Mono' }, tickFormatter: metric === 'value' ? fmtMoney : fmtNum, tickLine: false, axisLine: false }),
+          e(Tooltip, { contentStyle: { background: '#fff', border: '1px solid var(--border)', borderRadius: 4, fontSize: 12 }, formatter: v => metric === 'value' ? fmtMoneyFull(v) : fmtNum(Math.round(v)) }),
+          e(Bar, { dataKey: metric, radius: [3, 3, 0, 0] }, byLine.map((d, i) => e(Cell, { key: i, fill: COLORS[i % COLORS.length] })))))));
+
+  const lineCards = e('section', { className: 'section' },
+    e('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16 } },
+      byLine.map((L, i) => e('div', { key: i, className: 'card', style: { borderTop: '3px solid ' + COLORS[i % COLORS.length] } },
+        e('div', { style: { fontFamily: 'Fraunces, serif', fontSize: 16, color: COLORS[i % COLORS.length] } }, L.name),
+        e('div', { className: 'kpi-sub' }, fmtNum(L.skus) + ' SKUs'),
+        e('div', { style: { marginTop: 12, display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' } }, e('span', { className: 'kpi-label' }, 'On hand'), e('strong', { style: { fontFamily: 'JetBrains Mono' } }, fmtNum(Math.round(L.onhand)))),
+        e('div', { style: { marginTop: 6, display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' } }, e('span', { className: 'kpi-label' }, 'Value'), e('strong', { style: { fontFamily: 'JetBrains Mono' } }, fmtMoney(L.value)))))));
+
+  const productSection = e('section', { className: 'section' },
+    e('div', { className: 'section-header' },
+      e('h2', { className: 'section-title' }, 'Product ', e('em', null, 'inventory')),
+      e('span', { className: 'section-meta' }, fmtNum(inStock.length) + ' SKUs in stock')),
+    e(InventoryTable, { list: inStock }));
+
+  const oosSection = e('section', { className: 'section' },
+    e('div', { className: 'section-header' },
+      e('h2', { className: 'section-title' }, 'Out of ', e('em', null, 'stock')),
+      e('span', { className: 'section-meta' }, fmtNum(oos.length) + ' SKUs · 0 on hand')),
+    e('div', { className: 'card', style: { padding: 0, overflow: 'hidden' } },
+      e('div', { style: { overflowX: 'auto', maxHeight: 420 } },
+        e('table', { className: 'data-table' },
+          e('thead', null, e('tr', null,
+            e('th', null, 'Product'), e('th', null, 'Line'), e('th', null, 'SKU'),
+            e('th', { className: 'num' }, 'Units Sold'), e('th', { className: 'num' }, 'Batches'), e('th', null, 'Status'))),
+          e('tbody', null,
+            oos.length === 0
+              ? e('tr', null, e('td', { colSpan: 6, style: { padding: 20, color: 'var(--text-faint)', textAlign: 'center' } }, 'Nothing out of stock — every SKU has units on hand'))
+              : oos.map((p, i) => e('tr', { key: i },
+                  e('td', null, p.name),
+                  e('td', { className: 'dim' }, p.line),
+                  e('td', { className: 'dim font-mono', style: { fontSize: 11 } }, p.sku || '—'),
+                  e('td', { className: 'num dim' }, fmtNum(Math.round(p.sold))),
+                  e('td', { className: 'num dim' }, p.batches || '—'),
+                  e('td', null, e('span', { style: { fontFamily: 'JetBrains Mono', fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--rose)', border: '1px solid var(--rose)', borderRadius: 999, padding: '2px 8px' } }, 'Out')))))))));
+
+  return e('div', { className: 'app' },
+    e(Topbar, { fetchedAt: fetchedAt, rowCount: inStock.length, totalCount: built.length }),
+    e('div', { style: { marginBottom: 20 } },
+      e('h1', { style: { fontFamily: 'Fraunces, serif', fontWeight: 400, fontSize: 30, letterSpacing: '-0.02em', margin: 0 } }, 'Inventory'),
+      e('div', { style: { fontFamily: 'JetBrains Mono, monospace', fontSize: 11, color: 'var(--text-dim)', marginTop: 6 } }, 'New Jersey · Chill Medicated · live from Apex inventory')),
+    filterBar, kpis, byLineChart, lineCards, productSection, oosSection);
+}
+
+// ── Prospecting tab (New Jersey) ───────────────────────────────────
+// As-of-today account development, independent of the dashboard date filter.
+// Three lenses:
+//   • New / potential buyers — licensed retailers we've never invoiced
+//     (needs prospects.json; matched to our book on license number).
+//   • Lapsed buyers — bought before, gone quiet (31–60 / 61–90 / 90+ days).
+//   • Growth opportunities — active buyers trending down, or carrying only a
+//     narrow slice of the catalog who could take more lines.
+function Prospecting({ data }) {
+  const e = React.createElement;
+  const normLic = s => String(s || '').trim().toUpperCase();
+  const DAY = 86400000;
+
+  // Buyer activity is measured on the current Apex book (live rows only), never
+  // the 2024 historical backfill or the synthetic AR-report rows.
+  const liveRows = (data._liveRows && data._liveRows.length ? data._liveRows : (data.rows || []))
+    .filter(r => !r._arReport)
+    .filter(r => String(r.is_sample || '').toLowerCase() !== 'yes'
+      && !/samp(le)?/i.test(String(r.product_name || '')));
+
+  const rowRev = r => {
+    if (typeof r.line_total_raw === 'number') return r.line_total_raw / 100;
+    if (typeof r.order_price === 'number') return r.order_price / 100;
+    if (r.gross != null) {
+      const g = parseFloat(r.gross) || 0;
+      const complete = String(r.order_status || '').toLowerCase() === 'complete';
+      return g - (complete ? (parseFloat(r.discount) || 0) : 0);
+    }
+    return parseMoney(r.line_total || r.computed_sale_price || r.total || r.revenue);
+  };
+  const rowDate = r => parseDate(r.order_date_localized_raw || r.order_date_utc_raw
+    || r.order_date_raw || r.order_date_localized || r.order_date_utc || r.order_date);
+
+  // Category universe present in the catalog (excludes AR/blank).
+  const catUniverse = useMemo(() => {
+    const s = new Set();
+    liveRows.forEach(r => {
+      const c = r.product_category_name || r.product_category;
+      if (c && !/^AR /.test(String(c))) s.add(String(c));
+    });
+    return [...s].sort();
+  }, [data]);
+
+  // Per-buyer rollup, keyed by license (fallback to name).
+  const buyers = useMemo(() => {
+    const m = new Map();
+    let latest = 0;
+    liveRows.forEach(r => {
+      const lic = normLic(r.buyer_license);
+      const key = lic || ('name:' + (r.buyer_name || '?'));
+      let b = m.get(key);
+      if (!b) { b = { key, license: lic, name: r.buyer_name || '—', city: r.buyer_city || '',
+        rep: '', rev: 0, orders: new Set(), cats: new Set(), first: null, last: null,
+        rev30: 0, revPrev30: 0 }; m.set(key, b); }
+      const rev = rowRev(r) || 0;
+      b.rev += rev;
+      if (r.order_number) b.orders.add(r.order_number);
+      const c = r.product_category_name || r.product_category;
+      if (c && !/^AR /.test(String(c))) b.cats.add(String(c));
+      if (!b.rep) { const rp = Array.isArray(r.sales_reps_display) && r.sales_reps_display.length
+        ? r.sales_reps_display.filter(Boolean).join(', ') : (r.sales_reps || ''); if (rp) b.rep = String(rp); }
+      if (!b.city && r.buyer_city) b.city = r.buyer_city;
+      const d = rowDate(r);
+      if (d) { const t = d.getTime();
+        if (!b.first || t < b.first) b.first = t;
+        if (!b.last || t > b.last) b.last = t;
+        if (t > latest) latest = t; }
+    });
+    // As-of anchor: newest order in the data (≈ today in daily-refreshed
+    // production; stays meaningful if the export is a few days stale).
+    const asOf = latest ? new Date(latest) : new Date();
+    const asOfT = asOf.getTime();
+    m.forEach(b => {
+      b.orderCount = b.orders.size;
+      b.gap = b.last ? Math.floor((asOfT - b.last) / DAY) : null;
+      b.catCount = b.cats.size;
+      b.missing = catUniverse.filter(c => !b.cats.has(c));
+    });
+    // Recent vs prior 30-day windows for trend.
+    liveRows.forEach(r => {
+      const d = rowDate(r); if (!d) return;
+      const age = Math.floor((asOfT - d.getTime()) / DAY);
+      const lic = normLic(r.buyer_license);
+      const b = m.get(lic || ('name:' + (r.buyer_name || '?')));
+      if (!b) return;
+      const rev = rowRev(r) || 0;
+      if (age >= 0 && age < 30) b.rev30 += rev;
+      else if (age >= 30 && age < 60) b.revPrev30 += rev;
+    });
+    return { list: [...m.values()], asOf };
+  }, [data]);
+
+  const asOf = buyers.asOf;
+  const fmtD = d => d ? ((d.getMonth() + 1) + '/' + String(d.getDate()).padStart(2, '0') + '/' + d.getFullYear()) : '—';
+  const exportXls = (filename, title, headers, rows2d) => {
+    if (!rows2d.length) { window.alert('Nothing to download in this view.'); return; }
+    const esc = v => String(v == null ? '' : v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const thead = '<tr>' + headers.map(h => '<th>' + esc(h) + '</th>').join('') + '</tr>';
+    const body = rows2d.map(r => '<tr>' + r.map(c => '<td>' + esc(c) + '</td>').join('') + '</tr>').join('');
+    const html = '<html xmlns:x="urn:schemas-microsoft-com:office:excel"><head><meta charset="utf-8"></head><body>'
+      + '<table><tr><td><b>' + esc(title) + '</b></td></tr><tr><td>Generated ' + esc(new Date().toLocaleString()) + '</td></tr></table><br>'
+      + '<table border="1"><thead>' + thead + '</thead><tbody>' + body + '</tbody></table></body></html>';
+    __dl(filename, new Blob([html], { type: 'application/vnd.ms-excel' }));
+  };
+  const dlBtn = onClick => e('button', { className: 'date-preset', onClick: onClick, title: 'Download this view as Excel' }, '⬇ Excel');
+  const normName = s => String(s || '').trim().toLowerCase().replace(/\s+/g, ' ');
+  // Match new-vs-existing on license when present (Apex / MI LeafLink), otherwise
+  // on buyer name. NJ's LeafLink feed carries no license, but its buyer names come
+  // from the same LeafLink customer directory a prospect list does, so name
+  // matching is exact there.
+  const ourBook = useMemo(() => {
+    const lics = new Set(), names = new Set();
+    (data.rows || []).forEach(r => {
+      const l = normLic(r.buyer_license); if (l) lics.add(l);
+      const n = normName(r.buyer_name); if (n) names.add(n);
+    });
+    return { lics, names };
+  }, [data]);
+
+  const [section, setSection] = React.useState('new');
+  const [q, setQ] = React.useState('');
+  const [bucket, setBucket] = React.useState('all'); // lapsed bucket
+
+  // ── Derived lists ──
+  const prospects = useMemo(() => {
+    const recs = (data.prospects && Array.isArray(data.prospects.records)) ? data.prospects.records : null;
+    if (!recs) return null;
+    const seen = new Set();
+    return recs.filter(p => {
+      const lic = normLic(p.license);
+      const type = String(p.type || '');
+      const status = String(p.status || '');
+      if (status && !/active/i.test(status)) return false;
+      if (type && !/retail|treatment/i.test(type)) return false;
+      const nm = normName(p.name);
+      if (!lic && !nm) return false;                    // need some identifier
+      if (lic && ourBook.lics.has(lic)) return false;   // already a customer (by license)
+      if (nm && ourBook.names.has(nm)) return false;    // already a customer (by name)
+      const key = lic || nm;
+      if (seen.has(key)) return false;                  // dedupe
+      seen.add(key);
+      return true;
+    }).map(p => ({ name: p.name || '—', license: normLic(p.license), city: p.city || '',
+      county: p.county || '', address: p.address || '', zip: p.zip || '',
+      phone: p.phone || '', email: p.email || '', website: p.website || '' }))
+      .sort((a, b) => (a.city || '').localeCompare(b.city || '') || a.name.localeCompare(b.name));
+  }, [data, ourBook]);
+
+  const lapsed = useMemo(() => buyers.list
+    .filter(b => b.gap != null && b.gap > 30)
+    .map(b => ({ ...b, bucket: b.gap <= 60 ? 'b3160' : b.gap <= 90 ? 'b6190' : 'b91' }))
+    .sort((a, b) => b.rev - a.rev), [buyers]);
+
+  const growth = useMemo(() => buyers.list
+    .filter(b => b.gap != null && b.gap <= 90)  // still reasonably active
+    .map(b => {
+      const declining = b.revPrev30 > 0 && b.rev30 < b.revPrev30 * 0.75;
+      const trend = b.revPrev30 > 0 ? (b.rev30 - b.revPrev30) / b.revPrev30 : null;
+      const narrow = b.catCount > 0 && b.catCount <= 2;
+      return { ...b, declining, trend, narrow };
+    })
+    .filter(b => b.declining || b.narrow)
+    .sort((a, b) => b.rev - a.rev), [buyers]);
+
+  // ── Section switcher ──
+  const segBtn = (id, label, n) => {
+    const on = section === id;
+    return e('button', { key: id, type: 'button', onClick: () => { setSection(id); setQ(''); },
+      style: { fontFamily: 'JetBrains Mono, monospace', fontSize: 12, cursor: 'pointer', padding: '9px 16px',
+        borderRadius: 9, border: '1px solid ' + (on ? 'var(--accent)' : '#e3e9f1'),
+        color: on ? '#fff' : 'var(--text-dim)', background: on ? 'var(--accent)' : '#fff',
+        fontWeight: on ? 700 : 500, transition: 'all .15s' } },
+      label, n != null ? e('span', { style: { opacity: 0.7, marginLeft: 7 } }, n) : null);
+  };
+
+  const cell = (label, value, sub, color) => e('div', { className: 'kpi',
+    style: color ? { borderTop: '2px solid ' + color } : {} },
+    e('div', { className: 'kpi-label' }, label),
+    e('div', { className: 'kpi-value tabular' }, value),
+    sub ? e('div', { className: 'kpi-sub' }, sub) : null);
+
+  const searchBox = ph => e('div', { className: 'filter-group', style: { minWidth: 220, marginLeft: 'auto' } },
+    e('label', { className: 'filter-label' }, 'Search'),
+    e('input', { type: 'text', className: 'filter-input', placeholder: ph, value: q,
+      onChange: ev => setQ(ev.target.value) }));
+
+  // Pagination hoisted to top level so hook order is stable across section
+  // switches (Rules of Hooks): compute each section's filtered list, then ONE pager.
+  const _newFlt = prospects
+    ? (q ? prospects.filter(p => (p.name + ' ' + p.city + ' ' + p.license + ' ' + p.county + ' ' + (p.phone || '') + ' ' + (p.email || '')).toLowerCase().includes(q.toLowerCase())) : prospects)
+    : [];
+  let _lapList = bucket === 'all' ? lapsed : lapsed.filter(b => b.bucket === bucket);
+  if (q) _lapList = _lapList.filter(b => (buyerBusinessName(b.name) + ' ' + b.city + ' ' + b.rep).toLowerCase().includes(q.toLowerCase()));
+  const _groList = q ? growth.filter(b => (buyerBusinessName(b.name) + ' ' + b.city + ' ' + b.rep).toLowerCase().includes(q.toLowerCase())) : growth;
+  const _activeLen = section === 'new' ? _newFlt.length : section === 'lapsed' ? _lapList.length : _groList.length;
+  const pg = usePager(_activeLen, 50);
+
+  // ── NEW BUYERS ──
+  let body;
+  if (section === 'new') {
+    if (!prospects) {
+      body = e('section', { className: 'section' },
+        e('div', { className: 'card', style: { padding: 28, textAlign: 'center' } },
+          e('div', { style: { fontSize: 15, fontWeight: 700, marginBottom: 8 } }, 'No prospect list loaded yet'),
+          e('div', { style: { color: 'var(--text-dim)', fontSize: 13, lineHeight: 1.6, maxWidth: 620, margin: '0 auto' } },
+            'Add a ', e('code', null, 'prospects.json'), ' file to this dashboard folder — a list of licensed ',
+            'New Jersey retailers. This tab compares it against your book (by license number) and shows every ',
+            'licensed dispensary you have not yet invoiced. Generate it from your state regulator\'s ',
+            'licensed-business export.')));
+    } else {
+      const flt = _newFlt;
+      const cities = new Set(prospects.map(p => p.city).filter(Boolean));
+      body = e(React.Fragment, null,
+        e('div', { className: 'kpi-grid', style: { gridTemplateColumns: 'repeat(3, 1fr)', marginBottom: 20 } },
+          cell('Untapped retailers', fmtNum(prospects.length), 'licensed · never invoiced', 'var(--accent)'),
+          cell('Towns covered', fmtNum(cities.size), 'distinct municipalities'),
+          cell('Already customers', fmtNum(Math.max(ourBook.lics.size, ourBook.names.size)), 'accounts in your book')),
+        e('div', { className: 'filters', style: { marginBottom: 16 } }, searchBox('name / town / license…')),
+        e('section', { className: 'section' },
+          e('div', { className: 'section-header' },
+            e('h2', { className: 'section-title' }, 'New / potential ', e('em', null, 'buyers')),
+            e('div', { style: { display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' } },
+              e('span', { className: 'section-meta' }, fmtNum(flt.length) + ' prospects · A→Z by town'),
+              dlBtn(() => exportXls('Chill_NJ_Prospects_New.xls', 'Chill Medicated NJ \u2014 New / Potential Buyers',
+                ['Dispensary', 'Town', 'County', 'License #', 'Address', 'Phone', 'Email', 'Website'],
+                flt.map(p => [p.name, p.city, p.county, p.license, p.address, p.phone, p.email, p.website]))))),
+          e('div', { className: 'card', style: { padding: 0, overflow: 'hidden' } },
+            e('div', { style: { overflowX: 'auto', maxHeight: 620 } },
+              e('table', { className: 'data-table', style: { minWidth: 1200 } },
+                e('thead', null, e('tr', null,
+                  e('th', null, 'Dispensary'), e('th', null, 'Town'), e('th', null, 'County'),
+                  e('th', null, 'License #'), e('th', null, 'Address'),
+                  e('th', null, 'Phone'), e('th', null, 'Email'), e('th', null, 'Website'))),
+                e('tbody', null,
+                  flt.length === 0
+                    ? e('tr', null, e('td', { colSpan: 8, style: { padding: 20, textAlign: 'center', color: 'var(--text-faint)' } }, 'No prospects match your search.'))
+                    : flt.slice(pg.start, pg.end).map((p, i) => e('tr', { key: i },
+                        e('td', { style: { whiteSpace: 'normal', minWidth: 200, fontWeight: 600 } }, p.name),
+                        e('td', null, p.city || '—'),
+                        e('td', { className: 'dim' }, p.county || '—'),
+                        e('td', { className: 'font-mono', style: { color: 'var(--accent)', fontSize: 11 } }, p.license),
+                        e('td', { className: 'dim', style: { whiteSpace: 'normal', minWidth: 200, fontSize: 12 } }, p.address || '—'),
+                        e('td', { className: 'font-mono', style: { fontSize: 11, whiteSpace: 'nowrap' } }, p.phone ? e('a', { href: 'tel:' + p.phone, style: { color: 'var(--accent)' } }, p.phone) : '—'),
+                        e('td', { style: { fontSize: 11 } }, p.email ? e('a', { href: 'mailto:' + p.email, style: { color: 'var(--accent)' } }, p.email) : '—'),
+                        e('td', { style: { fontSize: 11 } }, p.website ? e('a', { href: (/^https?:\/\//.test(p.website) ? p.website : 'https://' + p.website), target: '_blank', rel: 'noopener', style: { color: 'var(--accent)' } }, 'Visit ↗') : '—'))))))),
+          e(Pager, { pager: pg, total: flt.length, unit: 'prospects' })));
+    }
+  }
+
+  // ── LAPSED ──
+  if (section === 'lapsed') {
+    const BK = [
+      { key: 'b3160', label: '31–60 days', color: '#caa11e' },
+      { key: 'b6190', label: '61–90 days', color: '#e07b2a' },
+      { key: 'b91', label: '90+ days', color: '#d6433f' }
+    ];
+    const cnt = k => lapsed.filter(b => b.bucket === k).length;
+    const sumRev = k => lapsed.filter(b => k === 'all' || b.bucket === k).reduce((s, b) => s + b.rev, 0);
+    const list = _lapList;
+    const bkColor = k => (BK.find(x => x.key === k) || {}).color || 'var(--text-dim)';
+    const bkLabel = k => (BK.find(x => x.key === k) || {}).label || k;
+    const chip = (id, label, color) => {
+      const on = bucket === id;
+      return e('button', { key: id, type: 'button', onClick: () => setBucket(on ? 'all' : id),
+        style: { fontFamily: 'JetBrains Mono, monospace', fontSize: 12, cursor: 'pointer', padding: '8px 15px',
+          borderRadius: 9, border: '1px solid ' + color, color: on ? '#fff' : color,
+          background: on ? color : '#fff', fontWeight: on ? 700 : 500 } }, label);
+    };
+    body = e(React.Fragment, null,
+      e('div', { className: 'kpi-grid', style: { gridTemplateColumns: 'repeat(4, 1fr)', marginBottom: 20 } },
+        cell('At risk (all lapsed)', fmtNum(lapsed.length), fmtMoney(sumRev('all')) + ' lifetime value', 'var(--accent)'),
+        cell('Quiet · 31–60', fmtNum(cnt('b3160')), fmtMoney(sumRev('b3160')), BK[0].color),
+        cell('Slipping · 61–90', fmtNum(cnt('b6190')), fmtMoney(sumRev('b6190')), BK[1].color),
+        cell('Lapsed · 90+', fmtNum(cnt('b91')), fmtMoney(sumRev('b91')), BK[2].color)),
+      e('div', { className: 'filters', style: { marginBottom: 16, alignItems: 'flex-end' } },
+        e('div', { className: 'filter-group', style: { minWidth: 'auto' } },
+          e('label', { className: 'filter-label' }, 'Bucket'),
+          e('div', { style: { display: 'flex', gap: 6, flexWrap: 'wrap' } }, BK.map(b => chip(b.key, b.label, b.color)))),
+        searchBox('buyer / town / rep…')),
+      e('section', { className: 'section' },
+        e('div', { className: 'section-header' },
+          e('h2', { className: 'section-title' }, 'Lapsed ', e('em', null, 'buyers')),
+          e('div', { style: { display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' } },
+            e('span', { className: 'section-meta' }, fmtNum(list.length) + ' buyers · highest value first · as of ' + fmtD(asOf)),
+            dlBtn(() => exportXls('Chill_NJ_Lapsed_Buyers.xls', 'Chill Medicated NJ \u2014 Lapsed Buyers (as of ' + fmtD(asOf) + ')',
+              ['Buyer', 'Town', 'Last order', 'Days quiet', 'Lifetime value', 'Orders', 'Avg order', 'Rep'],
+              list.map(b => [buyerBusinessName(b.name), b.city, fmtD(b.last ? new Date(b.last) : null), b.gap, b.rev.toFixed(2), b.orderCount, (b.orderCount ? b.rev / b.orderCount : 0).toFixed(2), b.rep]))))),
+        e('div', { className: 'card', style: { padding: 0, overflow: 'hidden' } },
+          e('div', { style: { overflowX: 'auto', maxHeight: 620 } },
+            e('table', { className: 'data-table', style: { minWidth: 940 } },
+              e('thead', null, e('tr', null,
+                e('th', null, 'Buyer'), e('th', null, 'Town'), e('th', null, 'Last order'),
+                e('th', { className: 'num' }, 'Days quiet'), e('th', { className: 'num' }, 'Lifetime value'),
+                e('th', { className: 'num' }, 'Orders'), e('th', { className: 'num' }, 'Avg order'), e('th', null, 'Rep'))),
+              e('tbody', null,
+                list.length === 0
+                  ? e('tr', null, e('td', { colSpan: 8, style: { padding: 20, textAlign: 'center', color: 'var(--text-faint)' } }, 'No lapsed buyers in this bucket.'))
+                  : list.slice(pg.start, pg.end).map((b, i) => e('tr', { key: i },
+                      e('td', { style: { whiteSpace: 'normal', minWidth: 190, fontWeight: 600 } }, buyerBusinessName(b.name)),
+                      e('td', null, b.city || '—'),
+                      e('td', { className: 'dim font-mono' }, fmtD(b.last ? new Date(b.last) : null)),
+                      e('td', { className: 'num', style: { color: bkColor(b.bucket), fontWeight: 700 } }, b.gap),
+                      e('td', { className: 'num' }, e('strong', null, fmtMoneyFull(b.rev))),
+                      e('td', { className: 'num dim' }, b.orderCount),
+                      e('td', { className: 'num dim' }, fmtMoneyFull(b.orderCount ? b.rev / b.orderCount : 0)),
+                      e('td', { className: 'dim' }, b.rep || '—'))))))),
+        e(Pager, { pager: pg, total: list.length, unit: 'buyers' })));
+  }
+
+  // ── GROWTH ──
+  if (section === 'growth') {
+    const declineN = growth.filter(b => b.declining).length;
+    const narrowN = growth.filter(b => b.narrow).length;
+    const list = _groList;
+    const badge = (txt, color) => e('span', { style: { display: 'inline-block', fontSize: 10.5,
+      fontFamily: 'JetBrains Mono, monospace', padding: '2px 7px', borderRadius: 20, marginRight: 5,
+      border: '1px solid ' + color, color: color, fontWeight: 700 } }, txt);
+    const trendCell = b => b.trend == null
+      ? e('span', { className: 'dim' }, 'new')
+      : e('span', { style: { color: b.trend < 0 ? 'var(--rose)' : 'var(--sage, #2e9e57)', fontWeight: 700 } },
+          (b.trend > 0 ? '+' : '') + Math.round(b.trend * 100) + '%');
+    body = e(React.Fragment, null,
+      e('div', { className: 'kpi-grid', style: { gridTemplateColumns: 'repeat(3, 1fr)', marginBottom: 20 } },
+        cell('Opportunities', fmtNum(growth.length), 'active buyers to grow', 'var(--accent)'),
+        cell('Trending down', fmtNum(declineN), 'last 30d vs prior 30d', '#d6433f'),
+        cell('Narrow assortment', fmtNum(narrowN), '≤2 of ' + catUniverse.length + ' categories', '#caa11e')),
+      e('div', { className: 'filters', style: { marginBottom: 16 } }, searchBox('buyer / town / rep…')),
+      e('section', { className: 'section' },
+        e('div', { className: 'section-header' },
+          e('h2', { className: 'section-title' }, 'Growth ', e('em', null, 'opportunities')),
+          e('div', { style: { display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' } },
+            e('span', { className: 'section-meta' }, fmtNum(list.length) + ' buyers · highest value first · as of ' + fmtD(asOf)),
+            dlBtn(() => exportXls('Chill_NJ_Growth_Opportunities.xls', 'Chill Medicated NJ \u2014 Growth Opportunities (as of ' + fmtD(asOf) + ')',
+              ['Buyer', 'Town', 'Signal', 'Last 30d', 'Prior 30d', 'Trend', 'Lines', 'Missing lines', 'Rep'],
+              list.map(b => [buyerBusinessName(b.name), b.city, [b.declining ? 'Declining' : '', b.narrow ? 'Narrow' : ''].filter(Boolean).join(' + '), b.rev30.toFixed(2), b.revPrev30.toFixed(2), (b.trend == null ? 'new' : Math.round(b.trend * 100) + '%'), b.catCount + '/' + catUniverse.length, b.missing.join(', '), b.rep]))))),
+        e('div', { className: 'card', style: { padding: 0, overflow: 'hidden' } },
+          e('div', { style: { overflowX: 'auto', maxHeight: 620 } },
+            e('table', { className: 'data-table', style: { minWidth: 1040 } },
+              e('thead', null, e('tr', null,
+                e('th', null, 'Buyer'), e('th', null, 'Town'), e('th', null, 'Signal'),
+                e('th', { className: 'num' }, 'Last 30d'), e('th', { className: 'num' }, 'Prior 30d'),
+                e('th', { className: 'num' }, 'Trend'), e('th', { className: 'num' }, 'Lines'),
+                e('th', null, 'Missing lines'), e('th', null, 'Rep'))),
+              e('tbody', null,
+                list.length === 0
+                  ? e('tr', null, e('td', { colSpan: 9, style: { padding: 20, textAlign: 'center', color: 'var(--text-faint)' } }, 'No growth opportunities match your search.'))
+                  : list.slice(pg.start, pg.end).map((b, i) => e('tr', { key: i },
+                      e('td', { style: { whiteSpace: 'normal', minWidth: 180, fontWeight: 600 } }, buyerBusinessName(b.name)),
+                      e('td', null, b.city || '—'),
+                      e('td', { style: { whiteSpace: 'nowrap' } },
+                        b.declining ? badge('↓ Declining', '#d6433f') : null,
+                        b.narrow ? badge('Narrow', '#caa11e') : null),
+                      e('td', { className: 'num dim' }, fmtMoneyFull(b.rev30)),
+                      e('td', { className: 'num dim' }, fmtMoneyFull(b.revPrev30)),
+                      e('td', { className: 'num' }, trendCell(b)),
+                      e('td', { className: 'num', style: { fontWeight: 700 } }, b.catCount + '/' + catUniverse.length),
+                      e('td', { className: 'dim', style: { whiteSpace: 'normal', minWidth: 190, fontSize: 11.5 } },
+                        b.missing.length ? b.missing.join(', ') : '— full range'),
+                      e('td', { className: 'dim' }, b.rep || '—'))))))),
+        e(Pager, { pager: pg, total: list.length, unit: 'buyers' })));
+  }
+
+  return e('div', { className: 'app' },
+    e(Topbar, { fetchedAt: (data.fetched_at ? new Date(data.fetched_at) : new Date()),
+      rowCount: buyers.list.length, totalCount: buyers.list.length }),
+    e('div', { style: { marginBottom: 6 } },
+      e('h1', { style: { fontFamily: 'Fraunces, serif', fontWeight: 400, fontSize: 30, letterSpacing: '-0.02em', margin: 0 } },
+        'Prospecting ', e('em', { style: { color: 'var(--accent)', fontStyle: 'italic' } }, '& growth'))),
+    e('div', { style: { fontFamily: 'JetBrains Mono, monospace', fontSize: 11, color: 'var(--text-dim)', margin: '0 0 20px', letterSpacing: '0.04em' } },
+      'New Jersey · account development · as of ' + fmtD(asOf) + ' · independent of the date filter'),
+    e('div', { style: { display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 22 } },
+      segBtn('new', 'New / potential', prospects ? fmtNum(prospects.length) : null),
+      segBtn('lapsed', 'Lapsed', fmtNum(lapsed.length)),
+      segBtn('growth', 'Growth', fmtNum(growth.length))),
+    body);
+}
+
+function App() {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [stale, setStale] = useState(null);
+  const [tab, setTab] = useState('sales'); // 'sales' | 'ar'
+  const [filters, setFilters] = useState({
+    from: '',
+    to: '',
+    brand: '',
+    buyer: [],
+    rep: '',
+    state: '',
+    status: '',
+    invoice: '',
+    productLine: '',
+    product: '',
+    excludeSamples: false,
+    cogsRatio: 0.45
+  });
+  // Data loader.
+  //
+  // GitHub rate-limits raw.githubusercontent.com and answers 429 "Too Many
+  // Requests" if a page fetches too often. Three things here keep us under it:
+  //
+  //   1. POLL EVERY 10 MINUTES, not every 60s. The scraper only commits about
+  //      every 10 minutes, so a one-minute poll re-downloaded megabytes to find
+  //      the same bytes nine times out of ten.
+  //   2. NO CACHE-BUSTING QUERY STRING. `?t=` + Date.now() made every request a
+  //      guaranteed cache miss. raw.githubusercontent sends max-age=300, so
+  //      normal caching removes most requests outright and a revalidate costs
+  //      a 304 with no body.
+  //   3. BACK OFF ON 429. Retrying a rate-limited host on the same schedule
+  //      only deepens the block. Each 429 doubles the wait, up to an hour.
+  //
+  // A failed refresh also no longer wipes the screen: once data has loaded, a
+  // later failure keeps the figures and flags them as stale instead of showing
+  // the "No data yet" card.
+  const POLL_MS = 10 * 60 * 1000;
+  const MAX_BACKOFF_MS = 60 * 60 * 1000;
+  useEffect(() => {
+    let cancelled = false;
+    let timer = null;
+    let backoff = 0;
+    const BASE = 'https://raw.githubusercontent.com/chill-medicatedhub/apex-dashboard-newjersey/refs/heads/main/';
+    const grab = name => fetch(BASE + name, { cache: 'default' }).then(r => {
+      if (r.status === 429) {
+        const e = new Error('GitHub is rate-limiting requests for this network (HTTP 429). The dashboard will retry automatically.');
+        e.rateLimited = true;
+        throw e;
+      }
+      return r;
+    });
+    const schedule = ms => {
+      if (cancelled) return;
+      clearTimeout(timer);
+      timer = setTimeout(load, ms);
+    };
+    const load = () => {
+      Promise.all([
+        grab('sales_data.json').then(r => {
+          if (!r.ok) throw new Error('Could not load sales_data.json (HTTP ' + r.status + ')');
+          return r.json();
+        }),
+        // Historical backfill (2024 LeafLink). Optional: if the file is missing
+        // or fails to parse, fall back to live-only instead of breaking. A 429
+        // still propagates, so the whole load backs off rather than silently
+        // dropping history.
+        grab('historical_data.json').then(r => r.ok ? r.json() : { rows: [] })
+          .catch(e => { if (e.rateLimited) throw e; return { rows: [] }; }),
+        // Prospect list (licensed retailers). Optional: powers the New/potential buyers section.
+        grab('prospects.json').then(r => r.ok ? r.json() : null)
+          .catch(e => { if (e.rateLimited) throw e; return null; })
+      ]).then(([live, hist, prospects]) => {
+        if (cancelled) return;
+        const histRows = Array.isArray(hist) ? hist : (hist.rows || []);
+        // _liveRows = current Apex data only. Used by Accounts Receivable, which must
+        // ignore the 2024 historical backfill (old records with stale "Unpaid" flags
+        // and no due dates would otherwise inflate AR with settled invoices).
+        setData({ ...live, rows: [...histRows, ...(live.rows || [])], _liveRows: live.rows || [], prospects: prospects });
+        setError(null);
+        setStale(null);
+        backoff = 0;
+        schedule(POLL_MS);
+      }).catch(e => {
+        if (cancelled) return;
+        setData(d => {
+          if (d) setStale(e.message);else setError(e.message);
+          return d;
+        });
+        backoff = e.rateLimited ? Math.min(backoff ? backoff * 2 : POLL_MS, MAX_BACKOFF_MS) : POLL_MS;
+        schedule(backoff);
+      });
+    };
+    load();
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
+  }, []);
+  if (error) {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "app"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "empty"
+    }, /*#__PURE__*/React.createElement("h2", null, "No data yet"), /*#__PURE__*/React.createElement("p", null, "Run ", /*#__PURE__*/React.createElement("code", null, "python scraper.py"), " in this folder to pull your sales data, then refresh."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 12,
+        fontSize: 12,
+        color: 'var(--text-faint)'
+      }
+    }, error)));
+  }
+  if (!data) {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "app"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "empty"
+    }, /*#__PURE__*/React.createElement("div", { className: "spinner" }), /*#__PURE__*/React.createElement("div", { className: "loading-label" }, "Loading")));
+  }
+  return /*#__PURE__*/React.createElement(React.Fragment, null,
+    /*#__PURE__*/React.createElement(ViewTabs, { tab: tab, setTab: setTab }),
+    tab === 'ar'
+      ? /*#__PURE__*/React.createElement(AccountsReceivable, { data: data })
+      : tab === 'prospecting'
+      ? /*#__PURE__*/React.createElement(Prospecting, { data: data })
+      : tab === 'inventory'
+      ? /*#__PURE__*/React.createElement(InventoryView, { data: data })
+      : /*#__PURE__*/React.createElement(Dashboard, {
+          data: data,
+          filters: filters,
+          setFilters: setFilters
+        }));
+}
+
+// --- Dashboard --------------------------------------------------------------
+function usePager(total, pageSize) {
+  const size = pageSize || 50;
+  const [page, setPage] = React.useState(0);
+  const pages = Math.max(1, Math.ceil((total || 0) / size));
+  const cur = Math.min(page, pages - 1);
+  return { page: cur, pages: pages, size: size, start: cur * size, end: cur * size + size, setPage: setPage };
+}
+function Pager({ pager, total, unit }) {
+  const e = React.createElement;
+  if (!pager || pager.pages <= 1) return null;
+  const nav = (label, disabled, onClick) => e("button", { className: "date-preset", disabled: disabled, onClick: onClick, style: { opacity: disabled ? 0.35 : 1, cursor: disabled ? "default" : "pointer" } }, label);
+  return e("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 16px", borderTop: "1px solid var(--border)", fontFamily: "JetBrains Mono", fontSize: 11, color: "var(--text-dim)" } },
+    e("span", null, fmtNum(total) + " " + (unit || "items") + " \u00b7 page " + (pager.page + 1) + " of " + pager.pages),
+    e("div", { style: { display: "flex", gap: 8 } },
+      nav("\u2039 Prev", pager.page <= 0, function () { pager.setPage(pager.page - 1); }),
+      nav("Next \u203a", pager.page >= pager.pages - 1, function () { pager.setPage(pager.page + 1); })));
+}
+function Dashboard({
+  data,
+  filters,
+  setFilters
+}) {
+  const rows = data.rows || [];
+
+  // Helper: detect sample/promo rows
+  // Apex has an explicit "is_sample" field, but we also catch SAMP/SAMPLE in names as a safety net
+  const isSampleRow = r => {
+    if (String(r.is_sample || '').toLowerCase() === 'yes') return true;
+    const name = String(r.product_name || '').toUpperCase();
+    if (name.includes('SAMP') || name.includes('SAMPLE')) return true;
+    const unit = parseMoney(r.product_listing_price);
+    if (unit > 0 && unit < 0.5) return true;
+    return false;
+  };
+
+  // Helper: pull sales rep — Apex returns sales_reps_display as an array, or sales_reps as a string
+  const extractRep = r => {
+    if (Array.isArray(r.sales_reps_display) && r.sales_reps_display.length) {
+      return r.sales_reps_display.filter(Boolean).join(', ');
+    }
+    if (r.sales_reps) return String(r.sales_reps);
+    if (r.sales_rep) return String(r.sales_rep); // fallback
+    return '';
+  };
+
+  // Normalize once — maps Apex's real field names into the dashboard's working fields
+  const normalized = useMemo(() => rows.map(r => ({
+    ...r,
+    // Canonical aliases the dashboard uses everywhere
+    brand: r.product_brand || r.brand || '',
+    sales_rep: extractRep(r),
+    order_date: r.order_date_utc || r.order_date_localized || r.order_date || '',
+    order_date_raw: r.order_date_utc_raw || r.order_date_localized_raw || r.order_date_raw || '',
+    delivery_date: r.delivery_date || '',
+    delivery_date_raw: r.delivery_date_raw || '',
+    buyer_state: normalizeState(r.buyer_state),
+    // Use order_number as the invoice/order identifier — Apex's real data doesn't have order_id at the line level
+    order_id: r.order_id || r.order_number || null,
+    // Computed fields
+    _date: parseDate(r.order_date_utc_raw || r.order_date_localized_raw || r.order_date_raw || r.order_date_utc || r.order_date),
+    _delivery: parseDate(r.delivery_date_raw || r.delivery_date),
+    _revenue: typeof r.line_total_raw === 'number' ? r.line_total_raw / 100 : parseMoney(r.line_total || r.computed_sale_price || r.total),
+    _cost: parseMoney(r.batch_cost_of_goods),
+    // Physical units sold. Apex's order_quantity (a.k.a. quantity) is in the
+    // order's unit of measure — "Case" for ~380 lines — so it mixes cases and
+    // eaches. inventory_quantity is the Total Unit Quantity (always "Unit"), the
+    // true physical-units measure, so we use it and fall back only if absent.
+    _quantity: parseFloat(r.inventory_quantity != null ? r.inventory_quantity : r.quantity_raw != null ? r.quantity_raw : r.quantity) || 0,
+    // DISCOUNT FIELD — using `discounts` (per-line) only. Apex also has
+    // `additional_discounts` (invoice-level), but it's not consistently reflected
+    // in the Apex UI, so we don't trust it as real discount activity. Line-level
+    // discounts here match what the CSV export and Apex invoice screens show.
+    // Comes from Apex as integer cents (e.g. 18000 = $180.00). Fallback handles
+    // edge cases where the field might be a string like "$30.00".
+    _lineDiscount: typeof r.discounts === 'number' ? r.discounts / 100 : parseMoney(r.discounts),
+    _discount: typeof r.discounts === 'number' ? r.discounts / 100 : parseMoney(r.discounts),
+    _unitPrice: parseMoney(r.product_listing_price || r.unit_price),
+    _isSample: isSampleRow(r),
+    // Credit detection — Apex records "credits applied to payment" inside the
+    // `payment_dates` array, with entries like "Credit of $1,045.22 on 03/17/2026".
+    // We parse those out and also keep the original negative-revenue fallback
+    // (in case Apex ever sends a credit as a negative line item).
+    _creditFromPayments: parsePaymentsForCredits(r.payment_dates || r.payments || r.payment_text || r.payment_history || '').total,
+    _creditEntries: parsePaymentsForCredits(r.payment_dates || r.payments || r.payment_text || r.payment_history || '').entries,
+    _isNegativeLine: typeof r.line_total_raw === 'number' && r.line_total_raw < 0 || parseMoney(r.line_total || r.computed_sale_price || r.total) < 0
+  })), [rows]);
+
+  // Distinct values for filters
+  const distinct = useMemo(() => ({
+    brands: [...new Set(normalized.map(r => r.brand).filter(Boolean))].sort(),
+    buyers: [...new Set(normalized.map(r => r.buyer_name).filter(Boolean))].sort(),
+    reps: [...new Set(normalized.map(r => r.sales_rep).filter(Boolean))].sort(),
+    states: [...new Set(normalized.map(r => r.buyer_state).filter(Boolean))].sort(),
+    statuses: [...new Set(normalized.map(r => r.payment_status).filter(Boolean))].sort(),
+    productLines: [...new Set(normalized.map(r => r.product_type).filter(Boolean))].sort()
+  }), [normalized]);
+
+  // Apply filters
+  const filtered = useMemo(() => normalized.filter(r => {
+    // Use string comparison on YYYY-MM-DD to avoid timezone issues
+    if (filters.from || filters.to) {
+      if (!r._date) return false;
+      const rowYmd = ymd(r._date);
+      if (filters.from && rowYmd < filters.from) return false;
+      if (filters.to && rowYmd > filters.to) return false;
+    }
+    if (Array.isArray(filters.buyer)) {
+      if (filters.buyer.length && !filters.buyer.includes(r.buyer_name)) return false;
+    } else if (filters.buyer && r.buyer_name !== filters.buyer) return false;
+    if (filters.rep && r.sales_rep !== filters.rep) return false;
+    if (filters.product) {
+      const hay = [r.product_name, r.product_type, r.product_sku].map(x => String(x || '').toLowerCase()).join(' ');
+      const terms = filters.product.toLowerCase().split(/\s+/).filter(Boolean);
+      if (!terms.every(t => hay.includes(t))) return false;
+    }
+    if (filters.status && r.payment_status !== filters.status) return false;
+    if (filters.productLine && r.product_type !== filters.productLine) return false;
+    if (filters.excludeSamples && r._isSample) return false;
+    if (filters.invoice) {
+      const q = filters.invoice.toLowerCase().replace(/^#/, '').trim();
+      const inv = String(r.order_number || r.order_id || '').toLowerCase();
+      if (!inv.includes(q)) return false;
+    }
+    return true;
+  }), [normalized, filters]);
+
+  // KPIs
+  const kpis = useMemo(() => {
+    const lineRevenue = filtered.reduce((s, r) => s + r._revenue, 0);
+    const actualCost = filtered.reduce((s, r) => s + r._cost * r._quantity, 0);
+    const units = filtered.reduce((s, r) => s + r._quantity, 0);
+    const orderIds = new Set(filtered.map(r => r.order_id).filter(Boolean));
+    const buyers = new Set(filtered.map(r => r.buyer_name).filter(Boolean));
+    const lineDiscounts = sumLineDiscounts(filtered);
+    // Invoice-level "additional discounts" repeat on every line of an invoice, so capture
+    // them once per invoice. They reduce what the buyer actually pays but aren't in line totals.
+    const addlByInvoice = new Map();
+    filtered.forEach(r => {
+      const id = r.order_id || r.order_number;
+      if (id && !addlByInvoice.has(id)) {
+        const ad = typeof r.additional_discounts === 'number' ? r.additional_discounts / 100 : parseMoney(r.additional_discounts);
+        if (ad) addlByInvoice.set(id, ad);
+      }
+    });
+    const addlDiscounts = [...addlByInvoice.values()].reduce((s, n) => s + n, 0);
+    // Net Revenue = sum of invoice line totals, matching what Apex Trading reports and
+    // what the PDF/Excel export shows. We deliberately do NOT subtract
+    // `additional_discounts` here: that field is not consistently reflected in the Apex
+    // UI (see the note on the discount fields above), so subtracting it made the KPI
+    // disagree with Apex and with our own export by the additional-discount total for
+    // whatever range was filtered. It stays available as `additionalDiscounts` below if
+    // we ever want to surface it as its own metric.
+    const revenue = lineRevenue;
+    // Discounts Given = per-line discounts only, matching the PDF summary table.
+    const discounts = lineDiscounts;
+
+    // Credits — pulled from Apex's "Payments" text field where credits are recorded
+    // as text like "Credit of $1,045.22 on 03/17/2026". The same payments string repeats
+    // on every line item of an invoice, so we dedupe by invoice/order_id before summing.
+    // Also catch any rows where revenue itself went negative (rare, but covers refund lines).
+    const creditByInvoice = new Map(); // order_id -> credit dollars
+    const negativeLineTotal = filtered.filter(r => r._isNegativeLine).reduce((s, r) => s + r._revenue, 0); // negative number
+    filtered.forEach(r => {
+      const id = r.order_id;
+      if (id && r._creditFromPayments > 0 && !creditByInvoice.has(id)) {
+        creditByInvoice.set(id, r._creditFromPayments);
+      }
+    });
+    const creditsFromPayments = [...creditByInvoice.values()].reduce((s, n) => s + n, 0);
+    const credits = creditsFromPayments + -negativeLineTotal; // both as positive dollars
+    const creditCount = creditByInvoice.size + filtered.filter(r => r._isNegativeLine).length;
+    const creditOrders = creditByInvoice.size + new Set(filtered.filter(r => r._isNegativeLine).map(r => r.order_id).filter(Boolean)).size;
+    // Note: "Net Revenue" stays equal to invoice totals (what was sold).
+    // Credits are payments-side, not revenue-side, so grossRevenue == revenue here.
+    const grossRevenue = revenue;
+
+    // If Apex isn't returning real COGS, fall back to the modeled ratio
+    const isModeled = actualCost === 0 && revenue > 0;
+    const cost = isModeled ? revenue * filters.cogsRatio : actualCost;
+    const margin = revenue ? (revenue - cost) / revenue * 100 : 0;
+    const netProfit = revenue - cost;
+    const avgUnitPrice = units ? revenue / units : 0;
+
+    // Month-over-Month change: compare current month's revenue to previous month's
+    // (based on the latest month present in the filtered data)
+    const byMonth = {};
+    filtered.forEach(r => {
+      if (!r._date) return;
+      const ym = `${r._date.getFullYear()}-${String(r._date.getMonth() + 1).padStart(2, '0')}`;
+      byMonth[ym] = (byMonth[ym] || 0) + r._revenue;
+    });
+    const monthKeys = Object.keys(byMonth).sort();
+    let momChange = null;
+    let momLabel = '—';
+    if (monthKeys.length >= 2) {
+      const latest = byMonth[monthKeys[monthKeys.length - 1]];
+      const prev = byMonth[monthKeys[monthKeys.length - 2]];
+      if (prev) {
+        momChange = (latest - prev) / prev * 100;
+        momLabel = monthKeys[monthKeys.length - 1] + ' vs ' + monthKeys[monthKeys.length - 2];
+      }
+    }
+    return {
+      revenue,
+      grossRevenue,
+      cost,
+      grossProfit: revenue - cost,
+      netProfit,
+      margin,
+      isModeled,
+      units,
+      orders: orderIds.size,
+      buyers: buyers.size,
+      avgOrder: orderIds.size ? revenue / orderIds.size : 0,
+      avgUnitsPerInvoice: orderIds.size ? units / orderIds.size : 0,
+      avgUnitPrice,
+      momChange,
+      momLabel,
+      discounts,
+      // Invoice-level "additional discounts" for the current filter range. Not folded
+      // into revenue or `discounts` (see note above) - exposed for reporting only.
+      additionalDiscounts: addlDiscounts,
+      credits,
+      creditCount,
+      creditOrders,
+      lineItems: filtered.length
+    };
+  }, [filtered, filters.cogsRatio]);
+
+  // Monthly breakdown matching the Apex monthly sales spreadsheet format
+  const monthlyBreakdown = useMemo(() => {
+    // First pass: bucket rows by month and sum the parts that aggregate freely
+    const map = {};
+    filtered.forEach(r => {
+      if (!r._date) return;
+      const y = r._date.getFullYear();
+      const m = r._date.getMonth();
+      const key = `${y}-${String(m + 1).padStart(2, '0')}`;
+      if (!map[key]) {
+        map[key] = {
+          key,
+          monthName: r._date.toLocaleString('en-US', {
+            month: 'long',
+            year: 'numeric'
+          }),
+          rows: [],
+          units: 0,
+          netSales: 0,
+          cogs: 0
+        };
+      }
+      map[key].rows.push(r);
+      map[key].units += r._quantity;
+      map[key].netSales += r._revenue;
+      map[key].cogs += r._cost * r._quantity;
+    });
+    // Second pass: per-month line-level discount totals.
+    Object.values(map).forEach(m => {
+      m.discounts = sumLineDiscounts(m.rows);
+      m.gross = m.netSales + m.discounts;
+      delete m.rows; // no longer needed; saves memory in the React render
+    });
+    const sorted = Object.values(map).sort((a, b) => a.key.localeCompare(b.key));
+    // Add MOM and Margin columns. Use modeled COGS when actual is zero.
+    return sorted.map((m, i) => {
+      const prev = i > 0 ? sorted[i - 1].netSales : 0;
+      const mom = prev ? (m.netSales - prev) / prev * 100 : null;
+      const effectiveCogs = m.cogs > 0 ? m.cogs : m.netSales * filters.cogsRatio;
+      const netProfit = m.netSales - effectiveCogs;
+      const margin = m.netSales ? netProfit / m.netSales * 100 : 0;
+      const cases = m.units / 30;
+      return {
+        ...m,
+        cogs: effectiveCogs,
+        cases,
+        mom,
+        netProfit,
+        margin
+      };
+    });
+  }, [filtered, filters.cogsRatio]);
+
+  // Revenue over time
+  const timeSeries = useMemo(() => {
+    const map = {};
+    filtered.forEach(r => {
+      if (!r._date) return;
+      const key = ymd(r._date);
+      if (!map[key]) map[key] = {
+        date: key,
+        revenue: 0,
+        units: 0,
+        orders: new Set()
+      };
+      map[key].revenue += r._revenue;
+      map[key].units += r._quantity;
+      if (r.order_id) map[key].orders.add(r.order_id);
+    });
+    return Object.values(map).map(d => ({
+      ...d,
+      orders: d.orders.size
+    })).sort((a, b) => a.date.localeCompare(b.date));
+  }, [filtered]);
+
+  // Group helpers
+  const groupSum = (key, n = 10) => {
+    const map = {};
+    filtered.forEach(r => {
+      const k = Array.isArray(key) ? (key.map(f => r[f]).find(Boolean) || '') : r[key];
+      if (!k) return;
+      if (!map[k]) map[k] = {
+        name: k,
+        revenue: 0,
+        units: 0
+      };
+      map[k].revenue += r._revenue;
+      map[k].units += r._quantity;
+    });
+    return Object.values(map).sort((a, b) => b.revenue - a.revenue).slice(0, n);
+  };
+  const topProducts = useMemo(() => groupSum('product_name'), [filtered]);
+  const topBuyers = useMemo(() => groupSum('buyer_name').map(d => ({ ...d, name: buyerBusinessName(d.name) })), [filtered]);
+  const byRep = useMemo(() => groupSum('sales_rep', 20), [filtered]);
+  const byCategory = useMemo(() => groupSum(['product_category','product_type']), [filtered]);
+  const byState = useMemo(() => groupSum('buyer_state', 15), [filtered]);
+
+  // Per-product breakdown (matches the Apex product-line spreadsheet)
+  const productBreakdown = useMemo(() => {
+    const map = {};
+    filtered.forEach(r => {
+      const k = r.product_name;
+      if (!k) return;
+      if (!map[k]) {
+        map[k] = {
+          name: k,
+          line: r.product_type || '—',
+          rows: [],
+          units: 0,
+          netSales: 0,
+          totalCost: 0,
+          unitPriceSum: 0,
+          // for weighted avg
+          listedPrice: r._unitPrice || 0,
+          costUnit: r._cost || 0,
+          currentInventory: null
+        };
+      }
+      if (r.current_inventory != null) map[k].currentInventory = r.current_inventory;
+      map[k].rows.push(r);
+      map[k].units += r._quantity;
+      map[k].netSales += r._revenue;
+      map[k].totalCost += r._cost * r._quantity;
+      // Take the highest unit price seen as "listed" (since promos can drop it)
+      if (r._unitPrice > map[k].listedPrice) map[k].listedPrice = r._unitPrice;
+    });
+    // Per-product line-level discount totals.
+    Object.values(map).forEach(p => {
+      p.discounts = sumLineDiscounts(p.rows);
+      p.gross = p.netSales + p.discounts;
+      delete p.rows;
+    });
+    return Object.values(map).map(p => {
+      const effectiveCost = p.totalCost > 0 ? p.totalCost : p.netSales * filters.cogsRatio;
+      const effectiveCostUnit = p.costUnit > 0 ? p.costUnit : p.units ? effectiveCost / p.units : 0;
+      return {
+        ...p,
+        totalCost: effectiveCost,
+        costUnit: effectiveCostUnit,
+        avgUnitPrice: p.units ? p.netSales / p.units : 0,
+        grossProfit: p.netSales - effectiveCost
+      };
+    }).sort((a, b) => b.netSales - a.netSales);
+  }, [filtered, filters.cogsRatio]);
+
+  // Group line items into invoices (one row per order/invoice)
+  const invoices = useMemo(() => {
+    const map = {};
+    filtered.forEach(r => {
+      const id = r.order_id || r.order_number;
+      if (!id) return;
+      if (!map[id]) {
+        map[id] = {
+          id,
+          invoice: r.order_number || '#' + r.order_id,
+          date: r.order_date || '—',
+          _date: r._date,
+          buyer: r.buyer_name || '—',
+          rep: r.sales_rep || '—',
+          state: r.buyer_state || '—',
+          status: r.payment_status || 'Unknown',
+          delivery: r.delivery_date || '—',
+          lineItems: 0,
+          units: 0,
+          revenue: 0,
+          discount: 0,
+          // Credit applied to this invoice. The payments-text field repeats on every
+          // line item, so we only capture it once per order (first line wins).
+          credit: r._creditFromPayments || 0,
+          creditEntries: r._creditEntries || []
+        };
+      }
+      map[id].lineItems += 1;
+      map[id].units += r._quantity;
+      map[id].revenue += r._revenue;
+      map[id].discount += r._lineDiscount;
+    });
+    return Object.values(map).sort((a, b) => (b._date?.getTime() || 0) - (a._date?.getTime() || 0));
+  }, [filtered]);
+
+  // Payment status
+  const paymentMix = useMemo(() => {
+    const map = {};
+    filtered.forEach(r => {
+      const k = r.payment_status || 'Unknown';
+      map[k] = (map[k] || 0) + r._revenue;
+    });
+    return Object.entries(map).map(([name, value]) => ({
+      name,
+      value
+    }));
+  }, [filtered]);
+
+  // Current inventory — from Apex's inventory endpoint (data.inventory), pulled
+  // by the scraper and filtered to Chill Medicated. Built from the unfiltered
+  // snapshot (current stock ignores the date/buyer filters by design). Sold
+  // totals join by sku, then name, using physical units (inventory_quantity).
+  const inventory = useMemo(() => {
+    const soldBySku = {},
+      soldByName = {},
+      revBySku = {},
+      revByName = {},
+      batchesBySku = {},
+      batchesByName = {};
+    normalized.forEach(r => {
+      const u = parseFloat(r.inventory_quantity) || r._quantity || 0;
+      const rev = r._revenue || 0;
+      const bn = (r.batch_name || '').trim();
+      if (bn) {
+        if (r.product_sku) (batchesBySku[r.product_sku] = batchesBySku[r.product_sku] || new Set()).add(bn);
+        if (r.product_name) (batchesByName[r.product_name] = batchesByName[r.product_name] || new Set()).add(bn);
+      }
+      if (r.product_sku) { soldBySku[r.product_sku] = (soldBySku[r.product_sku] || 0) + u; revBySku[r.product_sku] = (revBySku[r.product_sku] || 0) + rev; }
+      if (r.product_name) { soldByName[r.product_name] = (soldByName[r.product_name] || 0) + u; revByName[r.product_name] = (revByName[r.product_name] || 0) + rev; }
+    });
+    // Sales velocity for the stock forecast: physical units sold in the trailing
+    // 30 days, measured from the most recent order date in the data (not "today"),
+    // so a lagging scraper doesn't make everything look like it stopped selling.
+    const WIN = 30;
+    let maxT = 0;
+    normalized.forEach(r => { if (r._date && r._date.getTime() > maxT) maxT = r._date.getTime(); });
+    const winStart = maxT ? maxT - WIN * 86400000 : 0;
+    const recentBySku = {}, recentByName = {};
+    normalized.forEach(r => {
+      if (!r._date || r._date.getTime() < winStart) return;
+      const u = parseFloat(r.inventory_quantity) || r._quantity || 0;
+      if (r.product_sku) recentBySku[r.product_sku] = (recentBySku[r.product_sku] || 0) + u;
+      if (r.product_name) recentByName[r.product_name] = (recentByName[r.product_name] || 0) + u;
+    });
+    const cat = Array.isArray(data.inventory) ? data.inventory : [];
+    const list = cat.map(p => {
+      const sold = p.sku && soldBySku[p.sku] != null ? soldBySku[p.sku] : soldByName[p.name] || 0;
+      const revT = p.sku && revBySku[p.sku] != null ? revBySku[p.sku] : revByName[p.name] || 0;
+      const unitPrice = sold > 0 ? revT / sold : 0;
+      const qty = p.qty != null ? p.qty : (p.available != null ? p.available : (p.inventory != null ? p.inventory : null));
+      const recent = p.sku && recentBySku[p.sku] != null ? recentBySku[p.sku] : recentByName[p.name] || 0;
+      const velocity = recent / WIN;
+      let daysLeft = null;
+      if (qty != null) {
+        if (qty <= 0) daysLeft = 0;
+        else if (velocity > 0) daysLeft = qty / velocity;
+        else daysLeft = null;
+      }
+      const batchNames = Array.from((p.sku && batchesBySku[p.sku]) ? batchesBySku[p.sku] : (batchesByName[p.name] || [])).sort();
+      return {
+        name: p.name || '—',
+        line: p.line || '—',
+        sku: p.sku || '',
+        qty,
+        batches: p.batches || 0,
+        batchNames,
+        listed: p.listed != null ? !!p.listed : (p.status ? String(p.status).toLowerCase() === 'available' : false),
+        sold,
+        neverSold: sold <= 0,
+        unitPrice,
+        value: qty != null ? qty * unitPrice : 0,
+        velocity,
+        daysLeft
+      };
+    }).sort((a, b) => (b.qty || 0) - (a.qty || 0));
+    const withQty = list.filter(p => p.qty != null);
+    const onHandTotal = withQty.reduce((s, p) => s + p.qty, 0);
+    const listedN = list.filter(p => p.listed).length;
+    const out = withQty.filter(p => p.qty <= 0).length;
+    const onHandValue = list.reduce((s, p) => s + (p.value || 0), 0);
+    const lowStock = list.filter(p => p.daysLeft != null && p.daysLeft > 0 && p.daysLeft < 14).length;
+    return {
+      list,
+      onHandTotal,
+      onHandValue,
+      listedN,
+      skus: list.length,
+      out,
+      lowStock
+    };
+  }, [normalized, data.inventory]);
+  const resetFilters = () => setFilters({
+    from: '',
+    to: '',
+    brand: '',
+    buyer: [],
+    rep: '',
+    state: '',
+    status: '',
+    invoice: '',
+    productLine: '',
+    product: '',
+    excludeSamples: false,
+    cogsRatio: 0.45
+  });
+  const fetchedAt = new Date(data.fetched_at);
+
+  // Diagnostics — helps us see what the dashboard actually sees
+  const diag = useMemo(() => {
+    const datesValid = normalized.filter(r => r._date instanceof Date && !isNaN(r._date)).length;
+    const datesNull = normalized.length - datesValid;
+    const repsPresent = normalized.filter(r => r.sales_rep && String(r.sales_rep).trim()).length;
+    const repsEmpty = normalized.length - repsPresent;
+    const firstRow = normalized[0] || {};
+    const rawFirst = rows[0] || {};
+    const sampleDate = firstRow.order_date_raw || firstRow.order_date || '(no date field)';
+    const sampleRep = firstRow.sales_rep || '(empty)';
+    const orderIdsPresent = normalized.filter(r => r.order_id).length;
+    const distinctOrderIds = new Set(normalized.map(r => r.order_id).filter(Boolean)).size;
+    const rawOrderIdField = rawFirst.order_id != null ? `order_id=${JSON.stringify(rawFirst.order_id)}` : '(no order_id field)';
+    const rawOrderNumber = rawFirst.order_number != null ? `order_number=${JSON.stringify(rawFirst.order_number)}` : '(no order_number field)';
+    const sampleDiscount = firstRow._discount;
+    const rawDiscountFields = `discounts=${JSON.stringify(rawFirst.discounts)}`;
+    const totalDiscount = sumLineDiscounts(normalized);
+    const filteredDiscount = sumLineDiscounts(filtered);
+    // Per-invoice audit trail — respects the current filter state so you can answer
+    // "where exactly are these discounts coming from?" for any slice (a month, a state,
+    // a buyer, etc), making spot-checking against Apex straightforward.
+    const discountByInvoice = new Map();
+    filtered.forEach(r => {
+      const id = r.order_id;
+      if (!id) return;
+      if (!discountByInvoice.has(id)) {
+        discountByInvoice.set(id, {
+          invoice: r.order_number || id,
+          buyer: r.buyer_name || '—',
+          date: r.order_date || '—',
+          line: 0
+        });
+      }
+      discountByInvoice.get(id).line += r._lineDiscount || 0;
+    });
+    const discountAudit = [...discountByInvoice.values()].map(d => ({
+      ...d,
+      total: d.line
+    })).filter(d => d.total > 0).sort((a, b) => b.total - a.total);
+    const discountAuditTotal = discountAudit.reduce((s, d) => s + d.total, 0);
+    // Credits: parsed from the "Payments" text field on each row.
+    // Dedupe by invoice since the same payments string appears on every line item.
+    const creditByInvoice = new Map();
+    normalized.forEach(r => {
+      const id = r.order_id;
+      if (id && r._creditFromPayments > 0 && !creditByInvoice.has(id)) {
+        creditByInvoice.set(id, {
+          amount: r._creditFromPayments,
+          entries: r._creditEntries
+        });
+      }
+    });
+    const creditTotal = [...creditByInvoice.values()].reduce((s, v) => s + v.amount, 0);
+    const creditInvoices = [...creditByInvoice.keys()];
+    const rawPaymentsSample = rawFirst.payment_dates || rawFirst.payments || rawFirst.payment_text || rawFirst.payment_history || '(no payment_dates field on first row)';
+    return {
+      datesValid,
+      datesNull,
+      repsPresent,
+      repsEmpty,
+      sampleDate,
+      sampleRep,
+      orderIdsPresent,
+      distinctOrderIds,
+      rawOrderIdField,
+      rawOrderNumber,
+      sampleDiscount,
+      rawDiscountFields,
+      totalDiscount,
+      filteredDiscount,
+      discountAudit,
+      discountAuditTotal,
+      creditLineCount: creditByInvoice.size,
+      creditTotal,
+      creditInvoices,
+      rawPaymentsSample
+    };
+  }, [normalized, rows, filtered]);
+  const invPg = usePager(invoices.length, 50);
+  const pbPg = usePager(productBreakdown.length, 50);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "app"
+  }, /*#__PURE__*/React.createElement(Topbar, {
+    fetchedAt: fetchedAt,
+    rowCount: filtered.length,
+    totalCount: rows.length
+  }), /*#__PURE__*/React.createElement("details", {
+    style: {
+      background: 'var(--bg-elev)',
+      border: '1px solid var(--border)',
+      borderRadius: 4,
+      padding: '10px 14px',
+      marginBottom: 20,
+      fontFamily: 'JetBrains Mono, monospace',
+      fontSize: 11,
+      color: 'var(--text-dim)'
+    }
+  }, /*#__PURE__*/React.createElement("summary", {
+    style: {
+      cursor: 'pointer',
+      color: 'var(--accent)'
+    }
+  }, "DIAGNOSTICS \u2014 click to expand"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 10,
+      lineHeight: 1.8
+    }
+  }, /*#__PURE__*/React.createElement("div", null, "Total rows: ", normalized.length, " \xB7 After filters: ", filtered.length), /*#__PURE__*/React.createElement("div", null, "Valid dates: ", diag.datesValid, " \xB7 Null/invalid dates: ", diag.datesNull), /*#__PURE__*/React.createElement("div", null, "Sample date value (raw): \"", diag.sampleDate, "\""), /*#__PURE__*/React.createElement("div", null, "Rows with sales_rep: ", diag.repsPresent, " \xB7 Without: ", diag.repsEmpty), /*#__PURE__*/React.createElement("div", null, "Sample sales_rep value: \"", diag.sampleRep, "\""), /*#__PURE__*/React.createElement("div", null, "Distinct sales reps in data: ", distinct.reps.length, " (", distinct.reps.slice(0, 5).join(', '), distinct.reps.length > 5 ? '…' : '', ")"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 8,
+      color: 'var(--accent)'
+    }
+  }, "--- ORDER ID DEBUG ---"), /*#__PURE__*/React.createElement("div", null, "Rows with order_id: ", diag.orderIdsPresent, " \xB7 Distinct order_ids: ", diag.distinctOrderIds), /*#__PURE__*/React.createElement("div", null, "Raw first row: ", diag.rawOrderIdField, ", ", diag.rawOrderNumber), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 8,
+      color: 'var(--accent)'
+    }
+  }, "--- DISCOUNT DEBUG ---"), /*#__PURE__*/React.createElement("div", null, "Raw first row: ", diag.rawDiscountFields), /*#__PURE__*/React.createElement("div", null, "First row computed _discount: $", diag.sampleDiscount?.toFixed(2)), /*#__PURE__*/React.createElement("div", null, "Total discounts (all rows): $", diag.totalDiscount?.toLocaleString(undefined, {
+    maximumFractionDigits: 2
+  })), /*#__PURE__*/React.createElement("div", null, "Total discounts (current filter): $", diag.filteredDiscount?.toLocaleString(undefined, {
+    maximumFractionDigits: 2
+  })), diag.discountAudit && diag.discountAudit.length > 0 && /*#__PURE__*/React.createElement("details", {
+    style: {
+      marginTop: 6
+    }
+  }, /*#__PURE__*/React.createElement("summary", {
+    style: {
+      cursor: 'pointer',
+      color: 'var(--accent)'
+    }
+  }, "Per-invoice audit (", diag.discountAudit.length, " invoice", diag.discountAudit.length === 1 ? '' : 's', ", $", diag.discountAuditTotal.toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }), " total \xB7 click to expand)"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 6,
+      marginLeft: 12,
+      fontFamily: 'monospace',
+      fontSize: '0.85em'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'grid',
+      gridTemplateColumns: '120px 100px 1fr 110px',
+      gap: '4px 12px',
+      color: 'var(--text-dim)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 600
+    }
+  }, "Invoice"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 600
+    }
+  }, "Date"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 600
+    }
+  }, "Buyer"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 600,
+      textAlign: 'right'
+    }
+  }, "Discount"), diag.discountAudit.slice(0, 50).map((d, i) => /*#__PURE__*/React.createElement(React.Fragment, {
+    key: i
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: 'var(--accent)'
+    }
+  }, d.invoice), /*#__PURE__*/React.createElement("div", null, d.date), /*#__PURE__*/React.createElement("div", {
+    style: {
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap'
+    },
+    title: d.buyer
+  }, buyerBusinessName(d.buyer)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: 'right',
+      fontWeight: 600
+    }
+  }, "$", d.total.toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }))))), diag.discountAudit.length > 50 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 6,
+      color: 'var(--text-faint)'
+    }
+  }, "Showing top 50 of ", diag.discountAudit.length, " \xB7 narrow with filters to see specific invoices"))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 8,
+      color: 'var(--accent)'
+    }
+  }, "--- CREDIT DEBUG ---"), /*#__PURE__*/React.createElement("div", null, "Sample \"payments\" field (first row): ", typeof diag.rawPaymentsSample === 'string' ? `"${diag.rawPaymentsSample}"` : JSON.stringify(diag.rawPaymentsSample)), /*#__PURE__*/React.createElement("div", null, "Invoices with credits parsed: ", diag.creditLineCount), /*#__PURE__*/React.createElement("div", null, "Total credits applied: $", diag.creditTotal?.toLocaleString(undefined, {
+    maximumFractionDigits: 2
+  })), /*#__PURE__*/React.createElement("div", null, "Invoices: ", diag.creditInvoices.length === 0 ? '(none)' : diag.creditInvoices.slice(0, 10).join(', ') + (diag.creditInvoices.length > 10 ? ` … +${diag.creditInvoices.length - 10} more` : '')))), /*#__PURE__*/React.createElement(FilterBar, {
+    filters: filters,
+    setFilters: setFilters,
+    distinct: distinct,
+    onReset: resetFilters,
+    rows: filtered
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "kpi-grid"
+  }, /*#__PURE__*/React.createElement(Kpi, {
+    label: "Net Revenue",
+    value: fmtMoneyFull(kpis.revenue),
+    sub: `${fmtNum(kpis.lineItems)} line items`,
+    accent: true
+  }), /*#__PURE__*/React.createElement(Kpi, {
+    label: "MOM Change",
+    value: kpis.momChange == null ? '—' : (kpis.momChange >= 0 ? '+' : '') + kpis.momChange.toFixed(1) + '%',
+    sub: kpis.momLabel
+  }), /*#__PURE__*/React.createElement(Kpi, {
+    label: "Orders",
+    value: fmtNum(kpis.orders),
+    sub: `${fmtMoneyFull(kpis.avgOrder)} avg order`
+  }), /*#__PURE__*/React.createElement(Kpi, {
+    label: "Units Sold",
+    value: fmtNum(Math.round(kpis.units)),
+    sub: `${fmtNum(kpis.lineItems)} line items`
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "kpi-grid"
+  }, /*#__PURE__*/React.createElement(Kpi, {
+    label: "Avg Unit Price",
+    value: fmtMoneyFull(kpis.avgUnitPrice),
+    sub: "revenue \xF7 units"
+  }), /*#__PURE__*/React.createElement(Kpi, {
+    label: "Avg Units / Invoice",
+    value: kpis.avgUnitsPerInvoice.toFixed(1),
+    sub: `across ${fmtNum(kpis.orders)} invoices`
+  }), /*#__PURE__*/React.createElement(Kpi, {
+    label: "Active Buyers",
+    value: fmtNum(kpis.buyers),
+    sub: "unique accounts"
+  }), /*#__PURE__*/React.createElement(Kpi, {
+    label: "Markets",
+    value: fmtNum(distinct.states.filter(s => filtered.some(r => r.buyer_state === s)).length),
+    sub: "states with sales"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "kpi-grid"
+  }, /*#__PURE__*/React.createElement(Kpi, {
+    label: "Discounts Given",
+    value: fmtMoneyFull(kpis.discounts),
+    sub: kpis.grossRevenue ? (kpis.discounts / (kpis.grossRevenue + kpis.discounts) * 100).toFixed(1) + '% of gross' : '—'
+  }), /*#__PURE__*/React.createElement(Kpi, {
+    label: "Credits Applied",
+    value: fmtMoneyFull(kpis.credits),
+    sub: kpis.creditCount ? `${fmtNum(kpis.creditOrders)} invoice${kpis.creditOrders === 1 ? '' : 's'} · applied as payment` : 'none in current view'
+  })), /*#__PURE__*/React.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "section-header"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, "Invoices ", /*#__PURE__*/React.createElement("em", null, "\xB7 units & revenue per order")), /*#__PURE__*/React.createElement("div", {
+    style: { display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "text", className: "filter-input", placeholder: "search invoice #\u2026", value: filters.invoice,
+    onChange: ev => setFilters(f => ({ ...f, invoice: ev.target.value })), style: { height: 36, fontSize: 13, minWidth: 180 }
+  }), /*#__PURE__*/React.createElement("button", {
+    className: "date-preset", onClick: () => setFilters(f => ({ ...f, invoice: '' })), title: "Clear the invoice search"
+  }, "Reset"), /*#__PURE__*/React.createElement("span", {
+    className: "section-meta"
+  }, fmtNum(invoices.length), " invoices"))), /*#__PURE__*/React.createElement("div", {
+    className: "card",
+    style: {
+      padding: 0,
+      overflow: 'hidden'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      overflowX: 'auto',
+      maxHeight: 480
+    }
+  }, /*#__PURE__*/React.createElement("table", {
+    className: "data-table"
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Invoice #"), /*#__PURE__*/React.createElement("th", null, "Date"), /*#__PURE__*/React.createElement("th", null, "Buyer"), /*#__PURE__*/React.createElement("th", null, "Rep"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Line Items"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Total Units"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Revenue"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Credit Applied"), /*#__PURE__*/React.createElement("th", null, "Payment"))), /*#__PURE__*/React.createElement("tbody", null, invoices.slice(invPg.start, invPg.end).map((inv, i) => /*#__PURE__*/React.createElement("tr", {
+    key: i,
+    style: {
+      cursor: 'pointer'
+    },
+    onClick: () => setFilters(f => ({
+      ...f,
+      invoice: inv.invoice
+    })),
+    title: "Click to filter the whole dashboard by this invoice"
+  }, /*#__PURE__*/React.createElement("td", {
+    className: "font-mono",
+    style: {
+      color: 'var(--accent)'
+    }
+  }, inv.invoice), /*#__PURE__*/React.createElement("td", {
+    className: "dim font-mono"
+  }, inv.date), /*#__PURE__*/React.createElement("td", { title: inv.buyer }, buyerBusinessName(inv.buyer)), /*#__PURE__*/React.createElement("td", {
+    className: "dim"
+  }, inv.rep), /*#__PURE__*/React.createElement("td", {
+    className: "num dim"
+  }, fmtNum(inv.lineItems)), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, /*#__PURE__*/React.createElement("strong", null, fmtNum(Math.round(inv.units)))), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, fmtMoneyFull(inv.revenue)), /*#__PURE__*/React.createElement("td", {
+    className: "num",
+    style: inv.credit > 0 ? {
+      color: 'var(--accent)'
+    } : {
+      color: 'var(--text-faint)'
+    },
+    title: inv.credit > 0 && inv.creditEntries.length ? inv.creditEntries.map(e => `Credit of $${e.amount.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    })} on ${e.date}`).join('\n') : ''
+  }, inv.credit > 0 ? fmtMoneyFull(inv.credit) : '—'), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement(StatusPill, {
+    status: inv.status
+  }))))))), /*#__PURE__*/React.createElement(Pager, { pager: invPg, total: invoices.length, unit: "invoices" }))), React.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "section-header"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, "Recent ", /*#__PURE__*/React.createElement("em", null, "line items")), /*#__PURE__*/React.createElement("span", {
+    className: "section-meta"
+  }, "latest 25")), /*#__PURE__*/React.createElement("div", {
+    className: "card",
+    style: {
+      padding: 0,
+      overflow: 'hidden'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      overflowX: 'auto',
+      maxHeight: 560
+    }
+  }, /*#__PURE__*/React.createElement("table", {
+    className: "data-table"
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Date"), /*#__PURE__*/React.createElement("th", null, "Order"), /*#__PURE__*/React.createElement("th", null, "Buyer"), /*#__PURE__*/React.createElement("th", null, "Product"), /*#__PURE__*/React.createElement("th", null, "Rep"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Qty"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Revenue"), /*#__PURE__*/React.createElement("th", null, "Status"))), /*#__PURE__*/React.createElement("tbody", null, filtered.slice().sort((a, b) => (b._date?.getTime() || 0) - (a._date?.getTime() || 0)).slice(0, 25).map((r, i) => /*#__PURE__*/React.createElement("tr", {
+    key: i
+  }, /*#__PURE__*/React.createElement("td", {
+    className: "dim font-mono"
+  }, r.order_date || '—'), /*#__PURE__*/React.createElement("td", {
+    className: "font-mono"
+  }, "#", r.order_number || r.order_id || '—'), /*#__PURE__*/React.createElement("td", null, r.buyer_name || '—'), /*#__PURE__*/React.createElement("td", {
+    className: "dim"
+  }, r.product_name || '—'), /*#__PURE__*/React.createElement("td", null, r.sales_rep || '—'), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, fmtNum(r._quantity)), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, fmtMoneyFull(r._revenue)), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement(StatusPill, {
+    status: r.payment_status
+  }))))))))), React.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "section-header"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, "Product ", /*#__PURE__*/React.createElement("em", null, "breakdown")), /*#__PURE__*/React.createElement("span", {
+    className: "section-meta"
+  }, fmtNum(productBreakdown.length), " products")), /*#__PURE__*/React.createElement("div", {
+    className: "card",
+    style: {
+      padding: 0,
+      overflow: 'hidden'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      overflowX: 'auto',
+      maxHeight: 520
+    }
+  }, /*#__PURE__*/React.createElement("table", {
+    className: "data-table",
+    style: { minWidth: 820 }
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Product"), /*#__PURE__*/React.createElement("th", null, "Line"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Units Sold"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Gross Sales"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Discounts"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Net Sales"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Avg Unit $"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Listed $"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Current Inv."))), /*#__PURE__*/React.createElement("tbody", null, productBreakdown.slice(pbPg.start, pbPg.end).map((p, i) => /*#__PURE__*/React.createElement("tr", {
+    key: i
+  }, /*#__PURE__*/React.createElement("td", null, p.name), /*#__PURE__*/React.createElement("td", {
+    className: "dim"
+  }, p.line), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, fmtNum(Math.round(p.units))), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, fmtMoneyFull(p.gross)), /*#__PURE__*/React.createElement("td", {
+    className: "num dim"
+  }, fmtMoneyFull(p.discounts)), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, /*#__PURE__*/React.createElement("strong", null, fmtMoneyFull(p.netSales))), /*#__PURE__*/React.createElement("td", {
+    className: "num dim"
+  }, fmtMoneyFull(p.avgUnitPrice)), /*#__PURE__*/React.createElement("td", {
+    className: "num dim"
+  }, fmtMoneyFull(p.listedPrice)), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, p.currentInventory == null ? /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: 'var(--text-faint)'
+    }
+  }, "\u2014") : fmtNum(Math.round(p.currentInventory)))))))), /*#__PURE__*/React.createElement(Pager, { pager: pbPg, total: productBreakdown.length, unit: "products" }))), React.createElement(SalesByCategory, { rows: filtered }), React.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "section-header"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, "Monthly ", /*#__PURE__*/React.createElement("em", null, "breakdown")), /*#__PURE__*/React.createElement("span", {
+    className: "section-meta"
+  }, monthlyBreakdown.length, " months")), /*#__PURE__*/React.createElement("div", {
+    className: "card",
+    style: {
+      padding: 0,
+      overflow: 'hidden'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      overflowX: 'auto',
+      maxHeight: 560
+    }
+  }, /*#__PURE__*/React.createElement("table", {
+    className: "data-table"
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Month"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Units"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Cases"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Gross Sales"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Discounts"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "Net Sales"), /*#__PURE__*/React.createElement("th", {
+    className: "num"
+  }, "MOM \xB1"))), /*#__PURE__*/React.createElement("tbody", null, monthlyBreakdown.map((m, i) => /*#__PURE__*/React.createElement("tr", {
+    key: i
+  }, /*#__PURE__*/React.createElement("td", null, m.monthName), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, fmtNum(Math.round(m.units))), /*#__PURE__*/React.createElement("td", {
+    className: "num dim"
+  }, m.cases.toFixed(1)), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, fmtMoneyFull(m.gross)), /*#__PURE__*/React.createElement("td", {
+    className: "num dim"
+  }, fmtMoneyFull(m.discounts)), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, /*#__PURE__*/React.createElement("strong", null, fmtMoneyFull(m.netSales))), /*#__PURE__*/React.createElement("td", {
+    className: "num",
+    style: {
+      color: m.mom == null ? 'var(--text-faint)' : m.mom >= 0 ? 'var(--accent)' : 'var(--rose)'
+    }
+  }, m.mom == null ? '—' : (m.mom >= 0 ? '+' : '') + m.mom.toFixed(1) + '%'))), monthlyBreakdown.length > 0 && /*#__PURE__*/React.createElement("tr", {
+    style: {
+      background: 'var(--bg-elev-2)',
+      fontWeight: 600
+    }
+  }, /*#__PURE__*/React.createElement("td", null, "TOTAL"), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, fmtNum(Math.round(monthlyBreakdown.reduce((s, m) => s + m.units, 0)))), /*#__PURE__*/React.createElement("td", {
+    className: "num dim"
+  }, monthlyBreakdown.reduce((s, m) => s + m.cases, 0).toFixed(1)), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, fmtMoneyFull(monthlyBreakdown.reduce((s, m) => s + m.gross, 0))), /*#__PURE__*/React.createElement("td", {
+    className: "num dim"
+  }, fmtMoneyFull(monthlyBreakdown.reduce((s, m) => s + m.discounts, 0))), /*#__PURE__*/React.createElement("td", {
+    className: "num"
+  }, /*#__PURE__*/React.createElement("strong", null, fmtMoneyFull(monthlyBreakdown.reduce((s, m) => s + m.netSales, 0)))), /*#__PURE__*/React.createElement("td", {
+    className: "num dim"
+  }, "\u2014"))))))), React.createElement(RevenueOverTime, { rows: filtered }), React.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "grid-2"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "section-header"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, "Sales ", /*#__PURE__*/React.createElement("em", null, "by rep")), /*#__PURE__*/React.createElement("span", {
+    className: "section-meta"
+  }, byRep.length, " reps")), /*#__PURE__*/React.createElement("div", {
+    className: "card",
+    style: {
+      height: 360
+    }
+  }, /*#__PURE__*/React.createElement(ResponsiveContainer, {
+    width: "100%",
+    height: "100%"
+  }, /*#__PURE__*/React.createElement(BarChart, {
+    data: byRep,
+    layout: "vertical",
+    margin: {
+      top: 8,
+      right: 16,
+      left: 8,
+      bottom: 8
+    }
+  }, /*#__PURE__*/React.createElement(CartesianGrid, {
+    stroke: "#e7ecf2",
+    strokeDasharray: "2 2",
+    horizontal: false
+  }), /*#__PURE__*/React.createElement(XAxis, {
+    type: "number",
+    stroke: "#a7b2c0",
+    tick: {
+      fontSize: 11,
+      fontFamily: 'JetBrains Mono'
+    },
+    tickFormatter: fmtMoney,
+    axisLine: false,
+    tickLine: false
+  }), /*#__PURE__*/React.createElement(YAxis, {
+    type: "category",
+    dataKey: "name",
+    stroke: "#a7b2c0",
+    tick: {
+      fontSize: 11
+    },
+    width: 130,
+    axisLine: false,
+    tickLine: false
+  }), /*#__PURE__*/React.createElement(Tooltip, {
+    contentStyle: {
+      background: '#ffffff',
+      border: '1px solid #e7ecf2',
+      borderRadius: 4,
+      fontSize: 12
+    },
+    formatter: v => [fmtMoneyFull(v), 'Revenue']
+  }), /*#__PURE__*/React.createElement(Bar, {
+    dataKey: "revenue",
+    fill: "#7A4FB0",
+    radius: [0, 2, 2, 0]
+  }))))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "section-header"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, "By ", /*#__PURE__*/React.createElement("em", null, "category")), /*#__PURE__*/React.createElement("span", {
+    className: "section-meta"
+  }, "mix")), /*#__PURE__*/React.createElement("div", {
+    className: "card",
+    style: {
+      height: 360,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }
+  }, /*#__PURE__*/React.createElement(ResponsiveContainer, {
+    width: "100%",
+    height: "100%"
+  }, /*#__PURE__*/React.createElement(PieChart, null, /*#__PURE__*/React.createElement(Pie, {
+    data: byCategory,
+    dataKey: "revenue",
+    nameKey: "name",
+    cx: "50%",
+    cy: "50%",
+    innerRadius: 60,
+    outerRadius: 110,
+    paddingAngle: 2,
+    stroke: "#ffffff",
+    strokeWidth: 2
+  }, byCategory.map((_, i) => {
+    const colors = ['#8B5FBF', '#5E3E96', '#C3A6E6', '#4C8CA0', '#C2772A', '#6B7B8C', '#A7B2C0'];
+    return /*#__PURE__*/React.createElement(Cell, {
+      key: i,
+      fill: colors[i % colors.length]
+    });
+  })), /*#__PURE__*/React.createElement(Tooltip, {
+    contentStyle: {
+      background: '#ffffff',
+      border: '1px solid #e7ecf2',
+      borderRadius: 4,
+      fontSize: 12
+    },
+    formatter: v => fmtMoneyFull(v)
+  }), /*#__PURE__*/React.createElement(Legend, {
+    verticalAlign: "bottom",
+    iconType: "square",
+    wrapperStyle: {
+      fontSize: 11,
+      fontFamily: 'JetBrains Mono',
+      color: '#566274'
+    }
+  }))))))), React.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "section-header"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, "Payment ", /*#__PURE__*/React.createElement("em", null, "status")), /*#__PURE__*/React.createElement("span", {
+    className: "section-meta"
+  }, "AR mix")), /*#__PURE__*/React.createElement("div", {
+    className: "card"
+  }, /*#__PURE__*/React.createElement(RankList, {
+    data: paymentMix.map(p => ({
+      name: p.name,
+      revenue: p.value
+    }))
+  }))), React.createElement("section", {
+    className: "section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "grid-half"
+  }, /*#__PURE__*/React.createElement(RankCard, {
+    title: "Top products",
+    data: topProducts
+  }), /*#__PURE__*/React.createElement(RankCard, {
+    title: "Top buyers",
+    data: topBuyers
+  }))), /*#__PURE__*/React.createElement("footer", {
+    style: {
+      marginTop: 60,
+      padding: '20px 0',
+      borderTop: '1px solid var(--border)',
+      display: 'flex',
+      justifyContent: 'space-between',
+      fontFamily: 'JetBrains Mono',
+      fontSize: 11,
+      color: 'var(--text-faint)',
+      textTransform: 'uppercase',
+      letterSpacing: '0.12em'
+    }
+  }, /*#__PURE__*/React.createElement("span", null, "Chill Medicated \xB7 Sales Intelligence"), /*#__PURE__*/React.createElement("span", null, "Auto-refresh every 60s")));
+}
+
+// --- Components -------------------------------------------------------------
+function Topbar({
+  fetchedAt,
+  rowCount,
+  totalCount
+}) {
+  const ago = Math.floor((Date.now() - fetchedAt.getTime()) / 60000);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "topbar"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "brand-mark",
+    style: {
+      alignItems: 'center',
+      gap: 16
+    }
+  }, /*#__PURE__*/React.createElement("img", {
+    src: "logo.png",
+    alt: "Chill Medicated",
+    style: {
+      height: 48,
+      width: 'auto',
+      flexShrink: 0
+    }
+  }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", {
+    className: "brand-name",
+    style: {
+      lineHeight: 1,
+      fontSize: 26
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      background: 'linear-gradient(90deg, #8B5FBF 0%, #4A2E7A 100%)',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      backgroundClip: 'text'
+    }
+  }, "Chill"), ' ', /*#__PURE__*/React.createElement("em", {
+    style: {
+      color: 'var(--text-dim)',
+      fontStyle: 'italic',
+      fontWeight: 400
+    }
+  }, "Medicated")), /*#__PURE__*/React.createElement("div", {
+    className: "brand-tag",
+    style: {
+      marginTop: 4,
+      border: 'none',
+      padding: 0,
+      fontSize: 9
+    }
+  }, "New Jersey \xB7 Sales Intelligence"))), /*#__PURE__*/React.createElement("div", {
+    className: "topbar-meta"
+  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, fmtNum(rowCount)), " / ", fmtNum(totalCount), " rows"), /*#__PURE__*/React.createElement("span", null, "\xB7"), /*#__PURE__*/React.createElement("span", null, "Updated ", ago < 1 ? 'just now' : ago + 'm ago'), /*#__PURE__*/React.createElement("span", {
+    className: "pulse"
+  })));
+}
+function FilterBar({
+  filters,
+  setFilters,
+  distinct,
+  onReset,
+  rows
+}) {
+  const e = React.createElement;
+  const upd = (k, v) => setFilters(f => ({ ...f, [k]: v }));
+  const group = (label, control) => e("div", { className: "filter-group" },
+    e("label", { className: "filter-label" }, label), control);
+  const sel = (key, opts) => e("select", {
+    className: "filter-select", value: filters[key],
+    onChange: ev => upd(key, ev.target.value)
+  }, e("option", { value: "" }, "All"), opts.map(o => e("option", { key: o }, o)));
+
+  return e("div", { className: "filters" },
+    group("From", e("input", { type: "date", className: "filter-input", value: filters.from, onChange: ev => upd('from', ev.target.value) })),
+    group("To", e("input", { type: "date", className: "filter-input", value: filters.to, onChange: ev => upd('to', ev.target.value) })),
+    e("div", { className: "filter-group", style: { minWidth: 'auto' } },
+      e("label", { className: "filter-label" }, "Quick range"),
+      e("div", { style: { display: 'flex', gap: 6, flexWrap: 'wrap' } },
+        [['Today', 0], ['Last 7 days', 7], ['MTD', 'mtd'], ['Last month', 'lastmonth'], ['90 days', 90], ['YTD', 'ytd']].map(([lbl, d]) => {
+          // Compute the from/to this preset represents, so we can both apply it and
+          // highlight it in blue when it matches the current filter range.
+          const t = new Date();
+          const fmt = x => `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, '0')}-${String(x.getDate()).padStart(2, '0')}`;
+          let from, to = t;
+          if (d === 'ytd') { from = new Date(t.getFullYear(), 0, 1); }
+          else if (d === 'mtd') { from = new Date(t.getFullYear(), t.getMonth(), 1); }
+          else if (d === 'lastmonth') {
+            from = new Date(t.getFullYear(), t.getMonth() - 1, 1);
+            to = new Date(t.getFullYear(), t.getMonth(), 0);
+          }
+          else { from = new Date(t); from.setDate(from.getDate() - d); }
+          const fromS = fmt(from), toS = fmt(to);
+          const active = filters.from === fromS && filters.to === toS;
+          return e("button", { key: lbl, className: "date-preset" + (active ? " active" : ""),
+            onClick: () => setFilters(f => ({ ...f, from: fromS, to: toS })) }, lbl);
+        }))),
+    group("Product", e("input", { type: "text", className: "filter-input", placeholder: "search products\u2026", value: filters.product, onChange: ev => upd('product', ev.target.value) })),
+    group("Sales Rep", sel('rep', distinct.reps)),
+    e("div", { className: "filter-group", style: { minWidth: 180 } },
+      e("label", { className: "filter-label" }, "Buyer ", e("span", { style: { textTransform: 'none', letterSpacing: 0, color: 'var(--text-faint)' } }, "· multi")),
+      e(MultiSelect, {
+        options: distinct.buyers,
+        selected: Array.isArray(filters.buyer) ? filters.buyer : (filters.buyer ? [filters.buyer] : []),
+        onChange: vals => upd('buyer', vals),
+        labelFn: buyerBusinessName,
+        placeholder: "All buyers"
+      })),
+    group("Payment", sel('status', distinct.statuses)),
+    group("Invoice #", e("input", { type: "text", className: "filter-input", placeholder: "search\u2026", value: filters.invoice, onChange: ev => upd('invoice', ev.target.value) })),
+    group("Product Line", sel('productLine', distinct.productLines)),
+    e("div", { className: "filter-group", style: { justifyContent: 'flex-end' } },
+      e("label", { className: "filter-label", style: { display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', marginTop: 'auto', paddingBottom: 9 } },
+        e("input", { type: "checkbox", checked: filters.excludeSamples, onChange: ev => upd('excludeSamples', ev.target.checked), style: { accentColor: 'var(--accent)', width: 14, height: 14 } }),
+        "Exclude samples")),
+    e("div", { className: "filter-group", style: { minWidth: 'auto', marginLeft: 'auto', alignSelf: 'flex-end' } },
+      e("label", { className: "filter-label" }, "Download report"),
+      e("div", { style: { display: 'flex', gap: 6 } },
+        e("button", { className: "date-preset", onClick: () => downloadReportExcel(rows, filters), title: "Download the report as Excel, using the filters currently applied" }, "\u2b07 Excel"),
+        e("button", { className: "date-preset", onClick: () => downloadReportPDF(rows, filters), title: "Download the report as PDF, using the filters currently applied" }, "\u2b07 PDF"))),
+    e("button", {
+      className: "filter-reset",
+      onClick: onReset,
+      style: {
+        marginLeft: 16, alignSelf: 'flex-end',
+        background: 'var(--accent)', color: '#ffffff', border: 'none',
+        fontWeight: 700, padding: '10px 22px', borderRadius: 6,
+        boxShadow: '0 3px 12px rgba(20,35,60,0.16)', cursor: 'pointer',
+        letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: 12
+      }
+    }, "Reset"));
+}
+function Kpi({
+  label,
+  value,
+  sub,
+  accent
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: 'kpi' + (accent ? ' kpi-accent' : '')
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "kpi-label"
+  }, label), /*#__PURE__*/React.createElement("div", {
+    className: "kpi-value tabular"
+  }, value), sub && /*#__PURE__*/React.createElement("div", {
+    className: "kpi-sub"
+  }, sub));
+}
+function RankCard({
+  title,
+  data
+}) {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "section-header"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "section-title"
+  }, title.split(' ')[0], " ", /*#__PURE__*/React.createElement("em", null, title.split(' ').slice(1).join(' '))), /*#__PURE__*/React.createElement("span", {
+    className: "section-meta"
+  }, "top ", data.length)), /*#__PURE__*/React.createElement("div", {
+    className: "card"
+  }, /*#__PURE__*/React.createElement(RankList, {
+    data: data
+  })));
+}
+function RankList({
+  data
+}) {
+  const max = Math.max(...data.map(d => d.revenue), 1);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "rank-list"
+  }, data.length === 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: 20,
+      color: 'var(--text-faint)',
+      textAlign: 'center',
+      fontSize: 13
+    }
+  }, "No data"), data.map((d, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "rank-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "rank-num"
+  }, String(i + 1).padStart(2, '0')), /*#__PURE__*/React.createElement("div", {
+    className: "rank-name",
+    title: d.name
+  }, d.name), /*#__PURE__*/React.createElement("div", {
+    className: "rank-value"
+  }, fmtMoneyFull(d.revenue)), /*#__PURE__*/React.createElement("div", {
+    className: "rank-bar",
+    style: {
+      width: `calc(${(d.revenue / max * 100).toFixed(1)}% - 80px)`
+    }
+  }))));
+}
+function StatusPill({
+  status
+}) {
+  if (!status) return /*#__PURE__*/React.createElement("span", {
+    className: "dim"
+  }, "\u2014");
+  const cls = status.toLowerCase().includes('complet') ? 'pill-completed' : status.toLowerCase().includes('overdue') ? 'pill-overdue' : 'pill-pending';
+  return /*#__PURE__*/React.createElement("span", {
+    className: 'pill ' + cls
+  }, status);
+}
+
+// --- Mount ------------------------------------------------------------------
+ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
+</script>
+
+<script>
+/* Fail-loud watchdog (self-hosted build: libraries load from this repo root). */
+(function () {
+  function diagnose() {
+    var root = document.getElementById('root');
+    if (!root || root.childElementCount > 0) return;
+    var libs = { React: typeof window.React, ReactDOM: typeof window.ReactDOM, Recharts: typeof window.Recharts };
+    var missing = Object.keys(libs).filter(function (k) { return libs[k] === 'undefined'; });
+    var why = missing.length
+      ? 'These library files did not load: <b>' + missing.join(', ') + '</b>. Make sure react.production.min.js, react-dom.production.min.js, prop-types.min.js and Recharts.js were uploaded into the same folder as dashboard.html.'
+      : 'The libraries loaded but the app did not render. A hard refresh usually clears this.';
+    root.innerHTML =
+      '<div style="max-width:680px;margin:80px auto;padding:28px;background:var(--bg-elev,#ffffff);border:1px solid var(--border,#e7ecf2);border-left:3px solid var(--warm,#e0a85a);border-radius:10px;color:var(--text,#1a2230);font-family:Inter,system-ui,sans-serif">'
+      + '<div style="font-family:Fraunces,serif;font-size:22px;font-style:italic;margin-bottom:10px">Dashboard didn\u2019t load</div>'
+      + '<p style="color:var(--text-dim,#566274);line-height:1.7;font-size:14px;margin:0 0 12px">' + why + '</p>'
+      + '<button onclick="location.reload()" style="background:var(--accent,#6E42A6);border:none;color:#ffffff;font-weight:600;padding:9px 16px;border-radius:7px;cursor:pointer;font-family:JetBrains Mono,monospace;font-size:12px">Reload</button>'
+      + '</div>';
+  }
+  setTimeout(diagnose, 5000);
+})();
+</script>
+
+<style id="dash-nav-styles">
+  #dash-nav{position:sticky;top:0;z-index:60;background:rgba(255,255,255,0.82);-webkit-backdrop-filter:saturate(1.3) blur(10px);backdrop-filter:saturate(1.3) blur(10px);border-bottom:1px solid var(--border);}
+  #dash-nav .dn-inner{max-width:1600px;margin:0 auto;padding:9px clamp(22px,5vw,44px);display:flex;align-items:center;justify-content:space-between;gap:16px;}
+  .dn-btn{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-dim);background:#ffffff;border:1px solid var(--border);border-radius:9px;padding:8px 13px;cursor:pointer;text-decoration:none;transition:all .15s;}
+  .dn-btn:hover{color:var(--accent);border-color:var(--brand-cyan);background:var(--bg-elev-2);}
+  .dn-btn svg{width:14px;height:14px;}
+  .dn-jump-wrap{position:relative;}
+  .dn-menu{position:absolute;top:calc(100% + 8px);right:0;min-width:260px;max-height:62vh;overflow:auto;background:var(--bg-elev);border:1px solid var(--border);border-radius:12px;box-shadow:0 14px 36px rgba(20,35,60,0.18);padding:6px;display:none;}
+  .dn-menu.open{display:block;}
+  .dn-item{display:flex;align-items:center;gap:10px;width:100%;text-align:left;font-family:'Inter',sans-serif;font-size:13px;color:var(--text);background:transparent;border:none;border-radius:8px;padding:9px 11px;cursor:pointer;transition:background .12s,color .12s;}
+  .dn-item:hover{background:var(--bg-elev-2);color:var(--accent);}
+  .dn-item .dn-idx{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-faint);min-width:18px;text-align:right;}
+  @media print{#dash-nav{display:none;}}
+</style>
+<script>
+(function(){
+  /* ===== EDIT THIS: URL of the 4-card landing page ("Back to main page" target) ===== */
+  var HUB_URL = 'https://sales-intelligence.chill-hub.workers.dev/';
+  if (document.getElementById('dash-nav')) return;
+  var backSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>';
+  var caret = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>';
+  var nav = document.createElement('div');
+  nav.id = 'dash-nav';
+  nav.innerHTML = '<div class="dn-inner">'
+    + '<a class="dn-btn" href="' + HUB_URL + '">' + backSvg + 'Back to main page</a>'
+    + '<div class="dn-jump-wrap"><button class="dn-btn" id="dn-jump" aria-haspopup="true">Jump to section ' + caret + '</button>'
+    + '<div class="dn-menu" id="dn-menu"></div></div>'
+    + '</div>';
+  document.body.insertBefore(nav, document.body.firstChild);
+  var btn = nav.querySelector('#dn-jump'), menu = nav.querySelector('#dn-menu');
+  function navH(){ return nav.getBoundingClientRect().height || 52; }
+  function build(){
+    menu.innerHTML = '';
+    var items = [{ label: 'Overview (top)', el: null }];
+    document.querySelectorAll('.app .section-title').forEach(function(t){
+      items.push({ label: t.textContent.trim(), el: t });
+    });
+    items.forEach(function(it, i){
+      var b = document.createElement('button');
+      b.className = 'dn-item';
+      b.innerHTML = '<span class="dn-idx">' + (i === 0 ? '&bull;' : String(i).padStart(2,'0')) + '</span><span>' + it.label + '</span>';
+      b.addEventListener('click', function(){
+        close();
+        var y = it.el ? (it.el.getBoundingClientRect().top + window.pageYOffset - navH() - 16) : 0;
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+      });
+      menu.appendChild(b);
+    });
+  }
+  function open(){ build(); menu.classList.add('open'); }
+  function close(){ menu.classList.remove('open'); }
+  btn.addEventListener('click', function(e){ e.stopPropagation(); menu.classList.contains('open') ? close() : open(); });
+  document.addEventListener('click', function(e){ if (!nav.contains(e.target)) close(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+})();
+</script>
+<style id="back-to-top-styles">
+  #back-to-top{ position:fixed; right:24px; bottom:24px; z-index:70; width:44px; height:44px; display:flex; align-items:center; justify-content:center; background:var(--accent,#0EB1E8); color:#ffffff; border:none; border-radius:50%; box-shadow:0 6px 18px rgba(20,35,60,0.22); cursor:pointer; opacity:0; visibility:hidden; transform:translateY(10px); transition:opacity .2s, transform .2s, visibility .2s, background .15s; }
+  #back-to-top.show{ opacity:1; visibility:visible; transform:translateY(0); }
+  #back-to-top:hover{ background:var(--brand-purple,#8462AF); }
+  #back-to-top svg{ width:20px; height:20px; }
+  @media print{ #back-to-top{ display:none; } }
+</style>
+<script>
+(function(){
+  if (document.getElementById('back-to-top')) return;
+  var btn=document.createElement('button'); btn.id='back-to-top'; btn.type='button';
+  btn.setAttribute('aria-label','Back to top'); btn.title='Back to top';
+  btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>';
+  document.body.appendChild(btn);
+  var toggle=function(){ if(window.pageYOffset>300) btn.classList.add('show'); else btn.classList.remove('show'); };
+  window.addEventListener('scroll',toggle,{passive:true}); toggle();
+  btn.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+})();
+</script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-08-20T12:33:23.307553+00:00",
+  "fetched_at": "2026-08-20T12:48:00.064727+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
@@ -836,7 +836,7 @@
       "sales_reps": "",
       "sales_reps_display": "",
       "payment_dates": [],
-      "is_sample": false,
+      "is_sample": true,
       "notes": "",
       "product_sku": "40fa86c05854beeda4bf",
       "current_inventory": 438.0

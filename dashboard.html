@@ -120,10 +120,39 @@
   .ms-clear { background: transparent; border: none; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; }
   .ms-clear:hover { color: var(--accent); }
   .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 1px 2px rgba(20,35,60,0.04), 0 10px 30px rgba(20,35,60,0.06); }
-  .kpi { background: var(--bg-elev); padding: 22px 22px; display: flex; flex-direction: column; gap: 6px; position: relative; transition: background 0.18s; }
+  .kpi { background: var(--bg-elev); padding: 20px 18px; display: flex; flex-direction: column; gap: 6px; position: relative; transition: background 0.18s; }
   .kpi:hover { background: var(--bg-elev-2); }
   .kpi-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-faint); }
-  .kpi-value { font-family: 'Fraunces', serif; font-weight: 400; font-size: 44px; line-height: 1.04; letter-spacing: -0.025em; color: var(--text); font-variant-numeric: tabular-nums; }
+  /* Full, unrounded figures are far longer than the abbreviated "$1.2M" form.
+     The figure is sized off the CARD's own width (container query units), not
+     the viewport, so it fills the card whatever the grid does - 4-across,
+     5-across on the AR aging row, or stacked on a phone. 10cqw keeps a
+     15-character worst case like $122,807,459.72 on one line; nowrap
+     guarantees it never breaks mid-number.
+     The vw values below are the fallback for browsers without container
+     queries, and are deliberately more conservative. */
+  .kpi { container-type: inline-size; }
+  .kpi-value {
+    font-family: 'Fraunces', serif; font-weight: 400;
+    font-size: clamp(21px, 2.3vw, 40px);
+    line-height: 1.08; letter-spacing: -0.03em; color: var(--text);
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  .ar-theme .kpi-value { font-size: clamp(19px, 1.75vw, 31px); }
+  @media (max-width: 1100px) {
+    .kpi-value { font-size: clamp(22px, 4.6vw, 40px); }
+    .ar-theme .kpi-value { font-size: clamp(20px, 4vw, 34px); }
+  }
+  @supports (font-size: 1cqw) {
+    /* 9cqw fills the card while leaving headroom for a 15-character figure
+       such as $122,807,459.72 in a narrow 5-across AR cell. */
+    .kpi-value,
+    .ar-theme .kpi-value { font-size: clamp(20px, 9cqw, 60px); }
+    @media (max-width: 1100px) {
+      .kpi-value,
+      .ar-theme .kpi-value { font-size: clamp(22px, 9cqw, 60px); }
+    }
+  }
   .kpi-sub { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); margin-top: 2px; }
   .kpi-accent .kpi-value { background-image: linear-gradient(120deg, var(--brand-cyan) 0%, var(--brand-peri) 55%, var(--brand-purple) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
   .kpi::before { content: ''; position: absolute; top: 0; left: 0; width: 32px; height: 2px; background: linear-gradient(90deg, var(--brand-cyan), var(--brand-purple)); opacity: 0; transition: opacity 0.2s; }
@@ -968,11 +997,11 @@ function AccountsReceivable({ data }) {
     style: Object.assign({ cursor: key ? 'pointer' : 'default' }, color ? { borderTop: '2px solid ' + color } : {}, (key && bucketSel === key) ? { background: 'var(--bg-elev-2)' } : {})
   }, e('div', { className: 'kpi-label' }, label), e('div', { className: 'kpi-value tabular' }, value), sub ? e('div', { className: 'kpi-sub' }, sub) : null);
   const kpiGrid = e('div', { className: 'kpi-grid', style: { gridTemplateColumns: 'repeat(5, 1fr)' } },
-    cell('Total Outstanding', fmtMoney(tot.total), fmtNum(tot.count) + ' invoices', null, null, true),
-    cell('Current', fmtMoney(tot.current), pctOf(tot.current) + ' of AR', AGE[0].color, 'current'),
-    cell('31–60 days', fmtMoney(tot.b3160), pctOf(tot.b3160) + ' of AR', AGE[1].color, 'b3160'),
-    cell('61–90 days', fmtMoney(tot.b6190), pctOf(tot.b6190) + ' of AR', AGE[2].color, 'b6190'),
-    cell('91+ days', fmtMoney(tot.b91), pctOf(tot.b91) + ' of AR', AGE[3].color, 'b91'));
+    cell('Total Outstanding', fmtMoneyFull(tot.total), fmtNum(tot.count) + ' invoices', null, null, true),
+    cell('Current', fmtMoneyFull(tot.current), pctOf(tot.current) + ' of AR', AGE[0].color, 'current'),
+    cell('31–60 days', fmtMoneyFull(tot.b3160), pctOf(tot.b3160) + ' of AR', AGE[1].color, 'b3160'),
+    cell('61–90 days', fmtMoneyFull(tot.b6190), pctOf(tot.b6190) + ' of AR', AGE[2].color, 'b6190'),
+    cell('91+ days', fmtMoneyFull(tot.b91), pctOf(tot.b91) + ' of AR', AGE[3].color, 'b91'));
 
   // ── Aging donut + Top balances ──
   const donutBlock = e('div', null,
@@ -1156,8 +1185,8 @@ function InventoryView({ data }) {
     e('button', { className: 'filter-reset', onClick: () => { setQ(''); setLineSel(''); }, style: { marginLeft: 'auto', alignSelf: 'flex-end', background: 'var(--accent)', color: '#fff', border: 'none', fontWeight: 700, padding: '10px 22px', borderRadius: 6, cursor: 'pointer', letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: 12 } }, 'Reset'));
 
   const kpis = e('div', { className: 'kpi-grid' },
-    e(Kpi, { label: 'Units On Hand', value: fmtNum(Math.round(onHandTotal)), sub: fmtNum(skus) + ' SKUs · ' + fmtMoney(onHandValue), accent: true }),
-    e(Kpi, { label: 'On-Hand Value', value: fmtMoney(onHandValue), sub: fmtNum(listedN) + ' listed' }),
+    e(Kpi, { label: 'Units On Hand', value: fmtNum(Math.round(onHandTotal)), sub: fmtNum(skus) + ' SKUs · ' + fmtMoneyFull(onHandValue), accent: true }),
+    e(Kpi, { label: 'On-Hand Value', value: fmtMoneyFull(onHandValue), sub: fmtNum(listedN) + ' listed' }),
     e(Kpi, { label: 'Out of Stock', value: fmtNum(outN), sub: 'SKUs · 0 on hand' }),
     e(Kpi, { label: 'Low Stock', value: fmtNum(lowN), sub: '< 14 days of supply' }));
 
@@ -1597,6 +1626,7 @@ function Prospecting({ data }) {
 function App() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
+  const [stale, setStale] = useState(null);
   const [tab, setTab] = useState('sales'); // 'sales' | 'ar'
   const [filters, setFilters] = useState({
     from: '',
@@ -1612,33 +1642,85 @@ function App() {
     excludeSamples: false,
     cogsRatio: 0.45
   });
+  // Data loader.
+  //
+  // GitHub rate-limits raw.githubusercontent.com and answers 429 "Too Many
+  // Requests" if a page fetches too often. Three things here keep us under it:
+  //
+  //   1. POLL EVERY 10 MINUTES, not every 60s. The scraper only commits about
+  //      every 10 minutes, so a one-minute poll re-downloaded megabytes to find
+  //      the same bytes nine times out of ten.
+  //   2. NO CACHE-BUSTING QUERY STRING. `?t=` + Date.now() made every request a
+  //      guaranteed cache miss. raw.githubusercontent sends max-age=300, so
+  //      normal caching removes most requests outright and a revalidate costs
+  //      a 304 with no body.
+  //   3. BACK OFF ON 429. Retrying a rate-limited host on the same schedule
+  //      only deepens the block. Each 429 doubles the wait, up to an hour.
+  //
+  // A failed refresh also no longer wipes the screen: once data has loaded, a
+  // later failure keeps the figures and flags them as stale instead of showing
+  // the "No data yet" card.
+  const POLL_MS = 10 * 60 * 1000;
+  const MAX_BACKOFF_MS = 60 * 60 * 1000;
   useEffect(() => {
+    let cancelled = false;
+    let timer = null;
+    let backoff = 0;
+    const BASE = 'https://raw.githubusercontent.com/chill-medicatedhub/apex-dashboard-newjersey/refs/heads/main/';
+    const grab = name => fetch(BASE + name, { cache: 'default' }).then(r => {
+      if (r.status === 429) {
+        const e = new Error('GitHub is rate-limiting requests for this network (HTTP 429). The dashboard will retry automatically.');
+        e.rateLimited = true;
+        throw e;
+      }
+      return r;
+    });
+    const schedule = ms => {
+      if (cancelled) return;
+      clearTimeout(timer);
+      timer = setTimeout(load, ms);
+    };
     const load = () => {
       Promise.all([
-        fetch('https://raw.githubusercontent.com/chill-medicatedhub/apex-dashboard-newjersey/refs/heads/main/sales_data.json?t=' + Date.now()).then(r => {
-          if (!r.ok) throw new Error('Could not load sales_data.json');
+        grab('sales_data.json').then(r => {
+          if (!r.ok) throw new Error('Could not load sales_data.json (HTTP ' + r.status + ')');
           return r.json();
         }),
         // Historical backfill (2024 LeafLink). Optional: if the file is missing
-        // or fails to parse, fall back to live-only instead of breaking.
-        fetch('https://raw.githubusercontent.com/chill-medicatedhub/apex-dashboard-newjersey/refs/heads/main/historical_data.json?t=' + Date.now())
-          .then(r => r.ok ? r.json() : { rows: [] })
-          .catch(() => ({ rows: [] })),
+        // or fails to parse, fall back to live-only instead of breaking. A 429
+        // still propagates, so the whole load backs off rather than silently
+        // dropping history.
+        grab('historical_data.json').then(r => r.ok ? r.json() : { rows: [] })
+          .catch(e => { if (e.rateLimited) throw e; return { rows: [] }; }),
         // Prospect list (licensed retailers). Optional: powers the New/potential buyers section.
-        fetch('https://raw.githubusercontent.com/chill-medicatedhub/apex-dashboard-newjersey/refs/heads/main/prospects.json?t=' + Date.now())
-          .then(r => r.ok ? r.json() : null)
-          .catch(() => null)
+        grab('prospects.json').then(r => r.ok ? r.json() : null)
+          .catch(e => { if (e.rateLimited) throw e; return null; })
       ]).then(([live, hist, prospects]) => {
+        if (cancelled) return;
         const histRows = Array.isArray(hist) ? hist : (hist.rows || []);
         // _liveRows = current Apex data only. Used by Accounts Receivable, which must
         // ignore the 2024 historical backfill (old records with stale "Unpaid" flags
         // and no due dates would otherwise inflate AR with settled invoices).
         setData({ ...live, rows: [...histRows, ...(live.rows || [])], _liveRows: live.rows || [], prospects: prospects });
-      }).catch(e => setError(e.message));
+        setError(null);
+        setStale(null);
+        backoff = 0;
+        schedule(POLL_MS);
+      }).catch(e => {
+        if (cancelled) return;
+        setData(d => {
+          if (d) setStale(e.message);else setError(e.message);
+          return d;
+        });
+        backoff = e.rateLimited ? Math.min(backoff ? backoff * 2 : POLL_MS, MAX_BACKOFF_MS) : POLL_MS;
+        schedule(backoff);
+      });
     };
     load();
-    const id = setInterval(load, 60000); // refresh every minute
-    return () => clearInterval(id);
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
   }, []);
   if (error) {
     return /*#__PURE__*/React.createElement("div", {
@@ -2404,7 +2486,7 @@ function Dashboard({
     className: "kpi-grid"
   }, /*#__PURE__*/React.createElement(Kpi, {
     label: "Net Revenue",
-    value: fmtMoney(kpis.revenue),
+    value: fmtMoneyFull(kpis.revenue),
     sub: `${fmtNum(kpis.lineItems)} line items`,
     accent: true
   }), /*#__PURE__*/React.createElement(Kpi, {
@@ -2414,7 +2496,7 @@ function Dashboard({
   }), /*#__PURE__*/React.createElement(Kpi, {
     label: "Orders",
     value: fmtNum(kpis.orders),
-    sub: `${fmtMoney(kpis.avgOrder)} avg order`
+    sub: `${fmtMoneyFull(kpis.avgOrder)} avg order`
   }), /*#__PURE__*/React.createElement(Kpi, {
     label: "Units Sold",
     value: fmtNum(Math.round(kpis.units)),
@@ -2441,11 +2523,11 @@ function Dashboard({
     className: "kpi-grid"
   }, /*#__PURE__*/React.createElement(Kpi, {
     label: "Discounts Given",
-    value: fmtMoney(kpis.discounts),
+    value: fmtMoneyFull(kpis.discounts),
     sub: kpis.grossRevenue ? (kpis.discounts / (kpis.grossRevenue + kpis.discounts) * 100).toFixed(1) + '% of gross' : '—'
   }), /*#__PURE__*/React.createElement(Kpi, {
     label: "Credits Applied",
-    value: fmtMoney(kpis.credits),
+    value: fmtMoneyFull(kpis.credits),
     sub: kpis.creditCount ? `${fmtNum(kpis.creditOrders)} invoice${kpis.creditOrders === 1 ? '' : 's'} · applied as payment` : 'none in current view'
   })), /*#__PURE__*/React.createElement("section", {
     className: "section"

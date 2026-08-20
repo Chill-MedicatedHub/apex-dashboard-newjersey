@@ -419,6 +419,22 @@ const parseDate = str => {
   const d = new Date(s);
   return isNaN(d) ? null : d;
 };
+
+// Pull a settlement date out of Apex's payment_dates array. Entries look like
+// "Payment of $1,045.22 on 03/17/2026" or a plain date; take the latest one.
+const parsePaidDate = pd => {
+  if (!pd) return null;
+  const arr = Array.isArray(pd) ? pd : [pd];
+  let best = null;
+  arr.forEach(x => {
+    const m = String(x || '').match(/(\d{1,2}\/\d{1,2}\/\d{2,4}|\d{4}-\d{2}-\d{2})/);
+    if (!m) return;
+    const d = parseDate(m[1]);
+    if (d && (!best || d > best)) best = d;
+  });
+  return best;
+};
+
 const ymd = d => {
   if (!(d instanceof Date) || isNaN(d)) return '';
   const y = d.getFullYear();
@@ -1048,6 +1064,74 @@ function AccountsReceivable({ data }) {
           AGE.map(a => e(Bar, { key: a.key, dataKey: a.key, name: a.label, stackId: 'a', fill: a.color, radius: [0, 2, 2, 0] }))))));
 
   // ── Open invoices table ──
+  // ── Paid invoices ─────────────────────────────────────────────────────
+  // Companion to the open-receivables list above: every invoice that HAS been
+  // settled. Same rows, but selecting the paid statuses instead of the open
+  // ones. Vocabulary differs by market (MA "Completed", MO lowercase
+  // "completed", MI "Paid"), and NJ reports no payment status at all - there a
+  // populated paid_date is the signal. All three cases are handled below.
+  const paidInvoices = React.useMemo(() => {
+    const PAID_ST = { paid:1, completed:1, complete:1, 'paid in full':1, 'fully paid':1, settled:1, closed:1 };
+    const map = {};
+    rows.forEach(r => {
+      const stRaw = r.payment_status || '';
+      const st = String(stRaw).toLowerCase().trim();
+      const pDate = parseDate(r.paid_date_raw || r.paid_date) || parsePaidDate(r.payment_dates);
+      if (!PAID_ST[st] && !pDate) return;
+      const id = r.order_number || r.order_id || r.order;
+      if (!id) return;
+      if (!map[id]) {
+        map[id] = {
+          invoice: r.order_number || r.order_id || ('#' + r.order),
+          buyer: r.buyer_name || '\u2014',
+          destination: r.buyer_shipping_name || r.buyer_name || '\u2014',
+          license: r.buyer_license || '\u2014',
+          rep: repOf(r),
+          status: stRaw || 'Paid',
+          orderDate: parseDate(r.order_date_localized_raw || r.order_date_utc_raw || r.order_date_localized || r.order_date_utc || r.order_date_raw || r.order_date),
+          dueDate: parseDate(r.due_date_raw || r.due_date),
+          deliveryDate: parseDate(r.delivery_date_raw || r.delivery_date),
+          paidDate: pDate,
+          addlDiscount: typeof r.additional_discounts === 'number' ? r.additional_discounts / 100 : parseMoney(r.additional_discounts),
+          amount: 0
+        };
+      }
+      if (!map[id].paidDate && pDate) map[id].paidDate = pDate;
+      const lineRev = typeof r.line_total_raw === 'number' ? r.line_total_raw / 100 : parseMoney(r.line_total || r.computed_sale_price);
+      if (lineRev) { map[id].amount += lineRev; map[id]._hasLine = true; }
+      else if (!map[id]._hasLine) {
+        map[id].orderRev = typeof r.order_total === 'number' ? r.order_total : (typeof r.order_price === 'number' ? r.order_price / 100 : 0);
+      }
+    });
+    return Object.values(map).map(o => {
+      const total = Math.max(0, (o._hasLine ? o.amount : (o.orderRev || 0)) - (o.addlDiscount || 0));
+      const due = o.dueDate || (o.orderDate ? new Date(o.orderDate.getTime() + 30 * 86400000) : null);
+      // Days to pay: settlement date minus due date. Negative = paid early.
+      const daysToPay = (o.paidDate && due) ? Math.round((o.paidDate.getTime() - due.getTime()) / 86400000) : null;
+      return Object.assign({}, o, { total, due, daysToPay });
+    }).filter(o => o.total > 0);
+  }, [rows]);
+
+  const paidShown = React.useMemo(() => paidInvoices.filter(o => {
+    if (buyerSel.length && !buyerSel.includes(o.buyer)) return false;
+    if (repSel && o.rep !== repSel) return false;
+    if (q) { const s = (o.invoice + ' ' + o.buyer + ' ' + o.rep).toLowerCase(); if (!s.includes(q.toLowerCase())) return false; }
+    return true;
+  }), [paidInvoices, buyerSel, repSel, q]);
+
+  const paidSorted = React.useMemo(() => paidShown.slice().sort((a, b) =>
+    (b.paidDate ? b.paidDate.getTime() : 0) - (a.paidDate ? a.paidDate.getTime() : 0)), [paidShown]);
+  const paidPg = usePager(paidSorted.length, 50);
+  const paidTot = React.useMemo(() => {
+    let sum = 0, withDate = 0, dsum = 0;
+    paidShown.forEach(o => {
+      sum += o.total;
+      if (o.daysToPay != null) { withDate++; dsum += o.daysToPay; }
+    });
+    return { sum: sum, avgDays: withDate ? Math.round(dsum / withDate) : null, count: paidShown.length };
+  }, [paidShown]);
+
+
   const invTable = e('section', { className: 'section' },
     e('div', { className: 'section-header' },
       e('h2', { className: 'section-title' }, 'Open ', e('em', null, 'invoices')),
@@ -1085,6 +1169,46 @@ function AccountsReceivable({ data }) {
     e('div', { style: { fontFamily: 'JetBrains Mono, monospace', fontSize: 11, color: 'var(--text-dim)', lineHeight: 1.7 } },
       'AR lists invoices whose payment status is Unpaid / Partial / Overdue (and similar). ',
       rows.length ? ('Statuses present in ' + fmtNum(rows.length) + ' rows: ' + (_statusSummary.length ? _statusSummary.join('  \u00b7  ') : 'none') + '.') : 'The feed has no rows yet.')) : null;
+  // ── Paid invoices table ──
+  const paidTable = e('section', { className: 'section' },
+    e('div', { className: 'section-header' },
+      e('h2', { className: 'section-title' }, 'Paid ', e('em', null, 'invoices')),
+      e('div', { style: { display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' } },
+        e('span', { className: 'section-meta' },
+          fmtNum(paidTot.count) + ' invoices \u00b7 ' + fmtMoneyFull(paidTot.sum)
+          + (paidTot.avgDays != null ? ' \u00b7 avg ' + (paidTot.avgDays > 0 ? paidTot.avgDays + 'd late' : Math.abs(paidTot.avgDays) + 'd early') : '')
+          + ' \u00b7 newest first'))),
+    e('div', { className: 'card', style: { padding: 0, overflow: 'hidden' } },
+      e('div', { style: { overflowX: 'auto', maxHeight: 560 } },
+        e('table', { className: 'data-table', style: { minWidth: 1180 } },
+          e('thead', null, e('tr', null,
+            e('th', null, 'Paid Date'),
+            e('th', null, 'Invoice #'),
+            e('th', null, 'Destination'),
+            e('th', null, 'License #'),
+            e('th', null, 'Delivery Date'),
+            e('th', null, 'Due Date'),
+            e('th', { className: 'num' }, 'Days To Pay'),
+            e('th', { className: 'num' }, 'Invoice Total'),
+            e('th', null, 'Status'),
+            e('th', null, 'Rep'))),
+          e('tbody', null,
+            paidSorted.length === 0
+              ? e('tr', null, e('td', { colSpan: 10, style: { padding: 20, color: 'var(--text-faint)', textAlign: 'center' } }, 'No paid invoices match the filters.'))
+              : paidSorted.slice(paidPg.start, paidPg.end).map((o, i) => e('tr', { key: i },
+                  e('td', { className: 'dim font-mono' }, fmtD(o.paidDate)),
+                  e('td', { className: 'font-mono', style: { color: 'var(--accent)' } }, o.invoice),
+                  e('td', { title: o.destination, style: { whiteSpace: 'normal', minWidth: 150 } }, o.destination),
+                  e('td', { className: 'font-mono dim', style: { fontSize: 11 } }, o.license),
+                  e('td', { className: 'dim font-mono' }, fmtD(o.deliveryDate)),
+                  e('td', { className: 'dim font-mono' }, fmtD(o.due)),
+                  e('td', { className: 'num', style: { color: o.daysToPay == null ? 'var(--text-faint)' : (o.daysToPay > 0 ? '#d6433f' : '#2e9e57') } },
+                    o.daysToPay == null ? '\u2014' : (o.daysToPay > 0 ? o.daysToPay + 'd late' : (o.daysToPay === 0 ? 'on time' : Math.abs(o.daysToPay) + 'd early'))),
+                  e('td', { className: 'num' }, e('strong', null, fmtMoneyFull(o.total))),
+                  e('td', { className: 'dim' }, o.status),
+                  e('td', { className: 'dim' }, o.rep))))))),
+      e(Pager, { pager: paidPg, total: paidSorted.length, unit: 'invoices' }));
+
   return e('div', { className: 'app ar-theme' },
     e(Topbar, { fetchedAt: fetchedAt, rowCount: shown.length, totalCount: invoices.length }),
     e('div', { style: { marginBottom: 6 } },
@@ -1097,7 +1221,8 @@ function AccountsReceivable({ data }) {
     kpiGrid,
     twoUp,
     repChart,
-    invTable);
+    invTable,
+    paidTable);
 }
 
 function InventoryView({ data }) {

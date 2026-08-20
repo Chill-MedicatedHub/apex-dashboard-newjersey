@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-08-20T19:48:26.803851+00:00",
+  "fetched_at": "2026-08-20T20:03:47.710453+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
@@ -2991,8 +2991,8 @@
       "discounts": 0,
       "additional_discounts": 0,
       "batch_cost_of_goods": "",
-      "order_status": "Shipped",
-      "payment_status": "Shipped",
+      "order_status": "Complete",
+      "payment_status": "Complete",
       "classification": "Adult Use",
       "sales_rep": "",
       "sales_reps": "",

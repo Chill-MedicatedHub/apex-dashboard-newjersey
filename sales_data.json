@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-08-24T11:48:15.129218+00:00",
+  "fetched_at": "2026-08-24T12:03:43.437087+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
@@ -13,8 +13,8 @@
       "line": "",
       "brand": "Chill Medicated",
       "status": "available",
-      "inventory": 105.0,
-      "reserved": 15.0,
+      "inventory": 90.0,
+      "reserved": 0.0,
       "available": 90.0
     },
     {
@@ -24,8 +24,8 @@
       "line": "",
       "brand": "Chill Medicated",
       "status": "available",
-      "inventory": 305.0,
-      "reserved": 15.0,
+      "inventory": 290.0,
+      "reserved": 0.0,
       "available": 290.0
     },
     {
@@ -35,8 +35,8 @@
       "line": "",
       "brand": "Chill Medicated",
       "status": "available",
-      "inventory": 69.0,
-      "reserved": 15.0,
+      "inventory": 54.0,
+      "reserved": 0.0,
       "available": 54.0
     },
     {
@@ -46,8 +46,8 @@
       "line": "",
       "brand": "Chill Medicated",
       "status": "available",
-      "inventory": 210.0,
-      "reserved": 30.0,
+      "inventory": 195.0,
+      "reserved": 15.0,
       "available": 180.0
     },
     {
@@ -68,8 +68,8 @@
       "line": "",
       "brand": "Chill Medicated",
       "status": "available",
-      "inventory": 132.0,
-      "reserved": 30.0,
+      "inventory": 117.0,
+      "reserved": 15.0,
       "available": 102.0
     },
     {
@@ -79,8 +79,8 @@
       "line": "",
       "brand": "Chill Medicated",
       "status": "available",
-      "inventory": 240.0,
-      "reserved": 30.0,
+      "inventory": 225.0,
+      "reserved": 15.0,
       "available": 210.0
     },
     {
@@ -112,8 +112,8 @@
       "line": "",
       "brand": "Chill Medicated",
       "status": "available",
-      "inventory": 367.0,
-      "reserved": 15.0,
+      "inventory": 352.0,
+      "reserved": 0.0,
       "available": 352.0
     },
     {
@@ -123,8 +123,8 @@
       "line": "",
       "brand": "Chill Medicated",
       "status": "available",
-      "inventory": 315.0,
-      "reserved": 15.0,
+      "inventory": 300.0,
+      "reserved": 0.0,
       "available": 300.0
     },
     {
@@ -134,8 +134,8 @@
       "line": "",
       "brand": "Chill Medicated",
       "status": "available",
-      "inventory": 128.0,
-      "reserved": 15.0,
+      "inventory": 113.0,
+      "reserved": 0.0,
       "available": 113.0
     },
     {
@@ -145,8 +145,8 @@
       "line": "",
       "brand": "Chill Medicated",
       "status": "available",
-      "inventory": 487.0,
-      "reserved": 15.0,
+      "inventory": 472.0,
+      "reserved": 0.0,
       "available": 472.0
     }
   ],
@@ -185,8 +185,8 @@
       "discounts": 0,
       "additional_discounts": 0,
       "batch_cost_of_goods": "",
-      "order_status": "Accepted",
-      "payment_status": "Accepted",
+      "order_status": "Fulfilled",
+      "payment_status": "Fulfilled",
       "classification": "Adult Use",
       "sales_rep": "Ron Morton",
       "sales_reps": "Ron Morton",
@@ -231,8 +231,8 @@
       "discounts": 0,
       "additional_discounts": 0,
       "batch_cost_of_goods": "",
-      "order_status": "Accepted",
-      "payment_status": "Accepted",
+      "order_status": "Fulfilled",
+      "payment_status": "Fulfilled",
       "classification": "Adult Use",
       "sales_rep": "Ron Morton",
       "sales_reps": "Ron Morton",
@@ -277,8 +277,8 @@
       "discounts": 0,
       "additional_discounts": 0,
       "batch_cost_of_goods": "",
-      "order_status": "Accepted",
-      "payment_status": "Accepted",
+      "order_status": "Fulfilled",
+      "payment_status": "Fulfilled",
       "classification": "Adult Use",
       "sales_rep": "Ron Morton",
       "sales_reps": "Ron Morton",
@@ -323,8 +323,8 @@
       "discounts": 0,
       "additional_discounts": 0,
       "batch_cost_of_goods": "",
-      "order_status": "Accepted",
-      "payment_status": "Accepted",
+      "order_status": "Fulfilled",
+      "payment_status": "Fulfilled",
       "classification": "Adult Use",
       "sales_rep": "Ron Morton",
       "sales_reps": "Ron Morton",
@@ -369,8 +369,8 @@
       "discounts": 0,
       "additional_discounts": 0,
       "batch_cost_of_goods": "",
-      "order_status": "Accepted",
-      "payment_status": "Accepted",
+      "order_status": "Fulfilled",
+      "payment_status": "Fulfilled",
       "classification": "Adult Use",
       "sales_rep": "Ron Morton",
       "sales_reps": "Ron Morton",
@@ -415,8 +415,8 @@
       "discounts": 0,
       "additional_discounts": 0,
       "batch_cost_of_goods": "",
-      "order_status": "Accepted",
-      "payment_status": "Accepted",
+      "order_status": "Fulfilled",
+      "payment_status": "Fulfilled",
       "classification": "Adult Use",
       "sales_rep": "Ron Morton",
       "sales_reps": "Ron Morton",
@@ -461,8 +461,8 @@
       "discounts": 0,
       "additional_discounts": 0,
       "batch_cost_of_goods": "",
-      "order_status": "Accepted",
-      "payment_status": "Accepted",
+      "order_status": "Fulfilled",
+      "payment_status": "Fulfilled",
       "classification": "Adult Use",
       "sales_rep": "Ron Morton",
       "sales_reps": "Ron Morton",
@@ -507,8 +507,8 @@
       "discounts": 0,
       "additional_discounts": 0,
       "batch_cost_of_goods": "",
-      "order_status": "Accepted",
-      "payment_status": "Accepted",
+      "order_status": "Fulfilled",
+      "payment_status": "Fulfilled",
       "classification": "Adult Use",
       "sales_rep": "Ron Morton",
       "sales_reps": "Ron Morton",
@@ -553,8 +553,8 @@
       "discounts": 0,
       "additional_discounts": 0,
       "batch_cost_of_goods": "",
-      "order_status": "Accepted",
-      "payment_status": "Accepted",
+      "order_status": "Fulfilled",
+      "payment_status": "Fulfilled",
       "classification": "Adult Use",
       "sales_rep": "Ron Morton",
       "sales_reps": "Ron Morton",
@@ -599,8 +599,8 @@
       "discounts": 0,
       "additional_discounts": 0,
       "batch_cost_of_goods": "",
-      "order_status": "Accepted",
-      "payment_status": "Accepted",
+      "order_status": "Fulfilled",
+      "payment_status": "Fulfilled",
       "classification": "Adult Use",
       "sales_rep": "Ron Morton",
       "sales_reps": "Ron Morton",
@@ -645,8 +645,8 @@
       "discounts": 0,
       "additional_discounts": 0,
       "batch_cost_of_goods": "",
-      "order_status": "Accepted",
-      "payment_status": "Accepted",
+      "order_status": "Fulfilled",
+      "payment_status": "Fulfilled",
       "classification": "Adult Use",
       "sales_rep": "Ron Morton",
       "sales_reps": "Ron Morton",
@@ -655,7 +655,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "c08056a0-756e-465a-b36e-21c6402659bf",
@@ -1299,7 +1299,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "d6ad53df-a7c0-4698-9e35-586dd8b6ab2d",
@@ -1345,7 +1345,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "8fc6105a-feb9-40fb-a674-ff9636cb27d6",
@@ -1989,7 +1989,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "744cae32-4916-4f26-8afa-c455028246a2",
@@ -2955,7 +2955,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "a1e0fd16-e580-4060-a8b0-89262d134330",
@@ -3507,7 +3507,7 @@
       "is_sample": false,
       "notes": "Order ID: US10367581 \n\n\nOrder ID: US10367582",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "2ce178f5-daa9-4aec-93d5-c7a7da12c73f",
@@ -3599,7 +3599,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "631b8423-166b-4dbb-bfd2-0e2662f388e9",
@@ -3783,7 +3783,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "cb34eaf5-181f-4bf4-82b6-c6479d544255",
@@ -4289,7 +4289,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "eed7ee72-5485-4ac1-a335-2c4ffc00f579",
@@ -4841,7 +4841,7 @@
       "is_sample": false,
       "notes": "will send Subzero and Maxx units once testing is back on those. Promo and Sample units included.",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "17848e24-5b10-452d-8794-e6fa1bf71f2b",
@@ -5025,7 +5025,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "dbe0004e-06f7-491f-a439-07197fbc0d9d",
@@ -5531,7 +5531,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "c7e26640-3385-4c43-bed7-a09a84ca6fd5",
@@ -5669,7 +5669,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "db03e802-4c5e-434a-8f9b-4139474ecb9b",
@@ -5853,7 +5853,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "7e164219-fada-4afe-be4c-7a10192dd14b",
@@ -6083,7 +6083,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "8967f0e2-da67-4b0c-ba0c-63cb50507a67",
@@ -6451,7 +6451,7 @@
       "is_sample": false,
       "notes": "delivery asap",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "4fbfc556-a5f9-4f5e-a1b2-2cce1f593aa4",
@@ -6773,7 +6773,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "d108d350-3579-4a26-81a5-499f3f76080b",
@@ -7187,7 +7187,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "e2765766-fefa-4c8d-890d-e4798a85f0ae",
@@ -7417,7 +7417,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "963209af-18e9-46dc-8020-789668c4c6eb",
@@ -7601,7 +7601,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "802b5b27-9b5d-44df-ad8f-4a8cfba3a402",
@@ -8429,7 +8429,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "26c87984-cb65-4440-8d28-5ee9c0e55bb1",
@@ -8659,7 +8659,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "9c6f7418-5c4c-48c9-b8a4-4824796c0968",
@@ -9165,7 +9165,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "869cb034-b572-4bed-8538-4916727667d5",
@@ -9717,7 +9717,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "d491a36c-86c5-4666-9622-103d11e57bff",
@@ -10223,7 +10223,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "a5275730-d98f-44c4-ba4a-d82459449b70",
@@ -10821,7 +10821,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "4c6b3a8e-803f-4f36-9502-4cffd893b3db",
@@ -11373,7 +11373,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "2207008f-c065-47c7-86d2-7ecdde466d73",
@@ -11925,7 +11925,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "1e6a72f5-e13c-437a-bb62-c2499240a872",
@@ -12293,7 +12293,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "94fcdb44-2a98-445f-90f3-69462ccca78a",
@@ -12569,7 +12569,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "a043ec62-c7fc-441a-b656-a6cc236ee31f",
@@ -12891,7 +12891,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "9c567f11-69ab-40b4-96fd-959a5136e04e",
@@ -13167,7 +13167,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "a0341fda-449d-4c43-aea4-1d5031d5ffb2",
@@ -13535,7 +13535,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "6dca10ee-28d4-41b1-9390-b73682ae97a6",
@@ -13627,7 +13627,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "d64363fd-1bed-47c5-a6e3-394f18c84285",
@@ -13857,7 +13857,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "ea5f9a39-5b45-4950-bbf8-04e26d10beb3",
@@ -14133,7 +14133,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "7d1bc9d6-ff57-466c-bf81-9ecbd0ed9b0b",
@@ -14915,7 +14915,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "7b79529e-eaa1-4ff6-99cd-838f1828b09c",
@@ -15237,7 +15237,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "5dbf30a9-c1c5-4d94-8c6b-2886e1c66c4c",
@@ -15559,7 +15559,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "bff53cd5-8af3-49f0-9199-aca01c338e78",
@@ -16111,7 +16111,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "79a75ee2-230b-4b96-97fd-c90cfa9570a8",
@@ -16341,7 +16341,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "0392b56a-bd05-4a94-8a5c-c4ff0c0e6f07",
@@ -16939,7 +16939,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "3a23b357-5a30-47ff-b89c-e3f624d32dce",
@@ -17307,7 +17307,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "26333a89-0d10-4610-a5bc-ed3681528a12",
@@ -17951,7 +17951,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "31f82f16-3501-438d-b81f-462be82a4751",
@@ -18181,7 +18181,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "09bbee2f-9279-4b0e-a395-17bbfd8e8918",
@@ -18503,7 +18503,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "b23c1f62-b44e-4b08-9535-436eb15b5995",
@@ -18963,7 +18963,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "efc67ab0-9db9-4f36-8e3c-a5822e96668d",
@@ -19009,7 +19009,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "cb9193db-d0f1-41e1-b496-5cb060155c1f",
@@ -19331,7 +19331,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "1050341e-20a7-4793-bab8-061a19fdf7dd",
@@ -19975,7 +19975,7 @@
       "is_sample": false,
       "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "3aad1262-f115-4d0c-91a9-da4d803070be",
@@ -20159,7 +20159,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "e52c7c7d-c5ad-4ef8-8820-00507555f63d",
@@ -20343,7 +20343,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "3be7956d-35fc-4172-a7f3-5d9c70adf734",
@@ -20849,7 +20849,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "55a851d3-6b62-41db-8e51-f595a4d90c74",
@@ -21539,7 +21539,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "52b1a9eb-0ed9-4c50-b3a6-cd6b5e89cd2d",
@@ -22229,7 +22229,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "cda52dbf-40da-4fa5-b991-b019ae4d40a7",
@@ -22965,7 +22965,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "a3ba2541-2c2a-42de-a9d5-d8a6c439d4d1",
@@ -23563,7 +23563,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "200920c2-6be9-403e-8b5b-33ade59768ed",
@@ -24161,7 +24161,7 @@
       "is_sample": false,
       "notes": "",
       "product_sku": "chillb2btax",
-      "current_inventory": -1.0
+      "current_inventory": 0.0
     }
   ]
 }

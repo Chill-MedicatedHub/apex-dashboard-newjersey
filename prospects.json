@@ -1,8 +1,8 @@
 {
-  "as_of": "2026-08-25",
+  "as_of": "2026-08-26",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
-  "count": 293,
+  "count": 294,
   "records": [
     {
       "name": "Red Oak Dispensary - Absecon",
@@ -2236,6 +2236,17 @@
       "phone": "2677560050",
       "email": "apinvoices@ianthus.com",
       "website": "https://mpxnj.com/"
+    },
+    {
+      "name": "CannaVerde",
+      "license": "RE0074",
+      "type": "",
+      "status": "",
+      "city": "Plainfield",
+      "state": "NJ",
+      "phone": "9089414649",
+      "email": "Christina@cannaverdenj.com",
+      "website": "https://cannaverdenj.com"
     },
     {
       "name": "Island Vibez",

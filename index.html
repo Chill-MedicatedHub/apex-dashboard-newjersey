@@ -209,7 +209,9 @@
   .crm-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px 20px; }
   .crm-field-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase;
     letter-spacing: 0.1em; color: var(--text-faint); margin-bottom: 2px; }
-  .crm-field-value { font-size: 13px; color: var(--text); }
+  .crm-field-value { font-size: 13px; color: var(--text); word-break: break-word; }
+  .crm-contact { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent); }
+  .crm-contact:hover { border-bottom-style: solid; }
   .crm-textarea { width: 100%; min-height: 82px; resize: vertical; padding: 10px 12px;
     background: var(--bg-elev-2); color: var(--text); border: 1px solid var(--border);
     border-radius: var(--radius-sm); font-family: 'Inter', sans-serif; font-size: 13px; }
@@ -947,6 +949,35 @@ const crmRepOf = r => (Array.isArray(r.sales_reps_display) && r.sales_reps_displ
 // in scope here; these are the same implementations.
 const crmFmtD = d => d ? ((d.getMonth() + 1) + '/' + String(d.getDate()).padStart(2, '0') + '/' + d.getFullYear()) : '\u2014';
 
+// Contact details for a customer.
+//
+// The order feed carries no email or phone - those live in the state licence
+// data already loaded for the Prospecting tab (prospects.json). Match on
+// license number first, since that is exact, and fall back to a normalised
+// name for markets whose order feed has no license field (NJ). Anything not
+// found simply shows a dash rather than a blank row.
+const crmNormKey = s => String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+
+function buildContactIndex(prospects) {
+  const recs = (prospects && (prospects.records || prospects)) || [];
+  const byLicense = {}, byName = {};
+  (Array.isArray(recs) ? recs : []).forEach(x => {
+    const lic = crmNormKey(x.license);
+    if (lic) byLicense[lic] = x;
+    const nm = crmNormKey(x.name);
+    if (nm && !byName[nm]) byName[nm] = x;
+  });
+  return { byLicense: byLicense, byName: byName };
+}
+
+function lookupContact(index, name, license) {
+  if (!index) return null;
+  const l = crmNormKey(license);
+  if (l && index.byLicense[l]) return index.byLicense[l];
+  const n = crmNormKey(name);
+  return (n && index.byName[n]) || null;
+}
+
 const CRM_API = (() => {
   // Same origin as the dashboard. Served through the Worker this resolves to
   // the Worker's /api routes; opened from anywhere else it simply fails and
@@ -982,6 +1013,7 @@ const fmtStamp = s => {
 function CRM({ data }) {
   const e = React.createElement;
   const rows = React.useMemo(() => (data && (data._liveRows || data.rows)) || [], [data]);
+  const contactIndex = React.useMemo(() => buildContactIndex(data && data.prospects), [data]);
   const [q, setQ] = React.useState('');
   const [sel, setSel] = React.useState(null);
 
@@ -1030,11 +1062,19 @@ function CRM({ data }) {
         if (!a.last || d > a.last) a.last = d;
       }
     });
-    return Object.values(m).map(a => Object.assign(a, {
-      orderCount: Object.keys(a.orders).length,
-      topProducts: Object.entries(a.products).sort((x, y) => y[1] - x[1]).slice(0, 5)
-    })).sort((x, y) => y.revenue - x.revenue);
-  }, [rows]);
+    return Object.values(m).map(a => {
+      const c = lookupContact(contactIndex, a.name, a.license) || {};
+      return Object.assign(a, {
+        orderCount: Object.keys(a.orders).length,
+        topProducts: Object.entries(a.products).sort((x, y) => y[1] - x[1]).slice(0, 5),
+        email: (c.email || '').trim(),
+        phone: (c.phone || '').trim(),
+        website: (c.website || '').trim(),
+        county: (c.county || '').trim(),
+        licenseType: (c.type || '').trim()
+      });
+    }).sort((x, y) => y.revenue - x.revenue);
+  }, [rows, contactIndex]);
 
   const shown = React.useMemo(() => {
     const s = q.trim().toLowerCase();
@@ -1072,7 +1112,7 @@ function CRM({ data }) {
               },
               e('div', { className: 'crm-row-name' }, buyerBusinessName(a.name)),
               e('div', { className: 'crm-row-sub' },
-                [a.city, a.license].filter(Boolean).join(' \u00b7 ') || '\u2014'),
+                [a.city, a.license, a.phone].filter(Boolean).join(' \u00b7 ') || '\u2014'),
               e('div', { className: 'crm-row-rev' }, fmtMoneyFull(a.revenue)))))),
 
       // ---- Profile ----
@@ -1101,6 +1141,19 @@ function CRMAccount({ account }) {
         crmField('Town', [a.city, a.state, a.zip].filter(Boolean).join(', ') || '\u2014'),
         crmField('Address', a.address || '\u2014'),
         crmField('Ship to', a.shipTo || '\u2014'),
+        crmField('Email', a.email
+          ? React.createElement('a', { href: 'mailto:' + a.email, className: 'crm-contact' }, a.email)
+          : '\u2014'),
+        crmField('Phone', a.phone
+          ? React.createElement('a', { href: 'tel:' + a.phone.replace(/[^\d+]/g, ''), className: 'crm-contact' }, a.phone)
+          : '\u2014'),
+        crmField('Website', a.website
+          ? React.createElement('a', {
+              href: /^https?:/i.test(a.website) ? a.website : 'https://' + a.website,
+              target: '_blank', rel: 'noopener noreferrer', className: 'crm-contact'
+            }, a.website.replace(/^https?:\/\//i, ''))
+          : '\u2014'),
+        crmField('License type', a.licenseType || '\u2014'),
         crmField('Sales rep', a.rep || '\u2014'),
         crmField('First order', a.first ? crmFmtD(a.first) : '\u2014'),
         crmField('Last order', a.last ? crmFmtD(a.last) : '\u2014'))),

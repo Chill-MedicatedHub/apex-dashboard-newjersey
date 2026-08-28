@@ -1,10 +1,10 @@
 {
-  "fetched_at": "2026-08-28T12:18:15.319497+00:00",
+  "fetched_at": "2026-08-28T12:33:19.267003+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
-  "orders_seen": 1860,
-  "orders_kept": 1833,
+  "orders_seen": 1861,
+  "orders_kept": 1834,
   "inventory": [
     {
       "id": "2675942",

@@ -978,6 +978,31 @@ function lookupContact(index, name, license) {
   return (n && index.byName[n]) || null;
 }
 
+// Line revenue, units and order id.
+//
+// Each market's scraper names these differently, so read them by preference
+// rather than assuming one shape:
+//   MA / NJ  line_total_raw (cents), quantity_raw, order_number
+//   MI       revenue (dollars),      quantity,     order_number
+//   MO       order_price (cents),    quantity,     order
+// Getting this wrong silently produces a customer list with zero revenue
+// against every account, so each field is tried in turn and the first usable
+// value wins.
+const crmLineRevenue = r => {
+  if (typeof r.line_total_raw === 'number') return r.line_total_raw / 100;
+  if (typeof r.revenue === 'number') return r.revenue;
+  if (typeof r.order_price === 'number') return r.order_price / 100;
+  const parsed = parseMoney(r.line_total || r.computed_sale_price || r.revenue || 0);
+  return parsed || 0;
+};
+
+const crmLineUnits = r => Number(
+  r.quantity_raw != null ? r.quantity_raw
+  : r.quantity != null ? r.quantity
+  : r.units_sold) || 0;
+
+const crmOrderId = r => r.order_number || r.order_id || r.order || null;
+
 const CRM_API = (() => {
   // Same origin as the dashboard. Served through the Worker this resolves to
   // the Worker's /api routes; opened from anywhere else it simply fails and
@@ -1047,11 +1072,10 @@ function CRM({ data }) {
       if (r.buyer_city) a.city = r.buyer_city;
       if (crmRepOf(r)) a.rep = crmRepOf(r);
 
-      const rev = typeof r.line_total_raw === 'number' ? r.line_total_raw / 100
-        : parseMoney(r.line_total || r.computed_sale_price || 0);
+      const rev = crmLineRevenue(r);
       a.revenue += rev || 0;
-      a.units += Number(r.quantity_raw != null ? r.quantity_raw : r.quantity) || 0;
-      const id = r.order_number || r.order_id;
+      a.units += crmLineUnits(r);
+      const id = crmOrderId(r);
       if (id) a.orders[id] = 1;
       const p = r.product_name;
       if (p) a.products[p] = (a.products[p] || 0) + (rev || 0);

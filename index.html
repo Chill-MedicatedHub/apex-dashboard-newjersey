@@ -958,12 +958,24 @@ const crmFmtD = d => d ? ((d.getMonth() + 1) + '/' + String(d.getDate()).padStar
 // found simply shows a dash rather than a blank row.
 const crmNormKey = s => String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
 
+// Some state licence records carry a placeholder instead of a real number -
+// Michigan has "NA", "N/A" and "N*A" on three different retailers, and once
+// punctuation is stripped they all collapse to the same key. Matching on that
+// attaches one retailer's phone number to another, so placeholders are treated
+// as "no licence" and those rows fall through to matching on name instead.
+const CRM_PLACEHOLDER_LICENSE = { na: 1, nan: 1, none: 1, null: 1, unknown: 1, tbd: 1, pending: 1, '': 1 };
+const crmLicenseKey = s => {
+  const k = crmNormKey(s);
+  return CRM_PLACEHOLDER_LICENSE[k] ? '' : k;
+};
+
 function buildContactIndex(prospects) {
   const recs = (prospects && (prospects.records || prospects)) || [];
   const byLicense = {}, byName = {};
   (Array.isArray(recs) ? recs : []).forEach(x => {
-    const lic = crmNormKey(x.license);
-    if (lic) byLicense[lic] = x;
+    const lic = crmLicenseKey(x.license);
+    // First record wins, so a later placeholder can never displace a real one.
+    if (lic && !byLicense[lic]) byLicense[lic] = x;
     const nm = crmNormKey(x.name);
     if (nm && !byName[nm]) byName[nm] = x;
   });
@@ -972,7 +984,7 @@ function buildContactIndex(prospects) {
 
 function lookupContact(index, name, license) {
   if (!index) return null;
-  const l = crmNormKey(license);
+  const l = crmLicenseKey(license);
   if (l && index.byLicense[l]) return index.byLicense[l];
   const n = crmNormKey(name);
   return (n && index.byName[n]) || null;

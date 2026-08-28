@@ -1,8 +1,8 @@
 {
-  "as_of": "2026-08-27",
+  "as_of": "2026-08-28",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
-  "count": 294,
+  "count": 295,
   "records": [
     {
       "name": "Red Oak Dispensary - Absecon",
@@ -1708,6 +1708,17 @@
       "phone": "7323952444",
       "email": "",
       "website": "https://honeygrovedispensary.com/shop/metuchen/"
+    },
+    {
+      "name": "Sage Dispensary",
+      "license": "RE000061",
+      "type": "",
+      "status": "",
+      "city": "MOUNT LAUREL",
+      "state": "NJ",
+      "phone": "3104380805",
+      "email": "elevatedconsultingca@gmail.com",
+      "website": "https://sagedispensary.com/"
     },
     {
       "name": "Elevated by the CannaBoss Lady",

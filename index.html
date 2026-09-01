@@ -223,7 +223,11 @@
   .crm-link-btn { background: none; border: none; cursor: pointer; color: var(--text-faint);
     font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
   .crm-link-btn:hover { color: #d6433f; }
-  .crm-add-row { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.4fr) auto; gap: 8px; align-items: center; }
+  .crm-detail-table td { padding: 4px 6px; }
+  .crm-detail-header td { padding-top: 14px; }
+  .crm-inline-header { font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); font-weight: 600; }
+  .crm-add-row { display: grid; grid-template-columns: auto minmax(0,1fr) minmax(0,1.4fr) auto; gap: 8px; align-items: center; }
   @media (max-width: 720px) { .crm-add-row { grid-template-columns: 1fr; } }
   .crm-inline-input { width: 100%; padding: 5px 8px; background: transparent; color: var(--text);
     border: 1px solid transparent; border-radius: var(--radius-sm); font-family: 'Inter', sans-serif; font-size: 13px; }
@@ -1100,7 +1104,6 @@ function CRMSalesforce({ sf, customer }) {
   sf = sf || {};
 
   const rows = [
-    ['Account owner', sf.owner, sf.owner_email],
     ['Rep name', sf.rep],
     ['Account number', sf.account_number],
     ['Status', sf.status],
@@ -1109,7 +1112,6 @@ function CRMSalesforce({ sf, customer }) {
     ['Payment method', sf.payment_method],
     ['Delivery preference', sf.delivery_preference],
     ['Service zone', sf.service_zone],
-    ['Account type', sf.type],
     ['Licence type', sf.license_type],
     ['Doing business as', sf.dba],
     ['LeafLink ID', sf.leaflink_id],
@@ -1169,7 +1171,12 @@ function CRMSalesforce({ sf, customer }) {
 
 function CRM({ data }) {
   const e = React.createElement;
-  const rows = React.useMemo(() => (data && (data._liveRows || data.rows)) || [], [data]);
+  // Use the SAME rows as the Sales tab - live Apex data plus the historical
+  // backfill. Reading _liveRows alone dropped every buyer that has not ordered
+  // since the current data begins: 175 of Massachusetts' 304, for instance,
+  // which meant the CRM quietly disagreed with the rest of the dashboard about
+  // who the customers are.
+  const rows = React.useMemo(() => (data && (data.rows || data._liveRows)) || [], [data]);
   const contactIndex = React.useMemo(() => buildContactIndex(data && data.prospects), [data]);
   const sfIndex = React.useMemo(() => buildSalesforceIndex(data && data.salesforce), [data]);
   const [q, setQ] = React.useState('');
@@ -1319,12 +1326,11 @@ function CRMAccount({ account, rows }) {
   // Clicking an invoice filters the products table to that invoice's lines.
   const [invoice, setInvoice] = React.useState(null);
 
-  // Every line this account has ever bought, kept once so the invoice list and
-  // the product list are built from the same source.
+  // Every line this account has bought, read once so the invoice list and the
+  // product list are built from the same source.
   const lines = React.useMemo(
     () => rows.filter(r => r.buyer_name === a.name), [rows, a.name]);
 
-  // ---- Invoices, open and paid ---------------------------------------
   const invoices = React.useMemo(() => {
     const m = {};
     lines.forEach(r => {
@@ -1336,11 +1342,11 @@ function CRMAccount({ account, rows }) {
           date: crmOrderDate(r),
           status: r.payment_status || r.order_status || '\u2014',
           paid: crmIsPaid(r),
-          total: 0, units: 0, discount: 0, credit: 0, lines: 0
+          total: 0, units: 0, discount: 0, credit: 0, lines: 0,
+          // payment_dates repeats on every line of an order, so the credit is
+          // read once per invoice rather than summed per line.
+          credit: crmLineCredit(r.payment_dates)
         };
-        // payment_dates repeats on every line of an order, so read the credit
-        // once per invoice rather than summing it per line.
-        m[id].credit = crmLineCredit(r.payment_dates);
       }
       const o = m[id];
       o.total += crmLineRevenue(r);
@@ -1362,13 +1368,16 @@ function CRMAccount({ account, rows }) {
     return { outstanding, credits, discounts };
   }, [invoices]);
 
-  // ---- Products, responsive to the invoice filter ---------------------
   const products = React.useMemo(() => {
     const src = invoice ? lines.filter(r => crmOrderId(r) === invoice) : lines;
     const m = {};
     src.forEach(r => {
       const n = r.product_name || '\u2014';
-      if (!m[n]) m[n] = { name: n, revenue: 0, units: 0, orders: {} };
+      if (!m[n]) m[n] = {
+        name: n,
+        line: r.product_type || r.product_line || r.product_category || '',
+        revenue: 0, units: 0, orders: {}
+      };
       m[n].revenue += crmLineRevenue(r);
       m[n].units += crmLineUnits(r);
       const id = crmOrderId(r);
@@ -1379,119 +1388,141 @@ function CRMAccount({ account, rows }) {
       .sort((x, y) => y.revenue - x.revenue);
   }, [lines, invoice]);
 
+  // ---- Sections, built as flat pieces rather than one deep expression ----
+
+  const profileCard = e('div', { className: 'card', style: { marginBottom: 16 } },
+    e('h2', { style: { fontFamily: 'Fraunces, serif', fontWeight: 500, fontSize: 22, margin: '0 0 4px' } },
+      buyerBusinessName(a.name)),
+    a.group && a.group !== a.name
+      ? e('div', { className: 'kpi-sub', style: { marginBottom: 12 } }, 'Part of ' + a.group)
+      : null,
+    e('div', { className: 'crm-fields' },
+      crmField('License #', a.license || '\u2014', true),
+      crmField('Town', [a.city, a.state, a.zip].filter(Boolean).join(', ') || '\u2014'),
+      crmField('Address', a.address || '\u2014'),
+      crmField('Ship to', a.shipTo || '\u2014'),
+      crmField('Email', a.email
+        ? e('a', { href: 'mailto:' + a.email, className: 'crm-contact' }, a.email) : '\u2014'),
+      crmField('Phone', a.phone
+        ? e('a', { href: 'tel:' + a.phone.replace(/[^\d+]/g, ''), className: 'crm-contact' }, a.phone) : '\u2014'),
+      crmField('Website', a.website
+        ? e('a', {
+            href: /^https?:/i.test(a.website) ? a.website : 'https://' + a.website,
+            target: '_blank', rel: 'noopener noreferrer', className: 'crm-contact'
+          }, a.website.replace(/^https?:\/\//i, '')) : '\u2014'),
+      crmField('License type', a.licenseType || '\u2014'),
+      crmField('Sales rep', a.rep || '\u2014'),
+      crmField('First order', a.first ? crmFmtD(a.first) : '\u2014'),
+      crmField('Last order', a.last ? crmFmtD(a.last) : '\u2014')));
+
+  const kpiGrid = e('div', {
+    className: 'kpi-grid',
+    style: { gridTemplateColumns: 'repeat(4, 1fr)', marginBottom: 16 }
+  },
+    crmKpi('Lifetime revenue', fmtMoneyFull(a.revenue)),
+    crmKpi('Orders', fmtNum(a.orderCount)),
+    crmKpi('Avg order', fmtMoneyFull(a.orderCount ? a.revenue / a.orderCount : 0)),
+    crmKpi('Units', fmtNum(a.units)),
+    crmKpi('Credits applied', fmtMoneyFull(totals.credits)),
+    crmKpi('Discounts given', fmtMoneyFull(totals.discounts)),
+    crmKpi('Total outstanding', fmtMoneyFull(totals.outstanding)),
+    crmKpi('Invoices', fmtNum(invoices.length)));
+
+  // Invoice rows. Column order matches the Sales tab: date, order, then money.
+  const invoiceRows = invoices.length === 0
+    ? [e('tr', { key: 'none' }, e('td', {
+        colSpan: 8,
+        style: { padding: 18, color: 'var(--text-faint)', textAlign: 'center' }
+      }, 'No invoices.'))]
+    : invoices.map((o, i) => e('tr', {
+        key: i,
+        className: 'crm-inv' + (invoice === o.id ? ' crm-inv-active' : ''),
+        // A second click on the same invoice clears the filter rather than
+        // trapping you in it.
+        onClick: () => setInvoice(invoice === o.id ? null : o.id)
+      },
+        e('td', { className: 'dim font-mono' }, o.date ? crmFmtD(o.date) : '\u2014'),
+        e('td', { className: 'font-mono', style: { color: 'var(--accent)' } }, '#' + o.id),
+        e('td', null, e('span', {
+          className: 'pill',
+          style: o.paid
+            ? { color: 'var(--text-faint)', borderColor: 'var(--border)' }
+            : { color: '#d6433f', borderColor: '#d6433f' }
+        }, o.paid ? 'Paid' : 'Open')),
+        e('td', { className: 'num dim' }, fmtNum(o.lines)),
+        e('td', { className: 'num dim' }, fmtNum(o.units)),
+        e('td', { className: 'num dim' }, o.discount ? fmtMoneyFull(o.discount) : '\u2014'),
+        e('td', { className: 'num dim' }, o.credit ? fmtMoneyFull(o.credit) : '\u2014'),
+        e('td', { className: 'num' }, e('strong', null, fmtMoneyFull(o.total)))));
+
+  const invoiceTable = e('section', { className: 'section' },
+    e('div', { className: 'section-header' },
+      e('h2', { className: 'section-title' }, 'All ', e('em', null, 'invoices')),
+      e('span', { className: 'section-meta' },
+        fmtNum(invoices.length) + ' invoices \u00b7 '
+        + fmtNum(invoices.filter(o => !o.paid).length) + ' open \u00b7 '
+        + fmtNum(invoices.filter(o => o.paid).length) + ' paid'
+        + (invoice ? ' \u00b7 filtering products by #' + invoice : ' \u00b7 click one to filter products'))),
+    e('div', { className: 'card', style: { padding: 0, overflow: 'hidden' } },
+      e('div', { style: { overflowX: 'auto', maxHeight: 420 } },
+        e('table', { className: 'data-table' },
+          e('thead', null, e('tr', null,
+            e('th', null, 'Date'),
+            e('th', null, 'Invoice #'),
+            e('th', null, 'Status'),
+            e('th', { className: 'num' }, 'Lines'),
+            e('th', { className: 'num' }, 'Units'),
+            e('th', { className: 'num' }, 'Discounts'),
+            e('th', { className: 'num' }, 'Credits'),
+            e('th', { className: 'num' }, 'Net Sales'))),
+          e('tbody', null, invoiceRows)))));
+
+  // Product rows. Same shape as the Sales tab's product breakdown.
+  const productRows = products.length === 0
+    ? [e('tr', { key: 'none' }, e('td', {
+        colSpan: 6,
+        style: { padding: 18, color: 'var(--text-faint)', textAlign: 'center' }
+      }, 'No products.'))]
+    : products.map((p, i) => e('tr', { key: i },
+        e('td', null, p.name),
+        e('td', { className: 'dim' }, p.line || '\u2014'),
+        e('td', { className: 'num dim' }, fmtNum(p.units)),
+        e('td', { className: 'num dim' }, fmtNum(p.orderCount)),
+        e('td', { className: 'num dim' }, p.units ? fmtMoneyFull(p.revenue / p.units) : '\u2014'),
+        e('td', { className: 'num' }, e('strong', null, fmtMoneyFull(p.revenue)))));
+
+  const productTable = e('section', { className: 'section' },
+    e('div', { className: 'section-header' },
+      e('h2', { className: 'section-title' }, 'All ', e('em', null, 'products')),
+      e('div', { style: { display: 'flex', alignItems: 'center', gap: 10 } },
+        e('span', { className: 'section-meta' },
+          fmtNum(products.length) + ' products'
+          + (invoice ? ' on invoice #' + invoice : ' across all invoices')),
+        invoice
+          ? e('button', { className: 'crm-btn', onClick: () => setInvoice(null) }, 'Clear filter')
+          : null)),
+    e('div', { className: 'card', style: { padding: 0, overflow: 'hidden' } },
+      e('div', { style: { overflowX: 'auto', maxHeight: 420 } },
+        e('table', { className: 'data-table' },
+          e('thead', null, e('tr', null,
+            e('th', null, 'Product'),
+            e('th', null, 'Line'),
+            e('th', { className: 'num' }, 'Units Sold'),
+            e('th', { className: 'num' }, 'Invoices'),
+            e('th', { className: 'num' }, 'Avg Price'),
+            e('th', { className: 'num' }, 'Net Sales'))),
+          e('tbody', null, productRows)))));
+
   return e(React.Fragment, null,
-    // ---- Profile header ----
-    e('div', { className: 'card', style: { marginBottom: 16 } },
-      e('h2', { style: { fontFamily: 'Fraunces, serif', fontWeight: 500, fontSize: 22, margin: '0 0 4px' } },
-        buyerBusinessName(a.name)),
-      a.group && a.group !== a.name
-        ? e('div', { className: 'kpi-sub', style: { marginBottom: 12 } }, 'Part of ' + a.group)
-        : null,
-      e('div', { className: 'crm-fields' },
-        crmField('License #', a.license || '\u2014', true),
-        crmField('Town', [a.city, a.state, a.zip].filter(Boolean).join(', ') || '\u2014'),
-        crmField('Address', a.address || '\u2014'),
-        crmField('Ship to', a.shipTo || '\u2014'),
-        crmField('Email', a.email
-          ? e('a', { href: 'mailto:' + a.email, className: 'crm-contact' }, a.email) : '\u2014'),
-        crmField('Phone', a.phone
-          ? e('a', { href: 'tel:' + a.phone.replace(/[^\d+]/g, ''), className: 'crm-contact' }, a.phone) : '\u2014'),
-        crmField('Website', a.website
-          ? e('a', {
-              href: /^https?:/i.test(a.website) ? a.website : 'https://' + a.website,
-              target: '_blank', rel: 'noopener noreferrer', className: 'crm-contact'
-            }, a.website.replace(/^https?:\/\//i, '')) : '\u2014'),
-        crmField('License type', a.licenseType || '\u2014'),
-        crmField('Sales rep', a.rep || '\u2014'),
-        crmField('First order', a.first ? crmFmtD(a.first) : '\u2014'),
-        crmField('Last order', a.last ? crmFmtD(a.last) : '\u2014'))),
-
-    // ---- KPI cards ----
-    e('div', { className: 'kpi-grid', style: { gridTemplateColumns: 'repeat(4, 1fr)', marginBottom: 16 } },
-      crmKpi('Lifetime revenue', fmtMoneyFull(a.revenue)),
-      crmKpi('Orders', fmtNum(a.orderCount)),
-      crmKpi('Avg order', fmtMoneyFull(a.orderCount ? a.revenue / a.orderCount : 0)),
-      crmKpi('Units', fmtNum(a.units)),
-      crmKpi('Credits applied', fmtMoneyFull(totals.credits)),
-      crmKpi('Discounts given', fmtMoneyFull(totals.discounts)),
-      crmKpi('Total outstanding', fmtMoneyFull(totals.outstanding)),
-      crmKpi('Invoices', fmtNum(invoices.length))),
-
-    // ---- Additional information: what Salesforce holds, plus the fields the
-    // team adds themselves. One section rather than two, because from a user's
-    // point of view they are the same thing - everything about this account
-    // that is not derived from its order history.
+    profileCard,
+    kpiGrid,
+    // Additional information carries both the Salesforce fields and the ones
+    // the team maintains, in a single card.
     e(CRMSalesforce, { sf: a.sf, customer: a.name }),
-
     e(CRMNotes, { customer: a.name }),
     e(CRMFiles, { customer: a.name }),
-
-    // ---- Invoices ----
-    e('section', { className: 'section' },
-      e('div', { className: 'section-header' },
-        e('h2', { className: 'section-title' }, 'All ', e('em', null, 'invoices')),
-        e('span', { className: 'section-meta' },
-          fmtNum(invoices.length) + ' invoices \u00b7 '
-          + fmtNum(invoices.filter(o => !o.paid).length) + ' open \u00b7 '
-          + fmtNum(invoices.filter(o => o.paid).length) + ' paid'
-          + (invoice ? ' \u00b7 filtering products by ' + invoice : ' \u00b7 click one to filter products'))),
-      e('div', { className: 'card', style: { padding: 0, overflow: 'hidden' } },
-        e('div', { style: { overflowX: 'auto', maxHeight: 420 } },
-          e('table', { className: 'data-table' },
-            e('thead', null, e('tr', null,
-              e('th', null, 'Invoice #'), e('th', null, 'Date'), e('th', null, 'Status'),
-              e('th', { className: 'num' }, 'Lines'), e('th', { className: 'num' }, 'Units'),
-              e('th', { className: 'num' }, 'Discount'), e('th', { className: 'num' }, 'Credit'),
-              e('th', { className: 'num' }, 'Total'))),
-            e('tbody', null, invoices.length === 0
-              ? e('tr', null, e('td', { colSpan: 8, style: { padding: 18, color: 'var(--text-faint)', textAlign: 'center' } }, 'No invoices.'))
-              : invoices.map((o, i) => e('tr', {
-                  key: i,
-                  className: 'crm-inv' + (invoice === o.id ? ' crm-inv-active' : ''),
-                  // Clicking toggles: a second click on the same invoice clears
-                  // the filter rather than trapping you in it.
-                  onClick: () => setInvoice(invoice === o.id ? null : o.id)
-                },
-                e('td', { className: 'font-mono', style: { color: 'var(--accent)' } }, o.id),
-                e('td', { className: 'dim font-mono' }, o.date ? crmFmtD(o.date) : '\u2014'),
-                e('td', null, e('span', {
-                  className: 'pill',
-                  style: o.paid
-                    ? { color: 'var(--text-faint)', borderColor: 'var(--border)' }
-                    : { color: '#d6433f', borderColor: '#d6433f' }
-                }, o.paid ? 'Paid' : 'Open')),
-                e('td', { className: 'num dim' }, fmtNum(o.lines)),
-                e('td', { className: 'num dim' }, fmtNum(o.units)),
-                e('td', { className: 'num dim' }, o.discount ? fmtMoneyFull(o.discount) : '\u2014'),
-                e('td', { className: 'num dim' }, o.credit ? fmtMoneyFull(o.credit) : '\u2014'),
-                e('td', { className: 'num' }, e('strong', null, fmtMoneyFull(o.total))))))))),
-
-    // ---- Products ----
-    e('section', { className: 'section' },
-      e('div', { className: 'section-header' },
-        e('h2', { className: 'section-title' }, 'All ', e('em', null, 'products')),
-        e('div', { style: { display: 'flex', alignItems: 'center', gap: 10 } },
-          e('span', { className: 'section-meta' },
-            fmtNum(products.length) + ' products'
-            + (invoice ? ' on invoice ' + invoice : ' across all invoices')),
-          invoice
-            ? e('button', { className: 'crm-btn', onClick: () => setInvoice(null) }, 'Clear filter')
-            : null)),
-      e('div', { className: 'card', style: { padding: 0, overflow: 'hidden' } },
-        e('div', { style: { overflowX: 'auto', maxHeight: 420 } },
-          e('table', { className: 'data-table' },
-            e('thead', null, e('tr', null,
-              e('th', null, 'Product'),
-              e('th', { className: 'num' }, 'Invoices'),
-              e('th', { className: 'num' }, 'Units'),
-              e('th', { className: 'num' }, 'Revenue'))),
-            e('tbody', null, products.length === 0
-              ? e('tr', null, e('td', { colSpan: 4, style: { padding: 18, color: 'var(--text-faint)', textAlign: 'center' } }, 'No products.'))
-              : products.map((p, i) => e('tr', { key: i },
-                  e('td', null, p.name),
-                  e('td', { className: 'num dim' }, fmtNum(p.orderCount)),
-                  e('td', { className: 'num dim' }, fmtNum(p.units)),
-                  e('td', { className: 'num' }, e('strong', null, fmtMoneyFull(p.revenue))))))))))));
+    invoiceTable,
+    productTable);
 }
 
 const crmField = (label, value, mono) => React.createElement('div', { className: 'crm-field', key: label },
@@ -1514,6 +1545,7 @@ function CRMDetails({ customer }) {
   const [err, setErr] = React.useState(null);
   const [label, setLabel] = React.useState('');
   const [value, setValue] = React.useState('');
+  const [kind, setKind] = React.useState('field');
   const [busy, setBusy] = React.useState(false);
 
   const load = React.useCallback(() => {
@@ -1523,13 +1555,15 @@ function CRMDetails({ customer }) {
   }, [customer]);
   React.useEffect(load, [load]);
 
-  const save = (l, v) => {
-    if (!l.trim() || busy) return;
+  // One call covers create, rename and edit. Passing an id updates that row,
+  // which is what allows a label to change rather than only its value.
+  const save = (payload) => {
+    if (!String(payload.label || '').trim() || busy) return;
     setBusy(true);
     crmFetch('/details', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ state: CRM_STATE, customer: customer, label: l.trim(), value: v })
+      body: JSON.stringify(Object.assign({ state: CRM_STATE, customer: customer }, payload))
     }).then(() => { setLabel(''); setValue(''); load(); })
       .catch(x => setErr(x.message))
       .then(() => setBusy(false));
@@ -1541,8 +1575,69 @@ function CRMDetails({ customer }) {
       .then(load).catch(x => setErr(x.message));
   };
 
+  const headerRow = it => e('tr', { key: it.id, className: 'crm-detail-header' },
+    e('td', { colSpan: 3 }, e('input', {
+      className: 'crm-inline-input crm-inline-header',
+      defaultValue: it.label,
+      onBlur: ev => { if (ev.target.value.trim() && ev.target.value !== it.label)
+        save({ id: it.id, label: ev.target.value, value: '', kind: 'header' }); },
+      onKeyDown: ev => { if (ev.key === 'Enter') ev.target.blur(); }
+    })),
+    e('td', null, e('button', {
+      className: 'crm-link-btn', onClick: () => remove(it.id, it.label)
+    }, 'remove')));
+
+  const fieldRow = it => e('tr', { key: it.id },
+    e('td', { style: { width: '30%' } }, e('input', {
+      className: 'crm-inline-input', defaultValue: it.label, title: 'Rename this field',
+      onBlur: ev => { if (ev.target.value.trim() && ev.target.value !== it.label)
+        save({ id: it.id, label: ev.target.value, value: it.value, kind: 'field' }); },
+      onKeyDown: ev => { if (ev.key === 'Enter') ev.target.blur(); }
+    })),
+    e('td', null, e('input', {
+      className: 'crm-inline-input', defaultValue: it.value, title: 'Edit this value',
+      onBlur: ev => { if (ev.target.value !== it.value)
+        save({ id: it.id, label: it.label, value: ev.target.value, kind: 'field' }); },
+      onKeyDown: ev => { if (ev.key === 'Enter') ev.target.blur(); }
+    })),
+    e('td', { className: 'dim font-mono', style: { fontSize: 10, whiteSpace: 'nowrap' } },
+      (it.author || '\u2014') + ' \u00b7 ' + fmtStamp(it.updated_at)),
+    e('td', null, e('button', {
+      className: 'crm-link-btn', onClick: () => remove(it.id, it.label)
+    }, 'remove')));
+
+  const rows = (items || []).map(it => it.kind === 'header' ? headerRow(it) : fieldRow(it));
+
+  const table = items && items.length
+    ? e('table', { className: 'data-table crm-detail-table', style: { marginBottom: 14 } },
+        e('tbody', null, rows))
+    : null;
+
+  const addRow = e('div', { className: 'crm-add-row' },
+    e('select', {
+      className: 'filter-select', value: kind,
+      onChange: ev => setKind(ev.target.value), style: { maxWidth: 130 }
+    },
+      e('option', { value: 'field' }, 'Field'),
+      e('option', { value: 'header' }, 'Heading')),
+    e('input', {
+      className: 'filter-input',
+      placeholder: kind === 'header' ? 'Heading \u2014 e.g. Logistics' : 'Field name \u2014 e.g. Delivery window',
+      value: label, onChange: ev => setLabel(ev.target.value),
+      onKeyDown: ev => { if (ev.key === 'Enter') save({ label: label, value: value, kind: kind }); }
+    }),
+    kind === 'header' ? null : e('input', {
+      className: 'filter-input', placeholder: 'Value',
+      value: value, onChange: ev => setValue(ev.target.value),
+      onKeyDown: ev => { if (ev.key === 'Enter') save({ label: label, value: value, kind: kind }); }
+    }),
+    e('button', {
+      className: 'crm-btn', disabled: busy || !label.trim(),
+      onClick: () => save({ label: label, value: value, kind: kind })
+    }, busy ? 'Saving\u2026' : (kind === 'header' ? 'Add heading' : 'Add field')));
+
   // Rendered INSIDE the Additional information card, so it is content rather
-  // than its own section - no wrapper, no second box.
+  // than its own section.
   return e('div', null,
     e('div', {
       className: 'crm-field-label',
@@ -1550,46 +1645,14 @@ function CRMDetails({ customer }) {
     },
       e('span', null, 'Added by the team'),
       e('span', { style: { color: 'var(--text-faint)' } },
-        items ? fmtNum(items.length) + (items.length === 1 ? ' field' : ' fields') : 'loading\u2026')),
-    e('div', null,
-      items && items.length
-        ? e('table', { className: 'data-table', style: { marginBottom: 14 } },
-            e('thead', null, e('tr', null,
-              e('th', null, 'Field'), e('th', null, 'Value'),
-              e('th', null, 'Updated'), e('th', null, ''))),
-            e('tbody', null, items.map(it => e('tr', { key: it.id },
-              e('td', { style: { fontWeight: 600, whiteSpace: 'nowrap' } }, it.label),
-              // Click the value to edit it in place; saving overwrites the row.
-              e('td', null, e('input', {
-                className: 'crm-inline-input',
-                defaultValue: it.value,
-                onBlur: ev => { if (ev.target.value !== it.value) save(it.label, ev.target.value); },
-                onKeyDown: ev => { if (ev.key === 'Enter') ev.target.blur(); }
-              })),
-              e('td', { className: 'dim font-mono', style: { fontSize: 11, whiteSpace: 'nowrap' } },
-                (it.author || '\u2014') + ' \u00b7 ' + fmtStamp(it.updated_at)),
-              e('td', null, e('button', {
-                className: 'crm-link-btn', onClick: () => remove(it.id, it.label)
-              }, 'remove'))))))
-        : null,
-      e('div', { className: 'crm-add-row' },
-        e('input', {
-          className: 'filter-input', placeholder: 'Field name \u2014 e.g. Delivery window',
-          value: label, onChange: ev => setLabel(ev.target.value)
-        }),
-        e('input', {
-          className: 'filter-input', placeholder: 'Value',
-          value: value, onChange: ev => setValue(ev.target.value),
-          onKeyDown: ev => { if (ev.key === 'Enter') save(label, value); }
-        }),
-        e('button', {
-          className: 'crm-btn', disabled: busy || !label.trim(), onClick: () => save(label, value)
-        }, busy ? 'Saving\u2026' : 'Add field')),
-      err ? e('div', { className: 'crm-warn' }, err) : null,
-      items && !items.length && !err
-        ? e('div', { className: 'kpi-sub', style: { marginTop: 10 } },
-            'Nothing added yet. Use the boxes above to record anything the feeds do not carry.')
-        : null));
+        items ? fmtNum(items.length) + (items.length === 1 ? ' entry' : ' entries') : 'loading\u2026')),
+    table,
+    addRow,
+    err ? e('div', { className: 'crm-warn' }, err) : null,
+    items && !items.length && !err
+      ? e('div', { className: 'kpi-sub', style: { marginTop: 10 } },
+          'Nothing added yet. Add a field, or a heading to group fields under.')
+      : null);
 }
 
 // ── Notes ────────────────────────────────────────────────────────────────

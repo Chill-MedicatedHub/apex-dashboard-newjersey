@@ -233,7 +233,11 @@
   .crm-inv:hover { background: var(--bg-elev-2); }
   .crm-inv-active { background: var(--bg-elev-2); box-shadow: inset 3px 0 0 var(--accent); }
   .crm-note { border-left: 2px solid var(--border); padding: 6px 0 6px 12px; margin-bottom: 12px; }
-  .crm-note-meta { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-faint); margin-bottom: 3px; }
+  .crm-note-meta { display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-faint); margin-bottom: 3px; }
+  /* The delete control stays out of the way until the note is hovered. */
+  .crm-note .crm-link-btn { opacity: 0; transition: opacity .15s ease; }
+  .crm-note:hover .crm-link-btn { opacity: 1; }
   .crm-note-body { font-size: 13px; white-space: pre-wrap; }
   .crm-drop { border: 1.5px dashed var(--border); border-radius: var(--radius-sm); padding: 26px 16px;
     text-align: center; cursor: pointer; color: var(--text-dim); font-size: 13px; transition: all .15s ease; }
@@ -1091,9 +1095,9 @@ const fmtStamp = s => {
 
 
 // ── Additional information (from Salesforce) ─────────────────────────────
-function CRMSalesforce({ sf }) {
+function CRMSalesforce({ sf, customer }) {
   const e = React.createElement;
-  if (!sf) return null;
+  sf = sf || {};
 
   const rows = [
     ['Account owner', sf.owner, sf.owner_email],
@@ -1118,12 +1122,13 @@ function CRMSalesforce({ sf }) {
   ].filter(r => r[1]);
 
   const contacts = sf.contacts || [];
-  if (!rows.length && !contacts.length && !sf.notes) return null;
+  const hasSf = rows.length || contacts.length || sf.notes || sf.last_contact_note;
 
   return e('section', { className: 'section' },
     e('div', { className: 'section-header' },
       e('h2', { className: 'section-title' }, 'Additional ', e('em', null, 'information')),
-      e('span', { className: 'section-meta' }, 'from Salesforce')),
+      e('span', { className: 'section-meta' },
+        hasSf ? 'from Salesforce \u00b7 plus fields added by the team' : 'added by the team')),
     e('div', { className: 'card' },
       rows.length
         ? e('div', { className: 'crm-fields' }, rows.map(r => crmField(r[0],
@@ -1154,7 +1159,12 @@ function CRMSalesforce({ sf }) {
         ? e('div', { style: { marginTop: 18 } },
             e('div', { className: 'crm-field-label', style: { marginBottom: 4 } }, 'Salesforce notes'),
             e('div', { className: 'crm-note-body' }, sf.notes))
-        : null));
+        : null,
+      // Team-maintained fields live in the same card, below whatever Salesforce
+      // supplied, separated by a rule so the two sources stay distinguishable.
+      e('div', {
+        style: hasSf ? { marginTop: 20, paddingTop: 18, borderTop: '1px solid var(--border)' } : null
+      }, e(CRMDetails, { customer: customer }))));
 }
 
 function CRM({ data }) {
@@ -1407,12 +1417,14 @@ function CRMAccount({ account, rows }) {
       crmKpi('Total outstanding', fmtMoneyFull(totals.outstanding)),
       crmKpi('Invoices', fmtNum(invoices.length))),
 
-    // ---- The working area: what the team maintains, then notes and files ----
-    e(CRMDetails, { customer: a.name }),
+    // ---- Additional information: what Salesforce holds, plus the fields the
+    // team adds themselves. One section rather than two, because from a user's
+    // point of view they are the same thing - everything about this account
+    // that is not derived from its order history.
+    e(CRMSalesforce, { sf: a.sf, customer: a.name }),
+
     e(CRMNotes, { customer: a.name }),
     e(CRMFiles, { customer: a.name }),
-
-    e(CRMSalesforce, { sf: a.sf }),
 
     // ---- Invoices ----
     e('section', { className: 'section' },
@@ -1529,12 +1541,17 @@ function CRMDetails({ customer }) {
       .then(load).catch(x => setErr(x.message));
   };
 
-  return e('section', { className: 'section' },
-    e('div', { className: 'section-header' },
-      e('h2', { className: 'section-title' }, 'Account ', e('em', null, 'information')),
-      e('span', { className: 'section-meta' },
-        items ? fmtNum(items.length) + ' fields \u00b7 added by the team' : 'loading\u2026')),
-    e('div', { className: 'card' },
+  // Rendered INSIDE the Additional information card, so it is content rather
+  // than its own section - no wrapper, no second box.
+  return e('div', null,
+    e('div', {
+      className: 'crm-field-label',
+      style: { marginBottom: 8, display: 'flex', justifyContent: 'space-between' }
+    },
+      e('span', null, 'Added by the team'),
+      e('span', { style: { color: 'var(--text-faint)' } },
+        items ? fmtNum(items.length) + (items.length === 1 ? ' field' : ' fields') : 'loading\u2026')),
+    e('div', null,
       items && items.length
         ? e('table', { className: 'data-table', style: { marginBottom: 14 } },
             e('thead', null, e('tr', null,
@@ -1590,6 +1607,15 @@ function CRMNotes({ customer }) {
   }, [customer]);
   React.useEffect(load, [load]);
 
+  const remove = (id) => {
+    if (!window.confirm('Delete this note? This cannot be undone.')) return;
+    crmFetch('/notes?id=' + id, { method: 'DELETE' })
+      .then(load)
+      // The Worker only lets the author delete their own note, so a 403 here
+      // is a real answer rather than a fault - surface it as written.
+      .catch(x => setErr(x.message));
+  };
+
   const add = () => {
     const body = draft.trim();
     if (!body || busy) return;
@@ -1623,7 +1649,12 @@ function CRMNotes({ customer }) {
       err ? e('div', { className: 'crm-warn' }, err) : null,
       notes && notes.length
         ? e('div', { style: { marginTop: 14 } }, notes.map(n => e('div', { key: n.id, className: 'crm-note' },
-            e('div', { className: 'crm-note-meta' }, (n.author || 'unknown') + ' \u00b7 ' + fmtStamp(n.created_at)),
+            e('div', { className: 'crm-note-meta' },
+              e('span', null, (n.author || 'unknown') + ' \u00b7 ' + fmtStamp(n.created_at)),
+              e('button', {
+                className: 'crm-link-btn', title: 'Delete this note',
+                onClick: () => remove(n.id)
+              }, 'delete')),
             e('div', { className: 'crm-note-body' }, n.body))))
         : (notes && !err ? e('div', { className: 'kpi-sub', style: { marginTop: 12 } }, 'No notes yet.') : null)));
 }

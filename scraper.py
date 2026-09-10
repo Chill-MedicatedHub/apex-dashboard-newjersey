@@ -1098,6 +1098,7 @@ def main() -> None:
 
     elapsed = time.time() - started
     print(f"\n✓ Wrote {OUTPUT_PATH.name} ({len(raw_rows)} rows) in {elapsed:.1f}s")
+    push_to_chill(output)
 
 
 if __name__ == "__main__":

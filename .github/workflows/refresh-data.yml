@@ -57,6 +57,9 @@ jobs:
           # against the resolved brand name. Set "" to disable.
           LEAFLINK_BRAND_FILTER: "Chill Medicated"
           LEAFLINK_DOMAIN: "app.leaflink.com"
+          CHILL_DESK_URL: 'https://chill-desk.onrender.com'
+          CHILL_INGEST_KEY: chill_ingest_8W5RvaTOSzfDQDaIqIlXf-3CqZ5DlwvN
+          CHILL_MARKET: 'MA'
         run: python scraper.py
 
       - name: Commit & push refreshed data

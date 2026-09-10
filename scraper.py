@@ -43,6 +43,61 @@ from typing import Any, Iterator
 import requests
 from dotenv import load_dotenv
 
+import os
+
+def  push_to_chill(payload, market=None, source="leaflink"):
+    """Send the scraped rows to Chill Desk. Never raises."""
+    url = os.getenv("CHILL_DESK_URL", "").rstrip("/")
+    key = os.getenv("CHILL_INGEST_KEY", "")
+    market = market or os.getenv("CHILL_MARKET", "")
+
+    if not url or not key:
+        print("  Chill Desk: not configured (set CHILL_DESK_URL and CHILL_INGEST_KEY); skipping.")
+        return
+
+    rows = payload.get("rows", [])
+    if not rows:
+        print("  Chill Desk: no rows to push; skipping.")
+        return
+
+    try:
+        resp = requests.post(
+            f"{url}/api/ingest/orders",
+            json={"rows": rows, "market": market, "source": source},
+            headers={"X-Ingest-Key": key, "Content-Type": "application/json"},
+            timeout=180,
+        )
+    except requests.RequestException as e:
+        print(f"  Chill Desk: could not reach the server ({e}). Data is still saved locally.")
+        return
+
+    if resp.status_code == 401:
+        print("  Chill Desk: ingest key rejected. Generate a new one in Partner sales")
+        print("             and update CHILL_INGEST_KEY in .env.")
+        return
+
+    if resp.status_code != 200:
+        print(f"  Chill Desk: server returned {resp.status_code} — {resp.text[:200]}")
+        return
+
+    r = resp.json()
+    print(f"  Chill Desk: pushed {r['imported']} rows; "
+          f"{r['matched']} of {r['licences']} licences matched a partner account.")
+
+    by_state = r.get("markets") or {}
+    if by_state:
+        print("  Chill Desk: " + ", ".join(f"{m} {n}" for m, n in by_state.items()))
+    if r.get("noMarket"):
+        print(f"  Chill Desk: {r['noMarket']} row(s) had no state — set CHILL_MARKET in .env.")
+
+    unmatched = r.get("unmatched") or []
+    if unmatched:
+        print(f"  Chill Desk: {len(unmatched)} licence(s) have sales but no account yet —")
+        for u in unmatched[:5]:
+            print(f"               {u.get('buyer') or '?'}  ({u['license']}, {u['rows']} rows)")
+        if len(unmatched) > 5:
+            print(f"               …and {len(unmatched) - 5} more. See Partner sales.")
+
 # --------------------------------------------------------------------------- #
 # Configuration                                                               #
 # --------------------------------------------------------------------------- #

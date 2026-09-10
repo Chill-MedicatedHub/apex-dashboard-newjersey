@@ -531,6 +531,7 @@ def normalize_order_to_rows(order: dict) -> list[dict]:
             "paid_date": paid_date,
             # Buyer
             "buyer_name": buyer_name,
+            "buyer_license": "",   # filled by the customer enrichment pass below
             "buyer_state": state,
             "buyer_city": delivery_addr.get("city") or "",
             "buyer_zip": delivery_addr.get("zipcode") or "",
@@ -697,9 +698,13 @@ def fetch_category_lookup(session: requests.Session) -> dict:
 
 
 def fetch_customer_lookup(session: requests.Session, customer_ids: set) -> dict:
-    """Resolve customer IDs to display names. id -> display_name.
+    """Resolve customer IDs to {"name": ..., "license": ...}.
     Customers are usually a small set (one row per dispensary), so individual lookups
-    work fine. The /customers/{id}/ endpoint requires a single ID per call."""
+    work fine. The /customers/{id}/ endpoint requires a single ID per call.
+
+    The licence number matters as much as the name: it is what Chill Desk uses to
+    show each retailer their own purchase history, so it is carried through here
+    rather than fetched a second time."""
     if not customer_ids:
         return {}
     ids = sorted(c for c in customer_ids if c)
@@ -726,10 +731,17 @@ def fetch_customer_lookup(session: requests.Session, customer_ids: set) -> dict:
             name = data["company"].get("name") or data["company"].get("display_name") or ""
         if not name and isinstance(data.get("buyer"), dict):
             name = data["buyer"].get("name") or data["buyer"].get("display_name") or ""
-        if name:
-            lookup[cid] = name
+        # The state licence, under whichever key this account happens to use.
+        lic = (data.get("license_number") or data.get("old_license_number") or
+               data.get("business_identifier") or "")
+        if not lic and isinstance(data.get("license"), dict):
+            lic = data["license"].get("number") or ""
+        if name or lic:
+            lookup[cid] = {"name": name, "license": str(lic or "").strip()}
         time.sleep(SLEEP_BETWEEN_PAGES_SEC / 2)
-    print(f"  Customer lookup resolved {len(lookup)} of {len(ids)} name(s)")
+    with_lic = sum(1 for v in lookup.values() if v["license"])
+    print(f"  Customer lookup resolved {len(lookup)} of {len(ids)} name(s); "
+          f"{with_lic} have a licence number")
     return lookup
 
 
@@ -1025,11 +1037,14 @@ def main() -> None:
                 if info["wholesale_price_cents"]:
                     r["unit_price"] = f"${info['wholesale_price_cents']/100:,.2f}"
 
-        # Resolve customer name from id if it's still blank
-        if not r.get("buyer_name"):
-            cid = r.get("_customer_id")
-            if cid and cid in customer_lookup:
-                r["buyer_name"] = customer_lookup[cid]
+        # Resolve customer name and licence from id
+        cid = r.get("_customer_id")
+        if cid and cid in customer_lookup:
+            cust = customer_lookup[cid]
+            if not r.get("buyer_name"):
+                r["buyer_name"] = cust["name"]
+            if not r.get("buyer_license"):
+                r["buyer_license"] = cust["license"]
 
         # Resolve sales rep name from id if it's still blank
         if not r.get("sales_rep") or isinstance(r.get("sales_rep"), int):

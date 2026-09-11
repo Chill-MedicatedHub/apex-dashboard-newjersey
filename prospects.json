@@ -1,8 +1,8 @@
 {
-  "as_of": "2026-09-10",
+  "as_of": "2026-09-11",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
-  "count": 295,
+  "count": 296,
   "records": [
     {
       "name": "Red Oak Dispensary - Absecon",
@@ -1158,6 +1158,17 @@
       "phone": "6092622262",
       "email": "coryv@nealternatives.com",
       "website": "https://nealternatives.com/"
+    },
+    {
+      "name": "Hello High",
+      "license": "RE000748",
+      "type": "",
+      "status": "",
+      "city": "Hammonton",
+      "state": "NJ",
+      "phone": "6095674444",
+      "email": "Kdunlevy@hellohigh.com",
+      "website": "https://hellohigh.com/"
     },
     {
       "name": "Botera Harrison LLC",

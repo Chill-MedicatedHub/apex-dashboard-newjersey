@@ -961,6 +961,120 @@ def fetch_inventory(session: requests.Session) -> dict:
     return {"by_id": {}, "by_sku": {}, "catalog": []}
 
 
+
+# --------------------------------------------------------------------------- #
+# LeafLink contacts (shown in the dashboard CRM)                              #
+# --------------------------------------------------------------------------- #
+# The people at each customer - the Contacts panel on a LeafLink customer page.
+# Saved in the output under "contacts" and shown in each CRM account's contacts
+# table, labelled "LeafLink".
+#
+# This is optional and never breaks the sales pull: if LeafLink refuses the
+# request (the token needs read access to Customers/Contacts) or the endpoint
+# differs, the run carries on without contacts and says why. Set
+# LEAFLINK_CONTACTS=0 to skip it entirely.
+CONTACTS_ENABLED = os.getenv("LEAFLINK_CONTACTS", "1") not in ("0", "false", "no")
+
+
+def _contact_record(c, customer_info):
+    """One LeafLink contact as a flat record for the dashboard.
+
+    Field names vary between LeafLink accounts and API versions, so each value
+    is looked for under every plausible key rather than assuming one.
+    """
+    if not isinstance(c, dict):
+        return None
+
+    def s(v):
+        if v is None:
+            return ""
+        return v.strip() if isinstance(v, str) else str(v).strip()
+
+    first, last = s(c.get("first_name")), s(c.get("last_name"))
+    name = " ".join(x for x in (first, last) if x) or s(
+        c.get("name") or c.get("full_name") or c.get("display_name"))
+    title = (c.get("role") or c.get("title") or c.get("position") or
+             c.get("job_title") or "")
+    if isinstance(title, dict):
+        title = title.get("name") or title.get("display_name") or ""
+    email = s(c.get("email") or c.get("email_address"))
+    phone = s(c.get("phone") or c.get("phone_number") or c.get("mobile_phone") or
+              c.get("mobile") or c.get("cell_phone") or c.get("office_phone"))
+    ext = s(c.get("phone_extension") or c.get("extension"))
+    if phone and ext:
+        phone += " x" + ext
+
+    # Which customer the contact belongs to: an id, or the customer object.
+    cust = c.get("customer")
+    if cust is None:
+        cust = c.get("customer_id") if c.get("customer_id") is not None else c.get("company")
+    cid = cname = clic = ""
+    if isinstance(cust, dict):
+        cid = s(cust.get("id"))
+        cname = s(cust.get("display_name") or cust.get("name") or cust.get("nickname"))
+        clic = s(cust.get("license_number") or cust.get("license"))
+    elif cust is not None:
+        cid = s(cust)
+    info = customer_info.get(cid) if cid else None
+    if info:
+        cname = cname or s(info.get("name"))
+        clic = clic or s(info.get("license"))
+
+    if not (name or email or phone):
+        return None
+    return {"customer_id": cid, "customer": cname, "license": clic,
+            "name": name, "title": s(title), "email": email, "phone": phone}
+
+
+def _summarise_contacts(out):
+    matched = sum(1 for r in out if r["customer"] or r["license"])
+    print(f"  Contacts: {len(out)} saved; {matched} linked to a customer by name or licence")
+
+CONTACTS_PATH = os.getenv("LEAFLINK_CONTACTS_PATH", "/contacts/")
+CONTACTS_EXTRA_LOOKUPS = int(os.getenv("LEAFLINK_CONTACTS_EXTRA_LOOKUPS", "500"))
+
+
+def fetch_contacts(session: requests.Session, customer_lookup: dict) -> list:
+    """Every LeafLink contact, linked to its customer's name and licence."""
+    if not CONTACTS_ENABLED:
+        print("Skipping LeafLink contacts (LEAFLINK_CONTACTS=0).")
+        return []
+    print(f"Pulling LeafLink contacts from {CONTACTS_PATH} ...")
+    raw = []
+    try:
+        for i, c in enumerate(paginate(session, CONTACTS_PATH, {})):
+            if i == 0:
+                print(f"  DEBUG contact keys: {sorted(c.keys())}", file=sys.stderr)
+                print(f"  DEBUG contact sample: {json.dumps(c, default=str)[:600]}", file=sys.stderr)
+            raw.append(c)
+    except SystemExit as e:        # _get exits on 403/404; don't let that end the run
+        print(f"  NOTE: contacts not available, continuing without them.\n  {e}", file=sys.stderr)
+        return []
+    except Exception as e:
+        print(f"  NOTE: contacts pull failed ({e}); continuing without them.", file=sys.stderr)
+        return []
+
+    info = {str(k): v for k, v in (customer_lookup or {}).items()}
+    out = [r for r in (_contact_record(c, info) for c in raw) if r]
+
+    # Contacts at customers that have never ordered (LeafLink prospects) aren't
+    # in the order-based lookup, so resolve those names and licences too.
+    missing = sorted({r["customer_id"] for r in out
+                      if r["customer_id"] and r["customer_id"] not in info
+                      and not r["customer"]})[:CONTACTS_EXTRA_LOOKUPS]   # already named: no lookup needed
+    if missing:
+        print(f"  Resolving {len(missing)} more customer(s) for their contacts...")
+        try:
+            extra = fetch_customer_lookup(session, set(missing))
+        except Exception as e:
+            print(f"  NOTE: extra customer lookups failed ({e})", file=sys.stderr)
+            extra = {}
+        info.update({str(k): v for k, v in extra.items()})
+        out = [r for r in (_contact_record(c, info) for c in raw) if r]
+    _summarise_contacts(out)
+    return out
+
+
 def main() -> None:
     started = time.time()
     session = _session()
@@ -1019,6 +1133,7 @@ def main() -> None:
     brand_lookup = fetch_brand_lookup(session, brand_ids)
     customer_lookup = fetch_customer_lookup(session, seen_customer_ids)
     sales_rep_lookup = fetch_sales_rep_lookup(session, seen_rep_ids)
+    contacts = fetch_contacts(session, customer_lookup)
 
     # Step 4 — apply enrichment to every row, and filter by brand if requested
     final_rows = []
@@ -1106,6 +1221,8 @@ def main() -> None:
         "orders_kept": orders_kept,
         "inventory": inventory["catalog"],
         "rows": raw_rows,
+        # People at each customer, for the CRM (see fetch_contacts).
+        "contacts": contacts,
     }
     tmp = OUTPUT_PATH.with_suffix(".json.tmp")
     tmp.write_text(json.dumps(output, indent=2, default=str))

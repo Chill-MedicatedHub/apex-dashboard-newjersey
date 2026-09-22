@@ -1034,6 +1034,64 @@ CONTACTS_PATH = os.getenv("LEAFLINK_CONTACTS_PATH", "/contacts/")
 CONTACTS_EXTRA_LOOKUPS = int(os.getenv("LEAFLINK_CONTACTS_EXTRA_LOOKUPS", "500"))
 
 
+def _probe_contacts_for_customer(session, cid):
+    """Ask LeafLink for one customer's contacts, trying each way it might work.
+
+    Returns (records, how) where `how` is the shape that worked, so the rest of
+    the customers can be fetched the same way without probing again.
+    """
+    for how, path, params in (
+        ("filter", CONTACTS_PATH, {"customer": cid}),
+        ("nested", f"/customers/{cid}/contacts/", {}),
+    ):
+        try:
+            data = _get(session, path, params)
+        except (SystemExit, Exception):
+            continue
+        rows = data.get("results", data if isinstance(data, list) else [])
+        if isinstance(rows, list):
+            return rows, how
+    return None, None
+
+
+def _contacts_per_customer(session, customer_info):
+    """Fetch contacts one customer at a time, so each is linked to its customer.
+
+    Used when the flat contacts list doesn't say which customer each belongs to,
+    which is what LeafLink returns on this account.
+    """
+    ids = list(customer_info.keys())[:CONTACTS_EXTRA_LOOKUPS]
+    if not ids:
+        return []
+    how = None
+    out = []
+    for i, cid in enumerate(ids):
+        if how is None:
+            rows, how = _probe_contacts_for_customer(session, cid)
+            if how is None:
+                print("  NOTE: couldn't fetch contacts per customer either; "
+                      "saving them unlinked.", file=sys.stderr)
+                return []
+            print(f"  Fetching each customer's contacts ({how} style)...")
+        else:
+            path = CONTACTS_PATH if how == "filter" else f"/customers/{cid}/contacts/"
+            params = {"customer": cid} if how == "filter" else {}
+            try:
+                data = _get(session, path, params)
+            except (SystemExit, Exception):
+                continue
+            rows = data.get("results", data if isinstance(data, list) else [])
+        for c in rows or []:
+            if isinstance(c, dict):
+                c = dict(c)
+                c["customer"] = cid          # the link, from the request itself
+                out.append(c)
+        if i and i % 25 == 0:
+            print(f"    {i} of {len(ids)} customers checked, {len(out)} contact(s) so far")
+        time.sleep(SLEEP_BETWEEN_PAGES_SEC / 2)
+    return out
+
+
 def fetch_contacts(session: requests.Session, customer_lookup: dict) -> list:
     """Every LeafLink contact, linked to its customer's name and licence."""
     if not CONTACTS_ENABLED:
@@ -1056,6 +1114,28 @@ def fetch_contacts(session: requests.Session, customer_lookup: dict) -> list:
 
     info = {str(k): v for k, v in (customer_lookup or {}).items()}
     out = [r for r in (_contact_record(c, info) for c in raw) if r]
+
+    # A contact is only useful if we know whose it is. LeafLink's flat list
+    # doesn't say on every account, so in that case ask per customer instead -
+    # the link then comes from the request itself.
+    if out and not any(r["customer_id"] for r in out):
+        print(f"  The contacts list doesn't say which customer each belongs to; "
+              f"fetching per customer instead.")
+        all_customers = dict(info)
+        try:                      # include customers that have never ordered
+            for c in paginate(session, "/customers/", {}):
+                cid = str(c.get("id") or "")
+                if cid and cid not in all_customers:
+                    nm = (c.get("display_name") or c.get("name") or c.get("company_name") or "")
+                    lic = (c.get("license_number") or c.get("old_license_number") or "")
+                    all_customers[cid] = {"name": str(nm).strip(), "license": str(lic or "").strip()}
+        except (SystemExit, Exception) as e:
+            print(f"  NOTE: couldn't list all customers ({e}); using the ones with orders.", file=sys.stderr)
+        linked = _contacts_per_customer(session, all_customers)
+        if linked:
+            info = all_customers
+            raw = linked
+            out = [r for r in (_contact_record(c, info) for c in raw) if r]
 
     # Contacts at customers that have never ordered (LeafLink prospects) aren't
     # in the order-based lookup, so resolve those names and licences too.

@@ -1,10 +1,10 @@
 {
-  "fetched_at": "2026-09-23T18:49:55.659736+00:00",
+  "fetched_at": "2026-09-23T19:03:33.111950+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
-  "orders_seen": 1955,
-  "orders_kept": 1928,
+  "orders_seen": 1956,
+  "orders_kept": 1929,
   "inventory": [
     {
       "id": "2675942",
@@ -30226,6 +30226,59 @@
       "title": "Owner",
       "email": "dzillbarryrealtor@gmail.com",
       "phone": "8622934692"
+    }
+  ],
+  "contacts_debug": [
+    {
+      "id": 2287902,
+      "created_on": "2025-06-23T13:06:29.749191-04:00",
+      "modified": "2025-06-23T13:06:29.749206-04:00",
+      "owner": 24087,
+      "first_name": "Dan",
+      "last_name": "",
+      "email": "dan@apptitudeplus.com",
+      "secondary_email": null,
+      "role": null,
+      "description": "",
+      "phone": "9086562484",
+      "phone_extension": null,
+      "secondary_phone": null,
+      "secondary_phone_extension": null,
+      "delete": false
+    },
+    {
+      "id": 2357877,
+      "created_on": "2025-11-11T09:46:54.165070-05:00",
+      "modified": "2026-09-02T09:49:37.115477-04:00",
+      "owner": 24087,
+      "first_name": "Loretta",
+      "last_name": "",
+      "email": "Loretta.casaverde@gmail.com",
+      "secondary_email": null,
+      "role": null,
+      "description": "Inventory Rep",
+      "phone": null,
+      "phone_extension": null,
+      "secondary_phone": null,
+      "secondary_phone_extension": null,
+      "delete": false
+    },
+    {
+      "id": 2420407,
+      "created_on": "2026-03-24T12:17:27.477418-04:00",
+      "modified": "2026-03-24T12:21:15.449007-04:00",
+      "owner": 24087,
+      "first_name": "zayra",
+      "last_name": "a",
+      "email": "zayra@thecytgroup.com",
+      "secondary_email": null,
+      "role": "accountant",
+      "description": "",
+      "phone": "4422008087",
+      "phone_extension": null,
+      "secondary_phone": null,
+      "secondary_phone_extension": null,
+      "delete": false
     }
   ]
 }

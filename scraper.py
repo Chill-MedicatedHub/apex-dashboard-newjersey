@@ -974,6 +974,7 @@ def fetch_inventory(session: requests.Session) -> dict:
 # differs, the run carries on without contacts and says why. Set
 # LEAFLINK_CONTACTS=0 to skip it entirely.
 CONTACTS_ENABLED = os.getenv("LEAFLINK_CONTACTS", "1") not in ("0", "false", "no")
+CONTACTS_DEBUG_SAMPLE = []
 
 
 def _contact_record(c, customer_info):
@@ -1165,6 +1166,12 @@ def fetch_contacts(session: requests.Session, customer_lookup: dict) -> list:
             extra = {}
         info.update({str(k): v for k, v in extra.items()})
         out = [r for r in (_contact_record(c, info) for c in raw) if r]
+    # If none could be linked to a customer, keep a few untouched records in the
+    # output. They show exactly what LeafLink returns, so the field that names
+    # the customer can be identified without digging through run logs. Remove
+    # CONTACTS_DEBUG once contacts are linking properly.
+    global CONTACTS_DEBUG_SAMPLE
+    CONTACTS_DEBUG_SAMPLE = raw[:3] if (raw and not any(r["customer_id"] for r in out)) else []
     _summarise_contacts(out)
     return out
 
@@ -1317,6 +1324,9 @@ def main() -> None:
         "rows": raw_rows,
         # People at each customer, for the CRM (see fetch_contacts).
         "contacts": contacts,
+        # Only present while contacts can't be linked: raw records to identify
+        # LeafLink's field for the customer.
+        "contacts_debug": CONTACTS_DEBUG_SAMPLE,
     }
     tmp = OUTPUT_PATH.with_suffix(".json.tmp")
     tmp.write_text(json.dumps(output, indent=2, default=str))

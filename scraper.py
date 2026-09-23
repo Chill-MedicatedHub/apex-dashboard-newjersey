@@ -977,6 +977,32 @@ CONTACTS_ENABLED = os.getenv("LEAFLINK_CONTACTS", "1") not in ("0", "false", "no
 CONTACTS_DEBUG_SAMPLE = []
 
 
+def _contact_refs_from_customer(cust):
+    """The contacts a customer record points at, however LeafLink names it.
+
+    LeafLink's contacts endpoint is a flat address book: a contact carries no
+    customer at all. The link lives on the customer, so any field whose name
+    mentions "contact" is read - a list of ids, a list of objects, or a single
+    one.
+    """
+    refs = []
+    if not isinstance(cust, dict):
+        return refs
+    for key, val in cust.items():
+        if "contact" not in str(key).lower():
+            continue
+        items = val if isinstance(val, list) else [val]
+        for it in items:
+            if isinstance(it, dict):
+                if it.get("id") is not None or it.get("email") or it.get("first_name"):
+                    refs.append(it)
+            elif isinstance(it, int):
+                refs.append(it)
+            elif isinstance(it, str) and it.strip().isdigit():
+                refs.append(int(it.strip()))
+    return refs
+
+
 def _contact_record(c, customer_info):
     """One LeafLink contact as a flat record for the dashboard.
 
@@ -995,12 +1021,14 @@ def _contact_record(c, customer_info):
     name = " ".join(x for x in (first, last) if x) or s(
         c.get("name") or c.get("full_name") or c.get("display_name"))
     title = (c.get("role") or c.get("title") or c.get("position") or
-             c.get("job_title") or "")
+             c.get("job_title") or c.get("description") or "")
     if isinstance(title, dict):
         title = title.get("name") or title.get("display_name") or ""
-    email = s(c.get("email") or c.get("email_address"))
+    email = s(c.get("email") or c.get("email_address") or c.get("secondary_email"))
     phone = s(c.get("phone") or c.get("phone_number") or c.get("mobile_phone") or
               c.get("mobile") or c.get("cell_phone") or c.get("office_phone"))
+    if not phone:
+        phone = s(c.get("secondary_phone"))
     ext = s(c.get("phone_extension") or c.get("extension"))
     if phone and ext:
         phone += " x" + ext
@@ -1047,6 +1075,49 @@ def _fetch_customer_contacts(session, cid, how):
     return rows if isinstance(rows, list) else None
 
 
+def _contacts_via_customer_records(session, customer_info, by_id):
+    """Link contacts by reading each customer record, which points at its own.
+
+    Each customer is fetched once and any contact it references is attached.
+    References may be ids (looked up in the flat address book already pulled) or
+    whole contact objects. Stops early if the first few customers reference no
+    contacts at all, rather than making hundreds of pointless calls.
+    """
+    global CUSTOMER_DEBUG_SAMPLE
+    out, checked, with_refs = [], 0, 0
+    sample_customer = None
+    for cid, info in list(customer_info.items())[:CONTACTS_EXTRA_LOOKUPS]:
+        try:
+            cust = _get(session, f"/customers/{cid}/", None)
+        except (SystemExit, Exception):
+            continue
+        checked += 1
+        if sample_customer is None:
+            sample_customer = cust
+        refs = _contact_refs_from_customer(cust)
+        if refs:
+            with_refs += 1
+        for ref in refs:
+            rec = ref if isinstance(ref, dict) else by_id.get(str(ref))
+            if isinstance(rec, dict):
+                rec = dict(rec)
+                rec["customer"] = cid          # the link, from the customer record
+                out.append(rec)
+        if checked == 5 and with_refs == 0:
+            print("  NOTE: customer records don't reference their contacts either.")
+            CUSTOMER_DEBUG_SAMPLE = [sample_customer] if sample_customer else []
+            return []
+        if checked % 25 == 0:
+            print(f"    {checked} customers checked, {len(out)} contact(s) linked so far")
+        time.sleep(SLEEP_BETWEEN_PAGES_SEC / 2)
+    if not with_refs:
+        CUSTOMER_DEBUG_SAMPLE = [sample_customer] if sample_customer else []
+        print("  NOTE: customer records don't reference their contacts either.")
+        return []
+    print(f"  Linked {len(out)} contact(s) from {with_refs} customer record(s).")
+    return out
+
+
 def _choose_contact_style(session, ids):
     """Work out how to fetch one customer's contacts - and check it really does.
 
@@ -1077,6 +1148,10 @@ def _choose_contact_style(session, ids):
     return None
 
 
+RAW_CONTACTS = []          # the flat address book, kept so ids can be resolved
+CUSTOMER_DEBUG_SAMPLE = []  # a customer record, if contacts still can't be linked
+
+
 def _contacts_per_customer(session, customer_info):
     """Fetch contacts one customer at a time, so each is linked to its customer.
 
@@ -1086,6 +1161,11 @@ def _contacts_per_customer(session, customer_info):
     ids = list(customer_info.keys())[:CONTACTS_EXTRA_LOOKUPS]
     if not ids:
         return []
+    by_id = {str(c.get("id")): c for c in (RAW_CONTACTS or []) if isinstance(c, dict) and c.get("id") is not None}
+    linked = _contacts_via_customer_records(session, customer_info, by_id)
+    if linked:
+        return linked
+
     how = _choose_contact_style(session, ids)
     if how is None:
         print("  NOTE: LeafLink won't say which customer a contact belongs to, so no "
@@ -1115,11 +1195,13 @@ def fetch_contacts(session: requests.Session, customer_lookup: dict) -> list:
     print(f"Pulling LeafLink contacts from {CONTACTS_PATH} ...")
     raw = []
     try:
+        global RAW_CONTACTS
         for i, c in enumerate(paginate(session, CONTACTS_PATH, {})):
             if i == 0:
                 print(f"  DEBUG contact keys: {sorted(c.keys())}", file=sys.stderr)
                 print(f"  DEBUG contact sample: {json.dumps(c, default=str)[:600]}", file=sys.stderr)
             raw.append(c)
+        RAW_CONTACTS = raw
     except SystemExit as e:        # _get exits on 403/404; don't let that end the run
         print(f"  NOTE: contacts not available, continuing without them.\n  {e}", file=sys.stderr)
         return []
@@ -1327,6 +1409,7 @@ def main() -> None:
         # Only present while contacts can't be linked: raw records to identify
         # LeafLink's field for the customer.
         "contacts_debug": CONTACTS_DEBUG_SAMPLE,
+        "customer_debug": CUSTOMER_DEBUG_SAMPLE,
     }
     tmp = OUTPUT_PATH.with_suffix(".json.tmp")
     tmp.write_text(json.dumps(output, indent=2, default=str))

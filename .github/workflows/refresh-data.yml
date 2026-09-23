@@ -58,7 +58,8 @@ jobs:
           LEAFLINK_BRAND_FILTER: "Chill Medicated"
           LEAFLINK_DOMAIN: "app.leaflink.com"
           CHILL_DESK_URL: 'https://chill-desk.onrender.com'
-          CHILL_INGEST_KEY: chill_ingest_8W5RvaTOSzfDQDaIqIlXf-3CqZ5DlwvN
+          # From repo Secrets, never written in this file - the repo is public.
+          CHILL_INGEST_KEY: ${{ secrets.CHILL_INGEST_KEY }}
           CHILL_MARKET: 'NJ'
         run: python scraper.py
 
@@ -72,5 +73,18 @@ jobs:
             echo "No changes in sales_data.json — skipping commit."
           else
             git commit -m "chore: refresh sales data ($(date -u +%Y-%m-%dT%H:%MZ))"
-            git push
+            # Something may have reached GitHub while the scrape ran (an edit to
+            # scraper.py, say), and a plain push would then be refused. So bring
+            # that in first, then push, retrying a few times. "-X theirs" keeps
+            # this run's freshly scraped data if the same file changed there too.
+            for attempt in 1 2 3 4; do
+              if git pull --rebase -X theirs origin main && git push origin HEAD:main; then
+                echo "Pushed refreshed data."
+                exit 0
+              fi
+              echo "Push attempt $attempt didn't go through; retrying..."
+              sleep $((attempt * 5))
+            done
+            echo "Could not push after 4 attempts."
+            exit 1
           fi

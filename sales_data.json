@@ -1,10 +1,10 @@
 {
-  "fetched_at": "2026-09-23T19:18:18.661736+00:00",
+  "fetched_at": "2026-09-23T19:28:38.774539+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
-  "orders_seen": 1956,
-  "orders_kept": 1929,
+  "orders_seen": 1957,
+  "orders_kept": 1930,
   "inventory": [
     {
       "id": "2675942",
@@ -27604,7 +27604,7 @@
       "customer": "",
       "license": "",
       "name": "Loretta",
-      "title": "",
+      "title": "Inventory Rep",
       "email": "Loretta.casaverde@gmail.com",
       "phone": ""
     },
@@ -27991,7 +27991,7 @@
       "customer": "",
       "license": "",
       "name": "David Cassidy",
-      "title": "",
+      "title": "Founder and CEO",
       "email": "steve@daylitecannabis.com",
       "phone": "8623735066"
     },
@@ -28297,7 +28297,7 @@
       "customer": "",
       "license": "",
       "name": "Jon Fleishman",
-      "title": "",
+      "title": "COO",
       "email": "jon@conservatorycannabis.com",
       "phone": ""
     },
@@ -28648,7 +28648,7 @@
       "customer": "",
       "license": "",
       "name": "Alex Kardos",
-      "title": "",
+      "title": "Managing Partner",
       "email": "elevatedconsultingca@gmail.com",
       "phone": "3104380805"
     },
@@ -28729,7 +28729,7 @@
       "customer": "",
       "license": "",
       "name": "Karan Lalchandani",
-      "title": "",
+      "title": "Purchasing Manager",
       "email": "karan@jerseymeds.com",
       "phone": "6093653002"
     },
@@ -28747,7 +28747,7 @@
       "customer": "",
       "license": "",
       "name": "Nicki LaVigne",
-      "title": "",
+      "title": "CEO",
       "email": "nicki@andovercannabis.llc",
       "phone": "9734373040"
     },
@@ -28864,7 +28864,7 @@
       "customer": "",
       "license": "",
       "name": "Christopher Magyar",
-      "title": "",
+      "title": "7.16 Spoke with Chris and he re-ordered.",
       "email": "chris@njhighstreet.com",
       "phone": "9083191996"
     },
@@ -29080,7 +29080,7 @@
       "customer": "",
       "license": "",
       "name": "Annie Moulton",
-      "title": "",
+      "title": "Inventory Rep",
       "email": "anniem.casaverde@gmail.com",
       "phone": ""
     },
@@ -29755,7 +29755,7 @@
       "customer": "",
       "license": "",
       "name": "\u200bChante Stewart",
-      "title": "",
+      "title": "Accounting",
       "email": "cstewart@buditupnj.com",
       "phone": ""
     },
@@ -30007,7 +30007,7 @@
       "customer": "",
       "license": "",
       "name": "Nigel Vigil",
-      "title": "",
+      "title": "for invoicing",
       "email": "nvigil@onegreenleafdispensary.com",
       "phone": ""
     },
@@ -30279,6 +30279,130 @@
       "secondary_phone": null,
       "secondary_phone_extension": null,
       "delete": false
+    }
+  ],
+  "customer_debug": [
+    {
+      "id": 2047110,
+      "state": "NJ",
+      "managers": [],
+      "created_on": "2025-05-20T16:32:57.074402-04:00",
+      "modified": "2026-07-29T13:42:05.117286-04:00",
+      "next_contact_date": null,
+      "tier": null,
+      "nickname": null,
+      "external_id": null,
+      "ext_acct_id": "96",
+      "license_number": "RE000723",
+      "old_license_number": null,
+      "license_inactive": false,
+      "business_identifier": null,
+      "ein": "874196020",
+      "directions": "",
+      "delivery_preferences": "",
+      "currency": "USD",
+      "shipping_charge": null,
+      "brand": null,
+      "name": "Indigo Dispensary",
+      "dba": "Indigo Dispensary",
+      "business_license_name": null,
+      "description": "",
+      "website": "http://www.indigodispensary.com",
+      "address": "302 Crescent Blvd",
+      "old_address": null,
+      "unit_number": "",
+      "zipcode": "08030",
+      "city": "Brooklawn",
+      "county": "",
+      "country": null,
+      "lat": null,
+      "long": null,
+      "phone": "6099201818",
+      "phone_extension": null,
+      "email": "Ivan@indigodispensary.com",
+      "notes": null,
+      "leaflink_last_views": null,
+      "leaflink_source": false,
+      "reason": "clicked_shop_brand",
+      "archived": false,
+      "delinquent": false,
+      "discount_percent": "0.0000",
+      "owner": 24087,
+      "partner": 23855,
+      "price_schedule": null,
+      "service_zone": 18097,
+      "license_type": 201,
+      "payment_term": null,
+      "payment_methods": [],
+      "status": 13621,
+      "reason_product": null,
+      "external_ids": {},
+      "corporate_address": {
+        "address": "302 Crescent Blvd",
+        "unit_number": "",
+        "city": "Brooklawn",
+        "county": "",
+        "state": "NJ",
+        "zipcode": "08030"
+      },
+      "delivery_address": {
+        "address": "302 Crescent Blvd",
+        "unit_number": "",
+        "city": "Brooklawn",
+        "county": "",
+        "state": "NJ",
+        "zipcode": "08030"
+      },
+      "available_payment_options": [
+        {
+          "id": 21553,
+          "is_default": false,
+          "payment_method": {
+            "id": 4,
+            "method": "ACH"
+          },
+          "payment_program": null,
+          "payment_strategy": null,
+          "payment_term": {
+            "id": 20,
+            "term": "COD",
+            "days": null,
+            "code": "cod"
+          }
+        },
+        {
+          "id": 21554,
+          "is_default": false,
+          "payment_method": {
+            "id": 4,
+            "method": "ACH"
+          },
+          "payment_program": null,
+          "payment_strategy": null,
+          "payment_term": {
+            "id": 3,
+            "term": "Net 15",
+            "days": 15,
+            "code": "net15"
+          }
+        },
+        {
+          "id": 21555,
+          "is_default": true,
+          "payment_method": {
+            "id": 4,
+            "method": "ACH"
+          },
+          "payment_program": null,
+          "payment_strategy": null,
+          "payment_term": {
+            "id": 4,
+            "term": "Net 30",
+            "days": 30,
+            "code": "net30"
+          }
+        }
+      ]
     }
   ]
 }

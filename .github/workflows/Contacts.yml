@@ -1,0 +1,29 @@
+name: Pull LeafLink contacts into Chill Desk
+
+on:
+  workflow_dispatch:          # run it from the Actions tab when you want it
+
+jobs:
+  contacts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Pull contacts and send them to Chill Desk
+        env:
+          PYTHONUNBUFFERED: '1'
+          # The token this repo already uses for the sales scrape.
+          LEAFLINK_API_KEY: ${{ secrets.LEAFLINK_TOKEN }}
+          CHILL_DESK_URL: 'https://chill-desk.onrender.com'
+          CHILL_INGEST_KEY: ${{ secrets.CHILL_INGEST_KEY }}
+          BRAND_DOMAINS: 'medfarms.com,chillmedicated.com'
+        run: python pull-leaflink-contacts.py --go

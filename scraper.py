@@ -1034,24 +1034,46 @@ CONTACTS_PATH = os.getenv("LEAFLINK_CONTACTS_PATH", "/contacts/")
 CONTACTS_EXTRA_LOOKUPS = int(os.getenv("LEAFLINK_CONTACTS_EXTRA_LOOKUPS", "500"))
 
 
-def _probe_contacts_for_customer(session, cid):
-    """Ask LeafLink for one customer's contacts, trying each way it might work.
+def _fetch_customer_contacts(session, cid, how):
+    """One customer's contacts, the given way, or None if that way won't work."""
+    path = CONTACTS_PATH if how == "filter" else f"/customers/{cid}/contacts/"
+    params = {"customer": cid} if how == "filter" else {}
+    try:
+        data = _get(session, path, params)
+    except (SystemExit, Exception):
+        return None
+    rows = data.get("results", data if isinstance(data, list) else [])
+    return rows if isinstance(rows, list) else None
 
-    Returns (records, how) where `how` is the shape that worked, so the rest of
-    the customers can be fetched the same way without probing again.
+
+def _choose_contact_style(session, ids):
+    """Work out how to fetch one customer's contacts - and check it really does.
+
+    LeafLink quietly ignores a filter it doesn't support and hands back the same
+    full list every time. Believing that would put every contact on every
+    account, so two different customers are compared first: if both come back
+    with the same people, the filter isn't filtering and that way is rejected.
     """
-    for how, path, params in (
-        ("filter", CONTACTS_PATH, {"customer": cid}),
-        ("nested", f"/customers/{cid}/contacts/", {}),
-    ):
-        try:
-            data = _get(session, path, params)
-        except (SystemExit, Exception):
+    sample = [c for c in ids[:6]]
+    for how in ("filter", "nested"):
+        got = []
+        for cid in sample:
+            rows = _fetch_customer_contacts(session, cid, how)
+            if rows is None:
+                got = []
+                break
+            got.append({str(r.get("id") or r.get("email") or r) for r in rows if isinstance(r, dict)})
+            if len(got) >= 3:
+                break
+        if not got:
             continue
-        rows = data.get("results", data if isinstance(data, list) else [])
-        if isinstance(rows, list):
-            return rows, how
-    return None, None
+        nonempty = [g for g in got if g]
+        if len(nonempty) >= 2 and all(g == nonempty[0] for g in nonempty):
+            print(f"  NOTE: the {how} way returns the same contacts for every customer "
+                  f"({len(nonempty[0])} of them), so it isn't really filtering - ignoring it.")
+            continue
+        return how
+    return None
 
 
 def _contacts_per_customer(session, customer_info):
@@ -1063,24 +1085,16 @@ def _contacts_per_customer(session, customer_info):
     ids = list(customer_info.keys())[:CONTACTS_EXTRA_LOOKUPS]
     if not ids:
         return []
-    how = None
+    how = _choose_contact_style(session, ids)
+    if how is None:
+        print("  NOTE: LeafLink won't say which customer a contact belongs to, so no "
+              "contacts are saved. Send the DEBUG contact keys line below to check "
+              "which field holds the customer.", file=sys.stderr)
+        return []
+    print(f"  Fetching each customer's contacts ({how} style)...")
     out = []
     for i, cid in enumerate(ids):
-        if how is None:
-            rows, how = _probe_contacts_for_customer(session, cid)
-            if how is None:
-                print("  NOTE: couldn't fetch contacts per customer either; "
-                      "saving them unlinked.", file=sys.stderr)
-                return []
-            print(f"  Fetching each customer's contacts ({how} style)...")
-        else:
-            path = CONTACTS_PATH if how == "filter" else f"/customers/{cid}/contacts/"
-            params = {"customer": cid} if how == "filter" else {}
-            try:
-                data = _get(session, path, params)
-            except (SystemExit, Exception):
-                continue
-            rows = data.get("results", data if isinstance(data, list) else [])
+        rows = _fetch_customer_contacts(session, cid, how)
         for c in rows or []:
             if isinstance(c, dict):
                 c = dict(c)

@@ -977,6 +977,56 @@ CONTACTS_ENABLED = os.getenv("LEAFLINK_CONTACTS", "1") not in ("0", "false", "no
 CONTACTS_DEBUG_SAMPLE = []
 
 
+# LeafLink only includes a customer's people when asked: /customers/ with
+# include_children=contacts returns them nested inside each customer record.
+# Without it the contacts endpoint is a flat address book with no customer on
+# any record, and the customer record mentions no contacts at all.
+CONTACTS_INCLUDE = os.getenv("LEAFLINK_CONTACTS_INCLUDE", "contacts")
+# Our own staff, who are on these records as managers/owners rather than store
+# contacts. Anyone at these domains is left out of a store's contact list.
+BRAND_DOMAINS = [d.strip().lower() for d in
+                 os.getenv("BRAND_DOMAINS", "medfarms.com,chillmedicated.com").split(",") if d.strip()]
+
+
+def _is_ours(email):
+    at = str(email or "").split("@")
+    return len(at) > 1 and at[1].lower() in BRAND_DOMAINS
+
+
+def _contacts_from_customers(session):
+    """Every store's people, taken from the customer records that carry them."""
+    print(f"Pulling LeafLink contacts (customers with include_children={CONTACTS_INCLUDE}) ...")
+    out, seen_customers, with_people = [], 0, 0
+    try:
+        for c in paginate(session, "/customers/", {"include_children": CONTACTS_INCLUDE}):
+            if not isinstance(c, dict):
+                continue
+            seen_customers += 1
+            people = [m for m in (c.get("contacts") or []) if isinstance(m, dict)]
+            if seen_customers == 1:
+                print(f"  DEBUG customer keys: {sorted(c.keys())}", file=sys.stderr)
+                if people:
+                    print(f"  DEBUG contact sample: {json.dumps(people[0], default=str)[:400]}", file=sys.stderr)
+            if people:
+                with_people += 1
+            info = {str(c.get("id") or ""): {
+                "name": str(c.get("display_name") or c.get("name") or c.get("dba") or "").strip(),
+                "license": str(c.get("license_number") or c.get("old_license_number") or "").strip()}}
+            for m in people:
+                if _is_ours(m.get("email")):
+                    continue
+                m = dict(m)
+                m["customer"] = c.get("id")
+                rec = _contact_record(m, info)
+                if rec:
+                    out.append(rec)
+    except (SystemExit, Exception) as e:
+        print(f"  NOTE: couldn't read customers with contacts ({e}).", file=sys.stderr)
+        return []
+    print(f"  {seen_customers} customers, {with_people} with people listed, {len(out)} contact(s).")
+    return out
+
+
 def _contact_refs_from_customer(cust):
     """The contacts a customer record points at, however LeafLink names it.
 
@@ -1075,6 +1125,93 @@ def _fetch_customer_contacts(session, cid, how):
     return rows if isinstance(rows, list) else None
 
 
+# Where LeafLink might keep the customer <-> contact link. Neither the contact
+# record nor the customer record carries it, so each of these is tried against
+# two different customers and accepted only if it returns DIFFERENT contacts for
+# them - anything that hands back the same list every time is ignored.
+CONTACT_LINK_CANDIDATES = [
+    ("filter", "/contacts/", "customer"),
+    ("filter", "/contacts/", "customer_id"),
+    ("filter", "/contacts/", "company"),
+    ("filter", "/contacts/", "company_id"),
+    ("filter", "/contacts/", "customers"),
+    ("filter", "/contacts/", "account"),
+    ("filter", "/customer-contacts/", "customer"),
+    ("filter", "/customer_contacts/", "customer"),
+    ("filter", "/contact-assignments/", "customer"),
+    ("nested", "/customers/{id}/contacts/", None),
+    ("nested", "/companies/{id}/contacts/", None),
+    ("nested", "/customers/{id}/customer-contacts/", None),
+]
+CONTACT_LINK_TRIED = []      # what was tried and what came back, for diagnosis
+
+
+def _try_contact_link(session, kind, path, param, cid):
+    """One attempt: that customer's contacts, or None if this way doesn't work."""
+    try:
+        if kind == "filter":
+            data = _get(session, path, {param: cid})
+        else:
+            data = _get(session, path.format(id=cid), None)
+    except (SystemExit, Exception):
+        return None
+    if not isinstance(data, (dict, list)):
+        return None
+    rows = data.get("results", data) if isinstance(data, dict) else data
+    return rows if isinstance(rows, list) else None
+
+
+def _discover_contact_link(session, ids, total_contacts):
+    """Find a way to ask for one customer's contacts that actually filters."""
+    probe = [c for c in ids[:8]]
+    if len(probe) < 2:
+        return None
+    for kind, path, param in CONTACT_LINK_CANDIDATES:
+        sets, counts = [], []
+        for cid in probe[:3]:
+            rows = _try_contact_link(session, kind, path, param, cid)
+            if rows is None:
+                sets = []
+                break
+            sets.append({str(r.get("id") or r.get("email") or r) for r in rows if isinstance(r, dict)})
+            counts.append(len(rows))
+        label = f"{path}{'?' + param + '=' if param else ''}"
+        if not sets:
+            CONTACT_LINK_TRIED.append({"how": label, "result": "not available"})
+            continue
+        nonempty = [s for s in sets if s]
+        if not nonempty:
+            CONTACT_LINK_TRIED.append({"how": label, "result": "always empty"})
+            continue
+        if len(nonempty) >= 2 and all(s == nonempty[0] for s in nonempty):
+            CONTACT_LINK_TRIED.append({"how": label, "result": f"same {len(nonempty[0])} contacts for every customer"})
+            continue
+        if total_contacts and max(counts) >= total_contacts:
+            CONTACT_LINK_TRIED.append({"how": label, "result": "returns the whole address book"})
+            continue
+        CONTACT_LINK_TRIED.append({"how": label, "result": f"works - {counts} contacts for {len(probe[:3])} customers"})
+        print(f"  Found how LeafLink links contacts: {label}")
+        return (kind, path, param)
+    return None
+
+
+def _contacts_by_discovered_link(session, customer_info, link):
+    """Every customer's contacts, using the way that was found to work."""
+    kind, path, param = link
+    out = []
+    for i, cid in enumerate(list(customer_info.keys())[:CONTACTS_EXTRA_LOOKUPS]):
+        rows = _try_contact_link(session, kind, path, param, cid)
+        for c in rows or []:
+            if isinstance(c, dict):
+                c = dict(c)
+                c["customer"] = cid
+                out.append(c)
+        if i and i % 50 == 0:
+            print(f"    {i} customers checked, {len(out)} contact(s) linked so far")
+        time.sleep(SLEEP_BETWEEN_PAGES_SEC / 2)
+    return out
+
+
 def _contacts_via_customer_records(session, customer_info, by_id):
     """Link contacts by reading each customer record, which points at its own.
 
@@ -1162,9 +1299,18 @@ def _contacts_per_customer(session, customer_info):
     if not ids:
         return []
     by_id = {str(c.get("id")): c for c in (RAW_CONTACTS or []) if isinstance(c, dict) and c.get("id") is not None}
+
+    # 1. the customer record, if it points at its contacts
     linked = _contacts_via_customer_records(session, customer_info, by_id)
     if linked:
         return linked
+
+    # 2. otherwise look for an address that really does filter by customer
+    link = _discover_contact_link(session, ids, len(RAW_CONTACTS or []))
+    if link:
+        linked = _contacts_by_discovered_link(session, customer_info, link)
+        if linked:
+            return linked
 
     how = _choose_contact_style(session, ids)
     if how is None:
@@ -1192,7 +1338,13 @@ def fetch_contacts(session: requests.Session, customer_lookup: dict) -> list:
     if not CONTACTS_ENABLED:
         print("Skipping LeafLink contacts (LEAFLINK_CONTACTS=0).")
         return []
-    print(f"Pulling LeafLink contacts from {CONTACTS_PATH} ...")
+    # The way that works: customers, with their contacts included.
+    nested = _contacts_from_customers(session)
+    if nested:
+        _summarise_contacts(nested)
+        return nested
+
+    print(f"Falling back to {CONTACTS_PATH} ...")
     raw = []
     try:
         global RAW_CONTACTS
@@ -1410,6 +1562,8 @@ def main() -> None:
         # LeafLink's field for the customer.
         "contacts_debug": CONTACTS_DEBUG_SAMPLE,
         "customer_debug": CUSTOMER_DEBUG_SAMPLE,
+        # What was tried to link contacts to customers, and what came back.
+        "contacts_link_tried": CONTACT_LINK_TRIED,
     }
     tmp = OUTPUT_PATH.with_suffix(".json.tmp")
     tmp.write_text(json.dumps(output, indent=2, default=str))

@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-09-27T01:04:02.744945+00:00",
+  "fetched_at": "2026-09-27T01:18:48.461302+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
@@ -30541,15 +30541,6 @@
       "phone": "8564051063"
     },
     {
-      "customer_id": "2131393",
-      "customer": "The Retreat",
-      "license": "RE000571",
-      "name": "Alex Santiago",
-      "title": "GM",
-      "email": "asantiago@retreatnj.com",
-      "phone": ""
-    },
-    {
       "customer_id": "2126674",
       "customer": "Greenstop Wellness LLC",
       "license": "RE000221",
@@ -30565,6 +30556,15 @@
       "name": "Dominic Francis",
       "title": "Buyer",
       "email": "headstashcannaco@gmail.com",
+      "phone": ""
+    },
+    {
+      "customer_id": "2131393",
+      "customer": "The Retreat",
+      "license": "RE000571",
+      "name": "Alex Santiago",
+      "title": "GM",
+      "email": "asantiago@retreatnj.com",
       "phone": ""
     },
     {

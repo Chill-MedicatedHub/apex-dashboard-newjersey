@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-09-28T13:18:37.070489+00:00",
+  "fetched_at": "2026-09-28T13:33:56.443954+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
@@ -417,7 +417,7 @@
       "sales_reps": "",
       "sales_reps_display": "",
       "payment_dates": [],
-      "is_sample": false,
+      "is_sample": true,
       "notes": "",
       "product_sku": "41c68a5bbc4f357f9ec5",
       "current_inventory": 226.0
@@ -464,7 +464,7 @@
       "sales_reps": "",
       "sales_reps_display": "",
       "payment_dates": [],
-      "is_sample": false,
+      "is_sample": true,
       "notes": "",
       "product_sku": "40fa86c05854beeda4bf",
       "current_inventory": 318.0

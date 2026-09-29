@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-09-29T22:48:46.767382+00:00",
+  "fetched_at": "2026-09-29T23:04:15.941273+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
@@ -28834,18 +28834,18 @@
       "customer_id": "2051126",
       "customer": "Conservatory Cannabis Company",
       "license": "RE000868",
-      "name": "Connor Hendrickson",
-      "title": "",
-      "email": "connor@conservatorycannabis.com",
+      "name": "Amanda Penque",
+      "title": "Dir of Marketing",
+      "email": "amanda@conservatorycannabis.com",
       "phone": "6099049409"
     },
     {
       "customer_id": "2051126",
       "customer": "Conservatory Cannabis Company",
       "license": "RE000868",
-      "name": "Amanda Penque",
-      "title": "Dir of Marketing",
-      "email": "amanda@conservatorycannabis.com",
+      "name": "Connor Hendrickson",
+      "title": "",
+      "email": "connor@conservatorycannabis.com",
       "phone": "6099049409"
     },
     {
@@ -28933,19 +28933,19 @@
       "customer_id": "2113884",
       "customer": "Dazed Cannabis",
       "license": "RE000567",
-      "name": "Kayla Fuentes",
-      "title": "Inventory Manager",
-      "email": "Njorders@dazed.fun",
-      "phone": "6466708644"
+      "name": "Chris D",
+      "title": "",
+      "email": "accounting@dazed.fun",
+      "phone": ""
     },
     {
       "customer_id": "2113884",
       "customer": "Dazed Cannabis",
       "license": "RE000567",
-      "name": "Chris D",
-      "title": "",
-      "email": "accounting@dazed.fun",
-      "phone": ""
+      "name": "Kayla Fuentes",
+      "title": "Inventory Manager",
+      "email": "Njorders@dazed.fun",
+      "phone": "6466708644"
     },
     {
       "customer_id": "2051134",
@@ -28980,8 +28980,8 @@
       "license": "RE000726",
       "name": "Mukesh Patel",
       "title": "",
-      "email": "",
-      "phone": "2039484184"
+      "email": "info@easterngreendispensary.com",
+      "phone": "8562053257"
     },
     {
       "customer_id": "2051136",
@@ -28989,17 +28989,8 @@
       "license": "RE000726",
       "name": "Mukesh Patel",
       "title": "",
-      "email": "info@easterngreendispensary.com",
-      "phone": "8562053257"
-    },
-    {
-      "customer_id": "2051138",
-      "customer": "Elevated Herb LLC",
-      "license": "RE000250",
-      "name": "Drew Drechsel",
-      "title": "General Manager",
-      "email": "info@elevated-herb.com",
-      "phone": "9083035156"
+      "email": "",
+      "phone": "2039484184"
     },
     {
       "customer_id": "2051138",
@@ -29009,6 +29000,15 @@
       "title": "General Manager",
       "email": "rmartin@elevated-herb.com",
       "phone": "9732916840"
+    },
+    {
+      "customer_id": "2051138",
+      "customer": "Elevated Herb LLC",
+      "license": "RE000250",
+      "name": "Drew Drechsel",
+      "title": "General Manager",
+      "email": "info@elevated-herb.com",
+      "phone": "9083035156"
     },
     {
       "customer_id": "2099641",
@@ -29086,19 +29086,19 @@
       "customer_id": "2051145",
       "customer": "G2 Dispensary",
       "license": "RE000160",
-      "name": "Chris Maher",
-      "title": "Operating Manager",
-      "email": "chris@g2dispensary.com",
-      "phone": "9735922708"
+      "name": "Brad Morlino",
+      "title": "Manager",
+      "email": "brad@g2dispensary.com",
+      "phone": ""
     },
     {
       "customer_id": "2051145",
       "customer": "G2 Dispensary",
       "license": "RE000160",
-      "name": "Brad Morlino",
-      "title": "Manager",
-      "email": "brad@g2dispensary.com",
-      "phone": ""
+      "name": "Chris Maher",
+      "title": "Operating Manager",
+      "email": "chris@g2dispensary.com",
+      "phone": "9735922708"
     },
     {
       "customer_id": "2156923",
@@ -29113,18 +29113,27 @@
       "customer_id": "2161683",
       "customer": "Garden State Dispensary - Union",
       "license": "RE000017",
+      "name": "Garret Reams",
+      "title": "Regional Purchasing Manager",
+      "email": "garret.reams@ayrwellness.com",
+      "phone": ""
+    },
+    {
+      "customer_id": "2161683",
+      "customer": "Garden State Dispensary - Union",
+      "license": "RE000017",
       "name": "Philip Masturzo",
       "title": "Retail Purchasing Administrator PA & NJ",
       "email": "Philip.Masturzo@ayrwellness.com",
       "phone": "2672698649"
     },
     {
-      "customer_id": "2161683",
-      "customer": "Garden State Dispensary - Union",
-      "license": "RE000017",
-      "name": "Garret Reams",
-      "title": "Regional Purchasing Manager",
-      "email": "garret.reams@ayrwellness.com",
+      "customer_id": "2047117",
+      "customer": "Garfield Gardens Dispensary LLC",
+      "license": "RE000728",
+      "name": "Rita Tsalyuk",
+      "title": "",
+      "email": "rita.tsalyuk@gmail.com",
       "phone": ""
     },
     {
@@ -29134,15 +29143,6 @@
       "name": "Jessica Reuven",
       "title": "",
       "email": "jessica.reuven@yumaway.com",
-      "phone": ""
-    },
-    {
-      "customer_id": "2047117",
-      "customer": "Garfield Gardens Dispensary LLC",
-      "license": "RE000728",
-      "name": "Rita Tsalyuk",
-      "title": "",
-      "email": "rita.tsalyuk@gmail.com",
       "phone": ""
     },
     {
@@ -29176,19 +29176,19 @@
       "customer_id": "2051149",
       "customer": "Got Your Six Dispensary Of New Jersey LLC.",
       "license": "RE000544",
-      "name": "SABRINA PONTORIERO",
+      "name": "Freddy Herrera",
       "title": "",
-      "email": "SABRINA.P@gotyoursix.co",
-      "phone": "7324442060"
+      "email": "freddy.herrera@gotyoursixllc.com",
+      "phone": ""
     },
     {
       "customer_id": "2051149",
       "customer": "Got Your Six Dispensary Of New Jersey LLC.",
       "license": "RE000544",
-      "name": "Freddy Herrera",
+      "name": "SABRINA PONTORIERO",
       "title": "",
-      "email": "freddy.herrera@gotyoursixllc.com",
-      "phone": ""
+      "email": "SABRINA.P@gotyoursix.co",
+      "phone": "7324442060"
     },
     {
       "customer_id": "2099863",
@@ -29221,19 +29221,19 @@
       "customer_id": "2106306",
       "customer": "GW LEAF DISPENSARY LLC",
       "license": "RE001011",
-      "name": "Nicolle Lombardi",
+      "name": "Ta-leia Newsom",
       "title": "",
-      "email": "nicolle@gwleaf.com",
-      "phone": "2012139721"
+      "email": "Ta-leia@gwleaf.com",
+      "phone": ""
     },
     {
       "customer_id": "2106306",
       "customer": "GW LEAF DISPENSARY LLC",
       "license": "RE001011",
-      "name": "Ta-leia Newsom",
+      "name": "Nicolle Lombardi",
       "title": "",
-      "email": "Ta-leia@gwleaf.com",
-      "phone": ""
+      "email": "nicolle@gwleaf.com",
+      "phone": "2012139721"
     },
     {
       "customer_id": "2147053",
@@ -29266,10 +29266,10 @@
       "customer_id": "2051152",
       "customer": "Hashery",
       "license": "RE000185",
-      "name": "Len Coleman",
-      "title": "",
-      "email": "len@hasherynj.com",
-      "phone": "9088723753"
+      "name": "Haig Vartivarian",
+      "title": "General Manager",
+      "email": "haig@hasherynj.com",
+      "phone": "2013032999"
     },
     {
       "customer_id": "2051152",
@@ -29284,10 +29284,10 @@
       "customer_id": "2051152",
       "customer": "Hashery",
       "license": "RE000185",
-      "name": "Haig Vartivarian",
-      "title": "General Manager",
-      "email": "haig@hasherynj.com",
-      "phone": "2013032999"
+      "name": "Len Coleman",
+      "title": "",
+      "email": "len@hasherynj.com",
+      "phone": "9088723753"
     },
     {
       "customer_id": "2051154",
@@ -29329,18 +29329,18 @@
       "customer_id": "2135873",
       "customer": "High Almighty",
       "license": "RE000581",
-      "name": "Chad Gonzalez",
-      "title": "billing contact",
-      "email": "Chad@growfire.co",
+      "name": "Juan Calderon",
+      "title": "",
+      "email": "",
       "phone": ""
     },
     {
       "customer_id": "2135873",
       "customer": "High Almighty",
       "license": "RE000581",
-      "name": "Juan Calderon",
-      "title": "",
-      "email": "",
+      "name": "Chad Gonzalez",
+      "title": "billing contact",
+      "email": "Chad@growfire.co",
       "phone": ""
     },
     {
@@ -29365,19 +29365,19 @@
       "customer_id": "2051161",
       "customer": "Holistic Solutions LLC",
       "license": "RE000603",
-      "name": "Deja Nickelson",
-      "title": "Operations Manager",
-      "email": "nickelsondeja@yahoo.com",
-      "phone": ""
+      "name": "Suzan Nickelson",
+      "title": "",
+      "email": "Italdaughters72@gmail.com",
+      "phone": "8566493600"
     },
     {
       "customer_id": "2051161",
       "customer": "Holistic Solutions LLC",
       "license": "RE000603",
-      "name": "Suzan Nickelson",
-      "title": "",
-      "email": "Italdaughters72@gmail.com",
-      "phone": "8566493600"
+      "name": "Deja Nickelson",
+      "title": "Operations Manager",
+      "email": "nickelsondeja@yahoo.com",
+      "phone": ""
     },
     {
       "customer_id": "2050848",
@@ -29446,19 +29446,19 @@
       "customer_id": "2058366",
       "customer": "Jesters Joint Dispensary",
       "license": "RE000120",
-      "name": "Matthew Group",
-      "title": "Dispensary Manager",
-      "email": "matt@jestersnj.com",
-      "phone": "6027021780"
+      "name": "Sheldon Aberman",
+      "title": "",
+      "email": "Sheldon@jestersnj.com",
+      "phone": "8488008700"
     },
     {
       "customer_id": "2058366",
       "customer": "Jesters Joint Dispensary",
       "license": "RE000120",
-      "name": "Sheldon Aberman",
-      "title": "",
-      "email": "Sheldon@jestersnj.com",
-      "phone": "8488008700"
+      "name": "Matthew Group",
+      "title": "Dispensary Manager",
+      "email": "matt@jestersnj.com",
+      "phone": "6027021780"
     },
     {
       "customer_id": "2109726",
@@ -29554,19 +29554,19 @@
       "customer_id": "2057905",
       "customer": "Main Street Dispensary",
       "license": "RE000439",
-      "name": "Kelsey McLaughlin",
-      "title": "Inventory Manager",
-      "email": "kelsey@mainstreetdispensarynj.com",
-      "phone": ""
+      "name": "Josh Hantman",
+      "title": "General Manager",
+      "email": "josh@mainstreetdispensarynj.com",
+      "phone": "7733683667"
     },
     {
       "customer_id": "2057905",
       "customer": "Main Street Dispensary",
       "license": "RE000439",
-      "name": "Josh Hantman",
-      "title": "General Manager",
-      "email": "josh@mainstreetdispensarynj.com",
-      "phone": "7733683667"
+      "name": "Kelsey McLaughlin",
+      "title": "Inventory Manager",
+      "email": "kelsey@mainstreetdispensarynj.com",
+      "phone": ""
     },
     {
       "customer_id": "2051172",
@@ -29662,10 +29662,10 @@
       "customer_id": "2051184",
       "customer": "Nile Cannabis",
       "license": "RE000937",
-      "name": "Matthias Parker",
-      "title": "General Manager",
-      "email": "mparker@nile-cannabis.com",
-      "phone": "8484580028"
+      "name": "Leland O'Connor",
+      "title": "",
+      "email": "leland@nile-cannabis.com",
+      "phone": ""
     },
     {
       "customer_id": "2051184",
@@ -29680,10 +29680,19 @@
       "customer_id": "2051184",
       "customer": "Nile Cannabis",
       "license": "RE000937",
-      "name": "Leland O'Connor",
-      "title": "",
-      "email": "leland@nile-cannabis.com",
-      "phone": ""
+      "name": "Matthias Parker",
+      "title": "General Manager",
+      "email": "mparker@nile-cannabis.com",
+      "phone": "8484580028"
+    },
+    {
+      "customer_id": "2051184",
+      "customer": "Nile Cannabis",
+      "license": "RE000937",
+      "name": "Nile Inventory",
+      "title": "Inventory",
+      "email": "inventory@nile-cannabis.com",
+      "phone": "2018666547"
     },
     {
       "customer_id": "2051185",

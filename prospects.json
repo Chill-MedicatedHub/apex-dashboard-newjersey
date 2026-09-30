@@ -1,8 +1,8 @@
 {
-  "as_of": "2026-09-29",
+  "as_of": "2026-09-30",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
-  "count": 298,
+  "count": 300,
   "records": [
     {
       "name": "Red Oak Dispensary - Absecon",
@@ -597,6 +597,17 @@
       "phone": "6096823510",
       "email": "zacktheleafandseed@gmail.com",
       "website": "https://www.theleafandseednj.com"
+    },
+    {
+      "name": "NJ Leaf Aberdeen",
+      "license": "RE001057",
+      "type": "",
+      "status": "",
+      "city": "Cliffwood",
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "The Botanist Collingswood Dispensary",
@@ -1308,6 +1319,17 @@
       "type": "",
       "status": "",
       "city": "Irvington",
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
+    },
+    {
+      "name": "NJ Leaf Jamesburg",
+      "license": "RE001071",
+      "type": "",
+      "status": "",
+      "city": "Jamesburg",
       "state": "NJ",
       "phone": "",
       "email": "",
@@ -2140,7 +2162,7 @@
     },
     {
       "name": "Good Karma Dispensary",
-      "license": "RE001030",
+      "license": "RE0001030",
       "type": "",
       "status": "",
       "city": "North Plainfield",
@@ -2151,7 +2173,7 @@
     },
     {
       "name": "Good Karma Dispensary",
-      "license": "RE0001030",
+      "license": "RE001030",
       "type": "",
       "status": "",
       "city": "North Plainfield",

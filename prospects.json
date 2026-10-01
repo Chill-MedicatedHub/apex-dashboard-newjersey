@@ -1,8 +1,8 @@
 {
-  "as_of": "2026-09-30",
+  "as_of": "2026-10-01",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
-  "count": 300,
+  "count": 301,
   "records": [
     {
       "name": "Red Oak Dispensary - Absecon",
@@ -2302,6 +2302,17 @@
       "phone": "2677560050",
       "email": "apinvoices@ianthus.com",
       "website": "https://mpxnj.com/"
+    },
+    {
+      "name": "Broad Street Buds LLC",
+      "license": "RE000905",
+      "type": "",
+      "status": "",
+      "city": "Phillipsburg",
+      "state": "NJ",
+      "phone": "9087509007",
+      "email": "jim@broadstreetbudsnj.com",
+      "website": "https://broadstreetbudsnj.com/"
     },
     {
       "name": "CannaVerde",

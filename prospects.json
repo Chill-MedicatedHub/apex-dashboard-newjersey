@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-01",
+  "as_of": "2026-10-02",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
   "count": 301,
@@ -429,9 +429,9 @@
       "status": "",
       "city": "Bridgeton",
       "state": "NJ",
-      "phone": "",
+      "phone": "8564595006",
       "email": "",
-      "website": ""
+      "website": "https://blazinbuddiez.com/"
     },
     {
       "name": "Social Dispensary",

@@ -1,8 +1,8 @@
 {
-  "as_of": "2026-10-03",
+  "as_of": "2026-10-04",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
-  "count": 301,
+  "count": 302,
   "records": [
     {
       "name": "Red Oak Dispensary - Absecon",
@@ -1719,6 +1719,17 @@
       "phone": "9084488143",
       "email": "davidkauf166@gmail.com",
       "website": "https://bakedrooster.com/"
+    },
+    {
+      "name": "Iconic Dispensary LLC",
+      "license": "RE001087",
+      "type": "",
+      "status": "",
+      "city": "Lumberton Township",
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "Quality Roots - Evesham, LLC",

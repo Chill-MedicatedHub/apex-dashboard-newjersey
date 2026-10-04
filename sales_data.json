@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-10-04T00:18:34.561495+00:00",
+  "fetched_at": "2026-10-04T00:30:03.151665+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
@@ -30602,6 +30602,15 @@
       "title": "",
       "email": "hello@njcannabiscc.com",
       "phone": "2019182800"
+    },
+    {
+      "customer_id": "2205069",
+      "customer": "Iconic Dispensary LLC",
+      "license": "RE001087",
+      "name": "Joshua Wilson",
+      "title": "",
+      "email": "joshua@iconicdispensarynj.com",
+      "phone": "8588370293"
     }
   ],
   "contacts_debug": [],

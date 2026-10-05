@@ -1,8 +1,8 @@
 {
-  "as_of": "2026-10-04",
+  "as_of": "2026-10-05",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
-  "count": 302,
+  "count": 303,
   "records": [
     {
       "name": "Red Oak Dispensary - Absecon",
@@ -973,6 +973,17 @@
       "website": "https://gsngdispensary.com/"
     },
     {
+      "name": "Leaf Haus",
+      "license": "RE000671",
+      "type": "",
+      "status": "",
+      "city": "Franklin Township",
+      "state": "NJ",
+      "phone": "9089089333",
+      "email": "",
+      "website": "https://leafhaus.com/"
+    },
+    {
       "name": "Somerset Green LLC",
       "license": "RE000994",
       "type": "",
@@ -1728,7 +1739,7 @@
       "city": "Lumberton Township",
       "state": "NJ",
       "phone": "",
-      "email": "",
+      "email": "joshua@iconicdispensarynj.com",
       "website": ""
     },
     {

@@ -1,10 +1,10 @@
 {
-  "fetched_at": "2026-10-05T14:33:46.950939+00:00",
+  "fetched_at": "2026-10-05T14:48:32.769820+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
-  "orders_seen": 1985,
-  "orders_kept": 1958,
+  "orders_seen": 1986,
+  "orders_kept": 1959,
   "inventory": [
     {
       "id": "2675942",
@@ -28690,19 +28690,19 @@
       "customer_id": "2051113",
       "customer": "Bud It Up",
       "license": "RE000295",
-      "name": "John Soares",
-      "title": "Owner",
-      "email": "jsoares@buditupnj.com",
-      "phone": "8482339344"
+      "name": "\u200bChante Stewart",
+      "title": "",
+      "email": "cstewart@buditupnj.com",
+      "phone": ""
     },
     {
       "customer_id": "2051113",
       "customer": "Bud It Up",
       "license": "RE000295",
-      "name": "\u200bChante Stewart",
-      "title": "",
-      "email": "cstewart@buditupnj.com",
-      "phone": ""
+      "name": "John Soares",
+      "title": "Owner",
+      "email": "jsoares@buditupnj.com",
+      "phone": "8482339344"
     },
     {
       "customer_id": "2051116",
@@ -28753,15 +28753,6 @@
       "customer_id": "2051121",
       "customer": "Canopy Crossroad LLC",
       "license": "RE000258",
-      "name": "Rob Weiner",
-      "title": "Assistant General Manager",
-      "email": "rob@canopycrossroad.com",
-      "phone": "7326644022"
-    },
-    {
-      "customer_id": "2051121",
-      "customer": "Canopy Crossroad LLC",
-      "license": "RE000258",
       "name": "Andrew Zeitlin",
       "title": "CFO/Accounting",
       "email": "az@canopycrossroad.com",
@@ -28777,13 +28768,22 @@
       "phone": ""
     },
     {
+      "customer_id": "2051121",
+      "customer": "Canopy Crossroad LLC",
+      "license": "RE000258",
+      "name": "Rob Weiner",
+      "title": "Assistant General Manager",
+      "email": "rob@canopycrossroad.com",
+      "phone": "7326644022"
+    },
+    {
       "customer_id": "2051122",
       "customer": "Casa Verde Wellness",
       "license": "RE000881",
-      "name": "Annie Moulton",
+      "name": "Loretta",
       "title": "",
-      "email": "anniem.casaverde@gmail.com",
-      "phone": "6093389205"
+      "email": "Loretta.casaverde@gmail.com",
+      "phone": ""
     },
     {
       "customer_id": "2051122",
@@ -28807,10 +28807,10 @@
       "customer_id": "2051122",
       "customer": "Casa Verde Wellness",
       "license": "RE000881",
-      "name": "Loretta",
+      "name": "Annie Moulton",
       "title": "",
-      "email": "Loretta.casaverde@gmail.com",
-      "phone": ""
+      "email": "anniem.casaverde@gmail.com",
+      "phone": "6093389205"
     },
     {
       "customer_id": "2051123",
@@ -28852,6 +28852,15 @@
       "customer_id": "2051126",
       "customer": "Conservatory Cannabis Company",
       "license": "RE000868",
+      "name": "Amanda Penque",
+      "title": "Dir of Marketing",
+      "email": "amanda@conservatorycannabis.com",
+      "phone": "6099049409"
+    },
+    {
+      "customer_id": "2051126",
+      "customer": "Conservatory Cannabis Company",
+      "license": "RE000868",
       "name": "Connor Hendrickson",
       "title": "",
       "email": "connor@conservatorycannabis.com",
@@ -28876,13 +28885,13 @@
       "phone": ""
     },
     {
-      "customer_id": "2051126",
-      "customer": "Conservatory Cannabis Company",
-      "license": "RE000868",
-      "name": "Amanda Penque",
-      "title": "Dir of Marketing",
-      "email": "amanda@conservatorycannabis.com",
-      "phone": "6099049409"
+      "customer_id": "2051128",
+      "customer": "Cottonmouth Dispensary LLC",
+      "license": "RE000055",
+      "name": "Sam Mier",
+      "title": "",
+      "email": "sam@getcottonmouth.com",
+      "phone": "8563123877"
     },
     {
       "customer_id": "2051128",
@@ -28903,13 +28912,13 @@
       "phone": "8563123877"
     },
     {
-      "customer_id": "2051128",
-      "customer": "Cottonmouth Dispensary LLC",
-      "license": "RE000055",
-      "name": "Sam Mier",
+      "customer_id": "2051129",
+      "customer": "Cream",
+      "license": "RE000834",
+      "name": "John Caracciola",
       "title": "",
-      "email": "sam@getcottonmouth.com",
-      "phone": "8563123877"
+      "email": "john@cream.online",
+      "phone": ""
     },
     {
       "customer_id": "2051129",
@@ -28921,13 +28930,13 @@
       "phone": "8485009333"
     },
     {
-      "customer_id": "2051129",
-      "customer": "Cream",
-      "license": "RE000834",
-      "name": "John Caracciola",
+      "customer_id": "2051130",
+      "customer": "Dank Poet Dispensary LLC",
+      "license": "RE000499",
+      "name": "Chris Caruso",
       "title": "",
-      "email": "john@cream.online",
-      "phone": ""
+      "email": "chriscaruso@dankpoet.com",
+      "phone": "9087637579"
     },
     {
       "customer_id": "2051130",
@@ -28937,15 +28946,6 @@
       "title": "Owner Partner",
       "email": "sonia@dankpoet.com",
       "phone": "9083999714"
-    },
-    {
-      "customer_id": "2051130",
-      "customer": "Dank Poet Dispensary LLC",
-      "license": "RE000499",
-      "name": "Chris Caruso",
-      "title": "",
-      "email": "chriscaruso@dankpoet.com",
-      "phone": "9087637579"
     },
     {
       "customer_id": "2113884",
@@ -28978,19 +28978,19 @@
       "customer_id": "2075516",
       "customer": "Downtown FLWR",
       "license": "RE000725",
-      "name": "Amanda Handy",
+      "name": "Jazz Randall",
       "title": "",
-      "email": "amanda@downtownflwr.com",
-      "phone": ""
+      "email": "jazz@downtownflwr.com",
+      "phone": "7199637532"
     },
     {
       "customer_id": "2075516",
       "customer": "Downtown FLWR",
       "license": "RE000725",
-      "name": "Jazz Randall",
+      "name": "Amanda Handy",
       "title": "",
-      "email": "jazz@downtownflwr.com",
-      "phone": "7199637532"
+      "email": "amanda@downtownflwr.com",
+      "phone": ""
     },
     {
       "customer_id": "2051136",
@@ -29014,28 +29014,19 @@
       "customer_id": "2051138",
       "customer": "Elevated Herb LLC",
       "license": "RE000250",
-      "name": "Drew Drechsel",
-      "title": "General Manager",
-      "email": "info@elevated-herb.com",
-      "phone": "9083035156"
-    },
-    {
-      "customer_id": "2051138",
-      "customer": "Elevated Herb LLC",
-      "license": "RE000250",
       "name": "Roger Martin",
       "title": "General Manager",
       "email": "rmartin@elevated-herb.com",
       "phone": "9732916840"
     },
     {
-      "customer_id": "2099641",
-      "customer": "Emerald Tea Supply Co.",
-      "license": "RE000241",
-      "name": "Naeem Inventory",
-      "title": "Inventory Manager",
-      "email": "inventory@emeraldteasupplycompany.com",
-      "phone": ""
+      "customer_id": "2051138",
+      "customer": "Elevated Herb LLC",
+      "license": "RE000250",
+      "name": "Drew Drechsel",
+      "title": "General Manager",
+      "email": "info@elevated-herb.com",
+      "phone": "9083035156"
     },
     {
       "customer_id": "2099641",
@@ -29044,6 +29035,15 @@
       "name": "Dan Fusco",
       "title": "",
       "email": "dan.fusco@emeraldteasupplycompany.com",
+      "phone": ""
+    },
+    {
+      "customer_id": "2099641",
+      "customer": "Emerald Tea Supply Co.",
+      "license": "RE000241",
+      "name": "Naeem Inventory",
+      "title": "Inventory Manager",
+      "email": "inventory@emeraldteasupplycompany.com",
       "phone": ""
     },
     {
@@ -29086,19 +29086,19 @@
       "customer_id": "2081276",
       "customer": "Frosted Nug - Carneys Point",
       "license": "RE000992",
-      "name": "Kris Wilson",
+      "name": "Kristopher Wilson",
       "title": "",
-      "email": "kris@frostednug.com",
-      "phone": "8563763359"
+      "email": "kris@woolwichwellnesscompany.com",
+      "phone": ""
     },
     {
       "customer_id": "2081276",
       "customer": "Frosted Nug - Carneys Point",
       "license": "RE000992",
-      "name": "Kristopher Wilson",
+      "name": "Kris Wilson",
       "title": "",
-      "email": "kris@woolwichwellnesscompany.com",
-      "phone": ""
+      "email": "kris@frostednug.com",
+      "phone": "8563763359"
     },
     {
       "customer_id": "2051145",
@@ -29194,19 +29194,19 @@
       "customer_id": "2051149",
       "customer": "Got Your Six Dispensary Of New Jersey LLC.",
       "license": "RE000544",
-      "name": "SABRINA PONTORIERO",
+      "name": "Freddy Herrera",
       "title": "",
-      "email": "SABRINA.P@gotyoursix.co",
-      "phone": "7324442060"
+      "email": "freddy.herrera@gotyoursixllc.com",
+      "phone": ""
     },
     {
       "customer_id": "2051149",
       "customer": "Got Your Six Dispensary Of New Jersey LLC.",
       "license": "RE000544",
-      "name": "Freddy Herrera",
+      "name": "SABRINA PONTORIERO",
       "title": "",
-      "email": "freddy.herrera@gotyoursixllc.com",
-      "phone": ""
+      "email": "SABRINA.P@gotyoursix.co",
+      "phone": "7324442060"
     },
     {
       "customer_id": "2099863",
@@ -29284,19 +29284,19 @@
       "customer_id": "2051152",
       "customer": "Hashery",
       "license": "RE000185",
-      "name": "Haig Vartivarian",
-      "title": "General Manager",
-      "email": "haig@hasherynj.com",
-      "phone": "2013032999"
+      "name": "Len Coleman",
+      "title": "",
+      "email": "len@hasherynj.com",
+      "phone": "9088723753"
     },
     {
       "customer_id": "2051152",
       "customer": "Hashery",
       "license": "RE000185",
-      "name": "Len Coleman",
-      "title": "",
-      "email": "len@hasherynj.com",
-      "phone": "9088723753"
+      "name": "Haig Vartivarian",
+      "title": "General Manager",
+      "email": "haig@hasherynj.com",
+      "phone": "2013032999"
     },
     {
       "customer_id": "2051152",
@@ -29347,18 +29347,18 @@
       "customer_id": "2135873",
       "customer": "High Almighty",
       "license": "RE000581",
-      "name": "Juan Calderon",
-      "title": "",
-      "email": "",
+      "name": "Chad Gonzalez",
+      "title": "billing contact",
+      "email": "Chad@growfire.co",
       "phone": ""
     },
     {
       "customer_id": "2135873",
       "customer": "High Almighty",
       "license": "RE000581",
-      "name": "Chad Gonzalez",
-      "title": "billing contact",
-      "email": "Chad@growfire.co",
+      "name": "Juan Calderon",
+      "title": "",
+      "email": "",
       "phone": ""
     },
     {
@@ -29414,6 +29414,15 @@
       "title": "",
       "email": "vince@hudhaus.co",
       "phone": ""
+    },
+    {
+      "customer_id": "2205069",
+      "customer": "Iconic Dispensary LLC",
+      "license": "RE001087",
+      "name": "Joshua Wilson",
+      "title": "",
+      "email": "joshua@iconicdispensarynj.com",
+      "phone": "8588370293"
     },
     {
       "customer_id": "2047110",
@@ -29572,19 +29581,19 @@
       "customer_id": "2057905",
       "customer": "Main Street Dispensary",
       "license": "RE000439",
-      "name": "Josh Hantman",
-      "title": "General Manager",
-      "email": "josh@mainstreetdispensarynj.com",
-      "phone": "7733683667"
+      "name": "Kelsey McLaughlin",
+      "title": "Inventory Manager",
+      "email": "kelsey@mainstreetdispensarynj.com",
+      "phone": ""
     },
     {
       "customer_id": "2057905",
       "customer": "Main Street Dispensary",
       "license": "RE000439",
-      "name": "Kelsey McLaughlin",
-      "title": "Inventory Manager",
-      "email": "kelsey@mainstreetdispensarynj.com",
-      "phone": ""
+      "name": "Josh Hantman",
+      "title": "General Manager",
+      "email": "josh@mainstreetdispensarynj.com",
+      "phone": "7733683667"
     },
     {
       "customer_id": "2051172",
@@ -29617,19 +29626,19 @@
       "customer_id": "2051177",
       "customer": "Molly Ann Farms",
       "license": "RE000173",
-      "name": "Anaiya Anaiya",
+      "name": "Sean Hegarty",
       "title": "",
-      "email": "Aniaya@mollyannfarms.com",
-      "phone": ""
+      "email": "sean@mollyannfarms.com",
+      "phone": "9733154900"
     },
     {
       "customer_id": "2051177",
       "customer": "Molly Ann Farms",
       "license": "RE000173",
-      "name": "Sean Hegarty",
+      "name": "Anaiya Anaiya",
       "title": "",
-      "email": "sean@mollyannfarms.com",
-      "phone": "9733154900"
+      "email": "Aniaya@mollyannfarms.com",
+      "phone": ""
     },
     {
       "customer_id": "2073077",
@@ -29689,10 +29698,10 @@
       "customer_id": "2051184",
       "customer": "Nile Cannabis",
       "license": "RE000937",
-      "name": "Catt Murphy",
-      "title": "Supervisor",
-      "email": "cmurphy@nile-cannabis.com",
-      "phone": "2019885433"
+      "name": "Nile Inventory",
+      "title": "Inventory",
+      "email": "inventory@nile-cannabis.com",
+      "phone": "2018666547"
     },
     {
       "customer_id": "2051184",
@@ -29707,10 +29716,10 @@
       "customer_id": "2051184",
       "customer": "Nile Cannabis",
       "license": "RE000937",
-      "name": "Nile Inventory",
-      "title": "Inventory",
-      "email": "inventory@nile-cannabis.com",
-      "phone": "2018666547"
+      "name": "Catt Murphy",
+      "title": "Supervisor",
+      "email": "cmurphy@nile-cannabis.com",
+      "phone": "2019885433"
     },
     {
       "customer_id": "2051185",
@@ -29725,19 +29734,10 @@
       "customer_id": "2051187",
       "customer": "Nj Leaf (North Brunswick)",
       "license": "RE000751",
-      "name": "Luke Lieberman",
-      "title": "",
-      "email": "luke@njleaf.com",
-      "phone": ""
-    },
-    {
-      "customer_id": "2051187",
-      "customer": "Nj Leaf (North Brunswick)",
-      "license": "RE000751",
-      "name": "Shivani Pipalia",
-      "title": "",
-      "email": "shivani@njleaf.com",
-      "phone": "2013909711"
+      "name": "Jessica Gonzalez",
+      "title": "Manager",
+      "email": "jess@njleaf.com",
+      "phone": "7324067514"
     },
     {
       "customer_id": "2051187",
@@ -29752,18 +29752,18 @@
       "customer_id": "2051187",
       "customer": "Nj Leaf (North Brunswick)",
       "license": "RE000751",
-      "name": "Jessica Gonzalez",
-      "title": "Manager",
-      "email": "jess@njleaf.com",
-      "phone": "7324067514"
+      "name": "Shivani Pipalia",
+      "title": "",
+      "email": "shivani@njleaf.com",
+      "phone": "2013909711"
     },
     {
-      "customer_id": "2086690",
-      "customer": "Northeast Alternatives",
-      "license": "RE001004",
-      "name": "Accounts Payable",
+      "customer_id": "2051187",
+      "customer": "Nj Leaf (North Brunswick)",
+      "license": "RE000751",
+      "name": "Luke Lieberman",
       "title": "",
-      "email": "ap@nealternatives.com",
+      "email": "luke@njleaf.com",
       "phone": ""
     },
     {
@@ -29776,13 +29776,13 @@
       "phone": "8603959106"
     },
     {
-      "customer_id": "2081992",
-      "customer": "OHM THEORY",
-      "license": "RE000177",
-      "name": "Digan Patel",
+      "customer_id": "2086690",
+      "customer": "Northeast Alternatives",
+      "license": "RE001004",
+      "name": "Accounts Payable",
       "title": "",
-      "email": "diganpatel@icloud.com",
-      "phone": "8018038802"
+      "email": "ap@nealternatives.com",
+      "phone": ""
     },
     {
       "customer_id": "2081992",
@@ -29794,13 +29794,13 @@
       "phone": "2155549968"
     },
     {
-      "customer_id": "2140928",
-      "customer": "OTC JERSEY, LLC",
-      "license": "RE000977",
-      "name": "Noah V",
+      "customer_id": "2081992",
+      "customer": "OHM THEORY",
+      "license": "RE000177",
+      "name": "Digan Patel",
       "title": "",
-      "email": "absecon@offthechartsshop.com",
-      "phone": ""
+      "email": "diganpatel@icloud.com",
+      "phone": "8018038802"
     },
     {
       "customer_id": "2140928",
@@ -29810,6 +29810,15 @@
       "title": "Inventory Manager",
       "email": "absecon@offthechartsshop.com",
       "phone": "6093821689"
+    },
+    {
+      "customer_id": "2140928",
+      "customer": "OTC JERSEY, LLC",
+      "license": "RE000977",
+      "name": "Noah V",
+      "title": "",
+      "email": "absecon@offthechartsshop.com",
+      "phone": ""
     },
     {
       "customer_id": "2051195",
@@ -29869,15 +29878,6 @@
       "customer_id": "2089310",
       "customer": "Quality Cannabliss",
       "license": "RE000575",
-      "name": "Josh Boyle",
-      "title": "Quality Assurance Manager",
-      "email": "josh@qualitycannabliss.com",
-      "phone": ""
-    },
-    {
-      "customer_id": "2089310",
-      "customer": "Quality Cannabliss",
-      "license": "RE000575",
       "name": "Richelle Boyle",
       "title": "Founder & CEO",
       "email": "richelle@qualitycannabliss.com",
@@ -29887,9 +29887,9 @@
       "customer_id": "2089310",
       "customer": "Quality Cannabliss",
       "license": "RE000575",
-      "name": "Matt Curry",
+      "name": "Josh Boyle",
       "title": "",
-      "email": "marketing@qualitycannabliss.com",
+      "email": "josh@qualitycannabliss.com",
       "phone": ""
     },
     {
@@ -29897,8 +29897,17 @@
       "customer": "Quality Cannabliss",
       "license": "RE000575",
       "name": "Josh Boyle",
-      "title": "",
+      "title": "Quality Assurance Manager",
       "email": "josh@qualitycannabliss.com",
+      "phone": ""
+    },
+    {
+      "customer_id": "2089310",
+      "customer": "Quality Cannabliss",
+      "license": "RE000575",
+      "name": "Matt Curry",
+      "title": "",
+      "email": "marketing@qualitycannabliss.com",
       "phone": ""
     },
     {
@@ -29950,19 +29959,19 @@
       "customer_id": "2051203",
       "customer": "Roots Dispensary",
       "license": "RE000819",
-      "name": "Richard Del Valle",
+      "name": "Philip Fasulo",
       "title": "",
-      "email": "richard.delvalle@rootsnj.com",
-      "phone": "8569821114"
+      "email": "philip@rootsnj.com",
+      "phone": "6092322722"
     },
     {
       "customer_id": "2051203",
       "customer": "Roots Dispensary",
       "license": "RE000819",
-      "name": "Philip Fasulo",
+      "name": "Richard Del Valle",
       "title": "",
-      "email": "philip@rootsnj.com",
-      "phone": "6092322722"
+      "email": "richard.delvalle@rootsnj.com",
+      "phone": "8569821114"
     },
     {
       "customer_id": "2060531",
@@ -30094,19 +30103,19 @@
       "customer_id": "2067727",
       "customer": "Sweet Spot Farms",
       "license": "RE000427",
-      "name": "Christina occhipinti",
-      "title": "Operating Manager",
-      "email": "cocchipinti@sweetspotfarms.com",
-      "phone": "9733272027"
+      "name": "Ann Henderson",
+      "title": "",
+      "email": "ann@docannadispo.com",
+      "phone": ""
     },
     {
       "customer_id": "2067727",
       "customer": "Sweet Spot Farms",
       "license": "RE000427",
-      "name": "Ann Henderson",
-      "title": "",
-      "email": "ann@docannadispo.com",
-      "phone": ""
+      "name": "Christina occhipinti",
+      "title": "Operating Manager",
+      "email": "cocchipinti@sweetspotfarms.com",
+      "phone": "9733272027"
     },
     {
       "customer_id": "2067727",
@@ -30125,15 +30134,6 @@
       "title": "Store Manager",
       "email": "info@tasteofearth.co",
       "phone": "8563008783"
-    },
-    {
-      "customer_id": "2050870",
-      "customer": "Test Buyer",
-      "license": "M000086",
-      "name": "Kristen Ordonio",
-      "title": "",
-      "email": "kristen@highsman.com",
-      "phone": "9175530419"
     },
     {
       "customer_id": "2050870",
@@ -30170,6 +30170,15 @@
       "title": "",
       "email": "steven@mssprop.com",
       "phone": ""
+    },
+    {
+      "customer_id": "2050870",
+      "customer": "Test Buyer",
+      "license": "M000086",
+      "name": "Kristen Ordonio",
+      "title": "",
+      "email": "kristen@highsman.com",
+      "phone": "9175530419"
     },
     {
       "customer_id": "2081954",
@@ -30301,37 +30310,19 @@
       "customer_id": "2072611",
       "customer": "The Public Garden",
       "license": "RE000334",
-      "name": "Ryan Kennedy",
-      "title": "",
-      "email": "RKennedy@thepublic.garden",
-      "phone": "8624024366"
-    },
-    {
-      "customer_id": "2072611",
-      "customer": "The Public Garden",
-      "license": "RE000334",
       "name": "Rita DeAlmeida",
       "title": "",
       "email": "rdealmeida@thepublic.garden",
       "phone": "8624024366"
     },
     {
-      "customer_id": "2051209",
-      "customer": "The Social Leaf",
-      "license": "RE000649",
-      "name": "Thomas Marino",
+      "customer_id": "2072611",
+      "customer": "The Public Garden",
+      "license": "RE000334",
+      "name": "Ryan Kennedy",
       "title": "",
-      "email": "thomasmarino@thesocialleaf.com",
-      "phone": ""
-    },
-    {
-      "customer_id": "2051209",
-      "customer": "The Social Leaf",
-      "license": "RE000649",
-      "name": "Chris Cambert",
-      "title": "Inventory Manager",
-      "email": "Christopher.Cambert@thesocialleaf.com",
-      "phone": "9087588727"
+      "email": "RKennedy@thepublic.garden",
+      "phone": "8624024366"
     },
     {
       "customer_id": "2051209",
@@ -30350,6 +30341,24 @@
       "title": "",
       "email": "kevingorsegner@thesocialleaf.com",
       "phone": "9089026043"
+    },
+    {
+      "customer_id": "2051209",
+      "customer": "The Social Leaf",
+      "license": "RE000649",
+      "name": "Thomas Marino",
+      "title": "",
+      "email": "thomasmarino@thesocialleaf.com",
+      "phone": ""
+    },
+    {
+      "customer_id": "2051209",
+      "customer": "The Social Leaf",
+      "license": "RE000649",
+      "name": "Chris Cambert",
+      "title": "Inventory Manager",
+      "email": "Christopher.Cambert@thesocialleaf.com",
+      "phone": "9087588727"
     },
     {
       "customer_id": "2091367",
@@ -30373,18 +30382,18 @@
       "customer_id": "2117465",
       "customer": "Toke Lane",
       "license": "RE001034",
-      "name": "Marlon Jones",
-      "title": "General Manager",
-      "email": "mjones@tokelane.com",
+      "name": "D Nath",
+      "title": "",
+      "email": "dnath@tokelane.com",
       "phone": ""
     },
     {
       "customer_id": "2117465",
       "customer": "Toke Lane",
       "license": "RE001034",
-      "name": "D Nath",
-      "title": "",
-      "email": "dnath@tokelane.com",
+      "name": "Marlon Jones",
+      "title": "General Manager",
+      "email": "mjones@tokelane.com",
       "phone": ""
     },
     {
@@ -30400,18 +30409,18 @@
       "customer_id": "2051223",
       "customer": "Twisted Hat Cannabis",
       "license": "RE000056",
-      "name": "Armando Fernandez",
-      "title": "Chief Financial Officer",
-      "email": "armando@twistedhatcannabis.com",
+      "name": "Christine Toth",
+      "title": "",
+      "email": "Toast@twistedhatcannabis.com",
       "phone": "8568512208"
     },
     {
       "customer_id": "2051223",
       "customer": "Twisted Hat Cannabis",
       "license": "RE000056",
-      "name": "Christine Toth",
-      "title": "",
-      "email": "Toast@twistedhatcannabis.com",
+      "name": "Armando Fernandez",
+      "title": "Chief Financial Officer",
+      "email": "armando@twistedhatcannabis.com",
       "phone": "8568512208"
     },
     {
@@ -30427,19 +30436,19 @@
       "customer_id": "2163146",
       "customer": "Uncle Beez Greeneryz",
       "license": "RE001058",
-      "name": "Kevin Pizarro",
+      "name": "Jax Chavouis",
       "title": "",
-      "email": "kevin@unclebeezgreeneryz.com",
-      "phone": "2012709277"
+      "email": "jax@unclebeezgreeneryz.com",
+      "phone": ""
     },
     {
       "customer_id": "2163146",
       "customer": "Uncle Beez Greeneryz",
       "license": "RE001058",
-      "name": "Jax Chavouis",
+      "name": "Kevin Pizarro",
       "title": "",
-      "email": "jax@unclebeezgreeneryz.com",
-      "phone": ""
+      "email": "kevin@unclebeezgreeneryz.com",
+      "phone": "2012709277"
     },
     {
       "customer_id": "2051228",
@@ -30472,15 +30481,6 @@
       "customer_id": "2051230",
       "customer": "Valley Wellness",
       "license": "RE000367",
-      "name": "Sarah Trent",
-      "title": "CEO",
-      "email": "sarah.trent@valleywellnessnj.com",
-      "phone": ""
-    },
-    {
-      "customer_id": "2051230",
-      "customer": "Valley Wellness",
-      "license": "RE000367",
       "name": "Brandi Glynn",
       "title": "",
       "email": "brandi.glynn@valleywellnessnj.com",
@@ -30496,12 +30496,12 @@
       "phone": "9086011743"
     },
     {
-      "customer_id": "2097391",
-      "customer": "Vigor Dispensary",
-      "license": "RE000448",
-      "name": "Michael Rozzi",
-      "title": "",
-      "email": "mike@vigordispensary.com",
+      "customer_id": "2051230",
+      "customer": "Valley Wellness",
+      "license": "RE000367",
+      "name": "Sarah Trent",
+      "title": "CEO",
+      "email": "sarah.trent@valleywellnessnj.com",
       "phone": ""
     },
     {
@@ -30511,6 +30511,15 @@
       "name": "Briana Calabrese",
       "title": "",
       "email": "bri@vigordispensary.com",
+      "phone": ""
+    },
+    {
+      "customer_id": "2097391",
+      "customer": "Vigor Dispensary",
+      "license": "RE000448",
+      "name": "Michael Rozzi",
+      "title": "",
+      "email": "mike@vigordispensary.com",
       "phone": ""
     },
     {
@@ -30550,24 +30559,6 @@
       "phone": ""
     },
     {
-      "customer_id": "2163462",
-      "customer": "Green eyed chief llc",
-      "license": "RE00082",
-      "name": "Ricardo Birch",
-      "title": "",
-      "email": "Bigr1zz19@comcast.net",
-      "phone": "8564051063"
-    },
-    {
-      "customer_id": "2163462",
-      "customer": "Green eyed chief llc",
-      "license": "RE00082",
-      "name": "Ricardo Birch",
-      "title": "",
-      "email": "greeneyedchief200@gmail.com",
-      "phone": ""
-    },
-    {
       "customer_id": "2126674",
       "customer": "Greenstop Wellness LLC",
       "license": "RE000221",
@@ -30575,15 +30566,6 @@
       "title": "",
       "email": "greenstopwellnessjc@gmail.com",
       "phone": "2016041281"
-    },
-    {
-      "customer_id": "2131393",
-      "customer": "The Retreat",
-      "license": "RE000571",
-      "name": "Alex Santiago",
-      "title": "GM",
-      "email": "asantiago@retreatnj.com",
-      "phone": ""
     },
     {
       "customer_id": "2133712",
@@ -30604,13 +30586,31 @@
       "phone": "2019182800"
     },
     {
-      "customer_id": "2205069",
-      "customer": "Iconic Dispensary LLC",
-      "license": "RE001087",
-      "name": "Joshua Wilson",
+      "customer_id": "2131393",
+      "customer": "The Retreat",
+      "license": "RE000571",
+      "name": "Alex Santiago",
+      "title": "GM",
+      "email": "asantiago@retreatnj.com",
+      "phone": ""
+    },
+    {
+      "customer_id": "2163462",
+      "customer": "Green eyed chief llc",
+      "license": "RE00082",
+      "name": "Ricardo Birch",
       "title": "",
-      "email": "joshua@iconicdispensarynj.com",
-      "phone": "8588370293"
+      "email": "greeneyedchief200@gmail.com",
+      "phone": ""
+    },
+    {
+      "customer_id": "2163462",
+      "customer": "Green eyed chief llc",
+      "license": "RE00082",
+      "name": "Ricardo Birch",
+      "title": "",
+      "email": "Bigr1zz19@comcast.net",
+      "phone": "8564051063"
     }
   ],
   "contacts_debug": [],

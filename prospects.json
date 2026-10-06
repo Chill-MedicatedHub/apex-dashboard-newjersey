@@ -1,8 +1,8 @@
 {
-  "as_of": "2026-10-05",
+  "as_of": "2026-10-06",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
-  "count": 303,
+  "count": 304,
   "records": [
     {
       "name": "Red Oak Dispensary - Absecon",
@@ -1738,7 +1738,7 @@
       "status": "",
       "city": "Lumberton Township",
       "state": "NJ",
-      "phone": "",
+      "phone": "8588370293",
       "email": "joshua@iconicdispensarynj.com",
       "website": ""
     },
@@ -3303,6 +3303,17 @@
       "phone": "8562214000",
       "email": "mickee@blulight.com",
       "website": "https://blulight.com/"
+    },
+    {
+      "name": "Star Leaf Dispensary",
+      "license": "RE001072",
+      "type": "",
+      "status": "",
+      "city": "Wrightstown",
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
     },
     {
       "name": "Blue Oak",

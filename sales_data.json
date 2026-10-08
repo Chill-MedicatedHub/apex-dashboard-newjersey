@@ -1,10 +1,10 @@
 {
-  "fetched_at": "2026-10-08T20:03:48.733361+00:00",
+  "fetched_at": "2026-10-08T20:18:20.542531+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
-  "orders_seen": 1997,
-  "orders_kept": 1970,
+  "orders_seen": 1998,
+  "orders_kept": 1971,
   "inventory": [
     {
       "id": "2675942",
@@ -12560,7 +12560,7 @@
       "order_date_raw": "2026-05-18T14:47:28-04:00",
       "delivery_date": "05/22/2026",
       "delivery_date_raw": "2026-05-22T08:00:00-04:00",
-      "paid_date": "",
+      "paid_date": "2026-10-07",
       "buyer_name": "Blue Violets",
       "buyer_license": "RE000817",
       "buyer_state": "NJ",
@@ -12607,7 +12607,7 @@
       "order_date_raw": "2026-05-18T14:47:28-04:00",
       "delivery_date": "05/22/2026",
       "delivery_date_raw": "2026-05-22T08:00:00-04:00",
-      "paid_date": "",
+      "paid_date": "2026-10-07",
       "buyer_name": "Blue Violets",
       "buyer_license": "RE000817",
       "buyer_state": "NJ",
@@ -12654,7 +12654,7 @@
       "order_date_raw": "2026-05-18T14:47:28-04:00",
       "delivery_date": "05/22/2026",
       "delivery_date_raw": "2026-05-22T08:00:00-04:00",
-      "paid_date": "",
+      "paid_date": "2026-10-07",
       "buyer_name": "Blue Violets",
       "buyer_license": "RE000817",
       "buyer_state": "NJ",
@@ -12701,7 +12701,7 @@
       "order_date_raw": "2026-05-18T14:47:28-04:00",
       "delivery_date": "05/22/2026",
       "delivery_date_raw": "2026-05-22T08:00:00-04:00",
-      "paid_date": "",
+      "paid_date": "2026-10-07",
       "buyer_name": "Blue Violets",
       "buyer_license": "RE000817",
       "buyer_state": "NJ",
@@ -12748,7 +12748,7 @@
       "order_date_raw": "2026-05-18T14:47:28-04:00",
       "delivery_date": "05/22/2026",
       "delivery_date_raw": "2026-05-22T08:00:00-04:00",
-      "paid_date": "",
+      "paid_date": "2026-10-07",
       "buyer_name": "Blue Violets",
       "buyer_license": "RE000817",
       "buyer_state": "NJ",
@@ -29411,18 +29411,18 @@
       "customer_id": "2051121",
       "customer": "Canopy Crossroad LLC",
       "license": "RE000258",
-      "name": "Andrew Zeitlin",
-      "title": "CFO/Accounting",
-      "email": "az@canopycrossroad.com",
+      "name": "Accounts Receivable",
+      "title": "",
+      "email": "accounting@canopycrossroad.com",
       "phone": ""
     },
     {
       "customer_id": "2051121",
       "customer": "Canopy Crossroad LLC",
       "license": "RE000258",
-      "name": "Accounts Receivable",
-      "title": "",
-      "email": "accounting@canopycrossroad.com",
+      "name": "Andrew Zeitlin",
+      "title": "CFO/Accounting",
+      "email": "az@canopycrossroad.com",
       "phone": ""
     },
     {
@@ -29474,19 +29474,19 @@
       "customer_id": "2051123",
       "customer": "Castaway Cannabis LLC",
       "license": "RE000810",
-      "name": "Mary Maffei",
-      "title": "",
-      "email": "mmaffei@castawaycanna.com",
-      "phone": "6094707392"
+      "name": "Mike Cooney",
+      "title": "Marketing Manager",
+      "email": "mcooney@castawaycanna.com",
+      "phone": "8565443029"
     },
     {
       "customer_id": "2051123",
       "customer": "Castaway Cannabis LLC",
       "license": "RE000810",
-      "name": "Mike Cooney",
-      "title": "Marketing Manager",
-      "email": "mcooney@castawaycanna.com",
-      "phone": "8565443029"
+      "name": "Mary Maffei",
+      "title": "",
+      "email": "mmaffei@castawaycanna.com",
+      "phone": "6094707392"
     },
     {
       "customer_id": "2072378",
@@ -29505,15 +29505,6 @@
       "title": "Consultant/Buyer",
       "email": "LunaVerdeLLC@gmail.com",
       "phone": "6192085327"
-    },
-    {
-      "customer_id": "2051126",
-      "customer": "Conservatory Cannabis Company",
-      "license": "RE000868",
-      "name": "Amanda Penque",
-      "title": "Dir of Marketing",
-      "email": "amanda@conservatorycannabis.com",
-      "phone": "6099049409"
     },
     {
       "customer_id": "2051126",
@@ -29543,13 +29534,13 @@
       "phone": ""
     },
     {
-      "customer_id": "2051128",
-      "customer": "Cottonmouth Dispensary LLC",
-      "license": "RE000055",
-      "name": "Sam Mier",
-      "title": "",
-      "email": "sam@getcottonmouth.com",
-      "phone": "8563123877"
+      "customer_id": "2051126",
+      "customer": "Conservatory Cannabis Company",
+      "license": "RE000868",
+      "name": "Amanda Penque",
+      "title": "Dir of Marketing",
+      "email": "amanda@conservatorycannabis.com",
+      "phone": "6099049409"
     },
     {
       "customer_id": "2051128",
@@ -29558,6 +29549,15 @@
       "name": "Matthew Holcombe",
       "title": "",
       "email": "matthew@getcottonmouth.com",
+      "phone": "8563123877"
+    },
+    {
+      "customer_id": "2051128",
+      "customer": "Cottonmouth Dispensary LLC",
+      "license": "RE000055",
+      "name": "Sam Mier",
+      "title": "",
+      "email": "sam@getcottonmouth.com",
       "phone": "8563123877"
     },
     {
@@ -29636,19 +29636,19 @@
       "customer_id": "2075516",
       "customer": "Downtown FLWR",
       "license": "RE000725",
-      "name": "Jazz Randall",
+      "name": "Amanda Handy",
       "title": "",
-      "email": "jazz@downtownflwr.com",
-      "phone": "7199637532"
+      "email": "amanda@downtownflwr.com",
+      "phone": ""
     },
     {
       "customer_id": "2075516",
       "customer": "Downtown FLWR",
       "license": "RE000725",
-      "name": "Amanda Handy",
+      "name": "Jazz Randall",
       "title": "",
-      "email": "amanda@downtownflwr.com",
-      "phone": ""
+      "email": "jazz@downtownflwr.com",
+      "phone": "7199637532"
     },
     {
       "customer_id": "2051136",
@@ -29672,19 +29672,19 @@
       "customer_id": "2051138",
       "customer": "Elevated Herb LLC",
       "license": "RE000250",
-      "name": "Roger Martin",
+      "name": "Drew Drechsel",
       "title": "General Manager",
-      "email": "rmartin@elevated-herb.com",
-      "phone": "9732916840"
+      "email": "info@elevated-herb.com",
+      "phone": "9083035156"
     },
     {
       "customer_id": "2051138",
       "customer": "Elevated Herb LLC",
       "license": "RE000250",
-      "name": "Drew Drechsel",
+      "name": "Roger Martin",
       "title": "General Manager",
-      "email": "info@elevated-herb.com",
-      "phone": "9083035156"
+      "email": "rmartin@elevated-herb.com",
+      "phone": "9732916840"
     },
     {
       "customer_id": "2099641",
@@ -29744,28 +29744,19 @@
       "customer_id": "2081276",
       "customer": "Frosted Nug - Carneys Point",
       "license": "RE000992",
-      "name": "Kristopher Wilson",
-      "title": "",
-      "email": "kris@woolwichwellnesscompany.com",
-      "phone": ""
-    },
-    {
-      "customer_id": "2081276",
-      "customer": "Frosted Nug - Carneys Point",
-      "license": "RE000992",
       "name": "Kris Wilson",
       "title": "",
       "email": "kris@frostednug.com",
       "phone": "8563763359"
     },
     {
-      "customer_id": "2051145",
-      "customer": "G2 Dispensary",
-      "license": "RE000160",
-      "name": "Chris Maher",
-      "title": "Operating Manager",
-      "email": "chris@g2dispensary.com",
-      "phone": "9735922708"
+      "customer_id": "2081276",
+      "customer": "Frosted Nug - Carneys Point",
+      "license": "RE000992",
+      "name": "Kristopher Wilson",
+      "title": "",
+      "email": "kris@woolwichwellnesscompany.com",
+      "phone": ""
     },
     {
       "customer_id": "2051145",
@@ -29775,6 +29766,15 @@
       "title": "Manager",
       "email": "brad@g2dispensary.com",
       "phone": ""
+    },
+    {
+      "customer_id": "2051145",
+      "customer": "G2 Dispensary",
+      "license": "RE000160",
+      "name": "Chris Maher",
+      "title": "Operating Manager",
+      "email": "chris@g2dispensary.com",
+      "phone": "9735922708"
     },
     {
       "customer_id": "2156923",
@@ -29789,19 +29789,19 @@
       "customer_id": "2161683",
       "customer": "Garden State Dispensary - Union",
       "license": "RE000017",
-      "name": "Garret Reams",
-      "title": "Regional Purchasing Manager",
-      "email": "garret.reams@ayrwellness.com",
-      "phone": ""
+      "name": "Philip Masturzo",
+      "title": "Retail Purchasing Administrator PA & NJ",
+      "email": "Philip.Masturzo@ayrwellness.com",
+      "phone": "2672698649"
     },
     {
       "customer_id": "2161683",
       "customer": "Garden State Dispensary - Union",
       "license": "RE000017",
-      "name": "Philip Masturzo",
-      "title": "Retail Purchasing Administrator PA & NJ",
-      "email": "Philip.Masturzo@ayrwellness.com",
-      "phone": "2672698649"
+      "name": "Garret Reams",
+      "title": "Regional Purchasing Manager",
+      "email": "garret.reams@ayrwellness.com",
+      "phone": ""
     },
     {
       "customer_id": "2047117",
@@ -29883,6 +29883,15 @@
       "title": "Director of Retail Strategy",
       "email": "nick@gleafwellness.com",
       "phone": ""
+    },
+    {
+      "customer_id": "2073071",
+      "customer": "Greenlight Apothecary",
+      "license": "RE000586",
+      "name": "Joey Weimmer",
+      "title": "Regional Manager",
+      "email": "joey@greenlightnj.com",
+      "phone": "8627772556"
     },
     {
       "customer_id": "2073071",

@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-10-08T16:48:34.597510+00:00",
+  "fetched_at": "2026-10-08T17:03:34.228499+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
@@ -30743,10 +30743,28 @@
       "customer_id": "2067727",
       "customer": "Sweet Spot Farms",
       "license": "RE000427",
-      "name": "Ann Henderson",
+      "name": "Conner Ferrante",
+      "title": "AGM",
+      "email": "cferrante@sweetspotfarms.com",
+      "phone": "9733272027"
+    },
+    {
+      "customer_id": "2067727",
+      "customer": "Sweet Spot Farms",
+      "license": "RE000427",
+      "name": "Cj Brown",
       "title": "",
-      "email": "ann@docannadispo.com",
+      "email": "cjbrown9020@gmail.com",
       "phone": ""
+    },
+    {
+      "customer_id": "2067727",
+      "customer": "Sweet Spot Farms",
+      "license": "RE000427",
+      "name": "Christina occhipinti",
+      "title": "Operating Manager",
+      "email": "cocchipinti@sweetspotfarms.com",
+      "phone": "9733272027"
     },
     {
       "customer_id": "2067727",
@@ -30761,10 +30779,10 @@
       "customer_id": "2067727",
       "customer": "Sweet Spot Farms",
       "license": "RE000427",
-      "name": "Conner Ferrante",
-      "title": "AGM",
-      "email": "cferrante@sweetspotfarms.com",
-      "phone": "9733272027"
+      "name": "Ann Henderson",
+      "title": "",
+      "email": "ann@docannadispo.com",
+      "phone": ""
     },
     {
       "customer_id": "2067727",
@@ -30773,15 +30791,6 @@
       "name": "Angel Rubbet",
       "title": "",
       "email": "angel@docannadispo.com",
-      "phone": "9733272027"
-    },
-    {
-      "customer_id": "2067727",
-      "customer": "Sweet Spot Farms",
-      "license": "RE000427",
-      "name": "Christina occhipinti",
-      "title": "Operating Manager",
-      "email": "cocchipinti@sweetspotfarms.com",
       "phone": "9733272027"
     },
     {

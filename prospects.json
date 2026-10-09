@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-08",
+  "as_of": "2026-10-09",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
   "count": 304,
@@ -1529,9 +1529,9 @@
       "status": "",
       "city": "Jersey City",
       "state": "NJ",
-      "phone": "",
-      "email": "",
-      "website": ""
+      "phone": "9177431522",
+      "email": "memesdanckkworld@gmail.com",
+      "website": "https://memesdanckkworld.com/"
     },
     {
       "name": "The Cannabis Place",
@@ -2184,7 +2184,7 @@
     },
     {
       "name": "Good Karma Dispensary",
-      "license": "RE0001030",
+      "license": "RE001030",
       "type": "",
       "status": "",
       "city": "North Plainfield",
@@ -2195,7 +2195,7 @@
     },
     {
       "name": "Good Karma Dispensary",
-      "license": "RE001030",
+      "license": "RE0001030",
       "type": "",
       "status": "",
       "city": "North Plainfield",

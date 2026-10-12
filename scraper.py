@@ -270,6 +270,21 @@ def _to_decimal(v: Any) -> float:
         return 0.0
 
 
+def _optional_money_to_cents(m: Any) -> int | None:
+    """Like _money_to_cents, but None when LeafLink sent no value at all, so the
+    dashboard can tell "no figure" from "zero"."""
+    if m is None or m == "":
+        return None
+    if isinstance(m, dict):
+        if m.get("amount") is None:
+            return None
+        m = m.get("amount")
+    try:
+        return int(round(float(m) * 100))
+    except (TypeError, ValueError):
+        return None
+
+
 def _safe_state(addr: dict | None) -> str:
     """Extract 2-letter state code from a delivery/corporate address."""
     if not isinstance(addr, dict):
@@ -478,6 +493,15 @@ def normalize_order_to_rows(order: dict) -> list[dict]:
         discount_dollars = discount_dollars * 100
     order_subtotal = _order_subtotal_dollars(order)
 
+    # LeafLink's own figures for the whole order, as it bills them: the order
+    # total (discount taken once on the whole order, so no per-line rounding)
+    # and the amount still owed. Stamped on every row; main() blanks the total
+    # again if any of the order's lines are not kept (other brand, zero qty),
+    # because the total would then cover lines the dashboard does not show.
+    order_total_cents = _optional_money_to_cents(order.get("total"))
+    order_balance_cents = _optional_money_to_cents(order.get("payment_balance"))
+    order_line_count = len(order.get("line_items") or [])
+
     rows = []
     for li in order.get("line_items") or []:
         qty = _to_decimal(li.get("quantity"))
@@ -553,6 +577,10 @@ def normalize_order_to_rows(order: dict) -> list[dict]:
             "unit_price": f"${unit_cents/100:,.2f}",
             "discounts": discount_cents,  # integer cents — matches Apex shape
             "additional_discounts": 0,    # LeafLink has only one discount field
+            # LeafLink's order total and amount remaining, in cents (None = not sent)
+            "order_total_raw": order_total_cents,
+            "order_balance_raw": order_balance_cents,
+            "_order_line_count": order_line_count,
             "batch_cost_of_goods": "",    # not exposed by LeafLink — modeled at dashboard
             # Order state
             "order_status": status,
@@ -1523,6 +1551,33 @@ def main() -> None:
     if BRAND_FILTER:
         print(f"Brand filter '{BRAND_FILTER}' kept {len(final_rows)} of {len(raw_rows)} rows.")
     raw_rows = final_rows
+
+    # LeafLink's order total only stands for the dashboard's invoice when every
+    # line of the order made it into the data. Where a line was left out (another
+    # brand, or a zero-quantity line), blank it so the dashboard keeps adding up
+    # the lines it has. The amount remaining is kept either way (it is what the
+    # buyer owes on the whole order) and flagged the same way.
+    kept_per_order: dict = {}
+    for r in raw_rows:
+        kept_per_order[r["order_id"]] = kept_per_order.get(r["order_id"], 0) + 1
+    whole, partial, no_total = 0, 0, 0
+    seen_orders: set = set()
+    for r in raw_rows:
+        complete = kept_per_order.get(r["order_id"], 0) == r.get("_order_line_count")
+        r["order_total_all_lines"] = bool(complete)
+        if not complete:
+            r["order_total_raw"] = None
+        if r["order_id"] not in seen_orders:
+            seen_orders.add(r["order_id"])
+            if r.get("order_total_raw") is not None:
+                whole += 1
+            elif complete:
+                no_total += 1
+            else:
+                partial += 1
+        r.pop("_order_line_count", None)
+    print(f"Order totals: {whole} order(s) carry LeafLink's total; "
+          f"{partial} have lines left out (total blanked); {no_total} had no total from LeafLink.")
 
     # Step 5 — current inventory + full catalog (Available-listed products only)
     inventory = {"by_id": {}, "by_sku": {}, "catalog": []}

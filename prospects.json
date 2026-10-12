@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-11",
+  "as_of": "2026-10-12",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
   "count": 304,
@@ -2839,7 +2839,7 @@
       "city": "Toms River",
       "state": "NJ",
       "phone": "7323586800",
-      "email": "angel.capalbo@thesocialleaf.com",
+      "email": "dwells@thesocialleaf.com",
       "website": "https://thesocialleaf.com/"
     },
     {

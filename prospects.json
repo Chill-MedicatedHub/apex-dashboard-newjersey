@@ -1,8 +1,8 @@
 {
-  "as_of": "2026-10-13",
+  "as_of": "2026-10-14",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
-  "count": 304,
+  "count": 305,
   "records": [
     {
       "name": "Red Oak Dispensary - Absecon",
@@ -916,6 +916,17 @@
       "phone": "9082570421",
       "email": "vanessa@auntmarysnj.co",
       "website": "https://auntmarysnj.co/"
+    },
+    {
+      "name": "Nice Dreamz",
+      "license": "RE000787",
+      "type": "",
+      "status": "",
+      "city": "Folsom",
+      "state": "NJ",
+      "phone": "6093079300",
+      "email": "nicedreamz516@gmail.com",
+      "website": "https://www.nicedreamzfarm.com/"
     },
     {
       "name": "Ascend Wellness - Fort Lee",

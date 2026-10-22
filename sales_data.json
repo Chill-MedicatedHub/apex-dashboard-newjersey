@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-10-22T19:18:22.285902+00:00",
+  "fetched_at": "2026-10-22T19:33:36.021166+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
@@ -35,8 +35,8 @@
       "line": "",
       "brand": "Chill Medicated",
       "status": "available",
-      "inventory": 165.0,
-      "reserved": 15.0,
+      "inventory": 150.0,
+      "reserved": 0.0,
       "available": 150.0
     },
     {
@@ -46,8 +46,8 @@
       "line": "",
       "brand": "Chill Medicated",
       "status": "available",
-      "inventory": 75.0,
-      "reserved": 15.0,
+      "inventory": 60.0,
+      "reserved": 0.0,
       "available": 60.0
     },
     {
@@ -68,8 +68,8 @@
       "line": "",
       "brand": "Chill Medicated",
       "status": "available",
-      "inventory": 90.0,
-      "reserved": 15.0,
+      "inventory": 75.0,
+      "reserved": 0.0,
       "available": 75.0
     },
     {
@@ -79,8 +79,8 @@
       "line": "",
       "brand": "Chill Medicated",
       "status": "available",
-      "inventory": 314.0,
-      "reserved": 15.0,
+      "inventory": 299.0,
+      "reserved": 0.0,
       "available": 299.0
     },
     {

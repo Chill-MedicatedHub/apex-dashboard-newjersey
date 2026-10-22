@@ -1,8 +1,8 @@
 {
-  "as_of": "2026-10-21",
+  "as_of": "2026-10-22",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
-  "count": 305,
+  "count": 306,
   "records": [
     {
       "name": "Red Oak Dispensary - Absecon",
@@ -1851,6 +1851,17 @@
       "phone": "",
       "email": "",
       "website": ""
+    },
+    {
+      "name": "The Vault Dispensary",
+      "license": "RE001080",
+      "type": "",
+      "status": "",
+      "city": "Millville",
+      "state": "NJ",
+      "phone": "8564405062",
+      "email": "taleia@vaultdispensary.com",
+      "website": "https://vaultdispensary.com/"
     },
     {
       "name": "Carry-On Cannabis LLC",

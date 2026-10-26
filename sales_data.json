@@ -1,10 +1,10 @@
 {
-  "fetched_at": "2026-10-26T13:04:09.418570+00:00",
+  "fetched_at": "2026-10-26T13:18:24.913805+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
-  "orders_seen": 2033,
-  "orders_kept": 2006,
+  "orders_seen": 2034,
+  "orders_kept": 2007,
   "inventory": [
     {
       "id": "2675942",
@@ -177,8 +177,8 @@
       "order_total_raw": 191250,
       "order_balance_raw": 191250,
       "batch_cost_of_goods": "",
-      "order_status": "Shipped",
-      "payment_status": "Shipped",
+      "order_status": "Complete",
+      "payment_status": "Complete",
       "classification": "Adult Use",
       "sales_rep": "Peter Casey",
       "sales_reps": "Peter Casey",
@@ -227,8 +227,8 @@
       "order_total_raw": 191250,
       "order_balance_raw": 191250,
       "batch_cost_of_goods": "",
-      "order_status": "Shipped",
-      "payment_status": "Shipped",
+      "order_status": "Complete",
+      "payment_status": "Complete",
       "classification": "Adult Use",
       "sales_rep": "Peter Casey",
       "sales_reps": "Peter Casey",
@@ -277,8 +277,8 @@
       "order_total_raw": 191250,
       "order_balance_raw": 191250,
       "batch_cost_of_goods": "",
-      "order_status": "Shipped",
-      "payment_status": "Shipped",
+      "order_status": "Complete",
+      "payment_status": "Complete",
       "classification": "Adult Use",
       "sales_rep": "Peter Casey",
       "sales_reps": "Peter Casey",
@@ -327,8 +327,8 @@
       "order_total_raw": 191250,
       "order_balance_raw": 191250,
       "batch_cost_of_goods": "",
-      "order_status": "Shipped",
-      "payment_status": "Shipped",
+      "order_status": "Complete",
+      "payment_status": "Complete",
       "classification": "Adult Use",
       "sales_rep": "Peter Casey",
       "sales_reps": "Peter Casey",
@@ -30710,6 +30710,15 @@
       "phone": ""
     },
     {
+      "customer_id": "2051183",
+      "customer": "Nightjar Cannabis",
+      "license": "RE000474",
+      "name": "Wholesale NJ",
+      "title": "",
+      "email": "wholesale@nightjarcannabis.com",
+      "phone": "9737072915"
+    },
+    {
       "customer_id": "2203843",
       "customer": "NJ Leaf Aberdeen",
       "license": "RE001057",
@@ -30839,19 +30848,19 @@
       "customer_id": "2051124",
       "customer": "Citi Roots LLC",
       "license": "RE000588",
-      "name": "Emily Harrington",
-      "title": "General Manager",
-      "email": "emily@citirootsnj.com",
-      "phone": ""
+      "name": "CITI ROOTS",
+      "title": "",
+      "email": "CitiRootsNJ@Gmail.com",
+      "phone": "9082668492"
     },
     {
       "customer_id": "2051124",
       "customer": "Citi Roots LLC",
       "license": "RE000588",
-      "name": "CITI ROOTS",
-      "title": "",
-      "email": "CitiRootsNJ@Gmail.com",
-      "phone": "9082668492"
+      "name": "Emily Harrington",
+      "title": "General Manager",
+      "email": "emily@citirootsnj.com",
+      "phone": ""
     },
     {
       "customer_id": "2051191",

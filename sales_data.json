@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-10-27T19:34:09.171907+00:00",
+  "fetched_at": "2026-10-27T19:48:13.195902+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
@@ -30845,6 +30845,15 @@
       "phone": "5163438921"
     },
     {
+      "customer_id": "2203844",
+      "customer": "NJ Leaf Jamesburg",
+      "license": "RE001071",
+      "name": "Luke Lieberman",
+      "title": "",
+      "email": "luke@njleaf.com",
+      "phone": "9089077413"
+    },
+    {
       "customer_id": "2051124",
       "customer": "Citi Roots LLC",
       "license": "RE000588",
@@ -30861,6 +30870,15 @@
       "title": "General Manager",
       "email": "emily@citirootsnj.com",
       "phone": ""
+    },
+    {
+      "customer_id": "2203843",
+      "customer": "NJ Leaf Aberdeen",
+      "license": "RE001057",
+      "name": "Luke Lieberman",
+      "title": "",
+      "email": "luke@njleaf.com",
+      "phone": "9089077413"
     },
     {
       "customer_id": "2203843",
@@ -30929,19 +30947,19 @@
       "customer_id": "2168202",
       "customer": "Altalune Dispensary LLC",
       "license": "RE000395",
-      "name": "Richard Fierro",
+      "name": "Amanda Rallo",
       "title": "",
-      "email": "info@altalunedispo.org",
-      "phone": "2013600040"
+      "email": "amanda420@altalunedispo.org",
+      "phone": "5514862017"
     },
     {
       "customer_id": "2168202",
       "customer": "Altalune Dispensary LLC",
       "license": "RE000395",
-      "name": "Amanda Rallo",
+      "name": "Richard Fierro",
       "title": "",
-      "email": "amanda420@altalunedispo.org",
-      "phone": "5514862017"
+      "email": "info@altalunedispo.org",
+      "phone": "2013600040"
     },
     {
       "customer_id": "2051082",
@@ -31010,19 +31028,19 @@
       "customer_id": "2051087",
       "customer": "Aunt Mary'S Dispensary",
       "license": "RE000689",
-      "name": "Vanessa Danisz",
-      "title": "Operations Manager",
-      "email": "vanessa@auntmarysnj.co",
-      "phone": "9082570421"
+      "name": "Kate Bio",
+      "title": "Owner",
+      "email": "",
+      "phone": ""
     },
     {
       "customer_id": "2051087",
       "customer": "Aunt Mary'S Dispensary",
       "license": "RE000689",
-      "name": "Kate Bio",
-      "title": "Owner",
-      "email": "",
-      "phone": ""
+      "name": "Vanessa Danisz",
+      "title": "Operations Manager",
+      "email": "vanessa@auntmarysnj.co",
+      "phone": "9082570421"
     },
     {
       "customer_id": "2069972",
@@ -31046,36 +31064,9 @@
       "customer_id": "2051095",
       "customer": "Authorized Dealer Dispensary III",
       "license": "RE000825",
-      "name": "Rachel Katz",
-      "title": "Owner",
-      "email": "",
-      "phone": ""
-    },
-    {
-      "customer_id": "2051095",
-      "customer": "Authorized Dealer Dispensary III",
-      "license": "RE000825",
-      "name": "JJ Meyer",
-      "title": "Accounts Payable",
-      "email": "JMeyer@hbkcpa.com",
-      "phone": ""
-    },
-    {
-      "customer_id": "2051095",
-      "customer": "Authorized Dealer Dispensary III",
-      "license": "RE000825",
-      "name": "Wendy Topkins",
-      "title": "Owner",
-      "email": "info@baystreetgreenery.com",
-      "phone": "2014829675"
-    },
-    {
-      "customer_id": "2051095",
-      "customer": "Authorized Dealer Dispensary III",
-      "license": "RE000825",
-      "name": "Zulma Gonzalez-Lombardo",
-      "title": "Owner",
-      "email": "",
+      "name": "Joseph Casper",
+      "title": "General Manager",
+      "email": "joec@yourdealer.co",
       "phone": ""
     },
     {
@@ -31091,9 +31082,36 @@
       "customer_id": "2051095",
       "customer": "Authorized Dealer Dispensary III",
       "license": "RE000825",
-      "name": "Joseph Casper",
-      "title": "General Manager",
-      "email": "joec@yourdealer.co",
+      "name": "Rachel Katz",
+      "title": "Owner",
+      "email": "",
+      "phone": ""
+    },
+    {
+      "customer_id": "2051095",
+      "customer": "Authorized Dealer Dispensary III",
+      "license": "RE000825",
+      "name": "Wendy Topkins",
+      "title": "Owner",
+      "email": "info@baystreetgreenery.com",
+      "phone": "2014829675"
+    },
+    {
+      "customer_id": "2051095",
+      "customer": "Authorized Dealer Dispensary III",
+      "license": "RE000825",
+      "name": "JJ Meyer",
+      "title": "Accounts Payable",
+      "email": "JMeyer@hbkcpa.com",
+      "phone": ""
+    },
+    {
+      "customer_id": "2051095",
+      "customer": "Authorized Dealer Dispensary III",
+      "license": "RE000825",
+      "name": "Zulma Gonzalez-Lombardo",
+      "title": "Owner",
+      "email": "",
       "phone": ""
     },
     {
@@ -31154,19 +31172,19 @@
       "customer_id": "2072658",
       "customer": "BestBuds",
       "license": "RE000289",
-      "name": "Amanda Terpstra",
-      "title": "",
-      "email": "amanda@bestbudsnj.com",
-      "phone": "8563717329"
+      "name": "Rose Speero",
+      "title": "Inventory Manager",
+      "email": "inventory@bestbudsnj.com",
+      "phone": "8565351367"
     },
     {
       "customer_id": "2072658",
       "customer": "BestBuds",
       "license": "RE000289",
-      "name": "Rose Speero",
-      "title": "Inventory Manager",
-      "email": "inventory@bestbudsnj.com",
-      "phone": "8565351367"
+      "name": "Amanda Terpstra",
+      "title": "",
+      "email": "amanda@bestbudsnj.com",
+      "phone": "8563717329"
     },
     {
       "customer_id": "2072658",
@@ -31262,6 +31280,15 @@
       "customer_id": "2051106",
       "customer": "Blulight Cannabis (Woodbury)",
       "license": "RE000404",
+      "name": "Rahul Patel",
+      "title": "",
+      "email": "Rahul@blulight.com",
+      "phone": "7814627773"
+    },
+    {
+      "customer_id": "2051106",
+      "customer": "Blulight Cannabis (Woodbury)",
+      "license": "RE000404",
       "name": "Elianna Salmon",
       "title": "Procurement Manager",
       "email": "elianna@blulight.com",
@@ -31275,15 +31302,6 @@
       "title": "Purchaser",
       "email": "brad@blulight.com",
       "phone": "4107769894"
-    },
-    {
-      "customer_id": "2051106",
-      "customer": "Blulight Cannabis (Woodbury)",
-      "license": "RE000404",
-      "name": "Rahul Patel",
-      "title": "",
-      "email": "Rahul@blulight.com",
-      "phone": "7814627773"
     },
     {
       "customer_id": "2051111",
@@ -32342,10 +32360,10 @@
       "customer_id": "2051184",
       "customer": "Nile Cannabis",
       "license": "RE000937",
-      "name": "Matthias Parker",
-      "title": "General Manager",
-      "email": "mparker@nile-cannabis.com",
-      "phone": "8484580028"
+      "name": "Nile Inventory",
+      "title": "Inventory",
+      "email": "inventory@nile-cannabis.com",
+      "phone": "2018666547"
     },
     {
       "customer_id": "2051184",
@@ -32360,10 +32378,10 @@
       "customer_id": "2051184",
       "customer": "Nile Cannabis",
       "license": "RE000937",
-      "name": "Nile Inventory",
-      "title": "Inventory",
-      "email": "inventory@nile-cannabis.com",
-      "phone": "2018666547"
+      "name": "Matthias Parker",
+      "title": "General Manager",
+      "email": "mparker@nile-cannabis.com",
+      "phone": "8484580028"
     },
     {
       "customer_id": "2051184",
@@ -32384,6 +32402,15 @@
       "phone": "5515803644"
     },
     {
+      "customer_id": "2051186",
+      "customer": "NJ Leaf (Freehold)",
+      "license": "RE000640",
+      "name": "Luke Lieberman",
+      "title": "",
+      "email": "luke@njleaf.com",
+      "phone": "9089077413"
+    },
+    {
       "customer_id": "2051187",
       "customer": "Nj Leaf (North Brunswick)",
       "license": "RE000751",
@@ -32396,10 +32423,10 @@
       "customer_id": "2051187",
       "customer": "Nj Leaf (North Brunswick)",
       "license": "RE000751",
-      "name": "Shivani Pipalia",
+      "name": "Luke Lieberman",
       "title": "",
-      "email": "shivani@njleaf.com",
-      "phone": "2013909711"
+      "email": "luke@njleaf.com",
+      "phone": "9089077413"
     },
     {
       "customer_id": "2051187",
@@ -32420,13 +32447,13 @@
       "phone": "9082553088"
     },
     {
-      "customer_id": "2086690",
-      "customer": "Northeast Alternatives",
-      "license": "RE001004",
-      "name": "Accounts Payable",
+      "customer_id": "2051187",
+      "customer": "Nj Leaf (North Brunswick)",
+      "license": "RE000751",
+      "name": "Shivani Pipalia",
       "title": "",
-      "email": "ap@nealternatives.com",
-      "phone": ""
+      "email": "shivani@njleaf.com",
+      "phone": "2013909711"
     },
     {
       "customer_id": "2086690",
@@ -32436,6 +32463,15 @@
       "title": "Buyer",
       "email": "cory@nealternatives.com",
       "phone": "8603959106"
+    },
+    {
+      "customer_id": "2086690",
+      "customer": "Northeast Alternatives",
+      "license": "RE001004",
+      "name": "Accounts Payable",
+      "title": "",
+      "email": "ap@nealternatives.com",
+      "phone": ""
     },
     {
       "customer_id": "2081992",
@@ -32497,7 +32533,7 @@
       "license": "RE000455",
       "name": "Alex Svecharny",
       "title": "",
-      "email": "alex@thegoodssupply.co",
+      "email": "alex@thegoodssupply.com",
       "phone": "9084200838"
     },
     {
@@ -32506,7 +32542,7 @@
       "license": "RE000455",
       "name": "Alex Svecharny",
       "title": "",
-      "email": "alex@thegoodssupply.com",
+      "email": "alex@thegoodssupply.co",
       "phone": "9084200838"
     },
     {
@@ -33273,6 +33309,15 @@
       "title": "",
       "email": "Bigr1zz19@comcast.net",
       "phone": "8564051063"
+    },
+    {
+      "customer_id": "2114032",
+      "customer": "NJ Leaf Keansburg",
+      "license": "RE001024",
+      "name": "Luke Lieberman",
+      "title": "",
+      "email": "luke@njleaf.com",
+      "phone": "9089077413"
     },
     {
       "customer_id": "2148257",

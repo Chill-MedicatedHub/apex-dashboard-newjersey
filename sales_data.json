@@ -1,10 +1,10 @@
 {
-  "fetched_at": "2026-10-27T19:48:13.195902+00:00",
+  "fetched_at": "2026-10-27T20:03:46.422162+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
-  "orders_seen": 2037,
-  "orders_kept": 2010,
+  "orders_seen": 2042,
+  "orders_kept": 2015,
   "inventory": [
     {
       "id": "2675942",
@@ -36,8 +36,8 @@
       "brand": "Chill Medicated",
       "status": "available",
       "inventory": 150.0,
-      "reserved": 0.0,
-      "available": 150.0
+      "reserved": 75.0,
+      "available": 75.0
     },
     {
       "id": "2675961",
@@ -47,8 +47,8 @@
       "brand": "Chill Medicated",
       "status": "available",
       "inventory": 60.0,
-      "reserved": 0.0,
-      "available": 60.0
+      "reserved": 60.0,
+      "available": 0.0
     },
     {
       "id": "2675960",
@@ -69,8 +69,8 @@
       "brand": "Chill Medicated",
       "status": "available",
       "inventory": 75.0,
-      "reserved": 0.0,
-      "available": 75.0
+      "reserved": 60.0,
+      "available": 15.0
     },
     {
       "id": "2675962",
@@ -80,8 +80,8 @@
       "brand": "Chill Medicated",
       "status": "available",
       "inventory": 299.0,
-      "reserved": 0.0,
-      "available": 299.0
+      "reserved": 135.0,
+      "available": 164.0
     },
     {
       "id": "2675943",
@@ -141,6 +141,906 @@
   ],
   "rows": [
     {
+      "order_id": "5ec3af12-c80c-4433-a207-a5719601db2b",
+      "order_number": "US10367926",
+      "number": "5ec3af12-c80c-4433-a207-a5719601db2b",
+      "order_date_utc": "2026-10-27T15:49:56-04:00",
+      "order_date_utc_raw": "2026-10-27T15:49:56-04:00",
+      "order_date_localized": "2026-10-27T15:49:56-04:00",
+      "order_date_localized_raw": "2026-10-27T15:49:56-04:00",
+      "order_date": "10/27/2026",
+      "order_date_raw": "2026-10-27T15:49:56-04:00",
+      "delivery_date": "",
+      "delivery_date_raw": "",
+      "paid_date": "",
+      "buyer_name": "Nj Leaf (North Brunswick)",
+      "buyer_license": "RE000751",
+      "buyer_state": "NJ",
+      "buyer_city": "North Brunswick",
+      "buyer_zip": "08902",
+      "product_id": 2675950,
+      "product_name": "Chill Medicated - MAXX 1000mg THC: 1000mg CBD Body Rub",
+      "product_brand": "Chill Medicated",
+      "brand": "Chill Medicated",
+      "product_type": "Topicals",
+      "quantity_raw": 15.0,
+      "quantity": 15.0,
+      "order_quantity": 15.0,
+      "unit_multiplier": 15,
+      "line_total_raw": 52500,
+      "line_total": "$525.00",
+      "computed_sale_price": "$35.00",
+      "product_listing_price": "$525.00",
+      "unit_price": "$35.00",
+      "discounts": 0,
+      "additional_discounts": 0,
+      "order_total_raw": 105000,
+      "order_balance_raw": 105000,
+      "batch_cost_of_goods": "",
+      "order_status": "Submitted",
+      "payment_status": "Submitted",
+      "classification": "Adult Use",
+      "sales_rep": "",
+      "sales_reps": "",
+      "sales_reps_display": "",
+      "payment_dates": [],
+      "is_sample": false,
+      "notes": "",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "order_total_all_lines": true,
+      "current_inventory": 75.0
+    },
+    {
+      "order_id": "5ec3af12-c80c-4433-a207-a5719601db2b",
+      "order_number": "US10367926",
+      "number": "5ec3af12-c80c-4433-a207-a5719601db2b",
+      "order_date_utc": "2026-10-27T15:49:56-04:00",
+      "order_date_utc_raw": "2026-10-27T15:49:56-04:00",
+      "order_date_localized": "2026-10-27T15:49:56-04:00",
+      "order_date_localized_raw": "2026-10-27T15:49:56-04:00",
+      "order_date": "10/27/2026",
+      "order_date_raw": "2026-10-27T15:49:56-04:00",
+      "delivery_date": "",
+      "delivery_date_raw": "",
+      "paid_date": "",
+      "buyer_name": "Nj Leaf (North Brunswick)",
+      "buyer_license": "RE000751",
+      "buyer_state": "NJ",
+      "buyer_city": "North Brunswick",
+      "buyer_zip": "08902",
+      "product_id": 2675962,
+      "product_name": "Chill Medicated  - SUBZERO 1000mg THC: 1000mg CBD Roll-On",
+      "product_brand": "Chill Medicated",
+      "brand": "Chill Medicated",
+      "product_type": "Topicals",
+      "quantity_raw": 15.0,
+      "quantity": 15.0,
+      "order_quantity": 15.0,
+      "unit_multiplier": 15,
+      "line_total_raw": 52500,
+      "line_total": "$525.00",
+      "computed_sale_price": "$35.00",
+      "product_listing_price": "$525.00",
+      "unit_price": "$35.00",
+      "discounts": 0,
+      "additional_discounts": 0,
+      "order_total_raw": 105000,
+      "order_balance_raw": 105000,
+      "batch_cost_of_goods": "",
+      "order_status": "Submitted",
+      "payment_status": "Submitted",
+      "classification": "Adult Use",
+      "sales_rep": "",
+      "sales_reps": "",
+      "sales_reps_display": "",
+      "payment_dates": [],
+      "is_sample": false,
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "order_total_all_lines": true,
+      "current_inventory": 164.0
+    },
+    {
+      "order_id": "3094e861-479f-4a2f-ba92-034867eb5536",
+      "order_number": "US10367925",
+      "number": "3094e861-479f-4a2f-ba92-034867eb5536",
+      "order_date_utc": "2026-10-27T15:49:56-04:00",
+      "order_date_utc_raw": "2026-10-27T15:49:56-04:00",
+      "order_date_localized": "2026-10-27T15:49:56-04:00",
+      "order_date_localized_raw": "2026-10-27T15:49:56-04:00",
+      "order_date": "10/27/2026",
+      "order_date_raw": "2026-10-27T15:49:56-04:00",
+      "delivery_date": "",
+      "delivery_date_raw": "",
+      "paid_date": "",
+      "buyer_name": "NJ Leaf Keansburg",
+      "buyer_license": "RE001024",
+      "buyer_state": "NJ",
+      "buyer_city": "Keansburg",
+      "buyer_zip": "07734",
+      "product_id": 2675950,
+      "product_name": "Chill Medicated - MAXX 1000mg THC: 1000mg CBD Body Rub",
+      "product_brand": "Chill Medicated",
+      "brand": "Chill Medicated",
+      "product_type": "Topicals",
+      "quantity_raw": 15.0,
+      "quantity": 15.0,
+      "order_quantity": 15.0,
+      "unit_multiplier": 15,
+      "line_total_raw": 52500,
+      "line_total": "$525.00",
+      "computed_sale_price": "$35.00",
+      "product_listing_price": "$525.00",
+      "unit_price": "$35.00",
+      "discounts": 0,
+      "additional_discounts": 0,
+      "order_total_raw": 240000,
+      "order_balance_raw": 240000,
+      "batch_cost_of_goods": "",
+      "order_status": "Submitted",
+      "payment_status": "Submitted",
+      "classification": "Adult Use",
+      "sales_rep": "",
+      "sales_reps": "",
+      "sales_reps_display": "",
+      "payment_dates": [],
+      "is_sample": false,
+      "notes": "",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "order_total_all_lines": true,
+      "current_inventory": 75.0
+    },
+    {
+      "order_id": "3094e861-479f-4a2f-ba92-034867eb5536",
+      "order_number": "US10367925",
+      "number": "3094e861-479f-4a2f-ba92-034867eb5536",
+      "order_date_utc": "2026-10-27T15:49:56-04:00",
+      "order_date_utc_raw": "2026-10-27T15:49:56-04:00",
+      "order_date_localized": "2026-10-27T15:49:56-04:00",
+      "order_date_localized_raw": "2026-10-27T15:49:56-04:00",
+      "order_date": "10/27/2026",
+      "order_date_raw": "2026-10-27T15:49:56-04:00",
+      "delivery_date": "",
+      "delivery_date_raw": "",
+      "paid_date": "",
+      "buyer_name": "NJ Leaf Keansburg",
+      "buyer_license": "RE001024",
+      "buyer_state": "NJ",
+      "buyer_city": "Keansburg",
+      "buyer_zip": "07734",
+      "product_id": 2675961,
+      "product_name": "Chill Medicated - MAXX Majestic Mint 1000mg THC: 1000mg CBD Body Rub",
+      "product_brand": "Chill Medicated",
+      "brand": "Chill Medicated",
+      "product_type": "Topicals",
+      "quantity_raw": 15.0,
+      "quantity": 15.0,
+      "order_quantity": 15.0,
+      "unit_multiplier": 15,
+      "line_total_raw": 52500,
+      "line_total": "$525.00",
+      "computed_sale_price": "$35.00",
+      "product_listing_price": "$525.00",
+      "unit_price": "$35.00",
+      "discounts": 0,
+      "additional_discounts": 0,
+      "order_total_raw": 240000,
+      "order_balance_raw": 240000,
+      "batch_cost_of_goods": "",
+      "order_status": "Submitted",
+      "payment_status": "Submitted",
+      "classification": "Adult Use",
+      "sales_rep": "",
+      "sales_reps": "",
+      "sales_reps_display": "",
+      "payment_dates": [],
+      "is_sample": false,
+      "notes": "",
+      "product_sku": "4e3596d2a7ab898be2a3",
+      "order_total_all_lines": true,
+      "current_inventory": 0.0
+    },
+    {
+      "order_id": "3094e861-479f-4a2f-ba92-034867eb5536",
+      "order_number": "US10367925",
+      "number": "3094e861-479f-4a2f-ba92-034867eb5536",
+      "order_date_utc": "2026-10-27T15:49:56-04:00",
+      "order_date_utc_raw": "2026-10-27T15:49:56-04:00",
+      "order_date_localized": "2026-10-27T15:49:56-04:00",
+      "order_date_localized_raw": "2026-10-27T15:49:56-04:00",
+      "order_date": "10/27/2026",
+      "order_date_raw": "2026-10-27T15:49:56-04:00",
+      "delivery_date": "",
+      "delivery_date_raw": "",
+      "paid_date": "",
+      "buyer_name": "NJ Leaf Keansburg",
+      "buyer_license": "RE001024",
+      "buyer_state": "NJ",
+      "buyer_city": "Keansburg",
+      "buyer_zip": "07734",
+      "product_id": 2675949,
+      "product_name": "Chill Medicated - RELAX 500mg THC: 500mg CBD Body Rub",
+      "product_brand": "Chill Medicated",
+      "brand": "Chill Medicated",
+      "product_type": "Topicals",
+      "quantity_raw": 15.0,
+      "quantity": 15.0,
+      "order_quantity": 15.0,
+      "unit_multiplier": 15,
+      "line_total_raw": 30000,
+      "line_total": "$300.00",
+      "computed_sale_price": "$20.00",
+      "product_listing_price": "$300.00",
+      "unit_price": "$20.00",
+      "discounts": 0,
+      "additional_discounts": 0,
+      "order_total_raw": 240000,
+      "order_balance_raw": 240000,
+      "batch_cost_of_goods": "",
+      "order_status": "Submitted",
+      "payment_status": "Submitted",
+      "classification": "Adult Use",
+      "sales_rep": "",
+      "sales_reps": "",
+      "sales_reps_display": "",
+      "payment_dates": [],
+      "is_sample": false,
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "order_total_all_lines": true,
+      "current_inventory": 15.0
+    },
+    {
+      "order_id": "3094e861-479f-4a2f-ba92-034867eb5536",
+      "order_number": "US10367925",
+      "number": "3094e861-479f-4a2f-ba92-034867eb5536",
+      "order_date_utc": "2026-10-27T15:49:56-04:00",
+      "order_date_utc_raw": "2026-10-27T15:49:56-04:00",
+      "order_date_localized": "2026-10-27T15:49:56-04:00",
+      "order_date_localized_raw": "2026-10-27T15:49:56-04:00",
+      "order_date": "10/27/2026",
+      "order_date_raw": "2026-10-27T15:49:56-04:00",
+      "delivery_date": "",
+      "delivery_date_raw": "",
+      "paid_date": "",
+      "buyer_name": "NJ Leaf Keansburg",
+      "buyer_license": "RE001024",
+      "buyer_state": "NJ",
+      "buyer_city": "Keansburg",
+      "buyer_zip": "07734",
+      "product_id": 2675962,
+      "product_name": "Chill Medicated  - SUBZERO 1000mg THC: 1000mg CBD Roll-On",
+      "product_brand": "Chill Medicated",
+      "brand": "Chill Medicated",
+      "product_type": "Topicals",
+      "quantity_raw": 30.0,
+      "quantity": 30.0,
+      "order_quantity": 30.0,
+      "unit_multiplier": 15,
+      "line_total_raw": 105000,
+      "line_total": "$1,050.00",
+      "computed_sale_price": "$35.00",
+      "product_listing_price": "$525.00",
+      "unit_price": "$35.00",
+      "discounts": 0,
+      "additional_discounts": 0,
+      "order_total_raw": 240000,
+      "order_balance_raw": 240000,
+      "batch_cost_of_goods": "",
+      "order_status": "Submitted",
+      "payment_status": "Submitted",
+      "classification": "Adult Use",
+      "sales_rep": "",
+      "sales_reps": "",
+      "sales_reps_display": "",
+      "payment_dates": [],
+      "is_sample": false,
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "order_total_all_lines": true,
+      "current_inventory": 164.0
+    },
+    {
+      "order_id": "1733588a-9017-4293-a182-69f104d0174e",
+      "order_number": "US10367924",
+      "number": "1733588a-9017-4293-a182-69f104d0174e",
+      "order_date_utc": "2026-10-27T15:49:55-04:00",
+      "order_date_utc_raw": "2026-10-27T15:49:55-04:00",
+      "order_date_localized": "2026-10-27T15:49:55-04:00",
+      "order_date_localized_raw": "2026-10-27T15:49:55-04:00",
+      "order_date": "10/27/2026",
+      "order_date_raw": "2026-10-27T15:49:55-04:00",
+      "delivery_date": "",
+      "delivery_date_raw": "",
+      "paid_date": "",
+      "buyer_name": "NJ Leaf Aberdeen",
+      "buyer_license": "RE001057",
+      "buyer_state": "NJ",
+      "buyer_city": "Cliffwood",
+      "buyer_zip": "07721",
+      "product_id": 2675950,
+      "product_name": "Chill Medicated - MAXX 1000mg THC: 1000mg CBD Body Rub",
+      "product_brand": "Chill Medicated",
+      "brand": "Chill Medicated",
+      "product_type": "Topicals",
+      "quantity_raw": 15.0,
+      "quantity": 15.0,
+      "order_quantity": 15.0,
+      "unit_multiplier": 15,
+      "line_total_raw": 52500,
+      "line_total": "$525.00",
+      "computed_sale_price": "$35.00",
+      "product_listing_price": "$525.00",
+      "unit_price": "$35.00",
+      "discounts": 0,
+      "additional_discounts": 0,
+      "order_total_raw": 240000,
+      "order_balance_raw": 240000,
+      "batch_cost_of_goods": "",
+      "order_status": "Submitted",
+      "payment_status": "Submitted",
+      "classification": "Adult Use",
+      "sales_rep": "Sales Chill Medicated",
+      "sales_reps": "Sales Chill Medicated",
+      "sales_reps_display": "Sales Chill Medicated",
+      "payment_dates": [],
+      "is_sample": false,
+      "notes": "",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "order_total_all_lines": true,
+      "current_inventory": 75.0
+    },
+    {
+      "order_id": "1733588a-9017-4293-a182-69f104d0174e",
+      "order_number": "US10367924",
+      "number": "1733588a-9017-4293-a182-69f104d0174e",
+      "order_date_utc": "2026-10-27T15:49:55-04:00",
+      "order_date_utc_raw": "2026-10-27T15:49:55-04:00",
+      "order_date_localized": "2026-10-27T15:49:55-04:00",
+      "order_date_localized_raw": "2026-10-27T15:49:55-04:00",
+      "order_date": "10/27/2026",
+      "order_date_raw": "2026-10-27T15:49:55-04:00",
+      "delivery_date": "",
+      "delivery_date_raw": "",
+      "paid_date": "",
+      "buyer_name": "NJ Leaf Aberdeen",
+      "buyer_license": "RE001057",
+      "buyer_state": "NJ",
+      "buyer_city": "Cliffwood",
+      "buyer_zip": "07721",
+      "product_id": 2675961,
+      "product_name": "Chill Medicated - MAXX Majestic Mint 1000mg THC: 1000mg CBD Body Rub",
+      "product_brand": "Chill Medicated",
+      "brand": "Chill Medicated",
+      "product_type": "Topicals",
+      "quantity_raw": 15.0,
+      "quantity": 15.0,
+      "order_quantity": 15.0,
+      "unit_multiplier": 15,
+      "line_total_raw": 52500,
+      "line_total": "$525.00",
+      "computed_sale_price": "$35.00",
+      "product_listing_price": "$525.00",
+      "unit_price": "$35.00",
+      "discounts": 0,
+      "additional_discounts": 0,
+      "order_total_raw": 240000,
+      "order_balance_raw": 240000,
+      "batch_cost_of_goods": "",
+      "order_status": "Submitted",
+      "payment_status": "Submitted",
+      "classification": "Adult Use",
+      "sales_rep": "Sales Chill Medicated",
+      "sales_reps": "Sales Chill Medicated",
+      "sales_reps_display": "Sales Chill Medicated",
+      "payment_dates": [],
+      "is_sample": false,
+      "notes": "",
+      "product_sku": "4e3596d2a7ab898be2a3",
+      "order_total_all_lines": true,
+      "current_inventory": 0.0
+    },
+    {
+      "order_id": "1733588a-9017-4293-a182-69f104d0174e",
+      "order_number": "US10367924",
+      "number": "1733588a-9017-4293-a182-69f104d0174e",
+      "order_date_utc": "2026-10-27T15:49:55-04:00",
+      "order_date_utc_raw": "2026-10-27T15:49:55-04:00",
+      "order_date_localized": "2026-10-27T15:49:55-04:00",
+      "order_date_localized_raw": "2026-10-27T15:49:55-04:00",
+      "order_date": "10/27/2026",
+      "order_date_raw": "2026-10-27T15:49:55-04:00",
+      "delivery_date": "",
+      "delivery_date_raw": "",
+      "paid_date": "",
+      "buyer_name": "NJ Leaf Aberdeen",
+      "buyer_license": "RE001057",
+      "buyer_state": "NJ",
+      "buyer_city": "Cliffwood",
+      "buyer_zip": "07721",
+      "product_id": 2675949,
+      "product_name": "Chill Medicated - RELAX 500mg THC: 500mg CBD Body Rub",
+      "product_brand": "Chill Medicated",
+      "brand": "Chill Medicated",
+      "product_type": "Topicals",
+      "quantity_raw": 15.0,
+      "quantity": 15.0,
+      "order_quantity": 15.0,
+      "unit_multiplier": 15,
+      "line_total_raw": 30000,
+      "line_total": "$300.00",
+      "computed_sale_price": "$20.00",
+      "product_listing_price": "$300.00",
+      "unit_price": "$20.00",
+      "discounts": 0,
+      "additional_discounts": 0,
+      "order_total_raw": 240000,
+      "order_balance_raw": 240000,
+      "batch_cost_of_goods": "",
+      "order_status": "Submitted",
+      "payment_status": "Submitted",
+      "classification": "Adult Use",
+      "sales_rep": "Sales Chill Medicated",
+      "sales_reps": "Sales Chill Medicated",
+      "sales_reps_display": "Sales Chill Medicated",
+      "payment_dates": [],
+      "is_sample": false,
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "order_total_all_lines": true,
+      "current_inventory": 15.0
+    },
+    {
+      "order_id": "1733588a-9017-4293-a182-69f104d0174e",
+      "order_number": "US10367924",
+      "number": "1733588a-9017-4293-a182-69f104d0174e",
+      "order_date_utc": "2026-10-27T15:49:55-04:00",
+      "order_date_utc_raw": "2026-10-27T15:49:55-04:00",
+      "order_date_localized": "2026-10-27T15:49:55-04:00",
+      "order_date_localized_raw": "2026-10-27T15:49:55-04:00",
+      "order_date": "10/27/2026",
+      "order_date_raw": "2026-10-27T15:49:55-04:00",
+      "delivery_date": "",
+      "delivery_date_raw": "",
+      "paid_date": "",
+      "buyer_name": "NJ Leaf Aberdeen",
+      "buyer_license": "RE001057",
+      "buyer_state": "NJ",
+      "buyer_city": "Cliffwood",
+      "buyer_zip": "07721",
+      "product_id": 2675962,
+      "product_name": "Chill Medicated  - SUBZERO 1000mg THC: 1000mg CBD Roll-On",
+      "product_brand": "Chill Medicated",
+      "brand": "Chill Medicated",
+      "product_type": "Topicals",
+      "quantity_raw": 30.0,
+      "quantity": 30.0,
+      "order_quantity": 30.0,
+      "unit_multiplier": 15,
+      "line_total_raw": 105000,
+      "line_total": "$1,050.00",
+      "computed_sale_price": "$35.00",
+      "product_listing_price": "$525.00",
+      "unit_price": "$35.00",
+      "discounts": 0,
+      "additional_discounts": 0,
+      "order_total_raw": 240000,
+      "order_balance_raw": 240000,
+      "batch_cost_of_goods": "",
+      "order_status": "Submitted",
+      "payment_status": "Submitted",
+      "classification": "Adult Use",
+      "sales_rep": "Sales Chill Medicated",
+      "sales_reps": "Sales Chill Medicated",
+      "sales_reps_display": "Sales Chill Medicated",
+      "payment_dates": [],
+      "is_sample": false,
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "order_total_all_lines": true,
+      "current_inventory": 164.0
+    },
+    {
+      "order_id": "00651f1b-c854-432e-bcdb-f41ed0e6200a",
+      "order_number": "US10367923",
+      "number": "00651f1b-c854-432e-bcdb-f41ed0e6200a",
+      "order_date_utc": "2026-10-27T15:49:54-04:00",
+      "order_date_utc_raw": "2026-10-27T15:49:54-04:00",
+      "order_date_localized": "2026-10-27T15:49:54-04:00",
+      "order_date_localized_raw": "2026-10-27T15:49:54-04:00",
+      "order_date": "10/27/2026",
+      "order_date_raw": "2026-10-27T15:49:54-04:00",
+      "delivery_date": "",
+      "delivery_date_raw": "",
+      "paid_date": "",
+      "buyer_name": "NJ Leaf Jamesburg",
+      "buyer_license": "RE001071",
+      "buyer_state": "NJ",
+      "buyer_city": "Jamesburg",
+      "buyer_zip": "08831",
+      "product_id": 2675950,
+      "product_name": "Chill Medicated - MAXX 1000mg THC: 1000mg CBD Body Rub",
+      "product_brand": "Chill Medicated",
+      "brand": "Chill Medicated",
+      "product_type": "Topicals",
+      "quantity_raw": 15.0,
+      "quantity": 15.0,
+      "order_quantity": 15.0,
+      "unit_multiplier": 15,
+      "line_total_raw": 52500,
+      "line_total": "$525.00",
+      "computed_sale_price": "$35.00",
+      "product_listing_price": "$525.00",
+      "unit_price": "$35.00",
+      "discounts": 0,
+      "additional_discounts": 0,
+      "order_total_raw": 240000,
+      "order_balance_raw": 240000,
+      "batch_cost_of_goods": "",
+      "order_status": "Submitted",
+      "payment_status": "Submitted",
+      "classification": "Adult Use",
+      "sales_rep": "Sales Chill Medicated",
+      "sales_reps": "Sales Chill Medicated",
+      "sales_reps_display": "Sales Chill Medicated",
+      "payment_dates": [],
+      "is_sample": false,
+      "notes": "",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "order_total_all_lines": true,
+      "current_inventory": 75.0
+    },
+    {
+      "order_id": "00651f1b-c854-432e-bcdb-f41ed0e6200a",
+      "order_number": "US10367923",
+      "number": "00651f1b-c854-432e-bcdb-f41ed0e6200a",
+      "order_date_utc": "2026-10-27T15:49:54-04:00",
+      "order_date_utc_raw": "2026-10-27T15:49:54-04:00",
+      "order_date_localized": "2026-10-27T15:49:54-04:00",
+      "order_date_localized_raw": "2026-10-27T15:49:54-04:00",
+      "order_date": "10/27/2026",
+      "order_date_raw": "2026-10-27T15:49:54-04:00",
+      "delivery_date": "",
+      "delivery_date_raw": "",
+      "paid_date": "",
+      "buyer_name": "NJ Leaf Jamesburg",
+      "buyer_license": "RE001071",
+      "buyer_state": "NJ",
+      "buyer_city": "Jamesburg",
+      "buyer_zip": "08831",
+      "product_id": 2675961,
+      "product_name": "Chill Medicated - MAXX Majestic Mint 1000mg THC: 1000mg CBD Body Rub",
+      "product_brand": "Chill Medicated",
+      "brand": "Chill Medicated",
+      "product_type": "Topicals",
+      "quantity_raw": 15.0,
+      "quantity": 15.0,
+      "order_quantity": 15.0,
+      "unit_multiplier": 15,
+      "line_total_raw": 52500,
+      "line_total": "$525.00",
+      "computed_sale_price": "$35.00",
+      "product_listing_price": "$525.00",
+      "unit_price": "$35.00",
+      "discounts": 0,
+      "additional_discounts": 0,
+      "order_total_raw": 240000,
+      "order_balance_raw": 240000,
+      "batch_cost_of_goods": "",
+      "order_status": "Submitted",
+      "payment_status": "Submitted",
+      "classification": "Adult Use",
+      "sales_rep": "Sales Chill Medicated",
+      "sales_reps": "Sales Chill Medicated",
+      "sales_reps_display": "Sales Chill Medicated",
+      "payment_dates": [],
+      "is_sample": false,
+      "notes": "",
+      "product_sku": "4e3596d2a7ab898be2a3",
+      "order_total_all_lines": true,
+      "current_inventory": 0.0
+    },
+    {
+      "order_id": "00651f1b-c854-432e-bcdb-f41ed0e6200a",
+      "order_number": "US10367923",
+      "number": "00651f1b-c854-432e-bcdb-f41ed0e6200a",
+      "order_date_utc": "2026-10-27T15:49:54-04:00",
+      "order_date_utc_raw": "2026-10-27T15:49:54-04:00",
+      "order_date_localized": "2026-10-27T15:49:54-04:00",
+      "order_date_localized_raw": "2026-10-27T15:49:54-04:00",
+      "order_date": "10/27/2026",
+      "order_date_raw": "2026-10-27T15:49:54-04:00",
+      "delivery_date": "",
+      "delivery_date_raw": "",
+      "paid_date": "",
+      "buyer_name": "NJ Leaf Jamesburg",
+      "buyer_license": "RE001071",
+      "buyer_state": "NJ",
+      "buyer_city": "Jamesburg",
+      "buyer_zip": "08831",
+      "product_id": 2675949,
+      "product_name": "Chill Medicated - RELAX 500mg THC: 500mg CBD Body Rub",
+      "product_brand": "Chill Medicated",
+      "brand": "Chill Medicated",
+      "product_type": "Topicals",
+      "quantity_raw": 15.0,
+      "quantity": 15.0,
+      "order_quantity": 15.0,
+      "unit_multiplier": 15,
+      "line_total_raw": 30000,
+      "line_total": "$300.00",
+      "computed_sale_price": "$20.00",
+      "product_listing_price": "$300.00",
+      "unit_price": "$20.00",
+      "discounts": 0,
+      "additional_discounts": 0,
+      "order_total_raw": 240000,
+      "order_balance_raw": 240000,
+      "batch_cost_of_goods": "",
+      "order_status": "Submitted",
+      "payment_status": "Submitted",
+      "classification": "Adult Use",
+      "sales_rep": "Sales Chill Medicated",
+      "sales_reps": "Sales Chill Medicated",
+      "sales_reps_display": "Sales Chill Medicated",
+      "payment_dates": [],
+      "is_sample": false,
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "order_total_all_lines": true,
+      "current_inventory": 15.0
+    },
+    {
+      "order_id": "00651f1b-c854-432e-bcdb-f41ed0e6200a",
+      "order_number": "US10367923",
+      "number": "00651f1b-c854-432e-bcdb-f41ed0e6200a",
+      "order_date_utc": "2026-10-27T15:49:54-04:00",
+      "order_date_utc_raw": "2026-10-27T15:49:54-04:00",
+      "order_date_localized": "2026-10-27T15:49:54-04:00",
+      "order_date_localized_raw": "2026-10-27T15:49:54-04:00",
+      "order_date": "10/27/2026",
+      "order_date_raw": "2026-10-27T15:49:54-04:00",
+      "delivery_date": "",
+      "delivery_date_raw": "",
+      "paid_date": "",
+      "buyer_name": "NJ Leaf Jamesburg",
+      "buyer_license": "RE001071",
+      "buyer_state": "NJ",
+      "buyer_city": "Jamesburg",
+      "buyer_zip": "08831",
+      "product_id": 2675962,
+      "product_name": "Chill Medicated  - SUBZERO 1000mg THC: 1000mg CBD Roll-On",
+      "product_brand": "Chill Medicated",
+      "brand": "Chill Medicated",
+      "product_type": "Topicals",
+      "quantity_raw": 30.0,
+      "quantity": 30.0,
+      "order_quantity": 30.0,
+      "unit_multiplier": 15,
+      "line_total_raw": 105000,
+      "line_total": "$1,050.00",
+      "computed_sale_price": "$35.00",
+      "product_listing_price": "$525.00",
+      "unit_price": "$35.00",
+      "discounts": 0,
+      "additional_discounts": 0,
+      "order_total_raw": 240000,
+      "order_balance_raw": 240000,
+      "batch_cost_of_goods": "",
+      "order_status": "Submitted",
+      "payment_status": "Submitted",
+      "classification": "Adult Use",
+      "sales_rep": "Sales Chill Medicated",
+      "sales_reps": "Sales Chill Medicated",
+      "sales_reps_display": "Sales Chill Medicated",
+      "payment_dates": [],
+      "is_sample": false,
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "order_total_all_lines": true,
+      "current_inventory": 164.0
+    },
+    {
+      "order_id": "7c7acf6c-d25b-4643-93d8-3649d6f53d9a",
+      "order_number": "US10367922",
+      "number": "7c7acf6c-d25b-4643-93d8-3649d6f53d9a",
+      "order_date_utc": "2026-10-27T15:49:53-04:00",
+      "order_date_utc_raw": "2026-10-27T15:49:53-04:00",
+      "order_date_localized": "2026-10-27T15:49:53-04:00",
+      "order_date_localized_raw": "2026-10-27T15:49:53-04:00",
+      "order_date": "10/27/2026",
+      "order_date_raw": "2026-10-27T15:49:53-04:00",
+      "delivery_date": "",
+      "delivery_date_raw": "",
+      "paid_date": "",
+      "buyer_name": "NJ Leaf (Freehold)",
+      "buyer_license": "RE000640",
+      "buyer_state": "NJ",
+      "buyer_city": "Freehold",
+      "buyer_zip": "07728",
+      "product_id": 2675950,
+      "product_name": "Chill Medicated - MAXX 1000mg THC: 1000mg CBD Body Rub",
+      "product_brand": "Chill Medicated",
+      "brand": "Chill Medicated",
+      "product_type": "Topicals",
+      "quantity_raw": 15.0,
+      "quantity": 15.0,
+      "order_quantity": 15.0,
+      "unit_multiplier": 15,
+      "line_total_raw": 52500,
+      "line_total": "$525.00",
+      "computed_sale_price": "$35.00",
+      "product_listing_price": "$525.00",
+      "unit_price": "$35.00",
+      "discounts": 0,
+      "additional_discounts": 0,
+      "order_total_raw": 240000,
+      "order_balance_raw": 240000,
+      "batch_cost_of_goods": "",
+      "order_status": "Submitted",
+      "payment_status": "Submitted",
+      "classification": "Adult Use",
+      "sales_rep": "",
+      "sales_reps": "",
+      "sales_reps_display": "",
+      "payment_dates": [],
+      "is_sample": false,
+      "notes": "",
+      "product_sku": "4d5c9b1162b6431d6c6c",
+      "order_total_all_lines": true,
+      "current_inventory": 75.0
+    },
+    {
+      "order_id": "7c7acf6c-d25b-4643-93d8-3649d6f53d9a",
+      "order_number": "US10367922",
+      "number": "7c7acf6c-d25b-4643-93d8-3649d6f53d9a",
+      "order_date_utc": "2026-10-27T15:49:53-04:00",
+      "order_date_utc_raw": "2026-10-27T15:49:53-04:00",
+      "order_date_localized": "2026-10-27T15:49:53-04:00",
+      "order_date_localized_raw": "2026-10-27T15:49:53-04:00",
+      "order_date": "10/27/2026",
+      "order_date_raw": "2026-10-27T15:49:53-04:00",
+      "delivery_date": "",
+      "delivery_date_raw": "",
+      "paid_date": "",
+      "buyer_name": "NJ Leaf (Freehold)",
+      "buyer_license": "RE000640",
+      "buyer_state": "NJ",
+      "buyer_city": "Freehold",
+      "buyer_zip": "07728",
+      "product_id": 2675961,
+      "product_name": "Chill Medicated - MAXX Majestic Mint 1000mg THC: 1000mg CBD Body Rub",
+      "product_brand": "Chill Medicated",
+      "brand": "Chill Medicated",
+      "product_type": "Topicals",
+      "quantity_raw": 15.0,
+      "quantity": 15.0,
+      "order_quantity": 15.0,
+      "unit_multiplier": 15,
+      "line_total_raw": 52500,
+      "line_total": "$525.00",
+      "computed_sale_price": "$35.00",
+      "product_listing_price": "$525.00",
+      "unit_price": "$35.00",
+      "discounts": 0,
+      "additional_discounts": 0,
+      "order_total_raw": 240000,
+      "order_balance_raw": 240000,
+      "batch_cost_of_goods": "",
+      "order_status": "Submitted",
+      "payment_status": "Submitted",
+      "classification": "Adult Use",
+      "sales_rep": "",
+      "sales_reps": "",
+      "sales_reps_display": "",
+      "payment_dates": [],
+      "is_sample": false,
+      "notes": "",
+      "product_sku": "4e3596d2a7ab898be2a3",
+      "order_total_all_lines": true,
+      "current_inventory": 0.0
+    },
+    {
+      "order_id": "7c7acf6c-d25b-4643-93d8-3649d6f53d9a",
+      "order_number": "US10367922",
+      "number": "7c7acf6c-d25b-4643-93d8-3649d6f53d9a",
+      "order_date_utc": "2026-10-27T15:49:53-04:00",
+      "order_date_utc_raw": "2026-10-27T15:49:53-04:00",
+      "order_date_localized": "2026-10-27T15:49:53-04:00",
+      "order_date_localized_raw": "2026-10-27T15:49:53-04:00",
+      "order_date": "10/27/2026",
+      "order_date_raw": "2026-10-27T15:49:53-04:00",
+      "delivery_date": "",
+      "delivery_date_raw": "",
+      "paid_date": "",
+      "buyer_name": "NJ Leaf (Freehold)",
+      "buyer_license": "RE000640",
+      "buyer_state": "NJ",
+      "buyer_city": "Freehold",
+      "buyer_zip": "07728",
+      "product_id": 2675949,
+      "product_name": "Chill Medicated - RELAX 500mg THC: 500mg CBD Body Rub",
+      "product_brand": "Chill Medicated",
+      "brand": "Chill Medicated",
+      "product_type": "Topicals",
+      "quantity_raw": 15.0,
+      "quantity": 15.0,
+      "order_quantity": 15.0,
+      "unit_multiplier": 15,
+      "line_total_raw": 30000,
+      "line_total": "$300.00",
+      "computed_sale_price": "$20.00",
+      "product_listing_price": "$300.00",
+      "unit_price": "$20.00",
+      "discounts": 0,
+      "additional_discounts": 0,
+      "order_total_raw": 240000,
+      "order_balance_raw": 240000,
+      "batch_cost_of_goods": "",
+      "order_status": "Submitted",
+      "payment_status": "Submitted",
+      "classification": "Adult Use",
+      "sales_rep": "",
+      "sales_reps": "",
+      "sales_reps_display": "",
+      "payment_dates": [],
+      "is_sample": false,
+      "notes": "",
+      "product_sku": "4434adc7323607418729",
+      "order_total_all_lines": true,
+      "current_inventory": 15.0
+    },
+    {
+      "order_id": "7c7acf6c-d25b-4643-93d8-3649d6f53d9a",
+      "order_number": "US10367922",
+      "number": "7c7acf6c-d25b-4643-93d8-3649d6f53d9a",
+      "order_date_utc": "2026-10-27T15:49:53-04:00",
+      "order_date_utc_raw": "2026-10-27T15:49:53-04:00",
+      "order_date_localized": "2026-10-27T15:49:53-04:00",
+      "order_date_localized_raw": "2026-10-27T15:49:53-04:00",
+      "order_date": "10/27/2026",
+      "order_date_raw": "2026-10-27T15:49:53-04:00",
+      "delivery_date": "",
+      "delivery_date_raw": "",
+      "paid_date": "",
+      "buyer_name": "NJ Leaf (Freehold)",
+      "buyer_license": "RE000640",
+      "buyer_state": "NJ",
+      "buyer_city": "Freehold",
+      "buyer_zip": "07728",
+      "product_id": 2675962,
+      "product_name": "Chill Medicated  - SUBZERO 1000mg THC: 1000mg CBD Roll-On",
+      "product_brand": "Chill Medicated",
+      "brand": "Chill Medicated",
+      "product_type": "Topicals",
+      "quantity_raw": 30.0,
+      "quantity": 30.0,
+      "order_quantity": 30.0,
+      "unit_multiplier": 15,
+      "line_total_raw": 105000,
+      "line_total": "$1,050.00",
+      "computed_sale_price": "$35.00",
+      "product_listing_price": "$525.00",
+      "unit_price": "$35.00",
+      "discounts": 0,
+      "additional_discounts": 0,
+      "order_total_raw": 240000,
+      "order_balance_raw": 240000,
+      "batch_cost_of_goods": "",
+      "order_status": "Submitted",
+      "payment_status": "Submitted",
+      "classification": "Adult Use",
+      "sales_rep": "",
+      "sales_reps": "",
+      "sales_reps_display": "",
+      "payment_dates": [],
+      "is_sample": false,
+      "notes": "",
+      "product_sku": "44c0830788c59a8fdbaf",
+      "order_total_all_lines": true,
+      "current_inventory": 164.0
+    },
+    {
       "order_id": "30151d76-c390-41c0-9fdd-f2bacc3cf5c4",
       "order_number": "US10367906",
       "number": "30151d76-c390-41c0-9fdd-f2bacc3cf5c4",
@@ -188,7 +1088,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "30151d76-c390-41c0-9fdd-f2bacc3cf5c4",
@@ -238,7 +1138,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "30151d76-c390-41c0-9fdd-f2bacc3cf5c4",
@@ -288,7 +1188,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "30151d76-c390-41c0-9fdd-f2bacc3cf5c4",
@@ -338,7 +1238,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "4bcdf651-68ab-48c9-a081-b965697a8156",
@@ -388,7 +1288,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "4bcdf651-68ab-48c9-a081-b965697a8156",
@@ -438,7 +1338,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "4bcdf651-68ab-48c9-a081-b965697a8156",
@@ -538,7 +1438,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "4bcdf651-68ab-48c9-a081-b965697a8156",
@@ -588,7 +1488,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "4bcdf651-68ab-48c9-a081-b965697a8156",
@@ -738,7 +1638,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "c26ee084-7c5c-4758-8262-6d9eb8e557a7",
@@ -788,7 +1688,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "c26ee084-7c5c-4758-8262-6d9eb8e557a7",
@@ -838,7 +1738,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "c26ee084-7c5c-4758-8262-6d9eb8e557a7",
@@ -888,7 +1788,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "c26ee084-7c5c-4758-8262-6d9eb8e557a7",
@@ -1188,7 +2088,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "c2729d11-007d-4b2e-8186-8cff4bf297d0",
@@ -1238,7 +2138,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "c2729d11-007d-4b2e-8186-8cff4bf297d0",
@@ -1338,7 +2238,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "c2729d11-007d-4b2e-8186-8cff4bf297d0",
@@ -1388,7 +2288,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "c2729d11-007d-4b2e-8186-8cff4bf297d0",
@@ -1888,7 +2788,7 @@
       "notes": "Credit applied from promo",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "bfad30c1-187e-4849-84bb-1da85acebe6f",
@@ -1938,7 +2838,7 @@
       "notes": "Credit applied from promo",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "bfad30c1-187e-4849-84bb-1da85acebe6f",
@@ -1988,7 +2888,7 @@
       "notes": "Credit applied from promo",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "bfad30c1-187e-4849-84bb-1da85acebe6f",
@@ -2188,7 +3088,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "57aa2061-baa9-42aa-9bcf-4800361073e7",
@@ -2238,7 +3138,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "57aa2061-baa9-42aa-9bcf-4800361073e7",
@@ -2288,7 +3188,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "57aa2061-baa9-42aa-9bcf-4800361073e7",
@@ -2338,7 +3238,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "57aa2061-baa9-42aa-9bcf-4800361073e7",
@@ -2638,7 +3538,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "5ce1526b-ea2d-4195-8cc9-eb5da2843f13",
@@ -2688,7 +3588,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "5ce1526b-ea2d-4195-8cc9-eb5da2843f13",
@@ -2988,7 +3888,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "105abdc6-edab-4403-98a3-9cb9d5e7bf38",
@@ -3488,7 +4388,7 @@
       "notes": "Approved discount per David S.  15 Samples included 100mg Cherry",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "27830b5d-53cb-453e-8a24-12472fb65ba5",
@@ -3538,7 +4438,7 @@
       "notes": "Approved discount per David S.  15 Samples included 100mg Cherry",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "27830b5d-53cb-453e-8a24-12472fb65ba5",
@@ -3588,7 +4488,7 @@
       "notes": "Approved discount per David S.  15 Samples included 100mg Cherry",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "27830b5d-53cb-453e-8a24-12472fb65ba5",
@@ -3638,7 +4538,7 @@
       "notes": "Approved discount per David S.  15 Samples included 100mg Cherry",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "27830b5d-53cb-453e-8a24-12472fb65ba5",
@@ -3788,7 +4688,7 @@
       "notes": "Order ID: US10367730 \n\n\nOrder ID: US10367745",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "d22d9be0-56f6-4391-aa6a-ee53fe0669e1",
@@ -3838,7 +4738,7 @@
       "notes": "Order ID: US10367730 \n\n\nOrder ID: US10367745",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "d22d9be0-56f6-4391-aa6a-ee53fe0669e1",
@@ -3938,7 +4838,7 @@
       "notes": "Order ID: US10367730 \n\n\nOrder ID: US10367745",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "d22d9be0-56f6-4391-aa6a-ee53fe0669e1",
@@ -3988,7 +4888,7 @@
       "notes": "Order ID: US10367730 \n\n\nOrder ID: US10367745",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "d22d9be0-56f6-4391-aa6a-ee53fe0669e1",
@@ -4838,7 +5738,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "15d13a8b-795a-443c-924d-d5d0d22225c3",
@@ -4888,7 +5788,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "15d13a8b-795a-443c-924d-d5d0d22225c3",
@@ -4988,7 +5888,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "c08056a0-756e-465a-b36e-21c6402659bf",
@@ -5238,7 +6138,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "c08056a0-756e-465a-b36e-21c6402659bf",
@@ -5288,7 +6188,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "c08056a0-756e-465a-b36e-21c6402659bf",
@@ -5738,7 +6638,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "8fc6105a-feb9-40fb-a674-ff9636cb27d6",
@@ -5988,7 +6888,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "8fc6105a-feb9-40fb-a674-ff9636cb27d6",
@@ -6038,7 +6938,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "8fc6105a-feb9-40fb-a674-ff9636cb27d6",
@@ -6438,7 +7338,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "744cae32-4916-4f26-8afa-c455028246a2",
@@ -6488,7 +7388,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "744cae32-4916-4f26-8afa-c455028246a2",
@@ -6588,7 +7488,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "744cae32-4916-4f26-8afa-c455028246a2",
@@ -6638,7 +7538,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "744cae32-4916-4f26-8afa-c455028246a2",
@@ -6738,7 +7638,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "89dc272d-79fe-4c2a-b718-72ca7895526b",
@@ -6988,7 +7888,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "89dc272d-79fe-4c2a-b718-72ca7895526b",
@@ -7038,7 +7938,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "89dc272d-79fe-4c2a-b718-72ca7895526b",
@@ -7088,7 +7988,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "89dc272d-79fe-4c2a-b718-72ca7895526b",
@@ -7988,7 +8888,7 @@
       "notes": "Order ID: US10367581 \n\n\nOrder ID: US10367582",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "4e377e2a-3fa6-4e62-8455-7e781ff2f03d",
@@ -8038,7 +8938,7 @@
       "notes": "Order ID: US10367581 \n\n\nOrder ID: US10367582",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "4e377e2a-3fa6-4e62-8455-7e781ff2f03d",
@@ -8088,7 +8988,7 @@
       "notes": "Order ID: US10367581 \n\n\nOrder ID: US10367582",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "4e377e2a-3fa6-4e62-8455-7e781ff2f03d",
@@ -8188,7 +9088,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "2ce178f5-daa9-4aec-93d5-c7a7da12c73f",
@@ -8338,7 +9238,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "631b8423-166b-4dbb-bfd2-0e2662f388e9",
@@ -8388,7 +9288,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "631b8423-166b-4dbb-bfd2-0e2662f388e9",
@@ -8838,7 +9738,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "9f81fcb2-60fa-4f75-ab76-ca1c5324b52e",
@@ -8888,7 +9788,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "9f81fcb2-60fa-4f75-ab76-ca1c5324b52e",
@@ -8938,7 +9838,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "9f81fcb2-60fa-4f75-ab76-ca1c5324b52e",
@@ -9188,7 +10088,7 @@
       "notes": "will send Subzero and Maxx units once testing is back on those. Promo and Sample units included.",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "eed7ee72-5485-4ac1-a335-2c4ffc00f579",
@@ -9438,7 +10338,7 @@
       "notes": "will send Subzero and Maxx units once testing is back on those. Promo and Sample units included.",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "eed7ee72-5485-4ac1-a335-2c4ffc00f579",
@@ -9538,7 +10438,7 @@
       "notes": "will send Subzero and Maxx units once testing is back on those. Promo and Sample units included.",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "eed7ee72-5485-4ac1-a335-2c4ffc00f579",
@@ -9738,7 +10638,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "a7d6c3c0-0b20-43ce-9fd5-b446f85af8bd",
@@ -10038,7 +10938,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "a861e354-710c-43fe-a315-5bba15a4cda5",
@@ -10288,7 +11188,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "a861e354-710c-43fe-a315-5bba15a4cda5",
@@ -10388,7 +11288,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "c7e26640-3385-4c43-bed7-a09a84ca6fd5",
@@ -10538,7 +11438,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "db03e802-4c5e-434a-8f9b-4139474ecb9b",
@@ -10638,7 +11538,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "db03e802-4c5e-434a-8f9b-4139474ecb9b",
@@ -10788,7 +11688,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "7e164219-fada-4afe-be4c-7a10192dd14b",
@@ -10838,7 +11738,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "7e164219-fada-4afe-be4c-7a10192dd14b",
@@ -10888,7 +11788,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "7e164219-fada-4afe-be4c-7a10192dd14b",
@@ -11038,7 +11938,7 @@
       "notes": "delivery asap",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "53ec0059-932e-48b1-8fc0-ba9d3adbd75d",
@@ -11088,7 +11988,7 @@
       "notes": "delivery asap",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "53ec0059-932e-48b1-8fc0-ba9d3adbd75d",
@@ -11188,7 +12088,7 @@
       "notes": "delivery asap",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "53ec0059-932e-48b1-8fc0-ba9d3adbd75d",
@@ -12188,7 +13088,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "e2765766-fefa-4c8d-890d-e4798a85f0ae",
@@ -12488,7 +13388,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "963209af-18e9-46dc-8020-789668c4c6eb",
@@ -12638,7 +13538,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "802b5b27-9b5d-44df-ad8f-4a8cfba3a402",
@@ -13138,7 +14038,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "802b5b27-9b5d-44df-ad8f-4a8cfba3a402",
@@ -13188,7 +14088,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "802b5b27-9b5d-44df-ad8f-4a8cfba3a402",
@@ -13238,7 +14138,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "802b5b27-9b5d-44df-ad8f-4a8cfba3a402",
@@ -13388,7 +14288,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "802b5b27-9b5d-44df-ad8f-4a8cfba3a402",
@@ -13438,7 +14338,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "802b5b27-9b5d-44df-ad8f-4a8cfba3a402",
@@ -13538,7 +14438,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "26c87984-cb65-4440-8d28-5ee9c0e55bb1",
@@ -13588,7 +14488,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "26c87984-cb65-4440-8d28-5ee9c0e55bb1",
@@ -13638,7 +14538,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "26c87984-cb65-4440-8d28-5ee9c0e55bb1",
@@ -13688,7 +14588,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "26c87984-cb65-4440-8d28-5ee9c0e55bb1",
@@ -14188,7 +15088,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "9c6f7418-5c4c-48c9-b8a4-4824796c0968",
@@ -14738,7 +15638,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "869cb034-b572-4bed-8538-4916727667d5",
@@ -15338,7 +16238,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "d491a36c-86c5-4666-9622-103d11e57bff",
@@ -15688,7 +16588,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "a5275730-d98f-44c4-ba4a-d82459449b70",
@@ -15738,7 +16638,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "a5275730-d98f-44c4-ba4a-d82459449b70",
@@ -15838,7 +16738,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "a5275730-d98f-44c4-ba4a-d82459449b70",
@@ -16338,7 +17238,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "4c6b3a8e-803f-4f36-9502-4cffd893b3db",
@@ -16388,7 +17288,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "4c6b3a8e-803f-4f36-9502-4cffd893b3db",
@@ -16488,7 +17388,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "4c6b3a8e-803f-4f36-9502-4cffd893b3db",
@@ -16938,7 +17838,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "2207008f-c065-47c7-86d2-7ecdde466d73",
@@ -16988,7 +17888,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "2207008f-c065-47c7-86d2-7ecdde466d73",
@@ -17088,7 +17988,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "2207008f-c065-47c7-86d2-7ecdde466d73",
@@ -17388,7 +18288,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "1e6a72f5-e13c-437a-bb62-c2499240a872",
@@ -17638,7 +18538,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "1e6a72f5-e13c-437a-bb62-c2499240a872",
@@ -17888,7 +18788,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "94fcdb44-2a98-445f-90f3-69462ccca78a",
@@ -18038,7 +18938,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "a043ec62-c7fc-441a-b656-a6cc236ee31f",
@@ -18088,7 +18988,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "a043ec62-c7fc-441a-b656-a6cc236ee31f",
@@ -18288,7 +19188,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "a043ec62-c7fc-441a-b656-a6cc236ee31f",
@@ -18488,7 +19388,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "9c567f11-69ab-40b4-96fd-959a5136e04e",
@@ -18538,7 +19438,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "9c567f11-69ab-40b4-96fd-959a5136e04e",
@@ -18588,7 +19488,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "9c567f11-69ab-40b4-96fd-959a5136e04e",
@@ -18688,7 +19588,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "a0341fda-449d-4c43-aea4-1d5031d5ffb2",
@@ -18738,7 +19638,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "a0341fda-449d-4c43-aea4-1d5031d5ffb2",
@@ -18838,7 +19738,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "a0341fda-449d-4c43-aea4-1d5031d5ffb2",
@@ -18888,7 +19788,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "a0341fda-449d-4c43-aea4-1d5031d5ffb2",
@@ -19188,7 +20088,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "d64363fd-1bed-47c5-a6e3-394f18c84285",
@@ -19238,7 +20138,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "d64363fd-1bed-47c5-a6e3-394f18c84285",
@@ -19288,7 +20188,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "d64363fd-1bed-47c5-a6e3-394f18c84285",
@@ -19438,7 +20338,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "ea5f9a39-5b45-4950-bbf8-04e26d10beb3",
@@ -19488,7 +20388,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "ea5f9a39-5b45-4950-bbf8-04e26d10beb3",
@@ -19588,7 +20488,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "ea5f9a39-5b45-4950-bbf8-04e26d10beb3",
@@ -19638,7 +20538,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "ea5f9a39-5b45-4950-bbf8-04e26d10beb3",
@@ -19738,7 +20638,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": false,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "3817e56e-d341-49dc-95e9-3a4d802c74fd",
@@ -19788,7 +20688,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": false,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "4abb1745-eecb-4461-a3a2-508439783323",
@@ -19888,7 +20788,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "55b285ac-0c83-4969-8919-bf7063c6755a",
@@ -19938,7 +20838,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "55b285ac-0c83-4969-8919-bf7063c6755a",
@@ -20438,7 +21338,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "55b285ac-0c83-4969-8919-bf7063c6755a",
@@ -20488,7 +21388,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "55b285ac-0c83-4969-8919-bf7063c6755a",
@@ -20688,7 +21588,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "f5e5dabc-14ef-44da-a225-9d269a84931c",
@@ -20738,7 +21638,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "f5e5dabc-14ef-44da-a225-9d269a84931c",
@@ -20838,7 +21738,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "f5e5dabc-14ef-44da-a225-9d269a84931c",
@@ -21438,7 +22338,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "bff53cd5-8af3-49f0-9199-aca01c338e78",
@@ -21488,7 +22388,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "bff53cd5-8af3-49f0-9199-aca01c338e78",
@@ -21588,7 +22488,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "bff53cd5-8af3-49f0-9199-aca01c338e78",
@@ -21638,7 +22538,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "bff53cd5-8af3-49f0-9199-aca01c338e78",
@@ -21888,7 +22788,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "79a75ee2-230b-4b96-97fd-c90cfa9570a8",
@@ -21988,7 +22888,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "79a75ee2-230b-4b96-97fd-c90cfa9570a8",
@@ -22038,7 +22938,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "79a75ee2-230b-4b96-97fd-c90cfa9570a8",
@@ -22488,7 +23388,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "0392b56a-bd05-4a94-8a5c-c4ff0c0e6f07",
@@ -22538,7 +23438,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "0392b56a-bd05-4a94-8a5c-c4ff0c0e6f07",
@@ -22588,7 +23488,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "0392b56a-bd05-4a94-8a5c-c4ff0c0e6f07",
@@ -22638,7 +23538,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "0392b56a-bd05-4a94-8a5c-c4ff0c0e6f07",
@@ -23038,7 +23938,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "3a23b357-5a30-47ff-b89c-e3f624d32dce",
@@ -23088,7 +23988,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "3a23b357-5a30-47ff-b89c-e3f624d32dce",
@@ -23188,7 +24088,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": false,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "386a5612-c6ba-40dc-80e9-0b94913f8b8a",
@@ -23588,7 +24488,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "386a5612-c6ba-40dc-80e9-0b94913f8b8a",
@@ -23688,7 +24588,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "386a5612-c6ba-40dc-80e9-0b94913f8b8a",
@@ -23738,7 +24638,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "386a5612-c6ba-40dc-80e9-0b94913f8b8a",
@@ -23938,7 +24838,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "31f82f16-3501-438d-b81f-462be82a4751",
@@ -23988,7 +24888,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "31f82f16-3501-438d-b81f-462be82a4751",
@@ -24288,7 +25188,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "09bbee2f-9279-4b0e-a395-17bbfd8e8918",
@@ -24338,7 +25238,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "09bbee2f-9279-4b0e-a395-17bbfd8e8918",
@@ -24388,7 +25288,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "09bbee2f-9279-4b0e-a395-17bbfd8e8918",
@@ -24488,7 +25388,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "b23c1f62-b44e-4b08-9535-436eb15b5995",
@@ -25138,7 +26038,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "cb9193db-d0f1-41e1-b496-5cb060155c1f",
@@ -25188,7 +26088,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "cb9193db-d0f1-41e1-b496-5cb060155c1f",
@@ -25388,7 +26288,7 @@
       "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "1050341e-20a7-4793-bab8-061a19fdf7dd",
@@ -25638,7 +26538,7 @@
       "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "1050341e-20a7-4793-bab8-061a19fdf7dd",
@@ -25688,7 +26588,7 @@
       "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "1050341e-20a7-4793-bab8-061a19fdf7dd",
@@ -25738,7 +26638,7 @@
       "notes": "Syrups - base price $12.50 - (Regular + Zero Sugar)\nZero Sugar AM and PM price - $15.00 \nTopicals 1000:1000 - $35.00\nTopicals 500:500 - $17.50",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "1050341e-20a7-4793-bab8-061a19fdf7dd",
@@ -26288,7 +27188,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "e52c7c7d-c5ad-4ef8-8820-00507555f63d",
@@ -26488,7 +27388,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "3be7956d-35fc-4172-a7f3-5d9c70adf734",
@@ -26538,7 +27438,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "3be7956d-35fc-4172-a7f3-5d9c70adf734",
@@ -26588,7 +27488,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "3be7956d-35fc-4172-a7f3-5d9c70adf734",
@@ -26938,7 +27838,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "3be7956d-35fc-4172-a7f3-5d9c70adf734",
@@ -27038,7 +27938,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "55a851d3-6b62-41db-8e51-f595a4d90c74",
@@ -27138,7 +28038,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "55a851d3-6b62-41db-8e51-f595a4d90c74",
@@ -27188,7 +28088,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "55a851d3-6b62-41db-8e51-f595a4d90c74",
@@ -27238,7 +28138,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "55a851d3-6b62-41db-8e51-f595a4d90c74",
@@ -27688,7 +28588,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "55a851d3-6b62-41db-8e51-f595a4d90c74",
@@ -27788,7 +28688,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "52b1a9eb-0ed9-4c50-b3a6-cd6b5e89cd2d",
@@ -27888,7 +28788,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "52b1a9eb-0ed9-4c50-b3a6-cd6b5e89cd2d",
@@ -27938,7 +28838,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "52b1a9eb-0ed9-4c50-b3a6-cd6b5e89cd2d",
@@ -27988,7 +28888,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "52b1a9eb-0ed9-4c50-b3a6-cd6b5e89cd2d",
@@ -28438,7 +29338,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "52b1a9eb-0ed9-4c50-b3a6-cd6b5e89cd2d",
@@ -28638,7 +29538,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "c454e146-5231-4bcc-a2be-7ee76f5a604a",
@@ -29038,7 +29938,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "c454e146-5231-4bcc-a2be-7ee76f5a604a",
@@ -29088,7 +29988,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "c454e146-5231-4bcc-a2be-7ee76f5a604a",
@@ -29138,7 +30038,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "c454e146-5231-4bcc-a2be-7ee76f5a604a",
@@ -29688,7 +30588,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "a3ba2541-2c2a-42de-a9d5-d8a6c439d4d1",
@@ -29788,7 +30688,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "a3ba2541-2c2a-42de-a9d5-d8a6c439d4d1",
@@ -29838,7 +30738,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "a3ba2541-2c2a-42de-a9d5-d8a6c439d4d1",
@@ -29888,7 +30788,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "a3ba2541-2c2a-42de-a9d5-d8a6c439d4d1",
@@ -30338,7 +31238,7 @@
       "notes": "",
       "product_sku": "44c0830788c59a8fdbaf",
       "order_total_all_lines": true,
-      "current_inventory": 299.0
+      "current_inventory": 164.0
     },
     {
       "order_id": "200920c2-6be9-403e-8b5b-33ade59768ed",
@@ -30438,7 +31338,7 @@
       "notes": "",
       "product_sku": "4d5c9b1162b6431d6c6c",
       "order_total_all_lines": true,
-      "current_inventory": 150.0
+      "current_inventory": 75.0
     },
     {
       "order_id": "200920c2-6be9-403e-8b5b-33ade59768ed",
@@ -30488,7 +31388,7 @@
       "notes": "",
       "product_sku": "4e3596d2a7ab898be2a3",
       "order_total_all_lines": true,
-      "current_inventory": 60.0
+      "current_inventory": 0.0
     },
     {
       "order_id": "200920c2-6be9-403e-8b5b-33ade59768ed",
@@ -30538,7 +31438,7 @@
       "notes": "",
       "product_sku": "4434adc7323607418729",
       "order_total_all_lines": true,
-      "current_inventory": 75.0
+      "current_inventory": 15.0
     },
     {
       "order_id": "200920c2-6be9-403e-8b5b-33ade59768ed",

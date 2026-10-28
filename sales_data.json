@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-10-28T20:03:22.333073+00:00",
+  "fetched_at": "2026-10-28T20:18:15.823906+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
@@ -33257,22 +33257,22 @@
       "phone": "9737072915"
     },
     {
-      "customer_id": "2051184",
-      "customer": "Nile Cannabis",
-      "license": "RE000937",
-      "name": "Nile Inventory",
-      "title": "Inventory",
-      "email": "inventory@nile-cannabis.com",
-      "phone": "2018666547"
+      "customer_id": "2051183",
+      "customer": "Nightjar Cannabis",
+      "license": "RE000474",
+      "name": "Andrew Pena",
+      "title": "Buyer",
+      "email": "andrew@nightjarcannabis.com",
+      "phone": "9737072915"
     },
     {
       "customer_id": "2051184",
       "customer": "Nile Cannabis",
       "license": "RE000937",
-      "name": "Leland O'Connor",
-      "title": "",
-      "email": "leland@nile-cannabis.com",
-      "phone": ""
+      "name": "Catt Murphy",
+      "title": "Supervisor",
+      "email": "cmurphy@nile-cannabis.com",
+      "phone": "2019885433"
     },
     {
       "customer_id": "2051184",
@@ -33287,10 +33287,19 @@
       "customer_id": "2051184",
       "customer": "Nile Cannabis",
       "license": "RE000937",
-      "name": "Catt Murphy",
-      "title": "Supervisor",
-      "email": "cmurphy@nile-cannabis.com",
-      "phone": "2019885433"
+      "name": "Leland O'Connor",
+      "title": "",
+      "email": "leland@nile-cannabis.com",
+      "phone": ""
+    },
+    {
+      "customer_id": "2051184",
+      "customer": "Nile Cannabis",
+      "license": "RE000937",
+      "name": "Nile Inventory",
+      "title": "Inventory",
+      "email": "inventory@nile-cannabis.com",
+      "phone": "2018666547"
     },
     {
       "customer_id": "2051185",
@@ -33359,19 +33368,19 @@
       "customer_id": "2086690",
       "customer": "Northeast Alternatives",
       "license": "RE001004",
-      "name": "Accounts Payable",
-      "title": "",
-      "email": "ap@nealternatives.com",
-      "phone": ""
+      "name": "Cory Von Dassel",
+      "title": "Buyer",
+      "email": "cory@nealternatives.com",
+      "phone": "8603959106"
     },
     {
       "customer_id": "2086690",
       "customer": "Northeast Alternatives",
       "license": "RE001004",
-      "name": "Cory Von Dassel",
-      "title": "Buyer",
-      "email": "cory@nealternatives.com",
-      "phone": "8603959106"
+      "name": "Accounts Payable",
+      "title": "",
+      "email": "ap@nealternatives.com",
+      "phone": ""
     },
     {
       "customer_id": "2081992",
@@ -33467,15 +33476,6 @@
       "customer_id": "2089310",
       "customer": "Quality Cannabliss",
       "license": "RE000575",
-      "name": "Matt Curry",
-      "title": "",
-      "email": "marketing@qualitycannabliss.com",
-      "phone": ""
-    },
-    {
-      "customer_id": "2089310",
-      "customer": "Quality Cannabliss",
-      "license": "RE000575",
       "name": "Josh Boyle",
       "title": "Quality Assurance Manager",
       "email": "josh@qualitycannabliss.com",
@@ -33489,6 +33489,15 @@
       "title": "Founder & CEO",
       "email": "richelle@qualitycannabliss.com",
       "phone": "6099802002"
+    },
+    {
+      "customer_id": "2089310",
+      "customer": "Quality Cannabliss",
+      "license": "RE000575",
+      "name": "Matt Curry",
+      "title": "",
+      "email": "marketing@qualitycannabliss.com",
+      "phone": ""
     },
     {
       "customer_id": "2089310",
@@ -33548,19 +33557,19 @@
       "customer_id": "2051203",
       "customer": "Roots Dispensary",
       "license": "RE000819",
-      "name": "Philip Fasulo",
+      "name": "Richard Del Valle",
       "title": "",
-      "email": "philip@rootsnj.com",
-      "phone": "6092322722"
+      "email": "richard.delvalle@rootsnj.com",
+      "phone": "8569821114"
     },
     {
       "customer_id": "2051203",
       "customer": "Roots Dispensary",
       "license": "RE000819",
-      "name": "Richard Del Valle",
+      "name": "Philip Fasulo",
       "title": "",
-      "email": "richard.delvalle@rootsnj.com",
-      "phone": "8569821114"
+      "email": "philip@rootsnj.com",
+      "phone": "6092322722"
     },
     {
       "customer_id": "2060531",
@@ -33593,19 +33602,19 @@
       "customer_id": "2062658",
       "customer": "Sea & Leaf LLC",
       "license": "RE000211",
-      "name": "Matt Manager",
-      "title": "Operating Manager",
-      "email": "manager@seaandleaf.com",
-      "phone": "6095512750"
+      "name": "Jimmy Singh",
+      "title": "",
+      "email": "Jimmymultani88@gmail.com",
+      "phone": "6095823166"
     },
     {
       "customer_id": "2062658",
       "customer": "Sea & Leaf LLC",
       "license": "RE000211",
-      "name": "Jimmy Singh",
-      "title": "",
-      "email": "Jimmymultani88@gmail.com",
-      "phone": "6095823166"
+      "name": "Matt Manager",
+      "title": "Operating Manager",
+      "email": "manager@seaandleaf.com",
+      "phone": "6095512750"
     },
     {
       "customer_id": "2076560",

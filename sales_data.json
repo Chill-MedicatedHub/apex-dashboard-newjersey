@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-10-29T16:48:15.693289+00:00",
+  "fetched_at": "2026-10-29T17:03:44.707373+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
@@ -32990,19 +32990,19 @@
       "customer_id": "2047110",
       "customer": "Indigo Dispensary",
       "license": "RE000723",
-      "name": "Bluenathanoj Momongan",
-      "title": "Accounts Payable",
-      "email": "ap@indigodispensary.com",
-      "phone": "7188261111"
+      "name": "Ivan Valencia",
+      "title": "",
+      "email": "Ivan@indigodispensary.com",
+      "phone": "9172795005"
     },
     {
       "customer_id": "2047110",
       "customer": "Indigo Dispensary",
       "license": "RE000723",
-      "name": "Ivan Valencia",
-      "title": "",
-      "email": "Ivan@indigodispensary.com",
-      "phone": "9172795005"
+      "name": "Bluenathanoj Momongan",
+      "title": "Accounts Payable",
+      "email": "ap@indigodispensary.com",
+      "phone": "7188261111"
     },
     {
       "customer_id": "2113838",
@@ -33062,19 +33062,19 @@
       "customer_id": "2051167",
       "customer": "Kind Kush Dispensary",
       "license": "RE000019",
-      "name": "Keith Dearborn",
-      "title": "",
-      "email": "kdearborn20@gmail.com",
-      "phone": "2013165708"
+      "name": "Kyle Wildtaps",
+      "title": "Manager",
+      "email": "kwildtaps@gmail.com",
+      "phone": ""
     },
     {
       "customer_id": "2051167",
       "customer": "Kind Kush Dispensary",
       "license": "RE000019",
-      "name": "Kyle Wildtaps",
-      "title": "Manager",
-      "email": "kwildtaps@gmail.com",
-      "phone": ""
+      "name": "Keith Dearborn",
+      "title": "",
+      "email": "kdearborn20@gmail.com",
+      "phone": "2013165708"
     },
     {
       "customer_id": "2079602",
@@ -33101,6 +33101,15 @@
       "name": "Dustin Vielhauer",
       "title": "",
       "email": "dvielhauer@ftemo.com",
+      "phone": ""
+    },
+    {
+      "customer_id": "2205247",
+      "customer": "Leaf Haus",
+      "license": "RE000671",
+      "name": "Melissa Rofael",
+      "title": "",
+      "email": "melissa@leafhaus.com",
       "phone": ""
     },
     {
@@ -33188,19 +33197,19 @@
       "customer_id": "2051177",
       "customer": "Molly Ann Farms",
       "license": "RE000173",
-      "name": "Sean Hegarty",
+      "name": "Anaiya Anaiya",
       "title": "",
-      "email": "sean@mollyannfarms.com",
-      "phone": "9733154900"
+      "email": "Aniaya@mollyannfarms.com",
+      "phone": ""
     },
     {
       "customer_id": "2051177",
       "customer": "Molly Ann Farms",
       "license": "RE000173",
-      "name": "Anaiya Anaiya",
+      "name": "Sean Hegarty",
       "title": "",
-      "email": "Aniaya@mollyannfarms.com",
-      "phone": ""
+      "email": "sean@mollyannfarms.com",
+      "phone": "9733154900"
     },
     {
       "customer_id": "2073077",

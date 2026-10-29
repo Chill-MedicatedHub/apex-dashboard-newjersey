@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-28",
+  "as_of": "2026-10-29",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
   "count": 306,
@@ -374,9 +374,9 @@
       "status": "",
       "city": "Bloomfield",
       "state": "NJ",
-      "phone": "",
-      "email": "whatsgood@nightjarcannabis.com",
-      "website": ""
+      "phone": "9737072915",
+      "email": "andrew@nightjarcannabis.com",
+      "website": "https://nightjarcannabis.com/"
     },
     {
       "name": "Oopachi",

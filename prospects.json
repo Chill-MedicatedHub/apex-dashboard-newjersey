@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-06",
+  "as_of": "2026-11-07",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
   "count": 306,
@@ -2206,7 +2206,7 @@
     },
     {
       "name": "Good Karma Dispensary",
-      "license": "RE001030",
+      "license": "RE0001030",
       "type": "",
       "status": "",
       "city": "North Plainfield",
@@ -2217,7 +2217,7 @@
     },
     {
       "name": "Good Karma Dispensary",
-      "license": "RE0001030",
+      "license": "RE001030",
       "type": "",
       "status": "",
       "city": "North Plainfield",

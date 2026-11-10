@@ -1,8 +1,8 @@
 {
-  "as_of": "2026-11-09",
+  "as_of": "2026-11-10",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
-  "count": 306,
+  "count": 308,
   "records": [
     {
       "name": "Red Oak Dispensary - Absecon",
@@ -1347,6 +1347,17 @@
       "website": ""
     },
     {
+      "name": "Springfield Ave Dispensary LLC",
+      "license": "RE000212",
+      "type": "",
+      "status": "",
+      "city": "Irvington",
+      "state": "NJ",
+      "phone": "",
+      "email": "",
+      "website": ""
+    },
+    {
       "name": "NJ Leaf Jamesburg",
       "license": "RE001071",
       "type": "",
@@ -2206,7 +2217,7 @@
     },
     {
       "name": "Good Karma Dispensary",
-      "license": "RE0001030",
+      "license": "RE001030",
       "type": "",
       "status": "",
       "city": "North Plainfield",
@@ -2217,7 +2228,7 @@
     },
     {
       "name": "Good Karma Dispensary",
-      "license": "RE001030",
+      "license": "RE0001030",
       "type": "",
       "status": "",
       "city": "North Plainfield",
@@ -2764,6 +2775,17 @@
       "phone": "7329974799",
       "email": "",
       "website": "https://thedispensariesofnj.com/somerset/"
+    },
+    {
+      "name": "TreeHouse Central Jersey Dispensary",
+      "license": "RE000218",
+      "type": "",
+      "status": "",
+      "city": "Somerset",
+      "state": "NJ",
+      "phone": "7325794347",
+      "email": "",
+      "website": "https://centraljerseydispensary.store/"
     },
     {
       "name": "77 Main Street, LLC",

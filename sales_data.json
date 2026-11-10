@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-11-10T21:03:44.823455+00:00",
+  "fetched_at": "2026-11-10T21:18:26.191573+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
@@ -32465,15 +32465,6 @@
   ],
   "contacts": [
     {
-      "customer_id": "2051110",
-      "customer": "Botera Harrison LLC",
-      "license": "RE000269",
-      "name": "Gina Calitri",
-      "title": "",
-      "email": "gcalitri@boteranj.com",
-      "phone": "9084810001"
-    },
-    {
       "customer_id": "2051151",
       "customer": "Gynsyng",
       "license": "RE000163",
@@ -32492,13 +32483,13 @@
       "phone": "5163438921"
     },
     {
-      "customer_id": "2051141",
-      "customer": "Floro Evesham",
-      "license": "RE000832",
-      "name": "Chris Yermian",
-      "title": "buyer",
-      "email": "Chris@FloroNewJersey.com",
-      "phone": "2483039272"
+      "customer_id": "2051108",
+      "customer": "Boone Town Provisions",
+      "license": "RE000197",
+      "name": "Brittani Sobolewski",
+      "title": "",
+      "email": "britt@apptitudeplus.com",
+      "phone": "2019264165"
     },
     {
       "customer_id": "2051150",
@@ -32510,15 +32501,6 @@
       "phone": "8568733701"
     },
     {
-      "customer_id": "2051108",
-      "customer": "Boone Town Provisions",
-      "license": "RE000197",
-      "name": "Brittani Sobolewski",
-      "title": "",
-      "email": "britt@apptitudeplus.com",
-      "phone": "2019264165"
-    },
-    {
       "customer_id": "2051112",
       "customer": "Bud 2 Bloom LLC",
       "license": "RE000239",
@@ -32526,6 +32508,150 @@
       "title": "CEO",
       "email": "ariel@bud2bloodispensary.com",
       "phone": "8627460420"
+    },
+    {
+      "customer_id": "2051132",
+      "customer": "Daylite Cannabis",
+      "license": "RE000021",
+      "name": "Neil Swerdlow",
+      "title": "",
+      "email": "neil@daylitecannabis.com",
+      "phone": ""
+    },
+    {
+      "customer_id": "2051132",
+      "customer": "Daylite Cannabis",
+      "license": "RE000021",
+      "name": "David Cassidy",
+      "title": "",
+      "email": "steve@daylitecannabis.com",
+      "phone": "8623735066"
+    },
+    {
+      "customer_id": "2051213",
+      "customer": "Sparkology",
+      "license": "RE000936",
+      "name": "Brittany Aniska",
+      "title": "",
+      "email": "brittany@sparkology.com",
+      "phone": ""
+    },
+    {
+      "customer_id": "2051208",
+      "customer": "Simply Pure Trenton NJ Inc",
+      "license": "RE000028",
+      "name": "Shon Toledo",
+      "title": "Manager",
+      "email": "shon@simplypuretrenton.com",
+      "phone": ""
+    },
+    {
+      "customer_id": "2051208",
+      "customer": "Simply Pure Trenton NJ Inc",
+      "license": "RE000028",
+      "name": "Tahir Johnson",
+      "title": "",
+      "email": "ceo@simplypuretrenton.com",
+      "phone": "2023657310"
+    },
+    {
+      "customer_id": "2051156",
+      "customer": "High Profile - Somerdale",
+      "license": "RE000477",
+      "name": "DJ Famosi",
+      "title": "",
+      "email": "dfamosi@c3industries.com",
+      "phone": ""
+    },
+    {
+      "customer_id": "2131143",
+      "customer": "Altius",
+      "license": "RE000216",
+      "name": "Timothy Reidy",
+      "title": "",
+      "email": "tim.reidy@altiusdispensary.com",
+      "phone": "8479860291"
+    },
+    {
+      "customer_id": "2051141",
+      "customer": "Floro Evesham",
+      "license": "RE000832",
+      "name": "Chris Yermian",
+      "title": "buyer",
+      "email": "Chris@FloroNewJersey.com",
+      "phone": "2483039272"
+    },
+    {
+      "customer_id": "2051110",
+      "customer": "Botera Harrison LLC",
+      "license": "RE000269",
+      "name": "Gina Calitri",
+      "title": "",
+      "email": "gcalitri@boteranj.com",
+      "phone": "9084810001"
+    },
+    {
+      "customer_id": "2051191",
+      "customer": "Organic Farms",
+      "license": "RE000070",
+      "name": "Manager Farms",
+      "title": "buyers",
+      "email": "manager@organicfarms21.com",
+      "phone": ""
+    },
+    {
+      "customer_id": "2051231",
+      "customer": "Village Hoboken",
+      "license": "RE000875",
+      "name": "Yazmine Musa",
+      "title": "",
+      "email": "yazmine@thevillagebrands.com",
+      "phone": "2019326522"
+    },
+    {
+      "customer_id": "2051157",
+      "customer": "High Rollers Dispensary LLC",
+      "license": "RE000164",
+      "name": "Marisa Blackniak",
+      "title": "Manager",
+      "email": "mblackniak@highrollersdispensary.com",
+      "phone": ""
+    },
+    {
+      "customer_id": "2051157",
+      "customer": "High Rollers Dispensary LLC",
+      "license": "RE000164",
+      "name": "Chris Thomas",
+      "title": "",
+      "email": "jdelcher@highrollersdispensary.com",
+      "phone": "6093389399"
+    },
+    {
+      "customer_id": "2051190",
+      "customer": "One Green Leaf LLC",
+      "license": "RE000846",
+      "name": "Nigel Vigil",
+      "title": "",
+      "email": "nvigil@onegreenleafdispensary.com",
+      "phone": ""
+    },
+    {
+      "customer_id": "2051226",
+      "customer": "UFORIA",
+      "license": "RE000858",
+      "name": "Bashkim Spahi",
+      "title": "",
+      "email": "bashkim.spahi@gmail.com",
+      "phone": "3474553479"
+    },
+    {
+      "customer_id": "2051174",
+      "customer": "Midnight Greens",
+      "license": "RE000486",
+      "name": "Corrin Negron",
+      "title": "Inventory",
+      "email": "cnegron@midnightgreensnj.com",
+      "phone": ""
     },
     {
       "customer_id": "2051217",
@@ -32564,94 +32690,13 @@
       "phone": "6094180094"
     },
     {
-      "customer_id": "2131143",
-      "customer": "Altius",
-      "license": "RE000216",
-      "name": "Timothy Reidy",
+      "customer_id": "2203844",
+      "customer": "NJ Leaf Jamesburg",
+      "license": "RE001071",
+      "name": "Luke Lieberman",
       "title": "",
-      "email": "tim.reidy@altiusdispensary.com",
-      "phone": "8479860291"
-    },
-    {
-      "customer_id": "2051132",
-      "customer": "Daylite Cannabis",
-      "license": "RE000021",
-      "name": "Neil Swerdlow",
-      "title": "",
-      "email": "neil@daylitecannabis.com",
-      "phone": ""
-    },
-    {
-      "customer_id": "2051132",
-      "customer": "Daylite Cannabis",
-      "license": "RE000021",
-      "name": "David Cassidy",
-      "title": "",
-      "email": "steve@daylitecannabis.com",
-      "phone": "8623735066"
-    },
-    {
-      "customer_id": "2051226",
-      "customer": "UFORIA",
-      "license": "RE000858",
-      "name": "Bashkim Spahi",
-      "title": "",
-      "email": "bashkim.spahi@gmail.com",
-      "phone": "3474553479"
-    },
-    {
-      "customer_id": "2051157",
-      "customer": "High Rollers Dispensary LLC",
-      "license": "RE000164",
-      "name": "Marisa Blackniak",
-      "title": "Manager",
-      "email": "mblackniak@highrollersdispensary.com",
-      "phone": ""
-    },
-    {
-      "customer_id": "2051157",
-      "customer": "High Rollers Dispensary LLC",
-      "license": "RE000164",
-      "name": "Chris Thomas",
-      "title": "",
-      "email": "jdelcher@highrollersdispensary.com",
-      "phone": "6093389399"
-    },
-    {
-      "customer_id": "2051208",
-      "customer": "Simply Pure Trenton NJ Inc",
-      "license": "RE000028",
-      "name": "Shon Toledo",
-      "title": "Manager",
-      "email": "shon@simplypuretrenton.com",
-      "phone": ""
-    },
-    {
-      "customer_id": "2051208",
-      "customer": "Simply Pure Trenton NJ Inc",
-      "license": "RE000028",
-      "name": "Tahir Johnson",
-      "title": "",
-      "email": "ceo@simplypuretrenton.com",
-      "phone": "2023657310"
-    },
-    {
-      "customer_id": "2051191",
-      "customer": "Organic Farms",
-      "license": "RE000070",
-      "name": "Manager Farms",
-      "title": "buyers",
-      "email": "manager@organicfarms21.com",
-      "phone": ""
-    },
-    {
-      "customer_id": "2051119",
-      "customer": "Canna Remedies",
-      "license": "RE000051",
-      "name": "Monica Werkheiser",
-      "title": "Head of Operations",
-      "email": "monica@cannaremediesnj.com",
-      "phone": "6103497627"
+      "email": "luke@njleaf.com",
+      "phone": "9089077413"
     },
     {
       "customer_id": "2051192",
@@ -32663,39 +32708,21 @@
       "phone": "6093003906"
     },
     {
-      "customer_id": "2051190",
-      "customer": "One Green Leaf LLC",
-      "license": "RE000846",
-      "name": "Nigel Vigil",
-      "title": "",
-      "email": "nvigil@onegreenleafdispensary.com",
-      "phone": ""
-    },
-    {
-      "customer_id": "2051156",
-      "customer": "High Profile - Somerdale",
-      "license": "RE000477",
-      "name": "DJ Famosi",
-      "title": "",
-      "email": "dfamosi@c3industries.com",
-      "phone": ""
-    },
-    {
-      "customer_id": "2203844",
-      "customer": "NJ Leaf Jamesburg",
-      "license": "RE001071",
+      "customer_id": "2203843",
+      "customer": "NJ Leaf Aberdeen",
+      "license": "RE001057",
       "name": "Luke Lieberman",
       "title": "",
       "email": "luke@njleaf.com",
       "phone": "9089077413"
     },
     {
-      "customer_id": "2051213",
-      "customer": "Sparkology",
-      "license": "RE000936",
-      "name": "Brittany Aniska",
-      "title": "",
-      "email": "brittany@sparkology.com",
+      "customer_id": "2203843",
+      "customer": "NJ Leaf Aberdeen",
+      "license": "RE001057",
+      "name": "Bri Spierto",
+      "title": "IM",
+      "email": "Brianna@njleaf.com",
       "phone": ""
     },
     {
@@ -32717,40 +32744,13 @@
       "phone": ""
     },
     {
-      "customer_id": "2051231",
-      "customer": "Village Hoboken",
-      "license": "RE000875",
-      "name": "Yazmine Musa",
-      "title": "",
-      "email": "yazmine@thevillagebrands.com",
-      "phone": "2019326522"
-    },
-    {
-      "customer_id": "2051174",
-      "customer": "Midnight Greens",
-      "license": "RE000486",
-      "name": "Corrin Negron",
-      "title": "Inventory",
-      "email": "cnegron@midnightgreensnj.com",
-      "phone": ""
-    },
-    {
-      "customer_id": "2203843",
-      "customer": "NJ Leaf Aberdeen",
-      "license": "RE001057",
-      "name": "Luke Lieberman",
-      "title": "",
-      "email": "luke@njleaf.com",
-      "phone": "9089077413"
-    },
-    {
-      "customer_id": "2203843",
-      "customer": "NJ Leaf Aberdeen",
-      "license": "RE001057",
-      "name": "Bri Spierto",
-      "title": "IM",
-      "email": "Brianna@njleaf.com",
-      "phone": ""
+      "customer_id": "2051119",
+      "customer": "Canna Remedies",
+      "license": "RE000051",
+      "name": "Monica Werkheiser",
+      "title": "Head of Operations",
+      "email": "monica@cannaremediesnj.com",
+      "phone": "6103497627"
     },
     {
       "customer_id": "2051064",
@@ -34934,10 +34934,10 @@
       "customer_id": "2051209",
       "customer": "The Social Leaf",
       "license": "RE000649",
-      "name": "Kevin Gorsegner",
+      "name": "Thomas Marino",
       "title": "",
-      "email": "kevingorsegner@thesocialleaf.com",
-      "phone": "9089026043"
+      "email": "thomasmarino@thesocialleaf.com",
+      "phone": ""
     },
     {
       "customer_id": "2051209",
@@ -34961,10 +34961,10 @@
       "customer_id": "2051209",
       "customer": "The Social Leaf",
       "license": "RE000649",
-      "name": "Thomas Marino",
+      "name": "Kevin Gorsegner",
       "title": "",
-      "email": "thomasmarino@thesocialleaf.com",
-      "phone": ""
+      "email": "kevingorsegner@thesocialleaf.com",
+      "phone": "9089026043"
     },
     {
       "customer_id": "2091367",
@@ -34988,18 +34988,18 @@
       "customer_id": "2117465",
       "customer": "Toke Lane",
       "license": "RE001034",
-      "name": "D Nath",
-      "title": "",
-      "email": "dnath@tokelane.com",
+      "name": "Marlon Jones",
+      "title": "General Manager",
+      "email": "mjones@tokelane.com",
       "phone": ""
     },
     {
       "customer_id": "2117465",
       "customer": "Toke Lane",
       "license": "RE001034",
-      "name": "Marlon Jones",
-      "title": "General Manager",
-      "email": "mjones@tokelane.com",
+      "name": "D Nath",
+      "title": "",
+      "email": "dnath@tokelane.com",
       "phone": ""
     },
     {
@@ -35015,18 +35015,18 @@
       "customer_id": "2051223",
       "customer": "Twisted Hat Cannabis",
       "license": "RE000056",
-      "name": "Armando Fernandez",
-      "title": "Chief Financial Officer",
-      "email": "armando@twistedhatcannabis.com",
+      "name": "Christine Toth",
+      "title": "",
+      "email": "Toast@twistedhatcannabis.com",
       "phone": "8568512208"
     },
     {
       "customer_id": "2051223",
       "customer": "Twisted Hat Cannabis",
       "license": "RE000056",
-      "name": "Christine Toth",
-      "title": "",
-      "email": "Toast@twistedhatcannabis.com",
+      "name": "Armando Fernandez",
+      "title": "Chief Financial Officer",
+      "email": "armando@twistedhatcannabis.com",
       "phone": "8568512208"
     },
     {
@@ -35042,19 +35042,19 @@
       "customer_id": "2163146",
       "customer": "Uncle Beez Greeneryz",
       "license": "RE001058",
-      "name": "Jax Chavouis",
+      "name": "Kevin Pizarro",
       "title": "",
-      "email": "jax@unclebeezgreeneryz.com",
-      "phone": ""
+      "email": "kevin@unclebeezgreeneryz.com",
+      "phone": "2012709277"
     },
     {
       "customer_id": "2163146",
       "customer": "Uncle Beez Greeneryz",
       "license": "RE001058",
-      "name": "Kevin Pizarro",
+      "name": "Jax Chavouis",
       "title": "",
-      "email": "kevin@unclebeezgreeneryz.com",
-      "phone": "2012709277"
+      "email": "jax@unclebeezgreeneryz.com",
+      "phone": ""
     },
     {
       "customer_id": "2051228",
@@ -35078,28 +35078,19 @@
       "customer_id": "2051230",
       "customer": "Valley Wellness",
       "license": "RE000367",
-      "name": "Brandi Glynn",
-      "title": "",
-      "email": "brandi.glynn@valleywellnessnj.com",
-      "phone": "9084296680"
-    },
-    {
-      "customer_id": "2051230",
-      "customer": "Valley Wellness",
-      "license": "RE000367",
-      "name": "Patricia Walker",
-      "title": "Assistant Manager",
-      "email": "purchasing@valleywellnessnj.com",
-      "phone": "6192085327"
-    },
-    {
-      "customer_id": "2051230",
-      "customer": "Valley Wellness",
-      "license": "RE000367",
       "name": "Sarah Trent",
       "title": "CEO",
       "email": "sarah.trent@valleywellnessnj.com",
       "phone": ""
+    },
+    {
+      "customer_id": "2051230",
+      "customer": "Valley Wellness",
+      "license": "RE000367",
+      "name": "Brandi Glynn",
+      "title": "",
+      "email": "brandi.glynn@valleywellnessnj.com",
+      "phone": "9084296680"
     },
     {
       "customer_id": "2051230",
@@ -35111,12 +35102,21 @@
       "phone": "9086011743"
     },
     {
+      "customer_id": "2051230",
+      "customer": "Valley Wellness",
+      "license": "RE000367",
+      "name": "Patricia Walker",
+      "title": "Assistant Manager",
+      "email": "purchasing@valleywellnessnj.com",
+      "phone": "6192085327"
+    },
+    {
       "customer_id": "2097391",
       "customer": "Vigor Dispensary",
       "license": "RE000448",
-      "name": "Alan Ao",
+      "name": "Michael Rozzi",
       "title": "",
-      "email": "alan@vigordispensary.com",
+      "email": "mike@vigordispensary.com",
       "phone": ""
     },
     {
@@ -35132,18 +35132,18 @@
       "customer_id": "2097391",
       "customer": "Vigor Dispensary",
       "license": "RE000448",
-      "name": "Briana Calabrese",
+      "name": "Alan Ao",
       "title": "",
-      "email": "bri@vigordispensary.com",
+      "email": "alan@vigordispensary.com",
       "phone": ""
     },
     {
       "customer_id": "2097391",
       "customer": "Vigor Dispensary",
       "license": "RE000448",
-      "name": "Michael Rozzi",
+      "name": "Briana Calabrese",
       "title": "",
-      "email": "mike@vigordispensary.com",
+      "email": "bri@vigordispensary.com",
       "phone": ""
     },
     {
@@ -35163,42 +35163,6 @@
       "title": "",
       "email": "info@woodburywellnessdispensary.com",
       "phone": ""
-    },
-    {
-      "customer_id": "2163462",
-      "customer": "Green eyed chief llc",
-      "license": "RE00082",
-      "name": "Ricardo Birch",
-      "title": "",
-      "email": "greeneyedchief200@gmail.com",
-      "phone": ""
-    },
-    {
-      "customer_id": "2163462",
-      "customer": "Green eyed chief llc",
-      "license": "RE00082",
-      "name": "Ricardo Birch",
-      "title": "",
-      "email": "Bigr1zz19@comcast.net",
-      "phone": "8564051063"
-    },
-    {
-      "customer_id": "2126674",
-      "customer": "Greenstop Wellness LLC",
-      "license": "RE000221",
-      "name": "Vikram Kumar",
-      "title": "",
-      "email": "greenstopwellnessjc@gmail.com",
-      "phone": "2016041281"
-    },
-    {
-      "customer_id": "2114032",
-      "customer": "NJ Leaf Keansburg",
-      "license": "RE001024",
-      "name": "Luke Lieberman",
-      "title": "",
-      "email": "luke@njleaf.com",
-      "phone": "9089077413"
     },
     {
       "customer_id": "2133712",
@@ -35235,6 +35199,42 @@
       "title": "",
       "email": "jjimenez@starleafdispensary.com",
       "phone": "6093163130"
+    },
+    {
+      "customer_id": "2163462",
+      "customer": "Green eyed chief llc",
+      "license": "RE00082",
+      "name": "Ricardo Birch",
+      "title": "",
+      "email": "greeneyedchief200@gmail.com",
+      "phone": ""
+    },
+    {
+      "customer_id": "2163462",
+      "customer": "Green eyed chief llc",
+      "license": "RE00082",
+      "name": "Ricardo Birch",
+      "title": "",
+      "email": "Bigr1zz19@comcast.net",
+      "phone": "8564051063"
+    },
+    {
+      "customer_id": "2114032",
+      "customer": "NJ Leaf Keansburg",
+      "license": "RE001024",
+      "name": "Luke Lieberman",
+      "title": "",
+      "email": "luke@njleaf.com",
+      "phone": "9089077413"
+    },
+    {
+      "customer_id": "2126674",
+      "customer": "Greenstop Wellness LLC",
+      "license": "RE000221",
+      "name": "Vikram Kumar",
+      "title": "",
+      "email": "greenstopwellnessjc@gmail.com",
+      "phone": "2016041281"
     }
   ],
   "contacts_debug": [],

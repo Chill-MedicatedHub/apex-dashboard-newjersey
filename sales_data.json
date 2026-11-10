@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-11-10T13:03:31.478371+00:00",
+  "fetched_at": "2026-11-10T13:18:29.525886+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
@@ -35165,6 +35165,24 @@
       "phone": ""
     },
     {
+      "customer_id": "2114032",
+      "customer": "NJ Leaf Keansburg",
+      "license": "RE001024",
+      "name": "Luke Lieberman",
+      "title": "",
+      "email": "luke@njleaf.com",
+      "phone": "9089077413"
+    },
+    {
+      "customer_id": "2133712",
+      "customer": "ROLLIN' GREEN LLC",
+      "license": "RE001033",
+      "name": "Dominic Francis",
+      "title": "Buyer",
+      "email": "headstashcannaco@gmail.com",
+      "phone": ""
+    },
+    {
       "customer_id": "2131393",
       "customer": "The Retreat",
       "license": "RE000571",
@@ -35172,15 +35190,6 @@
       "title": "GM",
       "email": "asantiago@retreatnj.com",
       "phone": ""
-    },
-    {
-      "customer_id": "2126674",
-      "customer": "Greenstop Wellness LLC",
-      "license": "RE000221",
-      "name": "Vikram Kumar",
-      "title": "",
-      "email": "greenstopwellnessjc@gmail.com",
-      "phone": "2016041281"
     },
     {
       "customer_id": "2148257",
@@ -35192,15 +35201,6 @@
       "phone": "2019182800"
     },
     {
-      "customer_id": "2114032",
-      "customer": "NJ Leaf Keansburg",
-      "license": "RE001024",
-      "name": "Luke Lieberman",
-      "title": "",
-      "email": "luke@njleaf.com",
-      "phone": "9089077413"
-    },
-    {
       "customer_id": "2205479",
       "customer": "Star Leaf Dispensary",
       "license": "RE001072",
@@ -35208,15 +35208,6 @@
       "title": "",
       "email": "jjimenez@starleafdispensary.com",
       "phone": "6093163130"
-    },
-    {
-      "customer_id": "2133712",
-      "customer": "ROLLIN' GREEN LLC",
-      "license": "RE001033",
-      "name": "Dominic Francis",
-      "title": "Buyer",
-      "email": "headstashcannaco@gmail.com",
-      "phone": ""
     },
     {
       "customer_id": "2163462",
@@ -35235,6 +35226,15 @@
       "title": "",
       "email": "Bigr1zz19@comcast.net",
       "phone": "8564051063"
+    },
+    {
+      "customer_id": "2126674",
+      "customer": "Greenstop Wellness LLC",
+      "license": "RE000221",
+      "name": "Vikram Kumar",
+      "title": "",
+      "email": "greenstopwellnessjc@gmail.com",
+      "phone": "2016041281"
     }
   ],
   "contacts_debug": [],

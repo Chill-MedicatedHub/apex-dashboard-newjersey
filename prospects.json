@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-10",
+  "as_of": "2026-11-11",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
   "count": 308,
@@ -1354,8 +1354,8 @@
       "city": "Irvington",
       "state": "NJ",
       "phone": "",
-      "email": "",
-      "website": ""
+      "email": "springfieldavedispensary@gmail.com",
+      "website": "https://springfieldavedispensary.store/"
     },
     {
       "name": "NJ Leaf Jamesburg",
@@ -2217,7 +2217,7 @@
     },
     {
       "name": "Good Karma Dispensary",
-      "license": "RE001030",
+      "license": "RE0001030",
       "type": "",
       "status": "",
       "city": "North Plainfield",
@@ -2228,7 +2228,7 @@
     },
     {
       "name": "Good Karma Dispensary",
-      "license": "RE0001030",
+      "license": "RE001030",
       "type": "",
       "status": "",
       "city": "North Plainfield",
@@ -2784,7 +2784,7 @@
       "city": "Somerset",
       "state": "NJ",
       "phone": "7325794347",
-      "email": "",
+      "email": "centraljerseydispensary23@gmail.com",
       "website": "https://centraljerseydispensary.store/"
     },
     {

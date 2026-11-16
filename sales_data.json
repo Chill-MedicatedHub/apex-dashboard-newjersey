@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-11-16T15:04:22.701935+00:00",
+  "fetched_at": "2026-11-16T15:18:25.175888+00:00",
   "source": "leaflink-v2-api",
   "state": "NJ",
   "days_back": 365,
@@ -35735,6 +35735,15 @@
       "customer_id": "2051230",
       "customer": "Valley Wellness",
       "license": "RE000367",
+      "name": "Sarah Trent",
+      "title": "CEO",
+      "email": "sarah.trent@valleywellnessnj.com",
+      "phone": ""
+    },
+    {
+      "customer_id": "2051230",
+      "customer": "Valley Wellness",
+      "license": "RE000367",
       "name": "Brandi Glynn",
       "title": "",
       "email": "brandi.glynn@valleywellnessnj.com",
@@ -35759,12 +35768,12 @@
       "phone": "6192085327"
     },
     {
-      "customer_id": "2051230",
-      "customer": "Valley Wellness",
-      "license": "RE000367",
-      "name": "Sarah Trent",
-      "title": "CEO",
-      "email": "sarah.trent@valleywellnessnj.com",
+      "customer_id": "2097391",
+      "customer": "Vigor Dispensary",
+      "license": "RE000448",
+      "name": "Michael Rozzi",
+      "title": "",
+      "email": "mike@vigordispensary.com",
       "phone": ""
     },
     {
@@ -35780,9 +35789,9 @@
       "customer_id": "2097391",
       "customer": "Vigor Dispensary",
       "license": "RE000448",
-      "name": "Michael Rozzi",
+      "name": "Alan Ao",
       "title": "",
-      "email": "mike@vigordispensary.com",
+      "email": "alan@vigordispensary.com",
       "phone": ""
     },
     {
@@ -35792,15 +35801,6 @@
       "name": "Briana Calabrese",
       "title": "",
       "email": "bri@vigordispensary.com",
-      "phone": ""
-    },
-    {
-      "customer_id": "2097391",
-      "customer": "Vigor Dispensary",
-      "license": "RE000448",
-      "name": "Alan Ao",
-      "title": "",
-      "email": "alan@vigordispensary.com",
       "phone": ""
     },
     {
@@ -35822,15 +35822,6 @@
       "phone": ""
     },
     {
-      "customer_id": "2205479",
-      "customer": "Star Leaf Dispensary",
-      "license": "RE001072",
-      "name": "Jessica Jimenez",
-      "title": "",
-      "email": "jjimenez@starleafdispensary.com",
-      "phone": "6093163130"
-    },
-    {
       "customer_id": "2131393",
       "customer": "The Retreat",
       "license": "RE000571",
@@ -35849,13 +35840,22 @@
       "phone": "2019182800"
     },
     {
-      "customer_id": "2163462",
-      "customer": "Green eyed chief llc",
-      "license": "RE00082",
-      "name": "Ricardo Birch",
+      "customer_id": "2133712",
+      "customer": "ROLLIN' GREEN LLC",
+      "license": "RE001033",
+      "name": "Dominic Francis",
+      "title": "Buyer",
+      "email": "headstashcannaco@gmail.com",
+      "phone": ""
+    },
+    {
+      "customer_id": "2205479",
+      "customer": "Star Leaf Dispensary",
+      "license": "RE001072",
+      "name": "Jessica Jimenez",
       "title": "",
-      "email": "Bigr1zz19@comcast.net",
-      "phone": "8564051063"
+      "email": "jjimenez@starleafdispensary.com",
+      "phone": "6093163130"
     },
     {
       "customer_id": "2163462",
@@ -35865,6 +35865,15 @@
       "title": "",
       "email": "greeneyedchief200@gmail.com",
       "phone": ""
+    },
+    {
+      "customer_id": "2163462",
+      "customer": "Green eyed chief llc",
+      "license": "RE00082",
+      "name": "Ricardo Birch",
+      "title": "",
+      "email": "Bigr1zz19@comcast.net",
+      "phone": "8564051063"
     },
     {
       "customer_id": "2114032",
@@ -35883,15 +35892,6 @@
       "title": "",
       "email": "greenstopwellnessjc@gmail.com",
       "phone": "2016041281"
-    },
-    {
-      "customer_id": "2133712",
-      "customer": "ROLLIN' GREEN LLC",
-      "license": "RE001033",
-      "name": "Dominic Francis",
-      "title": "Buyer",
-      "email": "headstashcannaco@gmail.com",
-      "phone": ""
     }
   ],
   "contacts_debug": [],

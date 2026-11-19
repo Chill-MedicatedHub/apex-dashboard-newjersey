@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-18",
+  "as_of": "2026-11-19",
   "source": "LeafLink customer directory (/api/v2/customers/)",
   "state": "NJ",
   "count": 308,
@@ -2277,9 +2277,9 @@
       "status": "",
       "city": "Paterson",
       "state": "NJ",
-      "phone": "",
-      "email": "",
-      "website": ""
+      "phone": "9739108988",
+      "email": "info@blazedispensary.com",
+      "website": "https://blazedispensary.com/"
     },
     {
       "name": "RIse Paterson",
